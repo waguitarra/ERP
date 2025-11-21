@@ -1,0 +1,55 @@
+namespace Logistics.Domain.Entities;
+
+public class Warehouse
+{
+    private Warehouse() { }
+
+    public Warehouse(Guid companyId, string name, string code, string? address = null)
+    {
+        if (companyId == Guid.Empty)
+            throw new ArgumentException("CompanyId não pode ser vazio");
+        
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Nome não pode ser vazio");
+        
+        if (string.IsNullOrWhiteSpace(code))
+            throw new ArgumentException("Código não pode ser vazio");
+
+        Id = Guid.NewGuid();
+        CompanyId = companyId;
+        Name = name;
+        Code = code;
+        Address = address;
+        IsActive = true;
+        CreatedAt = DateTime.UtcNow;
+    }
+
+    public Guid Id { get; private set; }
+    public Guid CompanyId { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public string Code { get; private set; } = string.Empty;
+    public string? Address { get; private set; }
+    public bool IsActive { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime? UpdatedAt { get; private set; }
+
+    public Company Company { get; private set; } = null!;
+    public ICollection<StorageLocation> StorageLocations { get; private set; } = new List<StorageLocation>();
+
+    public void Update(string name, string code, string? address)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Nome não pode ser vazio");
+        
+        if (string.IsNullOrWhiteSpace(code))
+            throw new ArgumentException("Código não pode ser vazio");
+
+        Name = name;
+        Code = code;
+        Address = address;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void Activate() => IsActive = true;
+    public void Deactivate() => IsActive = false;
+}
