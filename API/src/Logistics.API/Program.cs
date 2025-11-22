@@ -22,7 +22,21 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Add services to the container.
-builder.Services.AddControllers();
+var mvcBuilder = builder.Services.AddControllers();
+
+// LOG: Descobrir controllers registrados
+Log.Information("========== CONTROLLERS REGISTRADOS ==========");
+var assembly = typeof(Program).Assembly;
+var controllerTypes = assembly.GetTypes()
+    .Where(t => t.Name.EndsWith("Controller") && !t.IsAbstract)
+    .ToList();
+
+foreach (var ctrl in controllerTypes)
+{
+    Log.Information("Controller encontrado: {ControllerName}", ctrl.Name);
+}
+Log.Information("Total de controllers: {Count}", controllerTypes.Count);
+Log.Information("=============================================");
 
 // Configurar DbContext com MySQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -43,15 +57,51 @@ builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
 builder.Services.AddScoped<IStockMovementRepository, StockMovementRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// WMS Repositories
+builder.Services.AddScoped<IWarehouseZoneRepository, WarehouseZoneRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IInboundShipmentRepository, InboundShipmentRepository>();
+builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
+builder.Services.AddScoped<IPickingWaveRepository, PickingWaveRepository>();
+builder.Services.AddScoped<IVehicleAppointmentRepository, VehicleAppointmentRepository>();
+builder.Services.AddScoped<IDockDoorRepository, DockDoorRepository>();
+builder.Services.AddScoped<ILotRepository, LotRepository>();
+builder.Services.AddScoped<IPutawayTaskRepository, PutawayTaskRepository>();
+builder.Services.AddScoped<IPackingTaskRepository, PackingTaskRepository>();
+builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+builder.Services.AddScoped<IOutboundShipmentRepository, OutboundShipmentRepository>();
+builder.Services.AddScoped<ISerialNumberRepository, SerialNumberRepository>();
+builder.Services.AddScoped<ICycleCountRepository, CycleCountRepository>();
+
 // Dependency Injection - Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IWarehouseService, WarehouseService>();
+builder.Services.AddScoped<IStorageLocationService, StorageLocationService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
+builder.Services.AddScoped<IStockMovementService, StockMovementService>();
+
+// WMS Services
+builder.Services.AddScoped<IWarehouseZoneService, WarehouseZoneService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IInboundShipmentService, InboundShipmentService>();
+builder.Services.AddScoped<IReceiptService, ReceiptService>();
+builder.Services.AddScoped<IPickingWaveService, PickingWaveService>();
+builder.Services.AddScoped<IVehicleAppointmentService, VehicleAppointmentService>();
+builder.Services.AddScoped<IDockDoorService, DockDoorService>();
+builder.Services.AddScoped<ILotService, LotService>();
+builder.Services.AddScoped<IPutawayTaskService, PutawayTaskService>();
+builder.Services.AddScoped<IPackingTaskService, PackingTaskService>();
+builder.Services.AddScoped<IPackageService, PackageService>();
+builder.Services.AddScoped<IOutboundShipmentService, OutboundShipmentService>();
+builder.Services.AddScoped<ISerialNumberService, SerialNumberService>();
+builder.Services.AddScoped<ICycleCountService, CycleCountService>();
 
 // Configurar JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
@@ -134,17 +184,14 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Logistics API V1");
-        c.RoutePrefix = string.Empty; // Swagger na raiz
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Logistics API V1");
+    c.RoutePrefix = string.Empty; // Swagger na raiz
+});
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Desabilitado para testes
 
 app.UseCors("AllowAll");
 

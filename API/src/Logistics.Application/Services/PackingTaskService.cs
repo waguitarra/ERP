@@ -1,0 +1,87 @@
+using Logistics.Application.DTOs.PackingTask;
+using Logistics.Application.Interfaces;
+using Logistics.Domain.Entities;
+using Logistics.Domain.Interfaces;
+
+namespace Logistics.Application.Services;
+
+public class PackingTaskService : IPackingTaskService
+{
+    private readonly IPackingTaskRepository _repository;
+    private readonly IOrderRepository _orderRepository;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public PackingTaskService(
+        IPackingTaskRepository repository,
+        IOrderRepository orderRepository,
+        IUnitOfWork unitOfWork)
+    {
+        _repository = repository;
+        _orderRepository = orderRepository;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<PackingTaskResponse> CreateAsync(CreatePackingTaskRequest request)
+    {
+        if (await _orderRepository.GetByIdAsync(request.OrderId) == null)
+            throw new KeyNotFoundException("Pedido não encontrado");
+
+        var task = new PackingTask(
+            request.TaskNumber,
+            request.OrderId,
+            request.AssignedTo
+        );
+
+        await _repository.AddAsync(task);
+        await _unitOfWork.CommitAsync();
+
+        return await GetByIdAsync(task.Id);
+    }
+
+    public async Task<PackingTaskResponse> GetByIdAsync(Guid id)
+    {
+        var task = await _repository.GetByIdAsync(id);
+        if (task == null) throw new KeyNotFoundException("Tarefa não encontrada");
+        return MapToResponse(task);
+    }
+
+    public async Task<IEnumerable<PackingTaskResponse>> GetByOrderIdAsync(Guid orderId)
+    {
+        var tasks = await _repository.GetByOrderIdAsync(orderId);
+        return tasks.Select(MapToResponse);
+    }
+
+    public async Task StartTaskAsync(Guid taskId)
+    {
+        var task = await _repository.GetByIdAsync(taskId);
+        if (task == null) throw new KeyNotFoundException("Tarefa não encontrada");
+
+        task.Start();
+        await _repository.UpdateAsync(task);
+        await _unitOfWork.CommitAsync();
+    }
+
+    public async Task CompleteTaskAsync(Guid taskId)
+    {
+        var task = await _repository.GetByIdAsync(taskId);
+        if (task == null) throw new KeyNotFoundException("Tarefa não encontrada");
+
+        task.Complete();
+        await _repository.UpdateAsync(task);
+        await _unitOfWork.CommitAsync();
+    }
+
+    private static PackingTaskResponse MapToResponse(PackingTask task)
+    {
+        return new PackingTaskResponse(
+            task.Id,
+            task.TaskNumber,
+            task.OrderId,
+            task.Order?.OrderNumber ?? "",
+            task.Status,
+            task.AssignedTo,
+            task.CompletedAt,
+            task.CreatedAt
+        );
+    }
+}

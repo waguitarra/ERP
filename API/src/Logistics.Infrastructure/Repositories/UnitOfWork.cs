@@ -38,7 +38,17 @@ public class UnitOfWork : IUnitOfWork
 
     public async Task<int> CommitAsync()
     {
-        return await _context.SaveChangesAsync();
+        var entriesCount = _context.ChangeTracker.Entries().Count();
+        Console.WriteLine($"[UnitOfWork] CommitAsync - Entries: {entriesCount}");
+        
+        foreach (var entry in _context.ChangeTracker.Entries())
+        {
+            Console.WriteLine($"[UnitOfWork] Entry: {entry.Entity.GetType().Name} - State: {entry.State}");
+        }
+        
+        var result = await _context.SaveChangesAsync();
+        Console.WriteLine($"[UnitOfWork] SaveChanges result: {result}");
+        return result;
     }
 
     public async Task RollbackAsync()
