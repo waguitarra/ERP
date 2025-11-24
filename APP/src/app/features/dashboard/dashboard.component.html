@@ -1,0 +1,88 @@
+<div class="animate-fade-in">
+      <div class="mb-8">
+        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Visão Geral</h1>
+        <p class="text-slate-500 dark:text-slate-400">Bem-vindo de volta, aqui está o que está acontecendo hoje.</p>
+      </div>
+
+      <!-- Cards de Estatísticas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        @for (stat of stats; track stat.title) {
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div [class]="'p-3 rounded-lg ' + stat.color">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="stat.icon" />
+                </svg>
+              </div>
+              <span [class]="stat.isPositive ? 'text-green-500 bg-green-50 dark:bg-green-900/30 dark:text-green-400' : 'text-red-500 bg-red-50 dark:bg-red-900/30 dark:text-red-400'" class="px-2.5 py-0.5 rounded-full text-xs font-medium">
+                {{stat.change}}
+              </span>
+            </div>
+            <div>
+              <h3 class="text-slate-500 dark:text-slate-400 text-sm font-medium">{{stat.title}}</h3>
+              <p class="text-2xl font-bold text-slate-800 dark:text-slate-100 mt-1">{{stat.value}}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Seção de Gráficos e Tabelas -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Gráfico Simulado (CSS Puro) -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm lg:col-span-2">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">Receita Mensal</h2>
+            <button class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Ver Relatório</button>
+          </div>
+          
+          <!-- Barras do Gráfico -->
+          <div class="h-64 flex items-end justify-between space-x-2">
+            @for (bar of chartData; track bar.label) {
+              <div class="flex flex-col items-center flex-1 group">
+                <div 
+                  class="w-full bg-blue-100 rounded-t-sm relative transition-all duration-500 group-hover:bg-blue-200"
+                  [style.height]="bar.height + '%'"
+                >
+                  <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 dark:bg-slate-700 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {{bar.value}}
+                  </div>
+                  <div class="w-full bg-blue-500 rounded-t-sm absolute bottom-0" [style.height]="bar.fill + '%'"></div>
+                </div>
+                <span class="text-xs text-slate-400 dark:text-slate-500 mt-2">{{bar.label}}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Lista de Atividade Recente -->
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6">Pedidos Recentes</h2>
+          <div class="space-y-4">
+            @for (order of recentOrders; track order.id) {
+              <div class="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="flex items-center space-x-3">
+                  <div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 font-bold text-xs">
+                    {{getInitials(order.customer)}}
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-slate-800 dark:text-slate-100">{{order.customer}}</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">{{order.product}}</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm font-bold text-slate-800 dark:text-slate-100">{{order.amount}}</p>
+                  <span [ngClass]="getStatusColor(order.status)" class="text-xs font-medium">
+                    {{order.status}}
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+          <button class="w-full mt-6 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">
+            Ver Todos os Pedidos
+          </button>
+        </div>
+
+      </div>
+    </div>
