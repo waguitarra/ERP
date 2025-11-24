@@ -1,14 +1,14 @@
 <div class="space-y-6 animate-fade-in">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Tarefas de Separação</h1>
-          <p class="text-slate-500 dark:text-slate-400 mt-1">Gerencie as tarefas de picking</p>
+          <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('pickingTasks.title') }}</h1>
+          <p class="text-slate-500 dark:text-slate-400 mt-1">{{ i18n.t('pickingTasks.subtitle') }}</p>
         </div>
         <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center space-x-2 self-start">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          <span>Nova Tarefa</span>
+          <span>{{ i18n.t('pickingTasks.newTask') }}</span>
         </button>
       </div>
 

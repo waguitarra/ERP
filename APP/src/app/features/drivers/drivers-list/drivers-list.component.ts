@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-drivers-list',
@@ -8,4 +9,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './drivers-list.component.html',
   styleUrls: ['./drivers-list.component.scss']
 })
-export class DriversListComponent {}
+export class DriversListComponent {
+  protected readonly i18n = inject(I18nService);
+}

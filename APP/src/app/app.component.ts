@@ -6,11 +6,8 @@ import { ToastNotificationsComponent } from './shared/components/toast-notificat
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, ToastNotificationsComponent],
-  template: `
-    <router-outlet />
-    <app-toast-notifications />
-  `,
-  styles: []
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'NEXUS ADMIN';

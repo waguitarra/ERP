@@ -1,21 +1,21 @@
 <div class="space-y-6 animate-fade-in">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Clientes</h1>
-          <p class="text-slate-500 dark:text-slate-400 mt-1">Gerencie seus clientes</p>
+          <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('customers.title') }}</h1>
+          <p class="text-slate-500 dark:text-slate-400 mt-1">{{ i18n.t('customers.subtitle') }}</p>
         </div>
         <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center space-x-2 self-start">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          <span>Novo Cliente</span>
+          <span>{{ i18n.t('customers.newCustomer') }}</span>
         </button>
       </div>
 
       <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
         <input 
           type="search"
-          placeholder="Buscar por nome, e-mail ou documento..."
+          [placeholder]="i18n.t('customers.searchPlaceholder')"
           class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150"
         >
       </div>
@@ -24,19 +24,19 @@
         @if (loading()) {
           <div class="p-12 text-center">
             <div class="inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-            <p class="mt-4 text-slate-500 dark:text-slate-400">Carregando clientes...</p>
+            <p class="mt-4 text-slate-500 dark:text-slate-400">{{ i18n.t('customers.loading') }}</p>
           </div>
         } @else if (hasData()) {
           <div class="overflow-x-auto">
             <table class="w-full">
               <thead class="bg-slate-50 dark:bg-slate-700/50 border-b border-slate-200 dark:border-slate-600">
                 <tr>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Cliente</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Contato</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Documento</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Cidade</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Ações</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{{ i18n.t('customers.table.customer') }}</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{{ i18n.t('customers.table.contact') }}</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{{ i18n.t('customers.table.document') }}</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{{ i18n.t('customers.table.city') }}</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{{ i18n.t('customers.table.status') }}</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{{ i18n.t('customers.table.actions') }}</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
@@ -60,15 +60,15 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-100">{{customer.city}}/{{customer.state}}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       @if (customer.isActive) {
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400">Ativo</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400">{{ i18n.t('common.status.active') }}</span>
                       } @else {
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400">Inativo</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400">{{ i18n.t('common.status.inactive') }}</span>
                       }
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                       <div class="flex items-center space-x-3">
-                        <button class="text-blue-600 hover:text-blue-700 font-medium">Editar</button>
-                        <button class="text-red-600 hover:text-red-700 font-medium">Excluir</button>
+                        <button class="text-blue-600 hover:text-blue-700 font-medium">{{ i18n.t('common.buttons.edit') }}</button>
+                        <button class="text-red-600 hover:text-red-700 font-medium">{{ i18n.t('common.buttons.delete') }}</button>
                       </div>
                     </td>
                   </tr>
@@ -83,10 +83,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </div>
-            <h3 class="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">Nenhum cliente encontrado</h3>
-            <p class="text-slate-500 dark:text-slate-400 mb-4">Comece adicionando seu primeiro cliente</p>
+            <h3 class="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">{{ i18n.t('customers.empty.title') }}</h3>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">{{ i18n.t('customers.empty.subtitle') }}</p>
             <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-              Criar Cliente
+              {{ i18n.t('customers.empty.button') }}
             </button>
           </div>
         }

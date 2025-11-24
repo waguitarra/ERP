@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CustomersService } from '../customers.service';
 import { Customer } from '@core/models/customer.model';
 import { AuthService } from '@core/services/auth.service';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-customers-list',
@@ -14,6 +15,7 @@ import { AuthService } from '@core/services/auth.service';
 export class CustomersListComponent implements OnInit {
   private readonly customersService = inject(CustomersService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
 
   loading = signal<boolean>(true);
   customers = signal<Customer[]>([]);

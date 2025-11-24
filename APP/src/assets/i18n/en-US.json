@@ -1,0 +1,297 @@
+{
+  "header": {
+    "logout": "Logout",
+    "notifications": "Notifications"
+  },
+  "sidebar": {
+    "categories": {
+      "main": "Main",
+      "inventory": "Inventory Management",
+      "logistics": "Logistics",
+      "settings": "Settings"
+    },
+    "menu": {
+      "dashboard": "Dashboard",
+      "customers": "Customers",
+      "suppliers": "Suppliers",
+      "products": "Products",
+      "orders": "Orders",
+      "warehouses": "Warehouses",
+      "inventory": "Inventory",
+      "pickingTasks": "Picking Tasks",
+      "packingTasks": "Packing Tasks",
+      "inboundShipments": "Inbound Shipments",
+      "outboundShipments": "Outbound Shipments",
+      "vehicles": "Vehicles",
+      "drivers": "Drivers",
+      "settings": "Settings"
+    }
+  },
+  "common": {
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "create": "Create",
+      "search": "Search",
+      "filter": "Filters",
+      "back": "Back",
+      "confirm": "Confirm",
+      "close": "Close",
+      "view": "View",
+      "next": "Next",
+      "previous": "Previous",
+      "refresh": "Refresh",
+      "export": "Export",
+      "import": "Import"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "delivered": "Delivered"
+    },
+    "messages": {
+      "loading": "Loading...",
+      "saving": "Saving...",
+      "saved": "Saved successfully",
+      "error": "Processing error",
+      "noData": "No records found",
+      "confirmDelete": "Are you sure you want to delete?",
+      "deleteSuccess": "Deleted successfully",
+      "createSuccess": "Created successfully",
+      "updateSuccess": "Updated successfully"
+    },
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "city": "City",
+      "state": "State",
+      "zipCode": "Zip Code",
+      "country": "Country",
+      "date": "Date",
+      "status": "Status",
+      "actions": "Actions",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome",
+      "subtitle": "ERP Management System",
+      "email": "Email",
+      "password": "Password",
+      "loginButton": "Sign In",
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password is required",
+      "invalidCredentials": "Invalid credentials",
+      "loggingIn": "Logging in...",
+      "validation": {
+        "emailRequired": "Email is required",
+        "passwordRequired": "Password is required"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Overview",
+    "subtitle": "Welcome back, here's what's happening today.",
+    "stats": {
+      "revenue": "Total Revenue",
+      "orders": "Orders",
+      "customers": "Customers",
+      "products": "Products"
+    },
+    "charts": {
+      "monthlyRevenue": "Monthly Revenue",
+      "viewReport": "View Report"
+    },
+    "recentOrders": {
+      "title": "Recent Orders",
+      "viewAll": "View All Orders"
+    }
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Manage product catalog",
+    "newProduct": "New Product",
+    "searchPlaceholder": "Search by name, SKU or category...",
+    "table": {
+      "sku": "SKU",
+      "product": "Product",
+      "category": "Category",
+      "price": "Price",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "empty": {
+      "title": "No products found",
+      "subtitle": "Start by creating your first product",
+      "button": "Create Product"
+    },
+    "loading": "Loading products...",
+    "total": "Total: {{count}} products"
+  },
+  "customers": {
+    "title": "Customers",
+    "subtitle": "Manage your customers",
+    "newCustomer": "New Customer",
+    "searchPlaceholder": "Search by name, email or document...",
+    "table": {
+      "customer": "Customer",
+      "contact": "Contact",
+      "document": "Document",
+      "city": "City",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "empty": {
+      "title": "No customers found",
+      "subtitle": "Start by adding your first customer",
+      "button": "Create Customer"
+    },
+    "loading": "Loading customers..."
+  },
+  "orders": {
+    "title": "Orders",
+    "subtitle": "Manage all orders",
+    "newOrder": "New Order",
+    "stats": {
+      "total": "Total Orders",
+      "pending": "Pending",
+      "processing": "Processing",
+      "delivered": "Delivered"
+    },
+    "table": {
+      "orderNumber": "Order #",
+      "customer": "Customer",
+      "date": "Date",
+      "totalAmount": "Total Amount",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "empty": {
+      "title": "No orders found",
+      "subtitle": "Start by creating a new order",
+      "button": "Create Order"
+    },
+    "loading": "Loading orders..."
+  },
+  "inventory": {
+    "title": "Inventory",
+    "subtitle": "Stock and inventory control",
+    "stats": {
+      "totalStock": "Total Stock",
+      "lowStock": "Low Stock",
+      "outOfStock": "Out of Stock",
+      "totalValue": "Total Value"
+    },
+    "module": {
+      "title": "Inventory Control",
+      "subtitle": "Inventory module under development"
+    }
+  },
+  "suppliers": {
+    "title": "Suppliers",
+    "subtitle": "Manage your suppliers",
+    "newSupplier": "New Supplier",
+    "module": {
+      "title": "Supplier Management",
+      "subtitle": "Suppliers module under development"
+    }
+  },
+  "warehouses": {
+    "title": "Warehouses",
+    "subtitle": "Manage your warehouses and storage locations",
+    "newWarehouse": "New Warehouse",
+    "module": {
+      "title": "Warehouse Management",
+      "subtitle": "Warehouses module under development"
+    }
+  },
+  "drivers": {
+    "title": "Drivers",
+    "subtitle": "Manage your driver fleet",
+    "newDriver": "New Driver",
+    "module": {
+      "title": "Driver Management",
+      "subtitle": "Drivers module under development"
+    }
+  },
+  "vehicles": {
+    "title": "Vehicles",
+    "subtitle": "Manage your vehicle fleet",
+    "newVehicle": "New Vehicle",
+    "module": {
+      "title": "Vehicle Management",
+      "subtitle": "Vehicles module under development"
+    }
+  },
+  "pickingTasks": {
+    "title": "Picking Tasks",
+    "subtitle": "Manage picking tasks",
+    "newTask": "New Task",
+    "module": {
+      "title": "Picking Tasks",
+      "subtitle": "Picking module under development"
+    }
+  },
+  "packingTasks": {
+    "title": "Packing Tasks",
+    "subtitle": "Manage packing tasks",
+    "newTask": "New Task",
+    "module": {
+      "title": "Packing Tasks",
+      "subtitle": "Packing module under development"
+    }
+  },
+  "inboundShipments": {
+    "title": "Inbound Shipments",
+    "subtitle": "Manage goods receipts",
+    "newShipment": "New Receipt",
+    "module": {
+      "title": "Inbound Shipments",
+      "subtitle": "Inbound module under development"
+    }
+  },
+  "outboundShipments": {
+    "title": "Outbound Shipments",
+    "subtitle": "Manage goods shipments",
+    "newShipment": "New Shipment",
+    "module": {
+      "title": "Outbound Shipments",
+      "subtitle": "Outbound module under development"
+    }
+  },
+  "layout": {
+    "header": {
+      "search": "Search...",
+      "notifications": "Notifications",
+      "profile": "Profile",
+      "logout": "Logout"
+    },
+    "sidebar": {
+      "menu": "Menu",
+      "dashboard": "Dashboard",
+      "products": "Products",
+      "customers": "Customers",
+      "orders": "Orders",
+      "inventory": "Inventory",
+      "suppliers": "Suppliers",
+      "warehouses": "Warehouses",
+      "drivers": "Drivers",
+      "vehicles": "Vehicles",
+      "pickingTasks": "Picking",
+      "packingTasks": "Packing",
+      "inboundShipments": "Inbound",
+      "outboundShipments": "Outbound"
+    }
+  }
+}

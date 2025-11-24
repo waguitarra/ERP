@@ -1,5 +1,6 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { I18nService } from '@core/services/i18n.service';
 
 interface StatCard {
   title: string;
@@ -27,6 +28,7 @@ interface RecentOrder {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  protected readonly i18n = inject(I18nService);
   stats: StatCard[] = [
     { 
       title: 'Vendas Totais', 

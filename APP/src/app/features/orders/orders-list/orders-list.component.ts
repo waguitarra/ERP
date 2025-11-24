@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OrdersService } from '../orders.service';
 import { Order } from '@core/models/order.model';
 import { AuthService } from '@core/services/auth.service';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-orders-list',
@@ -14,6 +15,7 @@ import { AuthService } from '@core/services/auth.service';
 export class OrdersListComponent implements OnInit {
   private readonly ordersService = inject(OrdersService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
 
   loading = signal<boolean>(true);
   orders = signal<Order[]>([]);

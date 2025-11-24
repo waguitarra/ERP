@@ -1,7 +1,7 @@
 <div class="animate-fade-in">
       <div class="mb-8">
-        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Visão Geral</h1>
-        <p class="text-slate-500 dark:text-slate-400">Bem-vindo de volta, aqui está o que está acontecendo hoje.</p>
+        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.title') }}</h1>
+        <p class="text-slate-500 dark:text-slate-400">{{ i18n.t('dashboard.subtitle') }}</p>
       </div>
 
       <!-- Cards de Estatísticas -->
@@ -32,8 +32,8 @@
         <!-- Gráfico Simulado (CSS Puro) -->
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm lg:col-span-2">
           <div class="flex items-center justify-between mb-6">
-            <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">Receita Mensal</h2>
-            <button class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">Ver Relatório</button>
+            <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.charts.monthlyRevenue') }}</h2>
+            <button class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">{{ i18n.t('dashboard.charts.viewReport') }}</button>
           </div>
           
           <!-- Barras do Gráfico -->
@@ -57,7 +57,7 @@
 
         <!-- Lista de Atividade Recente -->
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6">Pedidos Recentes</h2>
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6">{{ i18n.t('dashboard.recentOrders.title') }}</h2>
           <div class="space-y-4">
             @for (order of recentOrders; track order.id) {
               <div class="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">

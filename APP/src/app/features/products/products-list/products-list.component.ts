@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { ProductsService } from '../products.service';
 import { Product } from '@core/models/product.model';
 import { AuthService } from '@core/services/auth.service';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-products-list',
@@ -15,6 +16,7 @@ import { AuthService } from '@core/services/auth.service';
 export class ProductsListComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
 
   loading = signal<boolean>(false);
   error = signal<string | null>(null);

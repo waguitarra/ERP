@@ -7,13 +7,12 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       </div>
-      <h1 class="text-3xl font-bold text-white mb-2">NEXUS<span class="text-blue-400 dark:text-blue-300">ADMIN</span></h1>
-      <p class="text-slate-300 dark:text-slate-400">Sistema de Gestão ERP</p>
+      <h1 class="text-3xl font-bold text-white mb-2">{{ i18n.t('auth.login.title') }}</h1>
+      <p class="text-slate-300 dark:text-slate-400">{{ i18n.t('auth.login.subtitle') }}</p>
     </div>
 
     <!-- Card de Login -->
     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 animate-fade-in">
-      <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">Bem-vindo</h2>
 
       @if (errorMessage()) {
         <div class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
@@ -25,7 +24,7 @@
         <!-- Email -->
         <div class="mb-4">
           <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-            E-mail
+            {{ i18n.t('auth.login.email') }}
           </label>
           <input
             type="email"
@@ -36,14 +35,14 @@
             [class.border-red-500]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
           >
           @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
-            <p class="mt-1 text-sm text-red-600">E-mail é obrigatório</p>
+            <p class="mt-1 text-sm text-red-600">{{ i18n.t('auth.login.validation.emailRequired') }}</p>
           }
         </div>
 
         <!-- Senha -->
         <div class="mb-6">
           <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-            Senha
+            {{ i18n.t('auth.login.password') }}
           </label>
           <input
             type="password"
@@ -54,7 +53,7 @@
             [class.border-red-500]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
           >
           @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-            <p class="mt-1 text-sm text-red-600">Senha é obrigatória</p>
+            <p class="mt-1 text-sm text-red-600">{{ i18n.t('auth.login.validation.passwordRequired') }}</p>
           }
         </div>
 

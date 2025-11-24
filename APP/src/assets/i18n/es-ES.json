@@ -1,0 +1,297 @@
+{
+  "header": {
+    "logout": "Salir",
+    "notifications": "Notificaciones"
+  },
+  "sidebar": {
+    "categories": {
+      "main": "Principal",
+      "inventory": "Gestión de Inventario",
+      "logistics": "Logística",
+      "settings": "Configuración"
+    },
+    "menu": {
+      "dashboard": "Tablero",
+      "customers": "Clientes",
+      "suppliers": "Proveedores",
+      "products": "Productos",
+      "orders": "Pedidos",
+      "warehouses": "Almacenes",
+      "inventory": "Inventario",
+      "pickingTasks": "Tareas de Picking",
+      "packingTasks": "Tareas de Empaque",
+      "inboundShipments": "Recepción",
+      "outboundShipments": "Expedición",
+      "vehicles": "Vehículos",
+      "drivers": "Conductores",
+      "settings": "Ajustes"
+    }
+  },
+  "common": {
+    "buttons": {
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "create": "Crear",
+      "search": "Buscar",
+      "filter": "Filtros",
+      "back": "Volver",
+      "confirm": "Confirmar",
+      "close": "Cerrar",
+      "view": "Ver",
+      "next": "Siguiente",
+      "previous": "Anterior",
+      "refresh": "Actualizar",
+      "export": "Exportar",
+      "import": "Importar"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "delivered": "Entregado"
+    },
+    "messages": {
+      "loading": "Cargando...",
+      "saving": "Guardando...",
+      "saved": "Guardado exitosamente",
+      "error": "Error al procesar",
+      "noData": "No se encontraron registros",
+      "confirmDelete": "¿Está seguro de que desea eliminar?",
+      "deleteSuccess": "Eliminado exitosamente",
+      "createSuccess": "Creado exitosamente",
+      "updateSuccess": "Actualizado exitosamente"
+    },
+    "fields": {
+      "name": "Nombre",
+      "description": "Descripción",
+      "email": "Correo",
+      "phone": "Teléfono",
+      "address": "Dirección",
+      "city": "Ciudad",
+      "state": "Estado",
+      "zipCode": "Código Postal",
+      "country": "País",
+      "date": "Fecha",
+      "status": "Estado",
+      "actions": "Acciones",
+      "createdAt": "Creado en",
+      "updatedAt": "Actualizado en"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido",
+      "subtitle": "Sistema de Gestión ERP",
+      "email": "Correo",
+      "password": "Contraseña",
+      "loginButton": "Ingresar",
+      "emailRequired": "El correo es obligatorio",
+      "passwordRequired": "La contraseña es obligatoria",
+      "invalidCredentials": "Credenciales inválidas",
+      "loggingIn": "Iniciando sesión...",
+      "validation": {
+        "emailRequired": "El correo es obligatorio",
+        "passwordRequired": "La contraseña es obligatoria"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Resumen",
+    "subtitle": "Bienvenido de nuevo, esto es lo que está sucediendo hoy.",
+    "stats": {
+      "revenue": "Ingresos Totales",
+      "orders": "Pedidos",
+      "customers": "Clientes",
+      "products": "Productos"
+    },
+    "charts": {
+      "monthlyRevenue": "Ingresos Mensuales",
+      "viewReport": "Ver Informe"
+    },
+    "recentOrders": {
+      "title": "Pedidos Recientes",
+      "viewAll": "Ver Todos los Pedidos"
+    }
+  },
+  "products": {
+    "title": "Productos",
+    "subtitle": "Gestione el catálogo de productos",
+    "newProduct": "Nuevo Producto",
+    "searchPlaceholder": "Buscar por nombre, SKU o categoría...",
+    "table": {
+      "sku": "SKU",
+      "product": "Producto",
+      "category": "Categoría",
+      "price": "Precio",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "empty": {
+      "title": "No se encontraron productos",
+      "subtitle": "Comience creando su primer producto",
+      "button": "Crear Producto"
+    },
+    "loading": "Cargando productos...",
+    "total": "Total: {{count}} productos"
+  },
+  "customers": {
+    "title": "Clientes",
+    "subtitle": "Gestione sus clientes",
+    "newCustomer": "Nuevo Cliente",
+    "searchPlaceholder": "Buscar por nombre, correo o documento...",
+    "table": {
+      "customer": "Cliente",
+      "contact": "Contacto",
+      "document": "Documento",
+      "city": "Ciudad",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "empty": {
+      "title": "No se encontraron clientes",
+      "subtitle": "Comience agregando su primer cliente",
+      "button": "Crear Cliente"
+    },
+    "loading": "Cargando clientes..."
+  },
+  "orders": {
+    "title": "Pedidos",
+    "subtitle": "Gestione todos los pedidos",
+    "newOrder": "Nuevo Pedido",
+    "stats": {
+      "total": "Total de Pedidos",
+      "pending": "Pendientes",
+      "processing": "En Procesamiento",
+      "delivered": "Entregados"
+    },
+    "table": {
+      "orderNumber": "Nº Pedido",
+      "customer": "Cliente",
+      "date": "Fecha",
+      "totalAmount": "Monto Total",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "empty": {
+      "title": "No se encontraron pedidos",
+      "subtitle": "Comience creando un nuevo pedido",
+      "button": "Crear Pedido"
+    },
+    "loading": "Cargando pedidos..."
+  },
+  "inventory": {
+    "title": "Inventario",
+    "subtitle": "Control de stock e inventario",
+    "stats": {
+      "totalStock": "Stock Total",
+      "lowStock": "Stock Bajo",
+      "outOfStock": "Sin Stock",
+      "totalValue": "Valor Total"
+    },
+    "module": {
+      "title": "Control de Inventario",
+      "subtitle": "Módulo de inventario en desarrollo"
+    }
+  },
+  "suppliers": {
+    "title": "Proveedores",
+    "subtitle": "Gestione sus proveedores",
+    "newSupplier": "Nuevo Proveedor",
+    "module": {
+      "title": "Gestión de Proveedores",
+      "subtitle": "Módulo de proveedores en desarrollo"
+    }
+  },
+  "warehouses": {
+    "title": "Almacenes",
+    "subtitle": "Gestione sus almacenes y ubicaciones de almacenamiento",
+    "newWarehouse": "Nuevo Almacén",
+    "module": {
+      "title": "Gestión de Almacenes",
+      "subtitle": "Módulo de almacenes en desarrollo"
+    }
+  },
+  "drivers": {
+    "title": "Conductores",
+    "subtitle": "Gestione su flota de conductores",
+    "newDriver": "Nuevo Conductor",
+    "module": {
+      "title": "Gestión de Conductores",
+      "subtitle": "Módulo de conductores en desarrollo"
+    }
+  },
+  "vehicles": {
+    "title": "Vehículos",
+    "subtitle": "Gestione su flota de vehículos",
+    "newVehicle": "Nuevo Vehículo",
+    "module": {
+      "title": "Gestión de Vehículos",
+      "subtitle": "Módulo de vehículos en desarrollo"
+    }
+  },
+  "pickingTasks": {
+    "title": "Tareas de Separación",
+    "subtitle": "Gestione las tareas de picking",
+    "newTask": "Nueva Tarea",
+    "module": {
+      "title": "Tareas de Separación",
+      "subtitle": "Módulo de separación en desarrollo"
+    }
+  },
+  "packingTasks": {
+    "title": "Tareas de Embalaje",
+    "subtitle": "Gestione las tareas de packing",
+    "newTask": "Nueva Tarea",
+    "module": {
+      "title": "Tareas de Embalaje",
+      "subtitle": "Módulo de embalaje en desarrollo"
+    }
+  },
+  "inboundShipments": {
+    "title": "Recepciones",
+    "subtitle": "Gestione recepciones de mercancías",
+    "newShipment": "Nueva Recepción",
+    "module": {
+      "title": "Recepciones",
+      "subtitle": "Módulo de recepciones en desarrollo"
+    }
+  },
+  "outboundShipments": {
+    "title": "Expediciones",
+    "subtitle": "Gestione expediciones de mercancías",
+    "newShipment": "Nueva Expedición",
+    "module": {
+      "title": "Expediciones",
+      "subtitle": "Módulo de expediciones en desarrollo"
+    }
+  },
+  "layout": {
+    "header": {
+      "search": "Buscar...",
+      "notifications": "Notificaciones",
+      "profile": "Perfil",
+      "logout": "Salir"
+    },
+    "sidebar": {
+      "menu": "Menú",
+      "dashboard": "Panel",
+      "products": "Productos",
+      "customers": "Clientes",
+      "orders": "Pedidos",
+      "inventory": "Inventario",
+      "suppliers": "Proveedores",
+      "warehouses": "Almacenes",
+      "drivers": "Conductores",
+      "vehicles": "Vehículos",
+      "pickingTasks": "Separación",
+      "packingTasks": "Embalaje",
+      "inboundShipments": "Recepciones",
+      "outboundShipments": "Expediciones"
+    }
+  }
+}

@@ -25,63 +25,63 @@ export const routes: Routes = [
       },
       {
         path: 'products',
-        loadChildren: () => import('./features/products/products.routes')
-          .then(m => m.PRODUCTS_ROUTES)
+        loadComponent: () => import('./features/products/products-list/products-list.component')
+          .then(m => m.ProductsListComponent)
       },
       {
         path: 'customers',
-        loadChildren: () => import('./features/customers/customers.routes')
-          .then(m => m.CUSTOMERS_ROUTES)
+        loadComponent: () => import('./features/customers/customers-list/customers-list.component')
+          .then(m => m.CustomersListComponent)
       },
       {
         path: 'orders',
-        loadChildren: () => import('./features/orders/orders.routes')
-          .then(m => m.ORDERS_ROUTES)
+        loadComponent: () => import('./features/orders/orders-list/orders-list.component')
+          .then(m => m.OrdersListComponent)
       },
       {
         path: 'warehouses',
-        loadChildren: () => import('./features/warehouses/warehouses.routes')
-          .then(m => m.WAREHOUSES_ROUTES)
+        loadComponent: () => import('./features/warehouses/warehouses-list/warehouses-list.component')
+          .then(m => m.WarehousesListComponent)
       },
       {
         path: 'inventory',
-        loadChildren: () => import('./features/inventory/inventory.routes')
-          .then(m => m.INVENTORY_ROUTES)
+        loadComponent: () => import('./features/inventory/inventory-list/inventory-list.component')
+          .then(m => m.InventoryListComponent)
       },
       {
         path: 'suppliers',
-        loadChildren: () => import('./features/suppliers/suppliers.routes')
-          .then(m => m.SUPPLIERS_ROUTES)
+        loadComponent: () => import('./features/suppliers/suppliers-list/suppliers-list.component')
+          .then(m => m.SuppliersListComponent)
       },
       {
         path: 'inbound-shipments',
-        loadChildren: () => import('./features/inbound-shipments/inbound-shipments.routes')
-          .then(m => m.INBOUND_SHIPMENTS_ROUTES)
+        loadComponent: () => import('./features/inbound-shipments/inbound-shipments-list/inbound-shipments-list.component')
+          .then(m => m.InboundShipmentsListComponent)
       },
       {
         path: 'outbound-shipments',
-        loadChildren: () => import('./features/outbound-shipments/outbound-shipments.routes')
-          .then(m => m.OUTBOUND_SHIPMENTS_ROUTES)
+        loadComponent: () => import('./features/outbound-shipments/outbound-shipments-list/outbound-shipments-list.component')
+          .then(m => m.OutboundShipmentsListComponent)
       },
       {
         path: 'picking-tasks',
-        loadChildren: () => import('./features/picking-tasks/picking-tasks.routes')
-          .then(m => m.PICKING_TASKS_ROUTES)
+        loadComponent: () => import('./features/picking-tasks/picking-tasks-list/picking-tasks-list.component')
+          .then(m => m.PickingTasksListComponent)
       },
       {
         path: 'packing-tasks',
-        loadChildren: () => import('./features/packing-tasks/packing-tasks.routes')
-          .then(m => m.PACKING_TASKS_ROUTES)
+        loadComponent: () => import('./features/packing-tasks/packing-tasks-list/packing-tasks-list.component')
+          .then(m => m.PackingTasksListComponent)
       },
       {
         path: 'vehicles',
-        loadChildren: () => import('./features/vehicles/vehicles.routes')
-          .then(m => m.VEHICLES_ROUTES)
+        loadComponent: () => import('./features/vehicles/vehicles-list/vehicles-list.component')
+          .then(m => m.VehiclesListComponent)
       },
       {
         path: 'drivers',
-        loadChildren: () => import('./features/drivers/drivers.routes')
-          .then(m => m.DRIVERS_ROUTES)
+        loadComponent: () => import('./features/drivers/drivers-list/drivers-list.component')
+          .then(m => m.DriversListComponent)
       }
     ]
   },

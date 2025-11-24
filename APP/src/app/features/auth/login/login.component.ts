@@ -1,7 +1,9 @@
 import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,9 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);
+  private router = inject(Router);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
 
   loginForm: FormGroup;
   isLoading = signal(false);

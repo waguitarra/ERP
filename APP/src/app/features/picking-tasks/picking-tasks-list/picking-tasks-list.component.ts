@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-picking-tasks-list',
@@ -8,4 +9,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './picking-tasks-list.component.html',
   styleUrls: ['./picking-tasks-list.component.scss']
 })
-export class PickingTasksListComponent {}
+export class PickingTasksListComponent {
+  protected readonly i18n = inject(I18nService);
+}
