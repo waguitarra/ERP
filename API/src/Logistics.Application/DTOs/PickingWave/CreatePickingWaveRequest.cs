@@ -1,7 +1,8 @@
 namespace Logistics.Application.DTOs.PickingWave;
 
-public record CreatePickingWaveRequest(
-    string WaveNumber,
-    Guid WarehouseId,
-    List<Guid> OrderIds
-);
+public class CreatePickingWaveRequest
+{
+    public string WaveNumber { get; set; } = string.Empty;
+    public Guid WarehouseId { get; set; }
+    public List<Guid> OrderIds { get; set; } = new();
+}
