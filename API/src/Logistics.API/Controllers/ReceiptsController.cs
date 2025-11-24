@@ -17,7 +17,7 @@ public class ReceiptsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ReceiptResponse>> Create([FromBody] CreateReceiptRequest request)
+    public async Task<ActionResult<ReceiptResponse>> Create(CreateReceiptRequest request)
     {
         var receipt = await _service.CreateAsync(request);
         return CreatedAtAction(nameof(GetById), new { id = receipt.Id }, receipt);

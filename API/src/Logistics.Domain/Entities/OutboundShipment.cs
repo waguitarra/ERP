@@ -6,11 +6,10 @@ public class OutboundShipment
 {
     private OutboundShipment() { } // EF Core
 
-    public OutboundShipment(string shipmentNumber, Guid orderId, Guid carrierId)
+    public OutboundShipment(string shipmentNumber, Guid orderId, Guid? carrierId = null)
     {
         if (string.IsNullOrWhiteSpace(shipmentNumber)) throw new ArgumentException("ShipmentNumber inválido");
         if (orderId == Guid.Empty) throw new ArgumentException("OrderId inválido");
-        if (carrierId == Guid.Empty) throw new ArgumentException("CarrierId inválido");
 
         Id = Guid.NewGuid();
         ShipmentNumber = shipmentNumber;
@@ -23,7 +22,7 @@ public class OutboundShipment
     public Guid Id { get; private set; }
     public string ShipmentNumber { get; private set; } = string.Empty;
     public Guid OrderId { get; private set; }
-    public Guid CarrierId { get; private set; }
+    public Guid? CarrierId { get; private set; }
     public string? TrackingNumber { get; private set; }
     public OutboundStatus Status { get; private set; }
     public DateTime? ShippedDate { get; private set; }

@@ -10,17 +10,20 @@ public class ReceiptService : IReceiptService
     private readonly IReceiptRepository _repository;
     private readonly IInboundShipmentRepository _shipmentRepository;
     private readonly IWarehouseRepository _warehouseRepository;
+    private readonly IOrderRepository _orderRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public ReceiptService(
         IReceiptRepository repository,
         IInboundShipmentRepository shipmentRepository,
         IWarehouseRepository warehouseRepository,
+        IOrderRepository orderRepository,
         IUnitOfWork unitOfWork)
     {
         _repository = repository;
         _shipmentRepository = shipmentRepository;
         _warehouseRepository = warehouseRepository;
+        _orderRepository = orderRepository;
         _unitOfWork = unitOfWork;
     }
 
@@ -38,6 +41,23 @@ public class ReceiptService : IReceiptService
             request.WarehouseId,
             request.ReceivedBy
         );
+
+        // Buscar Order relacionado ao InboundShipment para criar ReceiptLines automaticamente
+        var order = await _orderRepository.GetByIdAsync(shipment.OrderId);
+        if (order != null && order.Items.Any())
+        {  
+            // Criar ReceiptLines baseado nos OrderItems
+            foreach (var orderItem in order.Items)
+            {
+                var receiptLine = new ReceiptLine(
+                    receipt.Id,
+                    orderItem.ProductId,
+                    orderItem.SKU,
+                    orderItem.QuantityOrdered
+                );
+                receipt.AddLine(receiptLine);
+            }
+        }
 
         await _repository.AddAsync(receipt);
         await _unitOfWork.CommitAsync();

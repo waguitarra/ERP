@@ -1,6 +1,7 @@
 using Logistics.Application.DTOs.PutawayTask;
 using Logistics.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace Logistics.API.Controllers;
 
@@ -18,8 +19,27 @@ public class PutawayTasksController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<PutawayTaskResponse>> Create([FromBody] CreatePutawayTaskRequest request)
     {
-        var task = await _service.CreateAsync(request);
-        return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+        Log.Information("[PutawayTasksController] ########## POST /api/putawaytasks ##########");
+        Log.Information("[PutawayTasksController] Request: {@Request}", request);
+        
+        try
+        {
+            var task = await _service.CreateAsync(request);
+            Log.Information("[PutawayTasksController] Task criado com sucesso: {TaskId}", task.Id);
+            return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[PutawayTasksController] ERRO ao criar PutawayTask");
+            throw;
+        }
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<PutawayTaskResponse>>> GetAll()
+    {
+        var tasks = await _service.GetAllAsync();
+        return Ok(new { data = tasks });
     }
 
     [HttpGet("{id}")]

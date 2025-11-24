@@ -1,5 +1,6 @@
 using Logistics.Domain.Interfaces;
 using Logistics.Infrastructure.Data;
+using Serilog;
 
 namespace Logistics.Infrastructure.Repositories;
 
@@ -14,6 +15,7 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(LogisticsDbContext context)
     {
         _context = context;
+        Log.Information("[UnitOfWork] CONSTRUTOR - DbContext HashCode: {HashCode}", _context.GetHashCode());
     }
 
     public ICompanyRepository Companies
@@ -38,16 +40,33 @@ public class UnitOfWork : IUnitOfWork
 
     public async Task<int> CommitAsync()
     {
+        Log.Information("[UnitOfWork] ========== CommitAsync INICIO ==========");
+        Log.Information("[UnitOfWork] DbContext HashCode: {HashCode}", _context.GetHashCode());
+        
         var entriesCount = _context.ChangeTracker.Entries().Count();
-        Console.WriteLine($"[UnitOfWork] CommitAsync - Entries: {entriesCount}");
+        Log.Information("[UnitOfWork] ChangeTracker total entries: {Entries}", entriesCount);
         
         foreach (var entry in _context.ChangeTracker.Entries())
         {
-            Console.WriteLine($"[UnitOfWork] Entry: {entry.Entity.GetType().Name} - State: {entry.State}");
+            Log.Information("[UnitOfWork] Entry: {EntityType} - State: {State} - HashCode: {HashCode}", 
+                entry.Entity.GetType().Name, entry.State, entry.Entity.GetHashCode());
         }
         
+        if (entriesCount == 0)
+        {
+            Log.Warning("[UnitOfWork] ATENÇÃO: ChangeTracker está VAZIO - nada para salvar!");
+        }
+        
+        Log.Information("[UnitOfWork] Chamando SaveChangesAsync()...");
         var result = await _context.SaveChangesAsync();
-        Console.WriteLine($"[UnitOfWork] SaveChanges result: {result}");
+        Log.Information("[UnitOfWork] SaveChangesAsync() retornou: {Result} registros salvos", result);
+        
+        if (result == 0 && entriesCount > 0)
+        {
+            Log.Error("[UnitOfWork] ERRO CRÍTICO: Havia {Entries} entries mas SaveChanges retornou 0!", entriesCount);
+        }
+        
+        Log.Information("[UnitOfWork] ========== CommitAsync FIM ==========");
         return result;
     }
 

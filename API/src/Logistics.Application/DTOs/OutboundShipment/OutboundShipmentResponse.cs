@@ -7,7 +7,7 @@ public record OutboundShipmentResponse(
     string ShipmentNumber,
     Guid OrderId,
     string OrderNumber,
-    Guid CarrierId,
+    Guid? CarrierId,
     string? TrackingNumber,
     OutboundStatus Status,
     DateTime? ShippedDate,

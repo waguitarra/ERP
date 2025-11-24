@@ -19,6 +19,7 @@ public class InboundShipmentRepository : IInboundShipmentRepository
         return await _context.InboundShipments
             .Include(i => i.Supplier)
             .Include(i => i.Order)
+                .ThenInclude(o => o.Items)
             .Include(i => i.Vehicle)
             .Include(i => i.Driver)
             .FirstOrDefaultAsync(i => i.Id == id);

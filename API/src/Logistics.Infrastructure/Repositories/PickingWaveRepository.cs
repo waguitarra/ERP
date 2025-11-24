@@ -18,7 +18,7 @@ public class PickingWaveRepository : IPickingWaveRepository
     {
         return await _context.PickingWaves
             .Include(w => w.Tasks)
-            .ThenInclude(t => t.Lines)
+                .ThenInclude(t => t.Lines)
             .Include(w => w.Warehouse)
             .FirstOrDefaultAsync(w => w.Id == id);
     }
@@ -26,6 +26,8 @@ public class PickingWaveRepository : IPickingWaveRepository
     public async Task<PickingWave?> GetByWaveNumberAsync(string waveNumber)
     {
         return await _context.PickingWaves
+            .Include(w => w.Tasks)
+                .ThenInclude(t => t.Lines)
             .FirstOrDefaultAsync(w => w.WaveNumber == waveNumber);
     }
 
