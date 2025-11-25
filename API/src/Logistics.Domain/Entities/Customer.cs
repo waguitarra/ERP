@@ -32,13 +32,19 @@ public class Customer
     public string? Phone { get; private set; }
     public string? Email { get; private set; }
     public string? Address { get; private set; }
+    public string? City { get; private set; }
+    public string? State { get; private set; }
+    public string? ZipCode { get; private set; }
+    public string? Country { get; private set; }
+    public double? Latitude { get; private set; }
+    public double? Longitude { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
 
     public Company Company { get; private set; } = null!;
 
-    public void Update(string name, string document, string? phone, string? email, string? address)
+    public void Update(string name, string document, string? phone, string? email, string? address, string? city = null, string? state = null, string? zipCode = null, string? country = null)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Nome não pode ser vazio");
@@ -51,6 +57,17 @@ public class Customer
         Phone = phone;
         Email = email;
         Address = address;
+        City = city;
+        State = state;
+        ZipCode = zipCode;
+        Country = country;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetGeolocation(double latitude, double longitude)
+    {
+        Latitude = latitude;
+        Longitude = longitude;
         UpdatedAt = DateTime.UtcNow;
     }
 

@@ -42,4 +42,18 @@ public class OrdersController : ControllerBase
 
         return Ok(order);
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<OrderResponse>> Update(Guid id, [FromBody] UpdateOrderRequest request)
+    {
+        try
+        {
+            var order = await _service.UpdateAsync(id, request);
+            return Ok(order);
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound();
+        }
+    }
 }

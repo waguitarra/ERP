@@ -19,18 +19,27 @@ APP/
 │   │   │   │   ├── api.service.ts
 │   │   │   │   └── storage.service.ts
 │   │   │   └── models/                    # Interfaces e tipos globais
-│   │   │
-│   │   ├── shared/                        # Componentes e recursos compartilhados
-│   │   │   ├── components/
-│   │   │   │   ├── table/                 # Componente de tabela reutilizável
-│   │   │   │   ├── modal/                 # Modal genérico
-│   │   │   │   ├── form-input/            # Inputs padronizados
-│   │   │   │   ├── pagination/            # Paginação
-│   │   │   │   ├── loading-spinner/       # Loading state
-│   │   │   │   └── confirm-dialog/        # Diálogo de confirmação
-│   │   │   ├── directives/
-│   │   │   ├── pipes/
-│   │   │   └── utils/
+│   │   │   │   ├── shared/                        # Componentes e recursos compartilhados
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── table/                 # Componente de tabela reutilizável
+│   │   │   │   │   ├── modal/                 # Modal genérico
+│   │   │   │   │   ├── form-input/            # Inputs padronizados
+│   │   │   │   │   ├── pagination/            # Paginação
+│   │   │   │   │   ├── loading-spinner/       # Loading state
+│   │   │   │   │   ├── confirm-dialog/        # Diálogo de confirmação
+│   │   │   │   │   │
+│   │   │   │   │   ├── MODAIS SELETORES ESPECÍFICOS (REUTILIZÁVEIS):
+│   │   │   │   │   ├── vehicle-selector-modal/     # 🚗 Seletor de veículos
+│   │   │   │   │   ├── driver-selector-modal/      # 👨‍✈️ Seletor de motoristas
+│   │   │   │   │   ├── warehouse-selector-modal/   # 🏭 Seletor de armazéns
+│   │   │   │   │   ├── order-selector-modal/       # 📦 Seletor de pedidos
+│   │   │   │   │   ├── customer-selector-modal/    # 👤 Seletor de clientes
+│   │   │   │   │   ├── supplier-selector-modal/    # 🏢 Seletor de fornecedores
+│   │   │   │   │   └── product-selector-modal/     # 📦 Seletor de produtos
+│   │   │   │   │
+│   │   │   │   ├── directives/
+│   │   │   │   ├── pipes/
+│   │   │   │   └── utils/
 │   │   │
 │   │   ├── layout/                        # Componentes de layout
 │   │   │   ├── main-layout/
@@ -599,3 +608,293 @@ export const routes: Routes = [
 ---
 
 **Este padrão deve ser seguido RIGOROSAMENTE em todo o projeto. Não há exceções.**
+
+---
+
+## 🎯 PADRÃO: COMPONENTES MODAIS SELETORES
+
+### Conceito
+O sistema utiliza **componentes modais específicos e independentes** para seleção de entidades. Cada modal é responsável por buscar, filtrar e permitir a seleção de um tipo específico de entidade.
+
+### Características Obrigatórias
+
+#### 1. **Independência**
+- Cada modal busca seus próprios dados da API
+- Não depende de props/inputs complexos de dados
+- Gerencia seu próprio estado (loading, search, selected)
+
+#### 2. **Identidade Visual Única**
+Cada modal possui cor e ícone específicos:
+
+| Modal | Cor | Ícone | Output |
+|-------|-----|-------|--------|
+| VehicleSelectorModal | Azul (`blue-600`) | 🚗 | `vehicleSelected` |
+| DriverSelectorModal | Verde (`green-600`) | 👨‍✈️ | `driverSelected` |
+| WarehouseSelectorModal | Roxo (`purple-600`) | 🏭 | `warehouseSelected` |
+| OrderSelectorModal | Laranja (`orange-600`) | 📦 | `orderSelected` |
+| CustomerSelectorModal | Ciano (`cyan-600`) | 👤 | `customerSelected` |
+| SupplierSelectorModal | Índigo (`indigo-600`) | 🏢 | `supplierSelected` |
+| ProductSelectorModal | Verde-azulado (`teal-600`) | 📦 | `productSelected` |
+
+#### 3. **Estrutura Padrão**
+
+```typescript
+@Component({
+  selector: 'app-[entity]-selector-modal',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './[entity]-selector-modal.component.html'
+})
+export class EntitySelectorModalComponent implements OnInit {
+  private readonly service = inject(EntityService);
+  
+  entitySelected = output<Entity>();
+  
+  isOpen = signal<boolean>(false);
+  loading = signal<boolean>(false);
+  searchTerm = signal<string>('');
+  selectedEntity = signal<Entity | null>(null);
+  entities = signal<Entity[]>([]);
+  
+  get filteredEntities(): Entity[] {
+    // Lógica de filtro
+  }
+
+  ngOnInit(): void {
+    this.loadEntities();
+  }
+
+  async loadEntities(): Promise<void> {
+    this.loading.set(true);
+    try {
+      const data = await this.service.getAll();
+      this.entities.set(data);
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
+  open(): void {
+    this.isOpen.set(true);
+    this.searchTerm.set('');
+    this.selectedEntity.set(null);
+    this.loadEntities();
+  }
+
+  close(): void {
+    this.isOpen.set(false);
+  }
+
+  selectEntity(entity: Entity): void {
+    this.selectedEntity.set(entity);
+  }
+
+  confirm(): void {
+    const selected = this.selectedEntity();
+    if (selected) {
+      this.entitySelected.emit(selected);
+      this.close();
+    }
+  }
+}
+```
+
+#### 4. **Template Padrão**
+
+```html
+<div *ngIf="isOpen()" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" (click)="close()">
+  <div class="bg-white dark:bg-slate-900 rounded-xl shadow-2xl w-full max-w-5xl max-h-screen overflow-hidden mx-4" (click)="$event.stopPropagation()">
+    
+    <!-- Header colorido -->
+    <div class="px-6 py-4 border-b bg-[COR]-600 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <svg class="w-8 h-8 text-white"><!-- Ícone --></svg>
+        <h2 class="text-2xl font-bold text-white">Selecionar [Entidade]</h2>
+      </div>
+      <button (click)="close()" class="text-white hover:bg-[COR]-700 rounded p-2">X</button>
+    </div>
+
+    <!-- Campo de busca -->
+    <div class="px-6 py-4 border-b bg-slate-50 dark:bg-slate-800">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm"
+        placeholder="🔍 Pesquisar..."
+        (ngModelChange)="searchTerm.set($event)"
+        class="w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-[COR]-500">
+    </div>
+
+    <!-- Lista de items -->
+    <div class="p-6 overflow-y-auto" style="max-height:60vh;">
+      <!-- Loading state -->
+      <div *ngIf="loading()" class="text-center py-12">
+        <div class="inline-block w-12 h-12 border-4 border-[COR]-600 border-t-transparent rounded-full animate-spin"></div>
+        <p class="mt-4">Carregando...</p>
+      </div>
+
+      <!-- Empty state -->
+      <div *ngIf="!loading() && filteredEntities.length === 0" class="text-center py-12">
+        <p class="text-xl">Nenhum resultado encontrado</p>
+      </div>
+      
+      <!-- Grid de items -->
+      <div *ngIf="!loading() && filteredEntities.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div 
+          *ngFor="let item of filteredEntities"
+          (click)="selectEntity(item)"
+          class="p-6 border-2 rounded-xl cursor-pointer transition-all"
+          [class.border-[COR]-600]="selectedEntity()?.id === item.id"
+          [class.bg-[COR]-50]="selectedEntity()?.id === item.id">
+          
+          <!-- Informações do item -->
+          <div class="text-2xl font-bold">{{item.displayName}}</div>
+          <div class="space-y-2 text-sm">
+            <!-- Mostrar TODAS as informações relevantes -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-6 py-4 border-t flex justify-end gap-3 bg-slate-50 dark:bg-slate-800">
+      <button type="button" (click)="close()" class="px-6 py-3 bg-slate-200 rounded-lg font-semibold">
+        Cancelar
+      </button>
+      <button 
+        type="button" 
+        (click)="confirm()" 
+        [disabled]="!selectedEntity()"
+        class="px-6 py-3 bg-[COR]-600 text-white rounded-lg font-semibold disabled:opacity-50">
+        ✓ Confirmar
+      </button>
+    </div>
+
+  </div>
+</div>
+```
+
+### Como Usar
+
+#### 1. Importar o componente
+
+```typescript
+import { VehicleSelectorModalComponent } from '@shared/components/vehicle-selector-modal/vehicle-selector-modal.component';
+
+@Component({
+  imports: [VehicleSelectorModalComponent]
+})
+export class MyComponent {
+  vehicleModal = viewChild<VehicleSelectorModalComponent>('vehicleModal');
+  selectedVehicle = signal<Vehicle | null>(null);
+
+  openVehicleSelector(): void {
+    this.vehicleModal()?.open();
+  }
+
+  onVehicleSelected(vehicle: Vehicle): void {
+    console.log('Veículo selecionado:', vehicle);
+    this.selectedVehicle.set(vehicle);
+    // Atualizar formulário com vehicle.id
+  }
+}
+```
+
+#### 2. Adicionar no template
+
+```html
+<button (click)="openVehicleSelector()">Selecionar Veículo</button>
+
+<app-vehicle-selector-modal 
+  #vehicleModal 
+  (vehicleSelected)="onVehicleSelected($event)">
+</app-vehicle-selector-modal>
+```
+
+### Regras Importantes
+
+#### ✅ SEMPRE:
+1. **Mostrar TODAS as informações relevantes** da entidade no card
+2. **Buscar dados da API** dentro do próprio componente
+3. **Emitir o objeto completo** da entidade selecionada (não só o ID)
+4. **Usar cores distintas** para cada tipo de modal
+5. **Loading state** enquanto carrega
+6. **Empty state** quando não encontra resultados
+7. **Dark mode** completo
+8. **Grid responsivo** (2 colunas em desktop, 1 em mobile)
+
+#### ❌ NUNCA:
+1. Criar modal genérico que serve para tudo
+2. Passar dados via @Input (o modal busca seus próprios dados)
+3. Mostrar apenas ID ou nome (usuário precisa ver tudo antes de escolher)
+4. Usar mesma cor para modais diferentes
+5. Esquecer loading/empty states
+
+### Informações que DEVEM ser exibidas
+
+#### VehicleSelectorModal 🚗
+- Placa (destaque)
+- Modelo
+- Ano
+- Cor
+- Capacidade
+- Status (Ativo/Inativo)
+
+#### DriverSelectorModal 👨‍✈️
+- Nome (destaque)
+- CNH
+- Telefone
+- Email
+- Status (Ativo/Inativo)
+
+#### WarehouseSelectorModal 🏭
+- Código (destaque)
+- Nome
+- Cidade
+- Estado
+- CEP
+- Status (Ativo/Inativo)
+
+#### OrderSelectorModal 📦
+- Número do pedido (destaque)
+- Cliente
+- Status (badge colorido)
+- Prioridade
+- Data esperada
+- Endereço de entrega
+
+#### CustomerSelectorModal 👤
+- Nome (destaque)
+- CPF/CNPJ
+- Email
+- Telefone
+- Endereço
+
+#### SupplierSelectorModal 🏢
+- Nome (destaque)
+- CNPJ
+- Email
+- Telefone
+- Endereço
+
+#### ProductSelectorModal 📦
+- Nome (destaque)
+- SKU
+- Preço
+- Estoque disponível
+- Categoria
+
+### Vantagens dessa Arquitetura
+
+1. **Reutilização**: Use o mesmo modal em qualquer lugar do sistema
+2. **Manutenção**: Bug corrigido em 1 lugar, afeta todos os usos
+3. **Consistência**: Mesma UX em todo o sistema
+4. **Escalabilidade**: Fácil criar novos modais seguindo o padrão
+5. **Independência**: Cada modal é autocontido
+6. **Performance**: Carrega dados apenas quando abre
+
+### Documentação Completa
+
+Para detalhes de implementação, exemplos e guias, consulte:
+**`APP-Documentation/COMPONENTES-MODAIS-SELETORES.md`**
+
+---

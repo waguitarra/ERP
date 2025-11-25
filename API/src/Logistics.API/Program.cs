@@ -64,6 +64,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // WMS Repositories
 builder.Services.AddScoped<IWarehouseZoneRepository, WarehouseZoneRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderStatusRepository, OrderStatusRepository>();
+builder.Services.AddScoped<IOrderPriorityRepository, OrderPriorityRepository>();
 builder.Services.AddScoped<IInboundShipmentRepository, InboundShipmentRepository>();
 builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
 builder.Services.AddScoped<IPickingWaveRepository, PickingWaveRepository>();
@@ -94,6 +96,8 @@ builder.Services.AddScoped<IStockMovementService, StockMovementService>();
 // WMS Services
 builder.Services.AddScoped<IWarehouseZoneService, WarehouseZoneService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderStatusService, OrderStatusService>();
+builder.Services.AddScoped<IOrderPriorityService, OrderPriorityService>();
 builder.Services.AddScoped<IInboundShipmentService, InboundShipmentService>();
 builder.Services.AddScoped<IReceiptService, ReceiptService>();
 builder.Services.AddScoped<IPickingWaveService, PickingWaveService>();

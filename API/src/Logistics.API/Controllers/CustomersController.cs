@@ -24,6 +24,7 @@ public class CustomersController : ControllerBase
         catch (Exception) { return StatusCode(500, ApiResponse<CustomerResponse>.ErrorResponse("Erro interno")); }
     }
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ActionResult<ApiResponse<IEnumerable<CustomerResponse>>>> GetAll([FromQuery] Guid? companyId)
     {
         try { return Ok(ApiResponse<IEnumerable<CustomerResponse>>.SuccessResponse(companyId.HasValue ? await _service.GetByCompanyIdAsync(companyId.Value) : await _service.GetAllAsync())); }

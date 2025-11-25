@@ -44,6 +44,29 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.SpecialInstructions)
             .HasMaxLength(1000);
 
+        // WMS Fields - Geolocalização
+        builder.Property(o => o.ShippingZipCode)
+            .HasMaxLength(20);
+
+        builder.Property(o => o.ShippingLatitude)
+            .HasPrecision(10, 8);
+
+        builder.Property(o => o.ShippingLongitude)
+            .HasPrecision(11, 8);
+
+        builder.Property(o => o.ShippingCity)
+            .HasMaxLength(100);
+
+        builder.Property(o => o.ShippingState)
+            .HasMaxLength(50);
+
+        builder.Property(o => o.ShippingCountry)
+            .HasMaxLength(50);
+
+        // WMS Fields - Rastreamento
+        builder.Property(o => o.TrackingNumber)
+            .HasMaxLength(100);
+
         // Relationships
         builder.HasOne(o => o.Company)
             .WithMany()
@@ -65,11 +88,37 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .HasForeignKey(i => i.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // WMS Relationships
+        builder.HasOne(o => o.Vehicle)
+            .WithMany()
+            .HasForeignKey(o => o.VehicleId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasOne(o => o.Driver)
+            .WithMany()
+            .HasForeignKey(o => o.DriverId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasOne(o => o.OriginWarehouse)
+            .WithMany()
+            .HasForeignKey(o => o.OriginWarehouseId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasOne(o => o.DestinationWarehouse)
+            .WithMany()
+            .HasForeignKey(o => o.DestinationWarehouseId)
+            .OnDelete(DeleteBehavior.SetNull);
+
         // Indexes
         builder.HasIndex(o => new { o.CompanyId, o.OrderNumber })
             .IsUnique();
 
         builder.HasIndex(o => o.OrderDate);
         builder.HasIndex(o => o.Status);
+        builder.HasIndex(o => o.VehicleId);
+        builder.HasIndex(o => o.DriverId);
+        builder.HasIndex(o => o.OriginWarehouseId);
+        builder.HasIndex(o => o.DestinationWarehouseId);
+        builder.HasIndex(o => o.TrackingNumber);
     }
 }

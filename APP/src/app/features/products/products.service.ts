@@ -16,7 +16,7 @@ export class ProductsService {
     return this.api.get<ProductListResponse>(this.endpoint, params);
   }
 
-  getById(id: number): Promise<Product> {
+  getById(id: string): Promise<Product> {
     return this.api.get<Product>(`${this.endpoint}/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class ProductsService {
     return this.api.post<Product>(this.endpoint, data);
   }
 
-  update(id: number, data: UpdateProductDto): Promise<void> {
+  update(id: string, data: UpdateProductDto): Promise<void> {
     return this.api.put<void>(`${this.endpoint}/${id}`, data);
   }
 
-  delete(id: number): Promise<void> {
+  delete(id: string): Promise<void> {
     return this.api.delete<void>(`${this.endpoint}/${id}`);
   }
 }

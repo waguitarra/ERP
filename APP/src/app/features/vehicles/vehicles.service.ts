@@ -1,13 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ApiService } from '@core/services/api.service';
-
-export interface Vehicle {
-  id: string;
-  companyId: string;
-  licensePlate: string;
-  model: string;
-  [key: string]: any;
-}
+import { Vehicle, CreateVehicleDto, UpdateVehicleDto } from '@core/models/vehicle.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +20,11 @@ export class VehiclesService {
     return this.api.get<Vehicle>(`${this.endpoint}/${id}`);
   }
 
-  create(data: any): Promise<Vehicle> {
+  create(data: CreateVehicleDto): Promise<Vehicle> {
     return this.api.post<Vehicle>(this.endpoint, data);
   }
 
-  update(id: string, data: any): Promise<void> {
+  update(id: string, data: UpdateVehicleDto): Promise<void> {
     return this.api.put<void>(`${this.endpoint}/${id}`, data);
   }
 

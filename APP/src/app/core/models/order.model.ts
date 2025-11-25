@@ -1,42 +1,74 @@
+import { OrderType, OrderStatus, OrderSource, OrderPriority } from './enums';
+
 export interface Order {
-  id: number;
+  id: string;  // Guid
+  companyId: string;  // Guid
   orderNumber: string;
-  customerId: number;
-  customerName: string;
-  status: OrderStatus;
-  totalAmount: number;
+  type: OrderType;
+  source: OrderSource;
+  customerId?: string;  // Guid nullable
+  customerName?: string;
+  supplierId?: string;  // Guid nullable
+  supplierName?: string;
   orderDate: Date;
-  deliveryDate?: Date;
+  expectedDate?: Date;
+  priority: OrderPriority;
+  status: OrderStatus;
+  totalQuantity: number;
+  totalValue: number;
+  shippingAddress?: string;
+  specialInstructions?: string;
+  isBOPIS: boolean;  // Buy Online Pickup In Store
+  createdBy: string;  // Guid
   items: OrderItem[];
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt?: Date;
 }
 
 export interface OrderItem {
-  id: number;
-  productId: number;
-  productName: string;
-  quantity: number;
+  id: string;  // Guid
+  orderId: string;  // Guid
+  productId: string;  // Guid
+  productName?: string;
+  sku: string;
+  quantityOrdered: number;
+  quantityAllocated: number;
+  quantityPicked: number;
+  quantityShipped: number;
   unitPrice: number;
-  totalPrice: number;
+  requiredLotNumber?: string;
+  requiredShipDate?: Date;
 }
 
-export type OrderStatus = 'Pendente' | 'Processando' | 'Enviado' | 'Entregue' | 'Cancelado';
-
-export interface CreateOrderDto {
-  customerId: number;
-  orderDate: Date;
-  deliveryDate?: Date;
-  items: CreateOrderItemDto[];
+export interface CreateOrderRequest {
+  companyId: string;
+  orderNumber: string;
+  type: OrderType;
+  source: OrderSource;
+  customerId?: string;
+  supplierId?: string;
+  orderDate: Date | string;
+  expectedDate?: Date | string;
+  priority: OrderPriority;
+  shippingAddress?: string;
+  specialInstructions?: string;
+  isBOPIS?: boolean;
+  items: CreateOrderItemRequest[];
 }
 
-export interface CreateOrderItemDto {
-  productId: number;
-  quantity: number;
+export interface CreateOrderItemRequest {
+  productId: string;
+  sku: string;
+  quantityOrdered: number;
   unitPrice: number;
+  requiredLotNumber?: string;
+  requiredShipDate?: Date;
 }
 
 export interface UpdateOrderDto {
   status?: OrderStatus;
-  deliveryDate?: Date;
+  priority?: OrderPriority;
+  expectedDate?: Date | string;
+  shippingAddress?: string;
+  specialInstructions?: string;
 }

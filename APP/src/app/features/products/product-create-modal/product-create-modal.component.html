@@ -1,0 +1,215 @@
+<app-modal [isOpen]="isOpen" [title]="'Criar Novo Produto'" [size]="'lg'" (close)="onClose()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Nome -->
+      <div class="md:col-span-2">
+        <app-form-field
+          [label]="'Nome do Produto'"
+          [control]="form.controls['name']"
+          [type]="'text'"
+          [placeholder]="'Ex: Notebook Dell Inspiron'"
+          [required]="true"
+        ></app-form-field>
+      </div>
+
+      <!-- SKU -->
+      <app-form-field
+        [label]="'SKU'"
+        [control]="form.controls['sku']"
+        [type]="'text'"
+        [placeholder]="'Ex: PROD-001'"
+        [required]="true"
+      ></app-form-field>
+
+      <!-- Código de Barras -->
+      <app-form-field
+        [label]="'Código de Barras'"
+        [control]="form.controls['barcode']"
+        [type]="'text'"
+        [placeholder]="'Ex: 7891234567890'"
+      ></app-form-field>
+
+      <!-- Descrição -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Descrição</label>
+        <textarea
+          formControlName="description"
+          rows="3"
+          placeholder="Descrição detalhada do produto..."
+          class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+        ></textarea>
+      </div>
+
+      <!-- Peso -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Peso <span class="text-red-500">*</span></label>
+        <div class="flex gap-2">
+          <input
+            type="number"
+            formControlName="weight"
+            placeholder="0.00"
+            class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <select
+            formControlName="weightUnit"
+            class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+            <option value="lb">lb</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Volume -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Volume</label>
+        <div class="flex gap-2">
+          <input
+            type="number"
+            formControlName="volume"
+            placeholder="0.00"
+            class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <select
+            formControlName="volumeUnit"
+            class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="m3">m³</option>
+            <option value="cm3">cm³</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Dimensões -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Dimensões (C x L x A)</label>
+        <div class="grid grid-cols-4 gap-2">
+          <input
+            type="number"
+            formControlName="length"
+            placeholder="Comprimento"
+            class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="number"
+            formControlName="width"
+            placeholder="Largura"
+            class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="number"
+            formControlName="height"
+            placeholder="Altura"
+            class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <select
+            formControlName="dimensionUnit"
+            class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="cm">cm</option>
+            <option value="m">m</option>
+            <option value="in">in</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Checkboxes -->
+      <div class="md:col-span-2 space-y-3">
+        <label class="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            formControlName="requiresLotTracking"
+            class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
+          />
+          <span class="text-sm text-slate-700 dark:text-slate-300">Requer Rastreamento por Lote</span>
+        </label>
+
+        <label class="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            formControlName="requiresSerialTracking"
+            class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
+          />
+          <span class="text-sm text-slate-700 dark:text-slate-300">Requer Rastreamento por Série</span>
+        </label>
+
+        <label class="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            formControlName="isPerishable"
+            class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
+          />
+          <span class="text-sm text-slate-700 dark:text-slate-300">Produto Perecível</span>
+        </label>
+      </div>
+
+      <!-- Validade (condicional) -->
+      @if (form.value.isPerishable) {
+        <app-form-field
+          [label]="'Validade (dias)'"
+          [control]="form.controls['shelfLifeDays']"
+          [type]="'number'"
+          [placeholder]="'Ex: 30'"
+          [required]="true"
+        ></app-form-field>
+      }
+
+      <!-- Estoque Mínimo -->
+      <app-form-field
+        [label]="'Estoque Mínimo'"
+        [control]="form.controls['minimumStock']"
+        [type]="'number'"
+        [placeholder]="'0'"
+      ></app-form-field>
+
+      <!-- Estoque de Segurança -->
+      <app-form-field
+        [label]="'Estoque de Segurança'"
+        [control]="form.controls['safetyStock']"
+        [type]="'number'"
+        [placeholder]="'0'"
+      ></app-form-field>
+
+      <!-- Classificação ABC -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Classificação ABC</label>
+        <select
+          formControlName="abcClassification"
+          class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="A">A - Alta rotatividade</option>
+          <option value="B">B - Média rotatividade</option>
+          <option value="C">C - Baixa rotatividade</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
+      <button
+        type="button"
+        (click)="onClose()"
+        [disabled]="isSaving"
+        class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50"
+      >
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        [disabled]="isSaving"
+        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+      >
+        @if (isSaving) {
+          <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Salvando...
+        } @else {
+          Criar Produto
+        }
+      </button>
+    </div>
+  </form>
+</app-modal>

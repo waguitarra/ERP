@@ -1,24 +1,36 @@
 <div class="space-y-6 animate-fade-in">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('vehicles.title') }}</h1>
-          <p class="text-slate-500 dark:text-slate-400 mt-1">Gerencie a frota de veículos</p>
-        </div>
-        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center space-x-2 self-start">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          <span>{{ i18n.t('vehicles.newVehicle') }}</span>
-        </button>
-      </div>
-
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm text-center py-20">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/30 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-          </svg>
-        </div>
-        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('vehicles.module.title') }}</h2>
-        <p class="text-slate-500 dark:text-slate-400 mt-2">{{ i18n.t('vehicles.module.subtitle') }}</p>
-      </div>
-    </div>
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Veículos</h1>
+    <button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Novo Veículo</button>
+  </div>
+  <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+    @if (loading()) {
+      <div class="p-12 text-center"><div class="inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>
+    } @else if (hasData()) {
+      <table class="min-w-full">
+        <thead class="bg-slate-50 dark:bg-slate-900"><tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Placa</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Modelo</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Capacidade</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Status</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Ações</th>
+        </tr></thead>
+        <tbody class="bg-white dark:bg-slate-800">
+          @for (vehicle of vehicles(); track vehicle.id) {
+            <tr class="border-t border-slate-200 dark:border-slate-700">
+              <td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-slate-100">{{vehicle.plateNumber}}</td>
+              <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{vehicle.model}}</td>
+              <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{vehicle.capacity}} kg</td>
+              <td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">{{vehicle.status}}</span></td>
+              <td class="px-6 py-4 text-sm"><button (click)="openEditModal(vehicle)" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 mr-3">Editar</button><button (click)="deleteVehicle(vehicle)" class="text-red-600 dark:text-red-400 hover:text-red-700">Deletar</button></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <div class="p-12 text-center"><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Novo Veículo</button></div>
+    }
+  </div>
+</div>
+@if (showCreateModal()) { <app-vehicle-create-modal (closeModal)="closeCreateModal()" (vehicleCreated)="onVehicleCreated()"></app-vehicle-create-modal> }
+@if (showEditModal() && selectedVehicle()) { <app-vehicle-edit-modal [vehicle]="selectedVehicle()!" (closeModal)="closeEditModal()" (vehicleUpdated)="onVehicleUpdated()"></app-vehicle-edit-modal> }

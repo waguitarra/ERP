@@ -9,11 +9,13 @@ export class SuppliersService {
   private readonly api = inject(ApiService);
   private readonly endpoint = '/suppliers';
 
-  getAll(page: number = 1, pageSize: number = 10): Promise<any> {
-    return this.api.get<any>(this.endpoint, { page, pageSize });
+  getAll(companyId?: string): Promise<any> {
+    const params: any = {};
+    if (companyId) params.companyId = companyId;
+    return this.api.get<any>(this.endpoint, params);
   }
 
-  getById(id: number): Promise<Supplier> {
+  getById(id: string): Promise<Supplier> {
     return this.api.get<Supplier>(`${this.endpoint}/${id}`);
   }
 
@@ -21,11 +23,11 @@ export class SuppliersService {
     return this.api.post<Supplier>(this.endpoint, data);
   }
 
-  update(id: number, data: UpdateSupplierDto): Promise<void> {
+  update(id: string, data: UpdateSupplierDto): Promise<void> {
     return this.api.put<void>(`${this.endpoint}/${id}`, data);
   }
 
-  delete(id: number): Promise<void> {
+  delete(id: string): Promise<void> {
     return this.api.delete<void>(`${this.endpoint}/${id}`);
   }
 }

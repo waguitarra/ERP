@@ -1,0 +1,15 @@
+<app-modal [isOpen]="isOpen" [title]="'Editar Motorista'" [size]="'md'" (close)="onClose()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="space-y-4">
+      <app-form-field [label]="'Nome'" [control]="form.controls['name']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="'CNH'" [control]="form.controls['licenseNumber']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="'Telefone'" [control]="form.controls['phone']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="'E-mail'" [control]="form.controls['email']" [type]="'email'"></app-form-field>
+      <label class="flex items-center space-x-2"><input type="checkbox" formControlName="isActive" class="w-4 h-4"/><span class="text-sm text-slate-700 dark:text-slate-300">Ativo</span></label>
+    </div>
+    <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
+      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Cancelar</button>
+      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { Salvando... } @else { Salvar }</button>
+    </div>
+  </form>
+</app-modal>

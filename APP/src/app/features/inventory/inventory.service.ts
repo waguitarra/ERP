@@ -1,13 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ApiService } from '@core/services/api.service';
-
-export interface Inventory {
-  id: string;
-  warehouseId: string;
-  productId: string;
-  quantity: number;
-  [key: string]: any;
-}
+import { Inventory, CreateInventoryDto, UpdateInventoryDto, InventoryAdjustmentDto, InventoryReservationDto } from '@core/models/inventory.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +10,6 @@ export class InventoryService {
   private readonly endpoint = '/inventories';
 
   getAll(warehouseId?: string, productId?: string): Promise<any> {
-    // Backend: GET /api/inventories?warehouseId={guid}&productId={guid}
     const params: any = {};
     if (warehouseId) params.warehouseId = warehouseId;
     if (productId) params.productId = productId;
@@ -28,15 +20,27 @@ export class InventoryService {
     return this.api.get<Inventory>(`${this.endpoint}/${id}`);
   }
 
-  create(data: any): Promise<Inventory> {
+  create(data: CreateInventoryDto): Promise<Inventory> {
     return this.api.post<Inventory>(this.endpoint, data);
   }
 
-  update(id: string, data: any): Promise<void> {
+  update(id: string, data: UpdateInventoryDto): Promise<void> {
     return this.api.put<void>(`${this.endpoint}/${id}`, data);
   }
 
   delete(id: string): Promise<void> {
     return this.api.delete<void>(`${this.endpoint}/${id}`);
+  }
+
+  adjust(data: InventoryAdjustmentDto): Promise<void> {
+    return this.api.post<void>(`${this.endpoint}/adjust`, data);
+  }
+
+  reserve(data: InventoryReservationDto): Promise<void> {
+    return this.api.post<void>(`${this.endpoint}/reserve`, data);
+  }
+
+  releaseReservation(inventoryId: string, quantity: number): Promise<void> {
+    return this.api.post<void>(`${this.endpoint}/${inventoryId}/release`, { quantity });
   }
 }

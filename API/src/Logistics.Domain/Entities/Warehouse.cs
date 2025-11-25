@@ -29,6 +29,12 @@ public class Warehouse
     public string Name { get; private set; } = string.Empty;
     public string Code { get; private set; } = string.Empty;
     public string? Address { get; private set; }
+    public string? City { get; private set; }
+    public string? State { get; private set; }
+    public string? ZipCode { get; private set; }
+    public string? Country { get; private set; }
+    public double? Latitude { get; private set; }
+    public double? Longitude { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
@@ -36,7 +42,7 @@ public class Warehouse
     public Company Company { get; private set; } = null!;
     public ICollection<StorageLocation> StorageLocations { get; private set; } = new List<StorageLocation>();
 
-    public void Update(string name, string code, string? address)
+    public void Update(string name, string code, string? address, string? city = null, string? state = null, string? zipCode = null, string? country = null)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Nome não pode ser vazio");
@@ -47,6 +53,17 @@ public class Warehouse
         Name = name;
         Code = code;
         Address = address;
+        City = city;
+        State = state;
+        ZipCode = zipCode;
+        Country = country;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetGeolocation(double latitude, double longitude)
+    {
+        Latitude = latitude;
+        Longitude = longitude;
         UpdatedAt = DateTime.UtcNow;
     }
 

@@ -41,6 +41,28 @@ public class Order
     public string? ShippingAddress { get; private set; }
     public string? SpecialInstructions { get; private set; }
     public bool IsBOPIS { get; private set; } // Buy Online Pickup In Store
+    
+    // Campos WMS
+    public Guid? VehicleId { get; private set; }
+    public Guid? DriverId { get; private set; }
+    public Guid? OriginWarehouseId { get; private set; }
+    public Guid? DestinationWarehouseId { get; private set; }
+    
+    // Geolocalização
+    public string? ShippingZipCode { get; private set; }
+    public decimal? ShippingLatitude { get; private set; }
+    public decimal? ShippingLongitude { get; private set; }
+    public string? ShippingCity { get; private set; }
+    public string? ShippingState { get; private set; }
+    public string? ShippingCountry { get; private set; }
+    
+    // Rastreamento
+    public string? TrackingNumber { get; private set; }
+    public DateTime? EstimatedDeliveryDate { get; private set; }
+    public DateTime? ActualDeliveryDate { get; private set; }
+    public DateTime? ShippedAt { get; private set; }
+    public DateTime? DeliveredAt { get; private set; }
+    
     public Guid CreatedBy { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
@@ -49,6 +71,10 @@ public class Order
     public Company Company { get; private set; } = null!;
     public Customer? Customer { get; private set; }
     public Supplier? Supplier { get; private set; }
+    public Vehicle? Vehicle { get; private set; }
+    public Driver? Driver { get; private set; }
+    public Warehouse? OriginWarehouse { get; private set; }
+    public Warehouse? DestinationWarehouse { get; private set; }
     public ICollection<OrderItem> Items { get; private set; } = new List<OrderItem>();
 
     public void SetCustomer(Guid customerId)
@@ -99,6 +125,94 @@ public class Order
     public void AddItem(OrderItem item)
     {
         Items.Add(item);
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    // Métodos WMS
+    public void AssignVehicle(Guid vehicleId)
+    {
+        VehicleId = vehicleId;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void AssignDriver(Guid driverId)
+    {
+        DriverId = driverId;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetWarehouses(Guid? originWarehouseId, Guid? destinationWarehouseId)
+    {
+        OriginWarehouseId = originWarehouseId;
+        DestinationWarehouseId = destinationWarehouseId;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetLogistics(Guid? vehicleId, Guid? driverId, Guid? originWarehouseId, Guid? destinationWarehouseId)
+    {
+        VehicleId = vehicleId;
+        DriverId = driverId;
+        OriginWarehouseId = originWarehouseId;
+        DestinationWarehouseId = destinationWarehouseId;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetGeolocation(string? zipCode, decimal? latitude, decimal? longitude, string? city, string? state, string? country)
+    {
+        ShippingZipCode = zipCode;
+        ShippingLatitude = latitude;
+        ShippingLongitude = longitude;
+        ShippingCity = city;
+        ShippingState = state;
+        ShippingCountry = country;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetTracking(string? trackingNumber, DateTime? estimatedDeliveryDate, DateTime? actualDeliveryDate)
+    {
+        TrackingNumber = trackingNumber;
+        EstimatedDeliveryDate = estimatedDeliveryDate;
+        ActualDeliveryDate = actualDeliveryDate;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetShippingLocation(string? zipCode, decimal? latitude, decimal? longitude, string? city, string? state, string? country)
+    {
+        ShippingZipCode = zipCode;
+        ShippingLatitude = latitude;
+        ShippingLongitude = longitude;
+        ShippingCity = city;
+        ShippingState = state;
+        ShippingCountry = country;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetTrackingNumber(string trackingNumber)
+    {
+        if (string.IsNullOrWhiteSpace(trackingNumber))
+            throw new ArgumentException("Tracking number não pode ser vazio");
+        TrackingNumber = trackingNumber;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetEstimatedDeliveryDate(DateTime estimatedDate)
+    {
+        EstimatedDeliveryDate = estimatedDate;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void MarkAsShipped()
+    {
+        Status = OrderStatus.Shipped;
+        ShippedAt = DateTime.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void MarkAsDelivered()
+    {
+        Status = OrderStatus.Delivered;
+        DeliveredAt = DateTime.UtcNow;
+        ActualDeliveryDate = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
     }
 }

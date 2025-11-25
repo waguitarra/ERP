@@ -1,0 +1,40 @@
+<div *ngIf="isOpen()" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" (click)="close()">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-2xl w-full max-w-5xl max-h-screen overflow-hidden mx-4" (click)="$event.stopPropagation()">
+<div class="px-6 py-4 border-b bg-orange-600 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+<h2 class="text-2xl font-bold text-white">Selecionar Pedido</h2>
+</div>
+<button (click)="close()" class="text-white hover:bg-orange-700 rounded p-2">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+</button>
+</div>
+<div class="px-6 py-4 border-b bg-slate-50 dark:bg-slate-800">
+<input type="text" [(ngModel)]="searchTerm" placeholder="🔍 Pesquisar por número, cliente..." (ngModelChange)="searchTerm.set($event)" class="w-full px-4 py-3 border-2 rounded-lg dark:bg-slate-700 dark:text-slate-100 focus:ring-2 focus:ring-orange-500">
+</div>
+<div class="p-6 overflow-y-auto" style="max-height:60vh;">
+<div *ngIf="loading()" class="text-center py-12"><div class="inline-block w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div><p class="mt-4 text-slate-600 dark:text-slate-400">Carregando pedidos...</p></div>
+<div *ngIf="!loading() && filteredOrders.length === 0" class="text-center py-12 text-slate-500"><svg class="w-20 h-20 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><p class="text-xl">Nenhum pedido encontrado</p></div>
+<div *ngIf="!loading() && filteredOrders.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div *ngFor="let order of filteredOrders" (click)="selectOrder(order)" class="p-6 border-2 rounded-xl cursor-pointer transition-all" [class.border-orange-600]="selectedOrder()?.id === order.id" [class.bg-orange-50]="selectedOrder()?.id === order.id" [class.dark:bg-orange-900]="selectedOrder()?.id === order.id" [class.border-slate-300]="selectedOrder()?.id !== order.id" [class.hover:border-orange-400]="selectedOrder()?.id !== order.id">
+<div class="flex justify-between items-start mb-4">
+<div class="flex-1"><div class="text-2xl font-bold text-slate-900 dark:text-slate-100">#{{order.orderNumber}}</div>
+<div *ngIf="order.customerName" class="text-sm text-slate-600 dark:text-slate-400 mt-1">{{order.customerName}}</div></div>
+<div class="flex flex-col gap-2 items-end">
+<span [class]="'px-3 py-1 rounded-full text-xs font-semibold ' + getStatusColor(order.status)">{{getStatusLabel(order.status)}}</span>
+<span class="text-xs text-slate-500">{{getPriorityLabel(order.priority)}}</span>
+</div>
+</div>
+<div class="space-y-2 text-sm">
+<div *ngIf="order.expectedDate"><span class="text-slate-500 font-semibold">Data Esperada:</span> <span class="text-slate-800 dark:text-slate-200">{{order.expectedDate | date:'dd/MM/yyyy'}}</span></div>
+<div *ngIf="order.shippingAddress"><span class="text-slate-500 font-semibold">Endereço:</span> <span class="text-slate-800 dark:text-slate-200">{{order.shippingAddress}}</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 border-t flex justify-end gap-3 bg-slate-50 dark:bg-slate-800">
+<button type="button" (click)="close()" class="px-6 py-3 bg-slate-200 dark:bg-slate-700 rounded-lg font-semibold">Cancelar</button>
+<button type="button" (click)="confirm()" [disabled]="!selectedOrder()" class="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold disabled:opacity-50">✓ Confirmar Pedido</button>
+</div>
+</div>
+</div>

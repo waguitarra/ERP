@@ -5,11 +5,13 @@ import { ProductsService } from '../products.service';
 import { Product } from '@core/models/product.model';
 import { AuthService } from '@core/services/auth.service';
 import { I18nService } from '@core/services/i18n.service';
+import { ProductCreateModalComponent } from '../product-create-modal/product-create-modal.component';
+import { ProductEditModalComponent } from '../product-edit-modal/product-edit-modal.component';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ProductCreateModalComponent, ProductEditModalComponent],
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
@@ -22,8 +24,11 @@ export class ProductsListComponent implements OnInit {
   error = signal<string | null>(null);
   products = signal<Product[]>([]);
   searchTerm = signal<string>('');
-
   hasData = computed(() => this.products().length > 0);
+  
+  showCreateModal = signal<boolean>(false);
+  showEditModal = signal<boolean>(false);
+  selectedProduct = signal<Product | null>(null);
 
   ngOnInit(): void {
     this.loadProducts();
@@ -52,25 +57,42 @@ export class ProductsListComponent implements OnInit {
   }
 
   openCreateModal(): void {
-    // TODO: Implementar modal de criação
-    console.log('Abrir modal de criação');
+    this.showCreateModal.set(true);
   }
-
-  editProduct(product: Product): void {
-    // TODO: Implementar edição
-    console.log('Editar produto:', product);
+  
+  closeCreateModal(): void {
+    this.showCreateModal.set(false);
   }
-
+  
+  onProductCreated(): void {
+    this.loadProducts();
+  }
+  
+  openEditModal(product: Product): void {
+    this.selectedProduct.set(product);
+    this.showEditModal.set(true);
+  }
+  
+  closeEditModal(): void {
+    this.showEditModal.set(false);
+    this.selectedProduct.set(null);
+  }
+  
+  onProductUpdated(): void {
+    this.loadProducts();
+  }
+  
   async deleteProduct(product: Product): Promise<void> {
-    if (!confirm(`Tem certeza que deseja excluir o produto "${product.name}"?`)) {
+    if (!confirm(`Deseja realmente excluir o produto "${product.name}"?`)) {
       return;
     }
-
+    
     try {
       await this.productsService.delete(product.id);
       await this.loadProducts();
-    } catch (err: any) {
-      alert(err.message || 'Erro ao excluir produto');
+    } catch (error) {
+      console.error('Erro ao excluir produto:', error);
+      alert('Erro ao excluir produto');
     }
   }
 }

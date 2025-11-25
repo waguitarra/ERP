@@ -1,0 +1,30 @@
+@if (isOpen()) {
+  <div class="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/50" (click)="onBackdropClick()">
+    <div 
+      [class]="'modal-content bg-white dark:bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all ' + 
+        (size() === 'sm' ? 'w-full max-w-md' : '') +
+        (size() === 'md' ? 'w-full max-w-2xl' : '') +
+        (size() === 'lg' ? 'w-full max-w-4xl' : '') +
+        (size() === 'xl' ? 'w-full max-w-6xl' : '')"
+      (click)="onContentClick($event)"
+    >
+      <!-- Header -->
+      <div class="modal-header flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ title() }}</h2>
+        <button 
+          (click)="onClose()"
+          class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body p-6 max-h-[70vh] overflow-y-auto">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+}

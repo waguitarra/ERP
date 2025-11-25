@@ -129,4 +129,50 @@ public class OrderService : IOrderService
             order.CreatedAt
         );
     }
+
+    public async Task<OrderResponse> UpdateAsync(Guid id, UpdateOrderRequest request)
+    {
+        var order = await _orderRepository.GetByIdAsync(id);
+        if (order == null)
+            throw new KeyNotFoundException("Pedido não encontrado");
+
+        // Atualizar status e prioridade
+        if (request.Status.HasValue)
+            order.SetStatus(request.Status.Value);
+        
+        if (request.Priority.HasValue)
+            order.SetPriority(request.Priority.Value);
+
+        // Atualizar dados de envio
+        if (request.ShippingAddress != null || request.SpecialInstructions != null)
+            order.SetShippingInfo(request.ShippingAddress, request.SpecialInstructions, order.IsBOPIS);
+
+        // Atualizar campos WMS
+        order.SetLogistics(
+            request.VehicleId,
+            request.DriverId,
+            request.OriginWarehouseId,
+            request.DestinationWarehouseId
+        );
+
+        order.SetGeolocation(
+            request.ShippingZipCode,
+            request.ShippingLatitude,
+            request.ShippingLongitude,
+            request.ShippingCity,
+            request.ShippingState,
+            request.ShippingCountry
+        );
+
+        order.SetTracking(
+            request.TrackingNumber,
+            request.EstimatedDeliveryDate,
+            request.ActualDeliveryDate
+        );
+
+        await _orderRepository.UpdateAsync(order);
+        await _unitOfWork.CommitAsync();
+
+        return MapToResponse(order);
+    }
 }

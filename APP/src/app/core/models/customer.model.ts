@@ -1,19 +1,24 @@
 export interface Customer {
-  id: number;
+  id: string;  // Guid
+  companyId: string;  // Guid
   name: string;
   email: string;
   phone: string;
-  document: string;
+  document: string;  // CPF/CNPJ
   address: string;
   city: string;
   state: string;
   zipCode: string;
+  country?: string;
+  latitude?: number;
+  longitude?: number;
   isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt?: string;
 }
 
 export interface CreateCustomerDto {
+  companyId: string;
   name: string;
   email: string;
   phone: string;
@@ -22,6 +27,7 @@ export interface CreateCustomerDto {
   city: string;
   state: string;
   zipCode: string;
+  country?: string;
 }
 
 export interface UpdateCustomerDto {
@@ -33,5 +39,6 @@ export interface UpdateCustomerDto {
   city?: string;
   state?: string;
   zipCode?: string;
+  country?: string;
   isActive?: boolean;
 }

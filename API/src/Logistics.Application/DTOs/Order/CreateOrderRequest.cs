@@ -1,3 +1,5 @@
+using OrderPriorityEnum = Logistics.Domain.Enums.OrderPriority;
+using OrderStatusEnum = Logistics.Domain.Enums.OrderStatus;
 using Logistics.Domain.Enums;
 
 namespace Logistics.Application.DTOs.Order;
@@ -10,7 +12,7 @@ public record CreateOrderRequest(
     Guid? CustomerId,
     Guid? SupplierId,
     DateTime? ExpectedDate,
-    OrderPriority Priority,
+    OrderPriorityEnum Priority,
     string? ShippingAddress,
     string? SpecialInstructions,
     bool IsBOPIS,

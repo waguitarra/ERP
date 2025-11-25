@@ -26,6 +26,8 @@ public class LogisticsDbContext : DbContext
     public DbSet<WarehouseZone> WarehouseZones { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<OrderStatusConfig> OrderStatusConfigs { get; set; }
+    public DbSet<OrderPriorityConfig> OrderPriorityConfigs { get; set; }
     public DbSet<Lot> Lots { get; set; }
     
     // WMS Receiving (Inbound)

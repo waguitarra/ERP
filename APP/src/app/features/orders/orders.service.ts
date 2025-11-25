@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ApiService } from '@core/services/api.service';
-import { Order, CreateOrderDto, UpdateOrderDto } from '@core/models/order.model';
+import { Order, CreateOrderRequest, UpdateOrderDto } from '@core/models/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +16,19 @@ export class OrdersService {
     return this.api.get<any>(`${this.endpoint}/company/${companyId}`);
   }
 
-  getById(id: number): Promise<Order> {
-    return this.api.get<Order>(`${this.endpoint}/${id}`);
+  getById(id: string): Promise<any> {
+    return this.api.get<any>(`${this.endpoint}/${id}`);
   }
 
-  create(data: CreateOrderDto): Promise<Order> {
-    return this.api.post<Order>(this.endpoint, data);
+  create(data: CreateOrderRequest): Promise<any> {
+    return this.api.post<any>(this.endpoint, data);
   }
 
-  update(id: number, data: UpdateOrderDto): Promise<void> {
-    return this.api.put<void>(`${this.endpoint}/${id}`, data);
+  update(id: string, data: UpdateOrderDto): Promise<any> {
+    return this.api.put<any>(`${this.endpoint}/${id}`, data);
   }
 
-  delete(id: number): Promise<void> {
-    return this.api.delete<void>(`${this.endpoint}/${id}`);
+  delete(id: string): Promise<any> {
+    return this.api.delete<any>(`${this.endpoint}/${id}`);
   }
 }

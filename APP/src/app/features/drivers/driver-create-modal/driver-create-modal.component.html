@@ -1,0 +1,14 @@
+<app-modal [isOpen]="isOpen" [title]="'Novo Motorista'" [size]="'md'" (close)="onClose()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="space-y-4">
+      <app-form-field [label]="'Nome'" [control]="form.controls['name']" [type]="'text'" [placeholder]="'Nome completo'" [required]="true"></app-form-field>
+      <app-form-field [label]="'CNH'" [control]="form.controls['licenseNumber']" [type]="'text'" [placeholder]="'Número da CNH'" [required]="true"></app-form-field>
+      <app-form-field [label]="'Telefone'" [control]="form.controls['phone']" [type]="'text'" [placeholder]="'(00) 00000-0000'" [required]="true"></app-form-field>
+      <app-form-field [label]="'E-mail'" [control]="form.controls['email']" [type]="'email'" [placeholder]="'email@exemplo.com'"></app-form-field>
+    </div>
+    <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
+      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Cancelar</button>
+      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { Salvando... } @else { Criar Motorista }</button>
+    </div>
+  </form>
+</app-modal>

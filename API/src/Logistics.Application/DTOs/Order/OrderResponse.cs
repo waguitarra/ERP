@@ -1,3 +1,5 @@
+using OrderPriorityEnum = Logistics.Domain.Enums.OrderPriority;
+using OrderStatusEnum = Logistics.Domain.Enums.OrderStatus;
 using Logistics.Domain.Enums;
 
 namespace Logistics.Application.DTOs.Order;
@@ -12,8 +14,8 @@ public record OrderResponse(
     Guid? SupplierId,
     DateTime OrderDate,
     DateTime? ExpectedDate,
-    OrderPriority Priority,
-    OrderStatus Status,
+    OrderPriorityEnum Priority,
+    OrderStatusEnum Status,
     decimal TotalQuantity,
     decimal TotalValue,
     string? ShippingAddress,
