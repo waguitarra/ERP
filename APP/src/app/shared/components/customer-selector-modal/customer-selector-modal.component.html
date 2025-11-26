@@ -7,7 +7,7 @@
         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
         </svg>
-        <h2 class="text-2xl font-bold text-white">Selecionar Cliente</h2>
+        <h2 class="text-2xl font-bold text-white">{{ 'modals.selectCustomer' | translate }}</h2>
       </div>
       <button (click)="close()" class="text-white hover:bg-cyan-700 rounded p-2 transition">✕</button>
     </div>
@@ -15,7 +15,7 @@
     <div class="px-6 py-4 border-b bg-slate-50 dark:bg-slate-800">
       <input type="text" 
              [(ngModel)]="searchTerm" 
-             placeholder="🔍 Pesquisar por nome, CPF/CNPJ, email..." 
+             [placeholder]="'common.placeholders.searchCustomer' | translate" 
              (ngModelChange)="searchTerm.set($event)" 
              class="w-full px-4 py-3 border-2 rounded-lg dark:bg-slate-700 dark:text-slate-100 focus:ring-2 focus:ring-cyan-500">
     </div>
@@ -24,13 +24,13 @@
       @if (loading()) {
         <div class="text-center py-12">
           <div class="inline-block w-12 h-12 border-4 border-cyan-600 border-t-transparent rounded-full animate-spin"></div>
-          <p class="mt-4 text-slate-600 dark:text-slate-400">Carregando clientes...</p>
+          <p class="mt-4 text-slate-600 dark:text-slate-400">{{ 'common.loading.customers' | translate }}</p>
         </div>
       }
       
       @if (!loading() && filteredCustomers.length === 0) {
         <div class="text-center py-12 text-slate-500">
-          <p class="text-xl">Nenhum cliente encontrado</p>
+          <p class="text-xl">{{ 'common.empty.noCustomers' | translate }}</p>
         </div>
       }
       
@@ -78,7 +78,7 @@
                     </svg>
                     <div>
                       <div class="font-semibold text-slate-700 dark:text-slate-300">{{customer.address}}</div>
-                      <div class="text-slate-600 dark:text-slate-400">{{customer.city}}, {{customer.state}} - CEP {{customer.zipCode}}</div>
+                      <div class="text-slate-600 dark:text-slate-400">{{customer.city}}, {{customer.state}} - {{ 'common.fields.zipCode' | translate }} {{customer.zipCode}}</div>
                       @if (customer.country) {
                         <div class="text-slate-500">{{customer.country}}</div>
                       }
@@ -93,8 +93,8 @@
     </div>
 
     <div class="px-6 py-4 border-t flex justify-end gap-3 bg-slate-50 dark:bg-slate-800">
-      <button type="button" (click)="close()" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 rounded-lg font-semibold transition">Cancelar</button>
-      <button type="button" (click)="confirm()" [disabled]="!selectedCustomer()" class="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition">✓ Confirmar Cliente</button>
+      <button type="button" (click)="close()" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 rounded-lg font-semibold transition">{{ 'common.buttons.cancel' | translate }}</button>
+      <button type="button" (click)="confirm()" [disabled]="!selectedCustomer()" class="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition">{{ 'modals.confirmCustomer' | translate }}</button>
     </div>
   </div>
 </div>

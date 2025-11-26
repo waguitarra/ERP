@@ -30,6 +30,7 @@
   "common": {
     "buttons": {
       "save": "Save",
+      "saveChanges": "Save Changes",
       "cancel": "Cancel",
       "delete": "Delete",
       "edit": "Edit",
@@ -44,7 +45,13 @@
       "previous": "Previous",
       "refresh": "Refresh",
       "export": "Export",
-      "import": "Import"
+      "import": "Import",
+      "block": "Block",
+      "unblock": "Unblock",
+      "createCustomer": "Create Customer",
+      "createProduct": "Create Product",
+      "createWarehouse": "Create Warehouse",
+      "createCompany": "Create Company"
     },
     "status": {
       "active": "Active",
@@ -53,7 +60,8 @@
       "processing": "Processing",
       "completed": "Completed",
       "cancelled": "Cancelled",
-      "delivered": "Delivered"
+      "delivered": "Delivered",
+      "blocked": "Blocked"
     },
     "messages": {
       "loading": "Loading...",
@@ -68,19 +76,202 @@
     },
     "fields": {
       "name": "Name",
+      "fullName": "Full name",
       "description": "Description",
       "email": "Email",
       "phone": "Phone",
       "address": "Address",
       "city": "City",
       "state": "State",
+      "stateAbbr": "State",
       "zipCode": "Zip Code",
       "country": "Country",
       "date": "Date",
-      "status": "Status",
-      "actions": "Actions",
       "createdAt": "Created at",
-      "updatedAt": "Updated at"
+      "updatedAt": "Updated at",
+      "taxId": "Tax ID",
+      "companyTaxId": "Company Tax ID",
+      "weight": "Weight",
+      "volume": "Volume",
+      "dimensions": "Dimensions (L x W x H)",
+      "length": "Length",
+      "width": "Width",
+      "height": "Height",
+      "type": "Type",
+      "sku": "SKU",
+      "barcode": "Barcode",
+      "productName": "Product Name",
+      "warehouseName": "Warehouse Name",
+      "code": "Code",
+      "companyName": "Company Legal Name",
+      "tradeName": "Trade Name",
+      "expectedDate": "Expected Date",
+      "shippingAddress": "Shipping Address",
+      "specialInstructions": "Special Instructions",
+      "location": "Location",
+      "contact": "Contact",
+      "document": "Document",
+      "vehicle": "Vehicle",
+      "driver": "Driver",
+      "originWarehouse": "Origin Warehouse",
+      "destinationType": "Destination Type",
+      "customer": "Customer",
+      "warehouse": "Warehouse",
+      "destinationWarehouse": "Destination Warehouse",
+      "customerDestination": "Customer Destination",
+      "trackingNumber": "Tracking Number",
+      "estimatedDeliveryDate": "Estimated Delivery",
+      "priority": "Priority",
+      "warehouseTransfer": "Warehouse (Transfer)",
+      "validityDays": "Shelf Life (days)",
+      "minimumStock": "Minimum Stock",
+      "safetyStock": "Safety Stock",
+      "abcClassification": "ABC Classification",
+      "cnh": "Driver's License"
+    },
+    "placeholders": {
+      "fullName": "Full name",
+      "email": "email@example.com",
+      "phone": "+1 (000) 000-0000",
+      "taxId": "000-00-0000",
+      "companyTaxId": "00-0000000",
+      "zipCode": "00000",
+      "address": "Street, number, complement",
+      "city": "City",
+      "state": "State",
+      "stateAbbr": "ST",
+      "country": "Country",
+      "search": "Search...",
+      "searchCustomer": "Search customer by name or document...",
+      "searchSupplier": "Search...",
+      "searchProduct": "Search by SKU, name...",
+      "searchOrder": "Search by number, customer...",
+      "searchWarehouse": "Search...",
+      "selectVehicle": "Select vehicle...",
+      "selectDriver": "Select driver...",
+      "selectWarehouse": "Select warehouse...",
+      "selectCustomer": "Select customer...",
+      "productDescription": "Detailed product description...",
+      "exampleProduct": "E.g.: Dell Inspiron Laptop",
+      "exampleSKU": "E.g.: PROD-001",
+      "exampleBarcode": "E.g.: 7891234567890",
+      "exampleWeight": "0.00",
+      "exampleVolume": "0.00",
+      "exampleValidity": "E.g.: 30",
+      "exampleStock": "0",
+      "exampleCode": "WH001",
+      "exampleWarehouse": "Main DC",
+      "exampleCity": "New York",
+      "addressStreet": "Street, number",
+      "trackingCode": "US123456789US"
+    },
+    "loading": {
+      "default": "Loading...",
+      "customers": "Loading customers...",
+      "orders": "Loading orders...",
+      "products": "Loading products..."
+    },
+    "saving": "Saving...",
+    "activeStatus": {
+      "activeCustomer": "Active Customer"
+    },
+    "orderStatus": {
+      "draft": "Draft",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "inProgress": "In Progress",
+      "partiallyFulfilled": "Partially Fulfilled",
+      "fulfilled": "Fulfilled",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled",
+      "onHold": "On Hold"
+    },
+    "empty": {
+      "noResults": "No results found",
+      "noCustomers": "No customers found"
+    },
+    "confirmations": {
+      "deleteCompany": "Do you really want to delete the company",
+      "deleteCustomer": "Do you really want to delete the customer",
+      "deleteSupplier": "Do you really want to delete the supplier",
+      "deleteProduct": "Do you really want to delete the product",
+      "deleteOrder": "Do you really want to delete the order",
+      "deleteWarehouse": "Do you want to delete the warehouse",
+      "deleteVehicle": "Do you really want to delete the vehicle",
+      "deleteLocation": "Do you really want to delete the location",
+      "unlockLocation": "Unlock this location?"
+    },
+    "errors": {
+      "generic": "Processing error",
+      "companyIdNotFound": "Error: CompanyId not found",
+      "createCompany": "Error creating company",
+      "updateCompany": "Error updating company",
+      "deleteCompany": "Error deleting company",
+      "createCustomer": "Error creating customer",
+      "updateCustomer": "Error updating customer",
+      "deleteCustomer": "Error deleting customer",
+      "createSupplier": "Error creating supplier",
+      "updateSupplier": "Error updating supplier",
+      "deleteSupplier": "Error deleting supplier",
+      "createProduct": "Error creating product",
+      "updateProduct": "Error updating product",
+      "deleteProduct": "Error deleting product",
+      "createWarehouse": "Error creating warehouse",
+      "updateWarehouse": "Error updating warehouse",
+      "deleteWarehouse": "Error deleting warehouse",
+      "createLocation": "Error creating location",
+      "updateLocation": "Error updating location",
+      "deleteLocation": "Error deleting location",
+      "blockLocation": "Error blocking location",
+      "unblockLocation": "Error unblocking"
+    },
+    "tooltips": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "block": "Block",
+      "unblock": "Unblock",
+      "toggleDarkMode": "Toggle dark mode",
+      "filter": "Filter",
+      "tryAgain": "Try Again"
+    }
+  },
+  "modals": {
+    "selectCustomer": "Select Customer",
+    "selectSupplier": "Select Supplier",
+    "selectProduct": "Select Product",
+    "selectOrder": "Select Order",
+    "selectWarehouse": "Select Warehouse",
+    "newCustomer": "New Customer",
+    "editCustomer": "Edit Customer",
+    "newSupplier": "New Supplier",
+    "editSupplier": "Edit Supplier",
+    "newProduct": "Create New Product",
+    "confirmCustomer": "Confirm Customer",
+    "editOrder": "Edit Order",
+    "newWarehouse": "New Warehouse",
+    "editWarehouse": "Edit Warehouse",
+    "editCompany": "Edit Company",
+    "newCompany": "New Company",
+    "deliveryRoute": "Delivery Route",
+    "origin": "ORIGIN",
+    "destination": "DESTINATION",
+    "wmsLogistics": "WMS Logistics",
+    "tracking": "Tracking"
+  },
+  "companies": {
+    "title": "Companies",
+    "newCompany": "New Company",
+    "activeCompany": "Active Company",
+    "empty": {
+      "message": "No companies registered"
+    },
+    "fields": {
+      "companyName": "Company Legal Name",
+      "tradeName": "Trade Name",
+      "companyTaxId": "Company Tax ID",
+      "name": "Name",
+      "location": "Location"
     }
   },
   "auth": {
@@ -120,9 +311,16 @@
   },
   "products": {
     "title": "Products",
-    "subtitle": "Manage product catalog",
+    "subtitle": "Manage your product catalog",
     "newProduct": "New Product",
+    "editProduct": "Edit Product",
+    "activeProduct": "Active Product",
+    "perishable": "Perishable",
+    "normal": "Normal",
     "searchPlaceholder": "Search by name, SKU or category...",
+    "buttons": {
+      "new": "New Product"
+    },
     "table": {
       "sku": "SKU",
       "product": "Product",
@@ -137,7 +335,28 @@
       "button": "Create Product"
     },
     "loading": "Loading products...",
-    "total": "Total: {{count}} products"
+    "total": "Total: {{count}} products",
+    "fields": {
+      "productName": "Product Name",
+      "sku": "SKU",
+      "barcode": "Barcode",
+      "description": "Description",
+      "weight": "Weight",
+      "volume": "Volume",
+      "requiresLotTracking": "Requires Lot Tracking",
+      "requiresSerialTracking": "Requires Serial Tracking",
+      "perishable": "Perishable Product",
+      "shelfLifeDays": "Shelf Life (days)",
+      "minimumStock": "Minimum Stock",
+      "safetyStock": "Safety Stock",
+      "abcClassification": "ABC Classification",
+      "highTurnover": "A - High turnover",
+      "mediumTurnover": "B - Medium turnover",
+      "lowTurnover": "C - Low turnover",
+      "price": "Price",
+      "stock": "Stock",
+      "category": "Category"
+    }
   },
   "customers": {
     "title": "Customers",
@@ -163,8 +382,43 @@
     "title": "Orders",
     "subtitle": "Manage all orders",
     "newOrder": "New Order",
+    "createOrder": "Create Order",
+    "orderInfo": "Order Information",
+    "customerSupplier": "Customer/Supplier",
+    "deliveryDetails": "Delivery Details",
+    "orderItems": "Order Items",
+    "addItem": "Add Item",
+    "totalItems": "Total Items:",
+    "totalQty": "Total Quantity:",
+    "totalValue": "Total Value:",
+    "fields": {
+      "orderNumber": "Order Number",
+      "type": "Type",
+      "source": "Source",
+      "priority": "Priority",
+      "expectedDate": "Expected Date",
+      "bopis": "BOPIS (Buy Online Pick In Store)",
+      "shippingAddress": "Shipping Address",
+      "specialInstructions": "Special Instructions",
+      "productId": "Product ID (GUID)",
+      "qty": "Qty",
+      "unitPrice": "Unit Price",
+      "subtotal": "Subtotal"
+    },
+    "priority": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
     "stats": {
       "total": "Total Orders",
+      "totalValue": "Total Value",
+      "qtyPending": "Qty Pending",
+      "valuePending": "Value Pending",
+      "qtyNonPending": "In Process",
+      "valueNonPending": "Value Process",
+      "completed": "Completed",
       "pending": "Pending",
       "processing": "Processing",
       "delivered": "Delivered"
@@ -202,15 +456,40 @@
     "title": "Suppliers",
     "subtitle": "Manage your suppliers",
     "newSupplier": "New Supplier",
+    "activeSupplier": "Active Supplier",
+    "table": {
+      "supplier": "Supplier",
+      "contact": "Contact",
+      "cnpj": "Tax ID",
+      "location": "Location",
+      "status": "Status",
+      "actions": "Actions"
+    },
     "module": {
       "title": "Supplier Management",
       "subtitle": "Suppliers module under development"
+    },
+    "fields": {
+      "supplierTaxId": "Tax ID"
     }
+  },
+  "stats": {
+    "total": "Total Orders",
+    "totalValue": "Total Value",
+    "qtyPending": "Qty Pending",
+    "valuePending": "Value Pending",
+    "qtyNonPending": "In Process",
+    "valueNonPending": "Value Process",
+    "completed": "Completed",
+    "pending": "Pending",
+    "processing": "Processing",
+    "delivered": "Delivered"
   },
   "warehouses": {
     "title": "Warehouses",
-    "subtitle": "Manage your warehouses and storage locations",
+    "subtitle": "Manage your warehouses and stock locations",
     "newWarehouse": "New Warehouse",
+    "activeWarehouse": "Active Warehouse",
     "module": {
       "title": "Warehouse Management",
       "subtitle": "Warehouses module under development"
@@ -220,6 +499,14 @@
     "title": "Drivers",
     "subtitle": "Manage your driver fleet",
     "newDriver": "New Driver",
+    "editDriver": "Edit Driver",
+    "createDriver": "Create Driver",
+    "fields": {
+      "licenseNumber": "Driver's License"
+    },
+    "placeholders": {
+      "licenseNumber": "License number"
+    },
     "module": {
       "title": "Driver Management",
       "subtitle": "Drivers module under development"
@@ -229,9 +516,50 @@
     "title": "Vehicles",
     "subtitle": "Manage your vehicle fleet",
     "newVehicle": "New Vehicle",
+    "editVehicle": "Edit Vehicle",
+    "createVehicle": "Create Vehicle",
+    "fields": {
+      "plateNumber": "License Plate",
+      "type": "Type",
+      "model": "Model",
+      "capacity": "Capacity (kg)"
+    },
+    "placeholders": {
+      "plate": "ABC-1234",
+      "type": "Truck, Van, etc",
+      "model": "Vehicle model",
+      "capacity": "1000"
+    },
+    "status": {
+      "available": "Available",
+      "inUse": "In Use",
+      "maintenance": "Maintenance"
+    },
     "module": {
       "title": "Vehicle Management",
       "subtitle": "Vehicles module under development"
+    }
+  },
+  "storageLocations": {
+    "title": "Storage Locations",
+    "newLocation": "New Location",
+    "editLocation": "Edit Location",
+    "createLocation": "Create Location",
+    "activeLocation": "Active Location",
+    "status": {
+      "available": "Available"
+    },
+    "empty": {
+      "message": "No locations registered"
+    },
+    "fields": {
+      "warehouseId": "Warehouse ID",
+      "zoneId": "Zone ID (optional)",
+      "aisle": "Aisle",
+      "rack": "Rack",
+      "shelf": "Shelf",
+      "bin": "Bin (optional)",
+      "capacity": "Capacity (optional)"
     }
   },
   "pickingTasks": {

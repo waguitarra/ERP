@@ -30,6 +30,31 @@ export class OrdersListComponent implements OnInit {
   selectedOrder = signal<Order | null>(null);
   hasData = computed(() => this.orders().length > 0);
 
+  // Computed totals
+  totalOrders = computed(() => this.orders().length);
+  totalValue = computed(() => this.orders().reduce((sum, order) => sum + (order.totalValue || 0), 0));
+  
+  // Pending orders (Draft, Pending, Confirmed)
+  pendingOrders = computed(() => this.orders().filter(o => 
+    o.status === OrderStatus.Draft || o.status === OrderStatus.Pending || o.status === OrderStatus.Confirmed
+  ).length);
+  pendingValue = computed(() => this.orders()
+    .filter(o => o.status === OrderStatus.Draft || o.status === OrderStatus.Pending || o.status === OrderStatus.Confirmed)
+    .reduce((sum, order) => sum + (order.totalValue || 0), 0));
+  
+  // Non-pending orders (all other statuses)
+  nonPendingOrders = computed(() => this.orders().filter(o => 
+    o.status !== OrderStatus.Draft && o.status !== OrderStatus.Pending && o.status !== OrderStatus.Confirmed
+  ).length);
+  nonPendingValue = computed(() => this.orders()
+    .filter(o => o.status !== OrderStatus.Draft && o.status !== OrderStatus.Pending && o.status !== OrderStatus.Confirmed)
+    .reduce((sum, order) => sum + (order.totalValue || 0), 0));
+  
+  // Completed/Delivered orders
+  completedOrders = computed(() => this.orders().filter(o => 
+    o.status === OrderStatus.Delivered
+  ).length);
+
   createModal = viewChild<OrderCreateModalComponent>('createModal');
   editModal = viewChild<OrderEditModalComponent>('editModal');
 

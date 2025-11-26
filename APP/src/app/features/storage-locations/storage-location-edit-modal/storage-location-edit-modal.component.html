@@ -3,7 +3,7 @@
     <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden" (click)="$event.stopPropagation()">
       
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
-        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">Editar Localização</h2>
+        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ 'storageLocations.editLocation' | translate }}</h2>
         <button (click)="close()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -16,7 +16,7 @@
           
           <div class="col-span-2">
             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-              Código <span class="text-red-500">*</span>
+              {{ 'common.fields.code' | translate }} <span class="text-red-500">*</span>
             </label>
             <input type="text" formControlName="code" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
@@ -27,32 +27,32 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Corredor</label>
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'storageLocations.fields.aisle' | translate }}</label>
             <input type="text" formControlName="aisle" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Rack</label>
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'storageLocations.fields.rack' | translate }}</label>
             <input type="text" formControlName="rack" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Prateleira</label>
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'storageLocations.fields.shelf' | translate }}</label>
             <input type="text" formControlName="shelf" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Bin</label>
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'storageLocations.fields.bin' | translate }}</label>
             <input type="text" formControlName="bin" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
           </div>
 
           <div>
             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-              Tipo <span class="text-red-500">*</span>
+              {{ 'common.fields.type' | translate }} <span class="text-red-500">*</span>
             </label>
             <select formControlName="locationType"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
@@ -67,7 +67,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Capacidade</label>
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'storageLocations.fields.capacity' | translate }}</label>
             <input type="number" formControlName="capacity" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
           </div>
@@ -75,7 +75,7 @@
           <div class="col-span-2">
             <label class="flex items-center gap-2">
               <input type="checkbox" formControlName="isActive" class="w-4 h-4 text-blue-600 rounded">
-              <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Localização Ativa</span>
+              <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ 'storageLocations.activeLocation' | translate }}</span>
             </label>
           </div>
 
@@ -85,14 +85,14 @@
       <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3">
         <button type="button" (click)="close()" [disabled]="loading()"
           class="px-4 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition">
-          Cancelar
+          {{ 'common.buttons.cancel' | translate }}
         </button>
         <button type="submit" (click)="onSubmit()" [disabled]="loading()"
           class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition disabled:opacity-50 flex items-center gap-2">
           @if (loading()) {
             <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           }
-          Salvar Alterações
+          {{ 'common.buttons.saveChanges' | translate }}
         </button>
       </div>
 

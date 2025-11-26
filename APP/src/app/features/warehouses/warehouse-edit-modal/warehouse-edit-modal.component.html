@@ -1,24 +1,24 @@
-<app-modal [isOpen]="isOpen" [title]="'Editar Armazém'" [size]="'lg'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="'modals.editWarehouse' | translate" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="md:col-span-2">
-        <app-form-field [label]="'Nome do Armazém'" [control]="form.controls['name']" [type]="'text'" [required]="true"></app-form-field>
+        <app-form-field [label]="'common.fields.warehouseName' | translate" [control]="form.controls['name']" [type]="'text'" [required]="true"></app-form-field>
       </div>
-      <app-form-field [label]="'Código'" [control]="form.controls['code']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="'CEP'" [control]="form.controls['zipCode']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.code' | translate" [control]="form.controls['code']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.zipCode' | translate" [control]="form.controls['zipCode']" [type]="'text'" [required]="true"></app-form-field>
       <div class="md:col-span-2">
-        <app-form-field [label]="'Endereço'" [control]="form.controls['address']" [type]="'text'" [required]="true"></app-form-field>
+        <app-form-field [label]="'common.fields.address' | translate" [control]="form.controls['address']" [type]="'text'" [required]="true"></app-form-field>
       </div>
-      <app-form-field [label]="'Cidade'" [control]="form.controls['city']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="'Estado'" [control]="form.controls['state']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="'País'" [control]="form.controls['country']" [type]="'text'"></app-form-field>
+      <app-form-field [label]="'common.fields.city' | translate" [control]="form.controls['city']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.state' | translate" [control]="form.controls['state']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.country' | translate" [control]="form.controls['country']" [type]="'text'"></app-form-field>
       <div class="md:col-span-2">
-        <label class="flex items-center space-x-2"><input type="checkbox" formControlName="isActive" class="w-4 h-4"/><span class="text-sm text-slate-700 dark:text-slate-300">Armazém Ativo</span></label>
+        <label class="flex items-center space-x-2"><input type="checkbox" formControlName="isActive" class="w-4 h-4"/><span class="text-sm text-slate-700 dark:text-slate-300">{{ 'warehouses.activeWarehouse' | translate }}</span></label>
       </div>
     </div>
     <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
-      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Cancelar</button>
-      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { Salvando... } @else { Salvar }</button>
+      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ 'common.buttons.cancel' | translate }}</button>
+      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ 'common.saving' | translate }} } @else { {{ 'common.buttons.save' | translate }} }</button>
     </div>
   </form>
 </app-modal>

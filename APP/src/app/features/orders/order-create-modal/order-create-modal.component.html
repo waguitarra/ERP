@@ -3,7 +3,7 @@
     <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden" (click)="$event.stopPropagation()">
       
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
-        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">Novo Pedido</h2>
+        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ 'orders.newOrder' | translate }}</h2>
         <button (click)="close()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -15,12 +15,12 @@
         
         <!-- Informações Básicas -->
         <div class="mb-6">
-          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Informações do Pedido</h3>
+          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">{{ 'orders.orderInfo' | translate }}</h3>
           <div class="grid grid-cols-3 gap-4">
             
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Número do Pedido <span class="text-red-500">*</span>
+                {{ 'orders.fields.orderNumber' | translate }} <span class="text-red-500">*</span>
               </label>
               <input type="text" formControlName="orderNumber" autocomplete="off"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
@@ -33,7 +33,7 @@
 
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Tipo <span class="text-red-500">*</span>
+                {{ 'orders.fields.type' | translate }} <span class="text-red-500">*</span>
               </label>
               <select formControlName="type"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
@@ -46,7 +46,7 @@
 
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Fonte <span class="text-red-500">*</span>
+                {{ 'orders.fields.source' | translate }} <span class="text-red-500">*</span>
               </label>
               <select formControlName="source"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
@@ -59,7 +59,7 @@
 
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Prioridade <span class="text-red-500">*</span>
+                {{ 'orders.fields.priority' | translate }} <span class="text-red-500">*</span>
               </label>
               <select formControlName="priority"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
@@ -71,7 +71,7 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Data Esperada</label>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'orders.fields.expectedDate' | translate }}</label>
               <input type="date" formControlName="expectedDate"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
             </div>
@@ -79,7 +79,7 @@
             <div class="flex items-center pt-6">
               <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" formControlName="isBOPIS" class="w-4 h-4 text-blue-600 rounded">
-                <span class="text-sm font-medium text-slate-700 dark:text-slate-300">BOPIS (Retirada na Loja)</span>
+                <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ 'orders.fields.bopis' | translate }}</span>
               </label>
             </div>
 
@@ -88,7 +88,7 @@
 
         <!-- Cliente/Fornecedor -->
         <div class="mb-6">
-          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Cliente/Fornecedor</h3>
+          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">{{ 'orders.customerSupplier' | translate }}</h3>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">ID do Cliente (GUID)</label>
@@ -107,16 +107,16 @@
 
         <!-- Endereço e Instruções -->
         <div class="mb-6">
-          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Detalhes de Entrega</h3>
+          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">{{ 'orders.deliveryDetails' | translate }}</h3>
           <div class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Endereço de Entrega</label>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'orders.fields.shippingAddress' | translate }}</label>
               <input type="text" formControlName="shippingAddress" autocomplete="street-address"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
                 placeholder="Rua, Número, Bairro, Cidade - Estado">
             </div>
             <div>
-              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Instruções Especiais</label>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'orders.fields.specialInstructions' | translate }}</label>
               <textarea formControlName="specialInstructions" rows="2"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
                 placeholder="Observações ou instruções especiais para este pedido"></textarea>
@@ -127,13 +127,13 @@
         <!-- Items do Pedido -->
         <div class="mb-6">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">Items do Pedido</h3>
+            <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">{{ 'orders.orderItems' | translate }}</h3>
             <button type="button" (click)="addItem()" 
               class="px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition flex items-center gap-1">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
               </svg>
-              Adicionar Item
+              {{ 'orders.addItem' | translate }}
             </button>
           </div>
 
@@ -142,31 +142,31 @@
               <div [formGroup]="$any(item)" class="p-4 border border-slate-200 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700/30">
                 <div class="grid grid-cols-12 gap-3">
                   <div class="col-span-3">
-                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">ID Produto (GUID) *</label>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ 'orders.fields.productId' | translate }} *</label>
                     <input type="text" formControlName="productId" autocomplete="off"
                       class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
                       [class.border-red-500]="item.get('productId')?.invalid && item.get('productId')?.touched">
                   </div>
                   <div class="col-span-2">
-                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">SKU *</label>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ 'products.fields.sku' | translate }} *</label>
                     <input type="text" formControlName="sku" autocomplete="off"
                       class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
                       [class.border-red-500]="item.get('sku')?.invalid && item.get('sku')?.touched">
                   </div>
                   <div class="col-span-2">
-                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Qtd *</label>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ 'orders.fields.qty' | translate }} *</label>
                     <input type="number" formControlName="quantityOrdered" min="1"
                       class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
                       [class.border-red-500]="item.get('quantityOrdered')?.invalid && item.get('quantityOrdered')?.touched">
                   </div>
                   <div class="col-span-2">
-                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Preço Unit. *</label>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ 'orders.fields.unitPrice' | translate }} *</label>
                     <input type="number" formControlName="unitPrice" min="0" step="0.01"
                       class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
                       [class.border-red-500]="item.get('unitPrice')?.invalid && item.get('unitPrice')?.touched">
                   </div>
                   <div class="col-span-2">
-                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Subtotal</label>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ 'orders.fields.subtotal' | translate }}</label>
                     <div class="px-2 py-1.5 text-sm font-bold text-slate-800 dark:text-slate-100">
                       {{(item.get('quantityOrdered')?.value || 0) * (item.get('unitPrice')?.value || 0) | currency:'BRL'}}
                     </div>
@@ -188,15 +188,15 @@
           <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <div class="flex justify-between items-center">
               <div>
-                <span class="text-sm text-slate-600 dark:text-slate-400">Total de Items:</span>
+                <span class="text-sm text-slate-600 dark:text-slate-400">{{ 'orders.totalItems' | translate }}</span>
                 <span class="ml-2 text-lg font-bold text-slate-800 dark:text-slate-100">{{items.length}}</span>
               </div>
               <div>
-                <span class="text-sm text-slate-600 dark:text-slate-400">Quantidade Total:</span>
+                <span class="text-sm text-slate-600 dark:text-slate-400">{{ 'orders.totalQty' | translate }}</span>
                 <span class="ml-2 text-lg font-bold text-slate-800 dark:text-slate-100">{{getTotalQuantity()}}</span>
               </div>
               <div>
-                <span class="text-sm text-slate-600 dark:text-slate-400">Valor Total:</span>
+                <span class="text-sm text-slate-600 dark:text-slate-400">{{ 'orders.totalValue' | translate }}</span>
                 <span class="ml-2 text-2xl font-bold text-blue-600 dark:text-blue-400">{{getTotalValue() | currency:'BRL'}}</span>
               </div>
             </div>
@@ -209,14 +209,14 @@
       <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3">
         <button type="button" (click)="close()" [disabled]="loading()"
           class="px-4 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition">
-          Cancelar
+          {{ 'common.buttons.cancel' | translate }}
         </button>
         <button type="submit" (click)="onSubmit()" [disabled]="loading()"
           class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition disabled:opacity-50 flex items-center gap-2">
           @if (loading()) {
             <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           }
-          Criar Pedido
+          {{ 'orders.createOrder' | translate }}
         </button>
       </div>
 

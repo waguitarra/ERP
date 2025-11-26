@@ -1,7 +1,7 @@
 <div class="space-y-6 animate-fade-in">
   <div class="flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Veículos</h1>
-    <button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Novo Veículo</button>
+    <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('vehicles.title') }}</h1>
+    <button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">{{ i18n.t('vehicles.newVehicle') }}</button>
   </div>
   <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
     @if (loading()) {
@@ -9,11 +9,11 @@
     } @else if (hasData()) {
       <table class="min-w-full">
         <thead class="bg-slate-50 dark:bg-slate-900"><tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Placa</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Modelo</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Capacidade</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Status</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Ações</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.plateNumber') }}</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.model') }}</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.capacity') }}</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.status') }}</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.actions') }}</th>
         </tr></thead>
         <tbody class="bg-white dark:bg-slate-800">
           @for (vehicle of vehicles(); track vehicle.id) {
@@ -22,13 +22,13 @@
               <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{vehicle.model}}</td>
               <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{vehicle.capacity}} kg</td>
               <td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">{{vehicle.status}}</span></td>
-              <td class="px-6 py-4 text-sm"><button (click)="openEditModal(vehicle)" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 mr-3">Editar</button><button (click)="deleteVehicle(vehicle)" class="text-red-600 dark:text-red-400 hover:text-red-700">Deletar</button></td>
+              <td class="px-6 py-4 text-sm"><button (click)="openEditModal(vehicle)" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 mr-3">{{ i18n.t('common.buttons.edit') }}</button><button (click)="deleteVehicle(vehicle)" class="text-red-600 dark:text-red-400 hover:text-red-700">{{ i18n.t('common.buttons.delete') }}</button></td>
             </tr>
           }
         </tbody>
       </table>
     } @else {
-      <div class="p-12 text-center"><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Novo Veículo</button></div>
+      <div class="p-12 text-center"><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">{{ i18n.t('vehicles.newVehicle') }}</button></div>
     }
   </div>
 </div>

@@ -1,53 +1,53 @@
-<app-modal [isOpen]="isOpen" [title]="'Criar Novo Produto'" [size]="'lg'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="'modals.newProduct' | translate" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Nome -->
       <div class="md:col-span-2">
         <app-form-field
-          [label]="'Nome do Produto'"
+          [label]="'products.fields.productName' | translate"
           [control]="form.controls['name']"
           [type]="'text'"
-          [placeholder]="'Ex: Notebook Dell Inspiron'"
+          [placeholder]="'common.placeholders.exampleProduct' | translate"
           [required]="true"
         ></app-form-field>
       </div>
 
       <!-- SKU -->
       <app-form-field
-        [label]="'SKU'"
+        [label]="'products.fields.sku' | translate"
         [control]="form.controls['sku']"
         [type]="'text'"
-        [placeholder]="'Ex: PROD-001'"
+        [placeholder]="'common.placeholders.exampleSKU' | translate"
         [required]="true"
       ></app-form-field>
 
       <!-- Código de Barras -->
       <app-form-field
-        [label]="'Código de Barras'"
+        [label]="'products.fields.barcode' | translate"
         [control]="form.controls['barcode']"
         [type]="'text'"
-        [placeholder]="'Ex: 7891234567890'"
+        [placeholder]="'common.placeholders.exampleBarcode' | translate"
       ></app-form-field>
 
       <!-- Descrição -->
       <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Descrição</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.description' | translate }}</label>
         <textarea
           formControlName="description"
           rows="3"
-          placeholder="Descrição detalhada do produto..."
+          [placeholder]="'common.placeholders.productDescription' | translate"
           class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
         ></textarea>
       </div>
 
       <!-- Peso -->
       <div>
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Peso <span class="text-red-500">*</span></label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.weight' | translate }} <span class="text-red-500">*</span></label>
         <div class="flex gap-2">
           <input
             type="number"
             formControlName="weight"
-            placeholder="0.00"
+            [placeholder]="'common.placeholders.exampleWeight' | translate"
             class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -63,12 +63,12 @@
 
       <!-- Volume -->
       <div>
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Volume</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.volume' | translate }}</label>
         <div class="flex gap-2">
           <input
             type="number"
             formControlName="volume"
-            placeholder="0.00"
+            [placeholder]="'common.placeholders.exampleWeight' | translate"
             class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -83,24 +83,24 @@
 
       <!-- Dimensões -->
       <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Dimensões (C x L x A)</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'common.fields.dimensions' | translate }}</label>
         <div class="grid grid-cols-4 gap-2">
           <input
             type="number"
             formControlName="length"
-            placeholder="Comprimento"
+            [placeholder]="'common.fields.length' | translate"
             class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
             formControlName="width"
-            placeholder="Largura"
+            [placeholder]="'common.fields.width' | translate"
             class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
             formControlName="height"
-            placeholder="Altura"
+            [placeholder]="'common.fields.height' | translate"
             class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -122,7 +122,7 @@
             formControlName="requiresLotTracking"
             class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
           />
-          <span class="text-sm text-slate-700 dark:text-slate-300">Requer Rastreamento por Lote</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'products.fields.requiresLotTracking' | translate }}</span>
         </label>
 
         <label class="flex items-center space-x-2 cursor-pointer">
@@ -131,7 +131,7 @@
             formControlName="requiresSerialTracking"
             class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
           />
-          <span class="text-sm text-slate-700 dark:text-slate-300">Requer Rastreamento por Série</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'products.fields.requiresSerialTracking' | translate }}</span>
         </label>
 
         <label class="flex items-center space-x-2 cursor-pointer">
@@ -140,47 +140,47 @@
             formControlName="isPerishable"
             class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
           />
-          <span class="text-sm text-slate-700 dark:text-slate-300">Produto Perecível</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'products.fields.perishable' | translate }}</span>
         </label>
       </div>
 
       <!-- Validade (condicional) -->
       @if (form.value.isPerishable) {
         <app-form-field
-          [label]="'Validade (dias)'"
+          [label]="'products.fields.shelfLifeDays' | translate"
           [control]="form.controls['shelfLifeDays']"
           [type]="'number'"
-          [placeholder]="'Ex: 30'"
+          [placeholder]="'common.placeholders.exampleValidity' | translate"
           [required]="true"
         ></app-form-field>
       }
 
       <!-- Estoque Mínimo -->
       <app-form-field
-        [label]="'Estoque Mínimo'"
+        [label]="'products.fields.minimumStock' | translate"
         [control]="form.controls['minimumStock']"
         [type]="'number'"
-        [placeholder]="'0'"
+        [placeholder]="'common.placeholders.exampleStock' | translate"
       ></app-form-field>
 
       <!-- Estoque de Segurança -->
       <app-form-field
-        [label]="'Estoque de Segurança'"
+        [label]="'products.fields.safetyStock' | translate"
         [control]="form.controls['safetyStock']"
         [type]="'number'"
-        [placeholder]="'0'"
+        [placeholder]="'common.placeholders.exampleStock' | translate"
       ></app-form-field>
 
       <!-- Classificação ABC -->
       <div>
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Classificação ABC</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.abcClassification' | translate }}</label>
         <select
           formControlName="abcClassification"
           class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="A">A - Alta rotatividade</option>
-          <option value="B">B - Média rotatividade</option>
-          <option value="C">C - Baixa rotatividade</option>
+          <option value="A">{{ 'products.fields.highTurnover' | translate }}</option>
+          <option value="B">{{ 'products.fields.mediumTurnover' | translate }}</option>
+          <option value="C">{{ 'products.fields.lowTurnover' | translate }}</option>
         </select>
       </div>
     </div>
@@ -193,7 +193,7 @@
         [disabled]="isSaving"
         class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50"
       >
-        Cancelar
+        {{ 'common.buttons.cancel' | translate }}
       </button>
       <button
         type="submit"
@@ -205,9 +205,9 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          Salvando...
+          {{ 'common.saving' | translate }}
         } @else {
-          Criar Produto
+          {{ 'common.buttons.createProduct' | translate }}
         }
       </button>
     </div>

@@ -1,14 +1,14 @@
 <div class="space-y-6 animate-fade-in">
-  <div class="flex justify-between items-center"><h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Motoristas</h1><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Novo Motorista</button></div>
+  <div class="flex justify-between items-center"><h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('drivers.title') }}</h1><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">{{ i18n.t('drivers.newDriver') }}</button></div>
   <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
     @if (loading()) { <div class="p-12 text-center"><div class="inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div> }
     @else if (hasData()) {
       <table class="min-w-full"><thead class="bg-slate-50 dark:bg-slate-900"><tr>
-        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Nome</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">CNH</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Telefone</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">E-mail</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Ações</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.name') }}</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('drivers.fields.licenseNumber') }}</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.phone') }}</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.email') }}</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.actions') }}</th>
       </tr></thead><tbody class="bg-white dark:bg-slate-800">
         @for (driver of drivers(); track driver.id) {
           <tr class="border-t border-slate-200 dark:border-slate-700">
@@ -16,11 +16,11 @@
             <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{driver.licenseNumber}}</td>
             <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{driver.phone}}</td>
             <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{driver.email || '-'}}</td>
-            <td class="px-6 py-4 text-sm"><button (click)="openEditModal(driver)" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 mr-3">Editar</button><button (click)="deleteDriver(driver)" class="text-red-600 dark:text-red-400 hover:text-red-700">Deletar</button></td>
+            <td class="px-6 py-4 text-sm"><button (click)="openEditModal(driver)" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 mr-3">{{ i18n.t('common.buttons.edit') }}</button><button (click)="deleteDriver(driver)" class="text-red-600 dark:text-red-400 hover:text-red-700">{{ i18n.t('common.buttons.delete') }}</button></td>
           </tr>
         }
       </tbody></table>
-    } @else { <div class="p-12 text-center"><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Novo Motorista</button></div> }
+    } @else { <div class="p-12 text-center"><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">{{ i18n.t('drivers.newDriver') }}</button></div> }
   </div>
 </div>
 @if (showCreateModal()) { <app-driver-create-modal (closeModal)="closeCreateModal()" (driverCreated)="onDriverCreated()"></app-driver-create-modal> }

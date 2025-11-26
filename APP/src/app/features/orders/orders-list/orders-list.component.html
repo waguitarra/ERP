@@ -12,22 +12,96 @@
         </button>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <p class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('orders.stats.total') }}</p>
-          <p class="text-2xl font-bold text-slate-800 dark:text-slate-100 mt-1">{{orders().length}}</p>
+      <!-- Stats Cards - Compact Dashboard -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+        <!-- Total Pedidos -->
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 p-2 rounded-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-blue-100 text-xs font-medium">{{i18n.t('orders.stats.total')}}</p>
+              <p class="text-2xl font-bold">{{totalOrders()}}</p>
+            </div>
+          </div>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <p class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('orders.stats.pending') }}</p>
-          <p class="text-2xl font-bold text-amber-600 dark:text-amber-400 mt-1">{{countByStatus(OrderStatus.Pending)}}</p>
+
+        <!-- Valor Total -->
+        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-4 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 p-2 rounded-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-green-100 text-xs font-medium">{{i18n.t('orders.stats.totalValue')}}</p>
+              <p class="text-xl font-bold">{{totalValue() | currency:'EUR':'symbol':'1.0-0'}}</p>
+            </div>
+          </div>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <p class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('orders.stats.processing') }}</p>
-          <p class="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">{{countByStatus(OrderStatus.InProgress)}}</p>
+
+        <!-- Qtd Pendentes -->
+        <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-4 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 p-2 rounded-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-orange-100 text-xs font-medium">{{i18n.t('orders.stats.qtyPending')}}</p>
+              <p class="text-2xl font-bold">{{pendingOrders()}}</p>
+            </div>
+          </div>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <p class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('orders.stats.delivered') }}</p>
-          <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-1">{{countByStatus(OrderStatus.Delivered)}}</p>
+
+        <!-- Valor Pendentes -->
+        <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg p-4 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 p-2 rounded-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-amber-100 text-xs font-medium">{{i18n.t('orders.stats.valuePending')}}</p>
+              <p class="text-xl font-bold">{{pendingValue() | currency:'EUR':'symbol':'1.0-0'}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Qtd Não Pendentes -->
+        <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg p-4 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 p-2 rounded-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-cyan-100 text-xs font-medium">{{i18n.t('orders.stats.qtyNonPending')}}</p>
+              <p class="text-2xl font-bold">{{nonPendingOrders()}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Valor Não Pendentes -->
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-4 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 p-2 rounded-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-purple-100 text-xs font-medium">{{i18n.t('orders.stats.valueNonPending')}}</p>
+              <p class="text-xl font-bold">{{nonPendingValue() | currency:'EUR':'symbol':'1.0-0'}}</p>
+            </div>
+          </div>
         </div>
       </div>
 

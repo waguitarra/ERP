@@ -52,7 +52,7 @@
               (click)="loadProducts()"
               class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Tentar Novamente
+              {{ i18n.t('common.buttons.tryAgain') }}
             </button>
           </div>
         } @else if (hasData()) {
@@ -94,9 +94,9 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       @if (product.isPerishable) {
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">Perecível</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">{{ i18n.t('products.perishable') }}</span>
                       } @else {
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-400">Normal</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-400">{{ i18n.t('products.normal') }}</span>
                       }
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">

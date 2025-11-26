@@ -30,6 +30,7 @@
   "common": {
     "buttons": {
       "save": "Salvar",
+      "saveChanges": "Salvar Alterações",
       "cancel": "Cancelar",
       "delete": "Excluir",
       "edit": "Editar",
@@ -44,11 +45,18 @@
       "previous": "Anterior",
       "refresh": "Atualizar",
       "export": "Exportar",
-      "import": "Importar"
+      "import": "Importar",
+      "block": "Bloquear",
+      "unblock": "Desbloquear",
+      "createCustomer": "Criar Cliente",
+      "createProduct": "Criar Produto",
+      "createWarehouse": "Criar Armazém",
+      "createCompany": "Criar Empresa"
     },
     "status": {
       "active": "Ativo",
       "inactive": "Inativo",
+      "blocked": "Bloqueado",
       "pending": "Pendente",
       "processing": "Processando",
       "completed": "Concluído",
@@ -68,19 +76,204 @@
     },
     "fields": {
       "name": "Nome",
+      "fullName": "Nome completo",
       "description": "Descrição",
       "email": "E-mail",
       "phone": "Telefone",
       "address": "Endereço",
       "city": "Cidade",
       "state": "Estado",
+      "stateAbbr": "UF",
       "zipCode": "CEP",
       "country": "País",
       "date": "Data",
       "status": "Status",
       "actions": "Ações",
       "createdAt": "Criado em",
-      "updatedAt": "Atualizado em"
+      "updatedAt": "Atualizado em",
+      "taxId": "CPF/CNPJ",
+      "companyTaxId": "CNPJ",
+      "weight": "Peso",
+      "volume": "Volume",
+      "dimensions": "Dimensões (C x L x A)",
+      "sku": "SKU",
+      "barcode": "Código de Barras",
+      "productName": "Nome do Produto",
+      "warehouseName": "Nome do Armazém",
+      "code": "Código",
+      "companyName": "Nome Razão Social",
+      "tradeName": "Nome Fantasia",
+      "expectedDate": "Data Esperada",
+      "shippingAddress": "Endereço de Entrega",
+      "specialInstructions": "Instruções Especiais",
+      "vehicle": "Veículo",
+      "driver": "Motorista",
+      "originWarehouse": "Armazém Origem",
+      "destinationType": "Tipo de Destino",
+      "customer": "Cliente",
+      "warehouse": "Armazém",
+      "destinationWarehouse": "Armazém Destino",
+      "customerDestination": "Cliente Destino",
+      "trackingNumber": "Código Rastreio",
+      "estimatedDeliveryDate": "Entrega Estimada",
+      "priority": "Prioridade",
+      "warehouseTransfer": "Armazém (Transferência)",
+      "length": "Comprimento",
+      "width": "Largura",
+      "height": "Altura",
+      "validityDays": "Validade (dias)",
+      "minimumStock": "Estoque Mínimo",
+      "safetyStock": "Estoque de Segurança",
+      "abcClassification": "Classificação ABC",
+      "cnh": "CNH",
+      "type": "Tipo",
+      "location": "Localização",
+      "contact": "Contato",
+      "document": "Documento"
+    },
+    "placeholders": {
+      "fullName": "Nome completo",
+      "email": "email@exemplo.com",
+      "phone": "(00) 00000-0000",
+      "taxId": "000.000.000-00",
+      "companyTaxId": "00.000.000/0000-00",
+      "zipCode": "00000-000",
+      "address": "Rua, número, complemento",
+      "city": "Cidade",
+      "state": "UF",
+      "stateAbbr": "SP",
+      "country": "Brasil",
+      "search": "Pesquisar...",
+      "searchCustomer": "Buscar cliente por nome ou documento...",
+      "searchSupplier": "Pesquisar...",
+      "searchProduct": "Pesquisar por SKU, nome...",
+      "searchOrder": "🔍 Pesquisar por número, cliente...",
+      "searchWarehouse": "🔍 Pesquisar...",
+      "selectVehicle": "Selecionar veículo...",
+      "selectDriver": "Selecionar motorista...",
+      "selectWarehouse": "Selecionar armazém...",
+      "selectCustomer": "Selecione um cliente",
+      "productDescription": "Descrição detalhada do produto...",
+      "exampleProduct": "Ex: Notebook Dell Inspiron",
+      "exampleSKU": "Ex: PROD-001",
+      "exampleBarcode": "Ex: 7891234567890",
+      "exampleWeight": "0.00",
+      "exampleVolume": "0.00",
+      "exampleValidity": "Ex: 30",
+      "exampleStock": "0",
+      "exampleCode": "WH001",
+      "exampleWarehouse": "CD Principal",
+      "exampleCity": "São Paulo",
+      "addressStreet": "Rua, número",
+      "trackingCode": "BR123456789BR"
+    },
+    "loading": {
+      "default": "Carregando...",
+      "customers": "Carregando clientes...",
+      "orders": "Carregando pedidos...",
+      "products": "Carregando produtos..."
+    },
+    "saving": "Salvando...",
+    "activeStatus": {
+      "activeCustomer": "Cliente Ativo"
+    },
+    "orderStatus": {
+      "draft": "Rascunho",
+      "pending": "Pendente",
+      "confirmed": "Confirmado",
+      "inProgress": "Em Andamento",
+      "partiallyFulfilled": "Parcialmente Atendido",
+      "fulfilled": "Atendido",
+      "shipped": "Enviado",
+      "delivered": "Entregue",
+      "cancelled": "Cancelado",
+      "onHold": "Em Espera"
+    },
+    "empty": {
+      "noResults": "Nenhum resultado encontrado",
+      "noCustomers": "Nenhum cliente encontrado"
+    },
+    "confirmations": {
+      "deleteCompany": "Deseja realmente excluir a empresa",
+      "deleteCustomer": "Deseja realmente excluir o cliente",
+      "deleteSupplier": "Deseja realmente excluir o fornecedor",
+      "deleteProduct": "Deseja realmente excluir o produto",
+      "deleteOrder": "Deseja realmente excluir o pedido",
+      "deleteWarehouse": "Deseja excluir o armazém",
+      "deleteVehicle": "Deseja realmente excluir o veículo",
+      "deleteLocation": "Deseja realmente excluir a localização",
+      "unlockLocation": "Desbloquear esta localização?"
+    },
+    "errors": {
+      "generic": "Erro ao processar",
+      "companyIdNotFound": "Erro: CompanyId não encontrado",
+      "createCompany": "Erro ao criar empresa",
+      "updateCompany": "Erro ao atualizar empresa",
+      "deleteCompany": "Erro ao excluir empresa",
+      "createCustomer": "Erro ao criar cliente",
+      "updateCustomer": "Erro ao atualizar cliente",
+      "deleteCustomer": "Erro ao excluir cliente",
+      "createSupplier": "Erro ao criar fornecedor",
+      "updateSupplier": "Erro ao atualizar fornecedor",
+      "deleteSupplier": "Erro ao excluir fornecedor",
+      "createProduct": "Erro ao criar produto",
+      "updateProduct": "Erro ao atualizar produto",
+      "deleteProduct": "Erro ao excluir produto",
+      "createWarehouse": "Erro ao criar armazém",
+      "updateWarehouse": "Erro ao atualizar armazém",
+      "deleteWarehouse": "Erro ao excluir armazém",
+      "createLocation": "Erro ao criar localização",
+      "updateLocation": "Erro ao atualizar localização",
+      "deleteLocation": "Erro ao excluir localização",
+      "blockLocation": "Erro ao bloquear localização",
+      "unblockLocation": "Erro ao desbloquear"
+    },
+    "tooltips": {
+      "edit": "Editar",
+      "delete": "Excluir",
+      "block": "Bloquear",
+      "unblock": "Desbloquear",
+      "toggleDarkMode": "Alternar modo escuro",
+      "filter": "Filtrar",
+      "tryAgain": "Tentar Novamente"
+    }
+  },
+  "modals": {
+    "selectCustomer": "Selecionar Cliente",
+    "selectSupplier": "Selecionar Fornecedor",
+    "selectProduct": "Selecionar Produto",
+    "selectOrder": "Selecionar Pedido",
+    "selectWarehouse": "Selecionar Armazém",
+    "newCustomer": "Novo Cliente",
+    "editCustomer": "Editar Cliente",
+    "newSupplier": "Novo Fornecedor",
+    "editSupplier": "Editar Fornecedor",
+    "newProduct": "Criar Novo Produto",
+    "confirmCustomer": "✓ Confirmar Cliente",
+    "editOrder": "Editar Pedido",
+    "newWarehouse": "Novo Armazém",
+    "editWarehouse": "Editar Armazém",
+    "editCompany": "Editar Empresa",
+    "newCompany": "Nova Empresa",
+    "deliveryRoute": "Rota de Entrega",
+    "origin": "ORIGEM",
+    "destination": "DESTINO",
+    "wmsLogistics": "Logística WMS",
+    "tracking": "Rastreamento"
+  },
+  "companies": {
+    "title": "Empresas",
+    "newCompany": "Nova Empresa",
+    "activeCompany": "Empresa Ativa",
+    "empty": {
+      "message": "Nenhuma empresa cadastrada"
+    },
+    "fields": {
+      "companyName": "Razão Social",
+      "tradeName": "Nome Fantasia",
+      "companyTaxId": "CNPJ",
+      "name": "Nome",
+      "location": "Localização"
     }
   },
   "auth": {
@@ -122,7 +315,14 @@
     "title": "Produtos",
     "subtitle": "Gerencie o catálogo de produtos",
     "newProduct": "Novo Produto",
+    "editProduct": "Editar Produto",
+    "activeProduct": "Produto Ativo",
+    "perishable": "Perecível",
+    "normal": "Normal",
     "searchPlaceholder": "Buscar por nome, SKU ou categoria...",
+    "buttons": {
+      "new": "Novo Produto"
+    },
     "table": {
       "sku": "SKU",
       "product": "Produto",
@@ -137,7 +337,26 @@
       "button": "Criar Produto"
     },
     "loading": "Carregando produtos...",
-    "total": "Total: {{count}} produtos"
+    "total": "Total: {{count}} produtos",
+    "fields": {
+      "productName": "Nome do Produto",
+      "sku": "SKU",
+      "barcode": "Código de Barras",
+      "description": "Descrição",
+      "weight": "Peso",
+      "volume": "Volume",
+      "dimensions": "Dimensões (C x L x A)",
+      "requiresLotTracking": "Requer Rastreamento por Lote",
+      "requiresSerialTracking": "Requer Rastreamento por Série",
+      "perishable": "Produto Perecível",
+      "shelfLifeDays": "Validade (dias)",
+      "minimumStock": "Estoque Mínimo",
+      "safetyStock": "Estoque de Segurança",
+      "abcClassification": "Classificação ABC",
+      "highTurnover": "A - Alta rotatividade",
+      "mediumTurnover": "B - Média rotatividade",
+      "lowTurnover": "C - Baixa rotatividade"
+    }
   },
   "customers": {
     "title": "Clientes",
@@ -163,8 +382,43 @@
     "title": "Pedidos",
     "subtitle": "Gerencie todos os pedidos",
     "newOrder": "Novo Pedido",
+    "createOrder": "Criar Pedido",
+    "orderInfo": "Informações do Pedido",
+    "customerSupplier": "Cliente/Fornecedor",
+    "deliveryDetails": "Detalhes de Entrega",
+    "orderItems": "Items do Pedido",
+    "addItem": "Adicionar Item",
+    "totalItems": "Total de Items:",
+    "totalQty": "Quantidade Total:",
+    "totalValue": "Valor Total:",
+    "fields": {
+      "orderNumber": "Número do Pedido",
+      "type": "Tipo",
+      "source": "Fonte",
+      "priority": "Prioridade",
+      "expectedDate": "Data Esperada",
+      "bopis": "BOPIS (Retirada na Loja)",
+      "shippingAddress": "Endereço de Entrega",
+      "specialInstructions": "Instruções Especiais",
+      "productId": "ID Produto (GUID)",
+      "qty": "Qtd",
+      "unitPrice": "Preço Unit.",
+      "subtotal": "Subtotal"
+    },
+    "priority": {
+      "low": "Baixa",
+      "normal": "Normal",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
     "stats": {
-      "total": "Total de Pedidos",
+      "total": "Total Pedidos",
+      "totalValue": "Valor Total",
+      "qtyPending": "Qtd Pendentes",
+      "valuePending": "Valor Pendentes",
+      "qtyNonPending": "Em Processo",
+      "valueNonPending": "Valor Processo",
+      "completed": "Concluídos",
       "pending": "Pendentes",
       "processing": "Em Processamento",
       "delivered": "Entregues"
@@ -202,15 +456,28 @@
     "title": "Fornecedores",
     "subtitle": "Gerencie seus fornecedores",
     "newSupplier": "Novo Fornecedor",
+    "activeSupplier": "Fornecedor Ativo",
+    "table": {
+      "supplier": "Fornecedor",
+      "contact": "Contato",
+      "cnpj": "CNPJ",
+      "location": "Localização",
+      "status": "Status",
+      "actions": "Ações"
+    },
     "module": {
       "title": "Gestão de Fornecedores",
       "subtitle": "Módulo de fornecedores em desenvolvimento"
+    },
+    "fields": {
+      "supplierTaxId": "CNPJ"
     }
   },
   "warehouses": {
     "title": "Armazéns",
     "subtitle": "Gerencie seus armazéns e locais de estoque",
     "newWarehouse": "Novo Armazém",
+    "activeWarehouse": "Armazém Ativo",
     "module": {
       "title": "Gestão de Armazéns",
       "subtitle": "Módulo de armazéns em desenvolvimento"
@@ -220,6 +487,14 @@
     "title": "Motoristas",
     "subtitle": "Gerencie sua frota de motoristas",
     "newDriver": "Novo Motorista",
+    "editDriver": "Editar Motorista",
+    "createDriver": "Criar Motorista",
+    "fields": {
+      "licenseNumber": "CNH"
+    },
+    "placeholders": {
+      "licenseNumber": "Número da CNH"
+    },
     "module": {
       "title": "Gestão de Motoristas",
       "subtitle": "Módulo de motoristas em desenvolvimento"
@@ -229,9 +504,50 @@
     "title": "Veículos",
     "subtitle": "Gerencie sua frota de veículos",
     "newVehicle": "Novo Veículo",
+    "editVehicle": "Editar Veículo",
+    "createVehicle": "Criar Veículo",
+    "fields": {
+      "plateNumber": "Placa",
+      "type": "Tipo",
+      "model": "Modelo",
+      "capacity": "Capacidade (kg)"
+    },
+    "placeholders": {
+      "plate": "ABC-1234",
+      "type": "Caminhão, Van, etc",
+      "model": "Modelo do veículo",
+      "capacity": "1000"
+    },
+    "status": {
+      "available": "Disponível",
+      "inUse": "Em Uso",
+      "maintenance": "Manutenção"
+    },
     "module": {
       "title": "Gestão de Veículos",
       "subtitle": "Módulo de veículos em desenvolvimento"
+    }
+  },
+  "storageLocations": {
+    "title": "Localizações de Estoque",
+    "newLocation": "Nova Localização",
+    "editLocation": "Editar Localização",
+    "createLocation": "Criar Localização",
+    "activeLocation": "Localização Ativa",
+    "status": {
+      "available": "Disponível"
+    },
+    "empty": {
+      "message": "Nenhuma localização cadastrada"
+    },
+    "fields": {
+      "warehouseId": "ID do Armazém",
+      "zoneId": "ID da Zona (opcional)",
+      "aisle": "Corredor",
+      "rack": "Rack",
+      "shelf": "Prateleira",
+      "bin": "Bin (opcional)",
+      "capacity": "Capacidade (opcional)"
     }
   },
   "pickingTasks": {

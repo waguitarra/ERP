@@ -1,39 +1,39 @@
-<app-modal [isOpen]="isOpen" [title]="'Editar Cliente'" [size]="'lg'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="'modals.editCustomer' | translate" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="md:col-span-2">
-        <app-form-field [label]="'Nome'" [control]="form.controls['name']" [type]="'text'" [placeholder]="'Nome completo'" [required]="true"></app-form-field>
+        <app-form-field [label]="'common.fields.name' | translate" [control]="form.controls['name']" [type]="'text'" [placeholder]="'common.placeholders.fullName' | translate" [required]="true"></app-form-field>
       </div>
       
-      <app-form-field [label]="'E-mail'" [control]="form.controls['email']" [type]="'email'" [placeholder]="'email@exemplo.com'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.email' | translate" [control]="form.controls['email']" [type]="'email'" [placeholder]="'common.placeholders.email' | translate" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'Telefone'" [control]="form.controls['phone']" [type]="'text'" [placeholder]="'(00) 00000-0000'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.phone' | translate" [control]="form.controls['phone']" [type]="'text'" [placeholder]="'common.placeholders.phone' | translate" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'CPF/CNPJ'" [control]="form.controls['document']" [type]="'text'" [placeholder]="'000.000.000-00'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.taxId' | translate" [control]="form.controls['document']" [type]="'text'" [placeholder]="'common.placeholders.taxId' | translate" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'CEP'" [control]="form.controls['zipCode']" [type]="'text'" [placeholder]="'00000-000'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.zipCode' | translate" [control]="form.controls['zipCode']" [type]="'text'" [placeholder]="'common.placeholders.zipCode' | translate" [required]="true"></app-form-field>
       
       <div class="md:col-span-2">
-        <app-form-field [label]="'Endereço'" [control]="form.controls['address']" [type]="'text'" [placeholder]="'Rua, número, complemento'" [required]="true"></app-form-field>
+        <app-form-field [label]="'common.fields.address' | translate" [control]="form.controls['address']" [type]="'text'" [placeholder]="'common.placeholders.address' | translate" [required]="true"></app-form-field>
       </div>
       
-      <app-form-field [label]="'Cidade'" [control]="form.controls['city']" [type]="'text'" [placeholder]="'Cidade'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.city' | translate" [control]="form.controls['city']" [type]="'text'" [placeholder]="'common.placeholders.city' | translate" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'Estado'" [control]="form.controls['state']" [type]="'text'" [placeholder]="'UF'" [required]="true"></app-form-field>
+      <app-form-field [label]="'common.fields.state' | translate" [control]="form.controls['state']" [type]="'text'" [placeholder]="'common.fields.stateAbbr' | translate" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'País'" [control]="form.controls['country']" [type]="'text'" [placeholder]="'Brasil'"></app-form-field>
+      <app-form-field [label]="'common.fields.country' | translate" [control]="form.controls['country']" [type]="'text'" [placeholder]="'common.placeholders.country' | translate"></app-form-field>
 
       <div class="md:col-span-2">
         <label class="flex items-center space-x-2 cursor-pointer">
           <input type="checkbox" formControlName="isActive" class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"/>
-          <span class="text-sm text-slate-700 dark:text-slate-300">Cliente Ativo</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'common.activeStatus.activeCustomer' | translate }}</span>
         </label>
       </div>
     </div>
 
     <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
       <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50">
-        Cancelar
+        {{ 'common.buttons.cancel' | translate }}
       </button>
       <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2">
         @if (isSaving) {
@@ -41,9 +41,9 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          Salvando...
+          {{ 'common.saving' | translate }}
         } @else {
-          Salvar Alterações
+          {{ 'common.buttons.saveChanges' | translate }}
         }
       </button>
     </div>
