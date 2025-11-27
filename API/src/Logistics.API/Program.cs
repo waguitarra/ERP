@@ -53,6 +53,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
@@ -64,6 +65,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // WMS Repositories
 builder.Services.AddScoped<IWarehouseZoneRepository, WarehouseZoneRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IPurchaseOrderRepository, PurchaseOrderRepository>();
+builder.Services.AddScoped<ISalesOrderRepository, SalesOrderRepository>();
 builder.Services.AddScoped<IOrderStatusRepository, OrderStatusRepository>();
 builder.Services.AddScoped<IOrderPriorityRepository, OrderPriorityRepository>();
 builder.Services.AddScoped<IInboundShipmentRepository, InboundShipmentRepository>();
@@ -78,6 +81,9 @@ builder.Services.AddScoped<IPackageRepository, PackageRepository>();
 builder.Services.AddScoped<IOutboundShipmentRepository, OutboundShipmentRepository>();
 builder.Services.AddScoped<ISerialNumberRepository, SerialNumberRepository>();
 builder.Services.AddScoped<ICycleCountRepository, CycleCountRepository>();
+builder.Services.AddScoped<IOrderDocumentRepository, OrderDocumentRepository>();
+builder.Services.AddScoped<IInboundParcelRepository, InboundParcelRepository>();
+builder.Services.AddScoped<IInboundCartonRepository, InboundCartonRepository>();
 
 // Dependency Injection - Services
 builder.Services.AddScoped<IAuthService, AuthService>();

@@ -6,6 +6,7 @@ import { FormFieldComponent } from '@shared/components/form-field/form-field.com
 import { WarehousesService } from '../warehouses.service';
 import { AuthService } from '@core/services/auth.service';
 import { CreateWarehouseDto } from '@core/models/warehouse.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-warehouse-create-modal',
@@ -18,6 +19,7 @@ export class WarehouseCreateModalComponent {
   private readonly fb = inject(FormBuilder);
   private readonly warehousesService = inject(WarehousesService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
   
   closeModal = output<void>();
   warehouseCreated = output<void>();

@@ -9,4 +9,7 @@ public interface IOrderService
     Task<IEnumerable<OrderResponse>> GetByCompanyIdAsync(Guid companyId);
     Task<IEnumerable<OrderResponse>> GetAllAsync();
     Task<OrderResponse> UpdateAsync(Guid id, UpdateOrderRequest request);
+    Task<OrderResponse> SetPurchaseDetailsAsync(Guid orderId, dynamic request);
+    Task<OrderResponse> SetPackagingHierarchyAsync(Guid orderId, dynamic request);
+    Task<OrderResponse> SetAsInternationalAsync(Guid orderId, dynamic request);
 }

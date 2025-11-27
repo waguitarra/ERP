@@ -5,6 +5,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { DriversService } from '../drivers.service';
 import { Driver, UpdateDriverDto } from '@core/models/driver.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-driver-edit-modal',
@@ -16,6 +17,7 @@ import { Driver, UpdateDriverDto } from '@core/models/driver.model';
 export class DriverEditModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly driversService = inject(DriversService);
+  protected readonly i18n = inject(I18nService);
   
   driver = input.required<Driver>();
   closeModal = output<void>();

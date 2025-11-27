@@ -1,7 +1,8 @@
 {
   "header": {
     "logout": "Sair",
-    "notifications": "Notificações"
+    "notifications": "Notificações",
+    "searchPlaceholder": "Buscar dados, usuários..."
   },
   "sidebar": {
     "categories": {
@@ -15,6 +16,9 @@
       "customers": "Clientes",
       "suppliers": "Fornecedores",
       "products": "Produtos",
+      "productCategories": "Categorias de Produtos",
+      "purchaseOrders": "Pedidos de Compra",
+      "salesOrders": "Pedidos de Venda",
       "orders": "Pedidos",
       "warehouses": "Armazéns",
       "inventory": "Inventário",
@@ -28,6 +32,16 @@
     }
   },
   "common": {
+    "search": "Buscar...",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "actions": "Ações",
+    "activate": "Ativar",
+    "deactivate": "Desativar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "save": "Salvar",
+    "cancel": "Cancelar",
     "buttons": {
       "save": "Salvar",
       "saveChanges": "Salvar Alterações",
@@ -51,7 +65,9 @@
       "createCustomer": "Criar Cliente",
       "createProduct": "Criar Produto",
       "createWarehouse": "Criar Armazém",
-      "createCompany": "Criar Empresa"
+      "createCompany": "Criar Empresa",
+      "toggleDarkMode": "Alternar modo escuro",
+      "tryAgain": "Tentar Novamente"
     },
     "status": {
       "active": "Ativo",
@@ -287,10 +303,12 @@
       "passwordRequired": "Senha é obrigatória",
       "invalidCredentials": "Credenciais inválidas",
       "loggingIn": "Entrando...",
-    "validation": {
-      "emailRequired": "E-mail é obrigatório",
-      "passwordRequired": "Senha é obrigatória"
-    }
+      "validation": {
+        "emailRequired": "E-mail é obrigatório",
+        "passwordRequired": "Senha é obrigatória"
+      },
+      "footer": "© 2024 NEXUS ADMIN. Todos os direitos reservados.",
+      "forgotPassword": "Esqueceu sua senha?"
     }
   },
   "dashboard": {
@@ -429,12 +447,15 @@
       "date": "Data",
       "totalAmount": "Valor Total",
       "status": "Status",
-      "actions": "Ações"
+      "actions": "Ações",
+      "totalValue": "Valor Total"
     },
     "empty": {
       "title": "Nenhum pedido encontrado",
       "subtitle": "Comece criando um novo pedido",
-      "button": "Criar Pedido"
+      "button": "Criar Pedido",
+      "createButton": "Criar Primeiro Pedido",
+      "message": "Nenhum pedido cadastrado ainda"
     },
     "loading": "Carregando pedidos..."
   },
@@ -471,7 +492,12 @@
     },
     "fields": {
       "supplierTaxId": "CNPJ"
-    }
+    },
+    "empty": {
+      "title": "Nenhum fornecedor encontrado",
+      "subtitle": "Comece adicionando seu primeiro fornecedor"
+    },
+    "loading": "Carregando fornecedores..."
   },
   "warehouses": {
     "title": "Armazéns",
@@ -609,5 +635,37 @@
       "inboundShipments": "Recebimentos",
       "outboundShipments": "Expedições"
     }
+  },
+  "product_categories": {
+    "title": "Categorias de Produtos",
+    "subtitle": "Gerencie as categorias de produtos",
+    "create_new": "Nova Categoria",
+    "create_category": "Criar Categoria",
+    "edit_category": "Editar Categoria",
+    "no_categories": "Nenhuma categoria encontrada",
+    "name": "Nome",
+    "code": "Código",
+    "description": "Descrição",
+    "barcode": "Código de Barras",
+    "reference": "Referência",
+    "status": "Status",
+    "is_maintenance": "É manutenção"
+  },
+  "purchase_orders": {
+    "title": "Pedidos de Compra",
+    "subtitle": "Gerencie pedidos de compra",
+    "create_new": "Novo Pedido de Compra",
+    "no_orders": "Nenhum pedido encontrado",
+    "po_number": "Número do Pedido",
+    "supplier": "Fornecedor",
+    "status": "Status",
+    "total_quantity": "Quantidade Total",
+    "total_value": "Valor Total",
+    "items": "Itens",
+    "select_category": "Selecione uma categoria",
+    "select_product": "Selecione um produto",
+    "quantity": "Quantidade",
+    "unit_price": "Preço Unitário",
+    "add_item": "Adicionar Item"
   }
 }

@@ -1,21 +1,21 @@
-<app-modal [isOpen]="isOpen" [title]="'modals.newWarehouse' | translate" [size]="'lg'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="i18n.t('modals.newWarehouse')" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="md:col-span-2">
-        <app-form-field [label]="'common.fields.warehouseName' | translate" [control]="form.controls['name']" [type]="'text'" [placeholder]="'common.placeholders.exampleWarehouse' | translate" [required]="true"></app-form-field>
+        <app-form-field [label]="i18n.t('common.fields.warehouseName')" [control]="form.controls['name']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.exampleWarehouse')" [required]="true"></app-form-field>
       </div>
-      <app-form-field [label]="'common.fields.code' | translate" [control]="form.controls['code']" [type]="'text'" [placeholder]="'common.placeholders.exampleCode' | translate" [required]="true"></app-form-field>
-      <app-form-field [label]="'common.fields.zipCode' | translate" [control]="form.controls['zipCode']" [type]="'text'" [placeholder]="'common.placeholders.zipCode' | translate" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.code')" [control]="form.controls['code']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.exampleCode')" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.zipCode')" [control]="form.controls['zipCode']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.zipCode')" [required]="true"></app-form-field>
       <div class="md:col-span-2">
-        <app-form-field [label]="'common.fields.address' | translate" [control]="form.controls['address']" [type]="'text'" [placeholder]="'common.placeholders.addressStreet' | translate" [required]="true"></app-form-field>
+        <app-form-field [label]="i18n.t('common.fields.address')" [control]="form.controls['address']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.addressStreet')" [required]="true"></app-form-field>
       </div>
-      <app-form-field [label]="'common.fields.city' | translate" [control]="form.controls['city']" [type]="'text'" [placeholder]="'common.placeholders.exampleCity' | translate" [required]="true"></app-form-field>
-      <app-form-field [label]="'common.fields.state' | translate" [control]="form.controls['state']" [type]="'text'" [placeholder]="'common.placeholders.stateAbbr' | translate" [required]="true"></app-form-field>
-      <app-form-field [label]="'common.fields.country' | translate" [control]="form.controls['country']" [type]="'text'" [placeholder]="'common.placeholders.country' | translate"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.city')" [control]="form.controls['city']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.exampleCity')" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.state')" [control]="form.controls['state']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.stateAbbr')" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.country')" [control]="form.controls['country']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.country')"></app-form-field>
     </div>
     <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
-      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ 'common.buttons.cancel' | translate }}</button>
-      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ 'common.saving' | translate }} } @else { {{ 'common.buttons.createWarehouse' | translate }} }</button>
+      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ i18n.t('common.buttons.cancel')}}</button>
+      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ i18n.t('common.saving')}} } @else { {{ i18n.t('common.buttons.createWarehouse')}} }</button>
     </div>
   </form>
 </app-modal>

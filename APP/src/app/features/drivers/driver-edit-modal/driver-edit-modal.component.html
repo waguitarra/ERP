@@ -1,15 +1,15 @@
-<app-modal [isOpen]="isOpen" [title]="'drivers.editDriver' | translate" [size]="'md'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="i18n.t('drivers.editDriver')" [size]="'md'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="space-y-4">
-      <app-form-field [label]="'common.fields.name' | translate" [control]="form.controls['name']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="'drivers.fields.licenseNumber' | translate" [control]="form.controls['licenseNumber']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="'common.fields.phone' | translate" [control]="form.controls['phone']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="'common.fields.email' | translate" [control]="form.controls['email']" [type]="'email'"></app-form-field>
-      <label class="flex items-center space-x-2"><input type="checkbox" formControlName="isActive" class="w-4 h-4"/><span class="text-sm text-slate-700 dark:text-slate-300">{{ 'common.status.active' | translate }}</span></label>
+      <app-form-field [label]="i18n.t('common.fields.name')" [control]="form.controls['name']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('drivers.fields.licenseNumber')" [control]="form.controls['licenseNumber']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.phone')" [control]="form.controls['phone']" [type]="'text'" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.email')" [control]="form.controls['email']" [type]="'email'"></app-form-field>
+      <label class="flex items-center space-x-2"><input type="checkbox" formControlName="isActive" class="w-4 h-4"/><span class="text-sm text-slate-700 dark:text-slate-300">{{ i18n.t('common.status.active')}}</span></label>
     </div>
     <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
-      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ 'common.buttons.cancel' | translate }}</button>
-      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ 'common.saving' | translate }} } @else { {{ 'common.buttons.save' | translate }} }</button>
+      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ i18n.t('common.buttons.cancel')}}</button>
+      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ i18n.t('common.saving')}} } @else { {{ i18n.t('common.buttons.save')}} }</button>
     </div>
   </form>
 </app-modal>

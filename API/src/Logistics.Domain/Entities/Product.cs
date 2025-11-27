@@ -26,6 +26,7 @@ public class Product
 
     public Guid Id { get; private set; }
     public Guid CompanyId { get; private set; }
+    public Guid? CategoryId { get; private set; }
     public string Name { get; private set; } = string.Empty;
     public string SKU { get; private set; } = string.Empty;
     public string? Barcode { get; private set; }
@@ -52,8 +53,9 @@ public class Product
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
 
-    // Navigation
+    // Navigation properties
     public Company Company { get; private set; } = null!;
+    public ProductCategory? Category { get; private set; }
 
     public void Update(string name, string sku, string? barcode, string? description, decimal weight, string? weightUnit)
     {
@@ -98,4 +100,10 @@ public class Product
 
     public void Activate() => IsActive = true;
     public void Deactivate() => IsActive = false;
+
+    public void SetCategory(Guid? categoryId)
+    {
+        CategoryId = categoryId;
+        UpdatedAt = DateTime.UtcNow;
+    }
 }

@@ -1,0 +1,1787 @@
+❯ Building...
+✔ Building...
+Application bundle generation failed. [6.361 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-create-modal/customer-create-modal.component.ts:22:21:
+[37m      22 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-create-modal/customer-create-modal.component.ts:24:21:
+[37m      24 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:1:43:
+[37m      1 │ ...[isOpen]="isOpen" [title]="i18n.[32mt[37m('modals.editCustomer')" [size]...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:5:38:
+[37m      5 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.name')" [contro...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:5:133:
+[37m      5 │ ...e]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.fullName'...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:8:36:
+[37m      8 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.email')" [contr...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:8:134:
+[37m      8 │ ...]="'email'" [placeholder]="i18n.[32mt[37m('common.placeholders.email')" ...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:10:36:
+[37m      10 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.phone')" [contr...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:10:133:
+[37m      10 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.phone')" ...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:12:36:
+[37m      12 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.taxId')" [contr...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:12:136:
+[37m      12 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.taxId')" ...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:14:36:
+[37m      14 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.zipCode')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:14:137:
+[37m      14 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.zipCode')...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:17:38:
+[37m      17 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.address')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:17:139:
+[37m      17 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.address')...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:20:36:
+[37m      20 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.city')" [contro...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:20:131:
+[37m      20 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.city')" [...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:22:36:
+[37m      22 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.state')" [contr...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:22:133:
+[37m      22 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.fields.stateAbbr')" [r...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:24:36:
+[37m      24 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.country')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:24:137:
+[37m      24 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.country')...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:29:75:
+[37m      29 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('common.activeStatus.activeCus...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:36:16:
+[37m      36 │         {{ i18n.[32mt[37m('common.buttons.cancel') }}
+         ╵                 [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:44:18:
+[37m      44 │           {{ i18n.[32mt[37m('common.saving') }}
+         ╵                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.html:46:18:
+[37m      46 │           {{ i18n.[32mt[37m('common.buttons.saveChanges') }}
+         ╵                   [32m^[0m
+
+  Error occurs in the template of component CustomerEditModalComponent.
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./customer-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:18:35:
+[37m      18 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:20:21:
+[37m      20 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/customers/customer-edit-modal/customer-edit-modal.component.ts:20:35:
+[37m      20 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-create-modal/driver-create-modal.component.ts:22:21:
+[37m      22 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-create-modal/driver-create-modal.component.ts:24:21:
+[37m      24 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:1:43:
+[37m      1 │ ...[isOpen]="isOpen" [title]="i18n.[32mt[37m('drivers.editDriver')" [size]=...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:4:36:
+[37m      4 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.name')" [contro...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:5:36:
+[37m      5 │ ...  <app-form-field [label]="i18n.[32mt[37m('drivers.fields.licenseNumber'...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:6:36:
+[37m      6 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.phone')" [contr...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:7:36:
+[37m      7 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.email')" [contr...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:8:181:
+[37m      8 │ ...00 dark:text-slate-300">{{ i18n.[32mt[37m('common.status.active') }}</sp...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:11:248:
+[37m      11 │ ...700 transition-colors">{{ i18n.[32mt[37m('common.buttons.cancel') }}</b...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:12:163:
+[37m      12 │ ...lors">@if (isSaving) { {{ i18n.[32mt[37m('common.saving') }} } @else { ...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.html:12:203:
+[37m      12 │ ....saving') }} } @else { {{ i18n.[32mt[37m('common.buttons.save') }} }</b...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component DriverEditModalComponent.
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./driver-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:18:35:
+[37m      18 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:20:21:
+[37m      20 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/drivers/driver-edit-modal/driver-edit-modal.component.ts:20:35:
+[37m      20 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-create-modal/product-create-modal.component.ts:22:21:
+[37m      22 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-create-modal/product-create-modal.component.ts:24:21:
+[37m      24 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:1:43:
+[37m      1 │ ...[isOpen]="isOpen" [title]="i18n.[32mt[37m('products.editProduct')" [size...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:7:24:
+[37m      7 │           [label]="i18n.[32mt[37m('products.fields.productName')"
+        ╵                         [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:10:30:
+[37m      10 │           [placeholder]="i18n.[32mt[37m('common.placeholders.exampleProduc...
+         ╵                               [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:17:22:
+[37m      17 │         [label]="i18n.[32mt[37m('products.fields.sku')"
+         ╵                       [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:20:28:
+[37m      20 │         [placeholder]="i18n.[32mt[37m('common.placeholders.exampleSKU')"
+         ╵                             [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:26:22:
+[37m      26 │         [label]="i18n.[32mt[37m('products.fields.barcode')"
+         ╵                       [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:29:28:
+[37m      29 │         [placeholder]="i18n.[32mt[37m('common.placeholders.exampleBarcode')"
+         ╵                             [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:34:97:
+[37m      34 │ ...k:text-slate-300 mb-2">{{ i18n.[32mt[37m('products.fields.description')...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:38:30:
+[37m      38 │           [placeholder]="i18n.[32mt[37m('common.placeholders.productDescri...
+         ╵                               [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:45:97:
+[37m      45 │ ...k:text-slate-300 mb-2">{{ i18n.[32mt[37m('products.fields.weight') }} <...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:50:32:
+[37m      50 │             [placeholder]="i18n.[32mt[37m('common.placeholders.exampleWeig...
+         ╵                                 [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:66:97:
+[37m      66 │ ...k:text-slate-300 mb-2">{{ i18n.[32mt[37m('products.fields.volume') }}</...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:71:32:
+[37m      71 │             [placeholder]="i18n.[32mt[37m('common.placeholders.exampleWeig...
+         ╵                                 [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:86:97:
+[37m      86 │ ...k:text-slate-300 mb-2">{{ i18n.[32mt[37m('common.fields.dimensions') }}...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:91:32:
+[37m      91 │             [placeholder]="i18n.[32mt[37m('common.fields.length')"
+         ╵                                 [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:97:32:
+[37m      97 │             [placeholder]="i18n.[32mt[37m('common.fields.width')"
+         ╵                                 [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:103:32:
+[37m      103 │             [placeholder]="i18n.[32mt[37m('common.fields.height')"
+          ╵                                 [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:125:75:
+[37m      125 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('products.fields.requiresLotT...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:134:75:
+[37m      134 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('products.fields.requiresSeri...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:143:75:
+[37m      143 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('products.fields.perishable')...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:152:75:
+[37m      152 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('products.activeProduct') }}<...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:159:24:
+[37m      159 │           [label]="i18n.[32mt[37m('products.fields.shelfLifeDays')"
+          ╵                         [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:162:30:
+[37m      162 │           [placeholder]="i18n.[32mt[37m('common.placeholders.exampleValid...
+          ╵                               [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:169:22:
+[37m      169 │         [label]="i18n.[32mt[37m('products.fields.minimumStock')"
+          ╵                       [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:172:28:
+[37m      172 │         [placeholder]="i18n.[32mt[37m('common.placeholders.exampleStock')"
+          ╵                             [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:177:22:
+[37m      177 │         [label]="i18n.[32mt[37m('products.fields.safetyStock')"
+          ╵                       [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:180:28:
+[37m      180 │         [placeholder]="i18n.[32mt[37m('common.placeholders.exampleStock')"
+          ╵                             [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:185:97:
+[37m      185 │ ...k:text-slate-300 mb-2">{{ i18n.[32mt[37m('products.fields.abcClassific...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:190:36:
+[37m      190 │ ...     <option value="A">{{ i18n.[32mt[37m('products.fields.highTurnover...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:191:36:
+[37m      191 │ ...     <option value="B">{{ i18n.[32mt[37m('products.fields.mediumTurnov...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:192:36:
+[37m      192 │ ...     <option value="C">{{ i18n.[32mt[37m('products.fields.lowTurnover'...
+          ╵                                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:205:16:
+[37m      205 │         {{ i18n.[32mt[37m('common.buttons.cancel') }}
+          ╵                 [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:217:18:
+[37m      217 │           {{ i18n.[32mt[37m('common.saving') }}
+          ╵                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.html:219:18:
+[37m      219 │           {{ i18n.[32mt[37m('common.buttons.saveChanges') }}
+          ╵                   [32m^[0m
+
+  Error occurs in the template of component ProductEditModalComponent.
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./product-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:18:35:
+[37m      18 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:20:21:
+[37m      20 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/products/product-edit-modal/product-edit-modal.component.ts:20:35:
+[37m      20 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-create-modal/supplier-create-modal.component.ts:22:21:
+[37m      22 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-create-modal/supplier-create-modal.component.ts:24:21:
+[37m      24 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:1:43:
+[37m      1 │ ...[isOpen]="isOpen" [title]="i18n.[32mt[37m('modals.editSupplier')" [size]...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:5:38:
+[37m      5 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.name')" [contro...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:5:133:
+[37m      5 │ ...e]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.fullName'...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:7:36:
+[37m      7 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.email')" [contr...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:7:134:
+[37m      7 │ ...]="'email'" [placeholder]="i18n.[32mt[37m('common.placeholders.email')" ...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:8:36:
+[37m      8 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.phone')" [contr...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:8:133:
+[37m      8 │ ...e]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.phone')" ...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:9:36:
+[37m      9 │ ...  <app-form-field [label]="i18n.[32mt[37m('companies.fields.companyTaxId...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:9:146:
+[37m      9 │ ...e]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.companyTa...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:10:36:
+[37m      10 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.zipCode')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:10:137:
+[37m      10 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.zipCode')...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:12:38:
+[37m      12 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.address')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:12:139:
+[37m      12 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.addressSt...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:14:36:
+[37m      14 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.city')" [contro...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:14:131:
+[37m      14 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.city')" [...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:15:36:
+[37m      15 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.state')" [contr...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:15:133:
+[37m      15 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.fields.stateAbbr')" [r...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:16:36:
+[37m      16 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.country')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:16:137:
+[37m      16 │ ...]="'text'" [placeholder]="i18n.[32mt[37m('common.placeholders.country')...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:20:75:
+[37m      20 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('suppliers.activeSupplier') }}...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:25:268:
+[37m      25 │ ...s disabled:opacity-50">{{ i18n.[32mt[37m('common.buttons.cancel') }}</b...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:29:18:
+[37m      29 │           {{ i18n.[32mt[37m('common.saving') }}
+         ╵                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.html:31:18:
+[37m      31 │           {{ i18n.[32mt[37m('common.buttons.saveChanges') }}
+         ╵                   [32m^[0m
+
+  Error occurs in the template of component SupplierEditModalComponent.
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./supplier-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:18:35:
+[37m      18 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:20:21:
+[37m      20 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/suppliers/supplier-edit-modal/supplier-edit-modal.component.ts:20:35:
+[37m      20 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-create-modal/vehicle-create-modal.component.ts:22:21:
+[37m      22 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-create-modal/vehicle-create-modal.component.ts:24:21:
+[37m      24 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:1:43:
+[37m      1 │ ...[isOpen]="isOpen" [title]="i18n.[32mt[37m('vehicles.editVehicle')" [size...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:4:36:
+[37m      4 │ ...  <app-form-field [label]="i18n.[32mt[37m('vehicles.fields.plateNumber')...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:5:36:
+[37m      5 │ ...  <app-form-field [label]="i18n.[32mt[37m('vehicles.fields.type')" [cont...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:6:36:
+[37m      6 │ ...  <app-form-field [label]="i18n.[32mt[37m('vehicles.fields.model')" [con...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:7:36:
+[37m      7 │ ...  <app-form-field [label]="i18n.[32mt[37m('vehicles.fields.capacity')" [...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:9:97:
+[37m      9 │ ...rk:text-slate-300 mb-2">{{ i18n.[32mt[37m('common.fields.status') }}</la...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:11:44:
+[37m      11 │ ...tion value="Available">{{ i18n.[32mt[37m('vehicles.status.available') }...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:12:40:
+[37m      12 │ ... <option value="InUse">{{ i18n.[32mt[37m('vehicles.status.inUse') }}</o...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:13:46:
+[37m      13 │ ...on value="Maintenance">{{ i18n.[32mt[37m('vehicles.status.maintenance')...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:16:181:
+[37m      16 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('common.status.active') }}</sp...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:19:248:
+[37m      19 │ ...700 transition-colors">{{ i18n.[32mt[37m('common.buttons.cancel') }}</b...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:20:163:
+[37m      20 │ ...lors">@if (isSaving) { {{ i18n.[32mt[37m('common.saving') }} } @else { ...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.html:20:203:
+[37m      20 │ ....saving') }} } @else { {{ i18n.[32mt[37m('common.buttons.save') }} }</b...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component VehicleEditModalComponent.
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./vehicle-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:18:35:
+[37m      18 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:20:21:
+[37m      20 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/vehicles/vehicle-edit-modal/vehicle-edit-modal.component.ts:20:35:
+[37m      20 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-create-modal/warehouse-create-modal.component.ts:22:21:
+[37m      22 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-create-modal/warehouse-create-modal.component.ts:24:21:
+[37m      24 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:1:43:
+[37m      1 │ ...[isOpen]="isOpen" [title]="i18n.[32mt[37m('modals.editWarehouse')" [size...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:5:38:
+[37m      5 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.warehouseName')...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:7:36:
+[37m      7 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.code')" [contro...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:8:36:
+[37m      8 │ ...  <app-form-field [label]="i18n.[32mt[37m('common.fields.zipCode')" [con...
+        ╵                                    [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:10:38:
+[37m      10 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.address')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:12:36:
+[37m      12 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.city')" [contro...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:13:36:
+[37m      13 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.state')" [contr...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:14:36:
+[37m      14 │ ... <app-form-field [label]="i18n.[32mt[37m('common.fields.country')" [con...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:16:183:
+[37m      16 │ ...0 dark:text-slate-300">{{ i18n.[32mt[37m('warehouses.activeWarehouse') ...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:20:248:
+[37m      20 │ ...700 transition-colors">{{ i18n.[32mt[37m('common.buttons.cancel') }}</b...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:21:157:
+[37m      21 │ ...ion-colors">{{ isSaving ? i18n.[32mt[37m('common.saving') : i18n.t('com...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG1: Object is of type 'unknown'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.html:21:183:
+[37m      21 │ ...i18n.t('common.saving') : i18n.[32mt[37m('common.buttons.save') }}</but...
+         ╵                                   [32m^[0m
+
+  Error occurs in the template of component WarehouseEditModalComponent.
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./warehouse-edit-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:18:35:
+[37m      18 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'i18n'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:20:21:
+[37m      20 │   protected readonly [32mi18n[37m = inject(I18nService);
+         ╵                      [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'I18nService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/warehouses/warehouse-edit-modal/warehouse-edit-modal.component.ts:20:35:
+[37m      20 │   protected readonly i18n = inject([32mI18nService[37m);
+         ╵                                    [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'i18n' does not exist on type 'CustomerSelectorModalComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.html:10:53:
+[37m      10 │ ...-2xl font-bold text-white">{{ [32mi18n[37m.t('modals.selectCustomer') }...
+         ╵                                  [32m~~~~[0m
+
+  Error occurs in the template of component CustomerSelectorModalComponent.
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.ts:11:15:
+[37m      11 │   templateUrl: [32m'./customer-selector-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'i18n' does not exist on type 'CustomerSelectorModalComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.html:18:28:
+[37m      18 │              [placeholder]="[32mi18n[37m.t('common.placeholders.searchCust...
+         ╵                             [32m~~~~[0m
+
+  Error occurs in the template of component CustomerSelectorModalComponent.
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.ts:11:15:
+[37m      11 │   templateUrl: [32m'./customer-selector-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'i18n' does not exist on type 'CustomerSelectorModalComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.html:27:64:
+[37m      27 │ ...e-600 dark:text-slate-400">{{ [32mi18n[37m.t('common.loading.customers'...
+         ╵                                  [32m~~~~[0m
+
+  Error occurs in the template of component CustomerSelectorModalComponent.
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.ts:11:15:
+[37m      11 │   templateUrl: [32m'./customer-selector-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'i18n' does not exist on type 'CustomerSelectorModalComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.html:33:32:
+[37m      33 │           <p class="text-xl">{{ [32mi18n[37m.t('common.empty.noCustomers')...
+         ╵                                 [32m~~~~[0m
+
+  Error occurs in the template of component CustomerSelectorModalComponent.
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.ts:11:15:
+[37m      11 │   templateUrl: [32m'./customer-selector-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'i18n' does not exist on type 'CustomerSelectorModalComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.html:81:113:
+[37m      81 │ ...ty}}, {{customer.state}} - {{ [32mi18n[37m.t('common.fields.zipCode') }...
+         ╵                                  [32m~~~~[0m
+
+  Error occurs in the template of component CustomerSelectorModalComponent.
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.ts:11:15:
+[37m      11 │   templateUrl: [32m'./customer-selector-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'i18n' does not exist on type 'CustomerSelectorModalComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.html:96:135:
+[37m      96 │ ... font-semibold transition">{{ [32mi18n[37m.t('common.buttons.cancel') }...
+         ╵                                  [32m~~~~[0m
+
+  Error occurs in the template of component CustomerSelectorModalComponent.
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.ts:11:15:
+[37m      11 │   templateUrl: [32m'./customer-selector-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'i18n' does not exist on type 'CustomerSelectorModalComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.html:97:227:
+[37m      97 │ ...or-not-allowed transition">{{ [32mi18n[37m.t('modals.confirmCustomer') ...
+         ╵                                  [32m~~~~[0m
+
+  Error occurs in the template of component CustomerSelectorModalComponent.
+
+    src/app/shared/components/customer-selector-modal/customer-selector-modal.component.ts:11:15:
+[37m      11 │   templateUrl: [32m'./customer-selector-modal.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+

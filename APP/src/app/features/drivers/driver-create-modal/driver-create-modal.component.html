@@ -1,14 +1,14 @@
-<app-modal [isOpen]="isOpen" [title]="'drivers.newDriver' | translate" [size]="'md'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="i18n.t('drivers.newDriver')" [size]="'md'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="space-y-4">
-      <app-form-field [label]="'common.fields.name' | translate" [control]="form.controls['name']" [type]="'text'" [placeholder]="'common.placeholders.fullName' | translate" [required]="true"></app-form-field>
-      <app-form-field [label]="'drivers.fields.licenseNumber' | translate" [control]="form.controls['licenseNumber']" [type]="'text'" [placeholder]="'drivers.placeholders.licenseNumber' | translate" [required]="true"></app-form-field>
-      <app-form-field [label]="'common.fields.phone' | translate" [control]="form.controls['phone']" [type]="'text'" [placeholder]="'common.placeholders.phone' | translate" [required]="true"></app-form-field>
-      <app-form-field [label]="'common.fields.email' | translate" [control]="form.controls['email']" [type]="'email'" [placeholder]="'common.placeholders.email' | translate"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.name')" [control]="form.controls['name']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.fullName')" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('drivers.fields.licenseNumber')" [control]="form.controls['licenseNumber']" [type]="'text'" [placeholder]="i18n.t('drivers.placeholders.licenseNumber')" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.phone')" [control]="form.controls['phone']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.phone')" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.email')" [control]="form.controls['email']" [type]="'email'" [placeholder]="i18n.t('common.placeholders.email')"></app-form-field>
     </div>
     <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
-      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ 'common.buttons.cancel' | translate }}</button>
-      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ 'common.saving' | translate }} } @else { {{ 'drivers.createDriver' | translate }} }</button>
+      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ i18n.t('common.buttons.cancel')}}</button>
+      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ i18n.t('common.saving')}} } @else { {{ i18n.t('drivers.createDriver')}} }</button>
     </div>
   </form>
 </app-modal>

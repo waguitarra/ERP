@@ -1,0 +1,33 @@
+❯ Building...
+✔ Building...
+Initial chunk files   | Names                             |  Raw size | Estimated transfer size
+chunk-L6D2LS4K.js     | -                                 | 177.28 kB |                51.23 kB
+chunk-72EBT5ND.js     | -                                 | 103.21 kB |                26.00 kB
+styles-2W353WBC.css   | styles                            |  42.03 kB |                 5.84 kB
+polyfills-FFHMD2TL.js | polyfills                         |  34.52 kB |                11.28 kB
+main-ZCA2JTUJ.js      | main                              |   8.34 kB |                 2.74 kB
+
+                      | Initial total                     | 365.38 kB |                97.09 kB
+
+Lazy chunk files      | Names                             |  Raw size | Estimated transfer size
+chunk-4QBJ4KF4.js     | orders-list-component             |  85.68 kB |                13.68 kB
+chunk-AVY7UIUR.js     | -                                 |  42.67 kB |                 8.68 kB
+chunk-XHQJ6LXF.js     | products-list-component           |  33.06 kB |                 5.27 kB
+chunk-3ARNIFIF.js     | customers-list-component          |  19.26 kB |                 3.91 kB
+chunk-QIYELOZ4.js     | suppliers-list-component          |  18.97 kB |                 3.88 kB
+chunk-W25YDV27.js     | main-layout-component             |  15.85 kB |                 4.17 kB
+chunk-PRPILDOO.js     | warehouses-list-component         |  14.40 kB |                 3.13 kB
+chunk-QBIG22S7.js     | vehicles-list-component           |  14.36 kB |                 3.09 kB
+chunk-6KKSO5SF.js     | drivers-list-component            |  12.49 kB |                 2.86 kB
+chunk-R3ZJRD7J.js     | dashboard-component               |   7.16 kB |                 2.30 kB
+chunk-GZPIG4EI.js     | login-component                   |   5.54 kB |                 1.81 kB
+chunk-WILPX6ME.js     | -                                 |   4.51 kB |                 1.66 kB
+chunk-HX273GWP.js     | inventory-list-component          |   4.08 kB |                 1.29 kB
+chunk-BLHU3DSP.js     | picking-tasks-list-component      |   2.27 kB |               905 bytes
+chunk-DMPPYJ2J.js     | outbound-shipments-list-component |   2.27 kB |               917 bytes
+...and 4 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [9.216 seconds]
+
+Output location: /home/wagnerfb/Projetos/ERP/APP/dist/nexus-admin
+

@@ -98,7 +98,40 @@ public class OrderService : IOrderService
         return orders.Select(MapToResponse);
     }
 
-    private static OrderResponse MapToResponse(Order order)
+    public async Task<OrderResponse> SetPurchaseDetailsAsync(Guid orderId, dynamic request)
+    {
+        var order = await _orderRepository.GetByIdAsync(orderId);
+        if (order == null)
+            throw new KeyNotFoundException("Order não encontrado");
+
+        order.SetPurchaseDetails(request.UnitCost, request.TaxPercentage, request.DesiredMarginPercentage);
+        await _unitOfWork.CommitAsync();
+        return MapToResponse(order);
+    }
+
+    public async Task<OrderResponse> SetPackagingHierarchyAsync(Guid orderId, dynamic request)
+    {
+        var order = await _orderRepository.GetByIdAsync(orderId);
+        if (order == null)
+            throw new KeyNotFoundException("Order não encontrado");
+
+        order.SetPackagingHierarchy(request.ExpectedParcels, request.CartonsPerParcel, request.UnitsPerCarton);
+        await _unitOfWork.CommitAsync();
+        return MapToResponse(order);
+    }
+
+    public async Task<OrderResponse> SetAsInternationalAsync(Guid orderId, dynamic request)
+    {
+        var order = await _orderRepository.GetByIdAsync(orderId);
+        if (order == null)
+            throw new KeyNotFoundException("Order não encontrado");
+
+        order.SetAsInternational(request.OriginCountry, request.PortOfEntry, request.ContainerNumber, request.Incoterm);
+        await _unitOfWork.CommitAsync();
+        return MapToResponse(order);
+    }
+
+    private OrderResponse MapToResponse(Order order)
     {
         return new OrderResponse(
             order.Id,

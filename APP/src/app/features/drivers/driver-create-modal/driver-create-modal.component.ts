@@ -6,6 +6,7 @@ import { FormFieldComponent } from '@shared/components/form-field/form-field.com
 import { DriversService } from '../drivers.service';
 import { AuthService } from '@core/services/auth.service';
 import { CreateDriverDto } from '@core/models/driver.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-driver-create-modal',
@@ -18,6 +19,7 @@ export class DriverCreateModalComponent {
   private readonly fb = inject(FormBuilder);
   private readonly driversService = inject(DriversService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
   
   closeModal = output<void>();
   driverCreated = output<void>();

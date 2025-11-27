@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CustomersService } from '@features/customers/customers.service';
 import { Customer } from '@core/models/customer.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-customer-selector-modal',
@@ -16,6 +17,7 @@ import { Customer } from '@core/models/customer.model';
 })
 export class CustomerSelectorModalComponent implements OnInit {
   private readonly customersService = inject(CustomersService);
+  protected readonly i18n = inject(I18nService);
   
   customerSelected = output<Customer>();
   

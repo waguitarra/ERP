@@ -1,407 +1,430 @@
 {
   "header": {
-    "logout": "Salir",
-    "notifications": "Notificaciones"
+    "logout": "Sair",
+    "notifications": "Notificações",
+    "searchPlaceholder": "Buscar dados, usuários..."
   },
   "sidebar": {
     "categories": {
       "main": "Principal",
-      "inventory": "Gestión de Inventario",
+      "inventory": "Gestão de Estoque",
       "logistics": "Logística",
-      "settings": "Configuración"
+      "settings": "Configurações"
     },
     "menu": {
-      "dashboard": "Tablero",
+      "dashboard": "Dashboard",
       "customers": "Clientes",
-      "suppliers": "Proveedores",
-      "products": "Productos",
+      "suppliers": "Fornecedores",
+      "products": "Produtos",
+      "productCategories": "Categorias de Produtos",
+      "purchaseOrders": "Pedidos de Compra",
+      "salesOrders": "Pedidos de Venda",
       "orders": "Pedidos",
-      "warehouses": "Almacenes",
-      "inventory": "Inventario",
-      "pickingTasks": "Tareas de Picking",
-      "packingTasks": "Tareas de Empaque",
-      "inboundShipments": "Recepción",
-      "outboundShipments": "Expedición",
-      "vehicles": "Vehículos",
-      "drivers": "Conductores",
+      "warehouses": "Armazéns",
+      "inventory": "Inventário",
+      "pickingTasks": "Tarefas de Separação",
+      "packingTasks": "Tarefas de Embalagem",
+      "inboundShipments": "Recebimentos",
+      "outboundShipments": "Expedições",
+      "vehicles": "Veículos",
+      "drivers": "Motoristas",
       "settings": "Ajustes"
     }
   },
   "common": {
+    "search": "Buscar...",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "actions": "Ações",
+    "activate": "Ativar",
+    "deactivate": "Desativar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "save": "Salvar",
+    "cancel": "Cancelar",
     "buttons": {
-      "save": "Guardar",
-      "saveChanges": "Guardar Cambios",
+      "save": "Salvar",
+      "saveChanges": "Salvar Alterações",
       "cancel": "Cancelar",
-      "delete": "Eliminar",
+      "delete": "Excluir",
       "edit": "Editar",
-      "create": "Crear",
+      "create": "Criar",
       "search": "Buscar",
       "filter": "Filtros",
-      "back": "Volver",
+      "back": "Voltar",
       "confirm": "Confirmar",
-      "close": "Cerrar",
+      "close": "Fechar",
       "view": "Ver",
-      "next": "Siguiente",
+      "next": "Próximo",
       "previous": "Anterior",
-      "refresh": "Actualizar",
+      "refresh": "Atualizar",
       "export": "Exportar",
       "import": "Importar",
       "block": "Bloquear",
       "unblock": "Desbloquear",
-      "createCustomer": "Crear Cliente",
-      "createProduct": "Crear Producto",
-      "createWarehouse": "Crear Almacén",
-      "createCompany": "Crear Empresa"
+      "createCustomer": "Criar Cliente",
+      "createProduct": "Criar Produto",
+      "createWarehouse": "Criar Armazém",
+      "createCompany": "Criar Empresa",
+      "toggleDarkMode": "Alternar modo escuro",
+      "tryAgain": "Tentar Novamente"
     },
     "status": {
-      "active": "Activo",
-      "inactive": "Inactivo",
+      "active": "Ativo",
+      "inactive": "Inativo",
       "blocked": "Bloqueado",
-      "pending": "Pendiente",
-      "processing": "Procesando",
-      "completed": "Completado",
+      "pending": "Pendente",
+      "processing": "Processando",
+      "completed": "Concluído",
       "cancelled": "Cancelado",
-      "delivered": "Entregado"
+      "delivered": "Entregue"
     },
     "messages": {
-      "loading": "Cargando...",
-      "saving": "Guardando...",
-      "saved": "Guardado exitosamente",
-      "error": "Error al procesar",
-      "noData": "No se encontraron registros",
-      "confirmDelete": "¿Está seguro de que desea eliminar?",
-      "deleteSuccess": "Eliminado exitosamente",
-      "createSuccess": "Creado exitosamente",
-      "updateSuccess": "Actualizado exitosamente"
+      "loading": "Carregando...",
+      "saving": "Salvando...",
+      "saved": "Salvo com sucesso",
+      "error": "Erro ao processar",
+      "noData": "Nenhum registro encontrado",
+      "confirmDelete": "Tem certeza que deseja excluir?",
+      "deleteSuccess": "Excluído com sucesso",
+      "createSuccess": "Criado com sucesso",
+      "updateSuccess": "Atualizado com sucesso"
     },
     "fields": {
-      "name": "Nombre",
-      "fullName": "Nombre completo",
-      "description": "Descripción",
-      "email": "Correo",
-      "phone": "Teléfono",
-      "address": "Dirección",
-      "city": "Ciudad",
+      "name": "Nome",
+      "fullName": "Nome completo",
+      "description": "Descrição",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "address": "Endereço",
+      "city": "Cidade",
       "state": "Estado",
-      "stateAbbr": "Estado",
-      "zipCode": "Código Postal",
+      "stateAbbr": "UF",
+      "zipCode": "CEP",
       "country": "País",
-      "date": "Fecha",
-      "createdAt": "Creado en",
-      "updatedAt": "Actualizado en",
-      "taxId": "NIF/CIF",
-      "companyTaxId": "CIF",
+      "date": "Data",
+      "status": "Status",
+      "actions": "Ações",
+      "createdAt": "Criado em",
+      "updatedAt": "Atualizado em",
+      "taxId": "CPF/CNPJ",
+      "companyTaxId": "CNPJ",
       "weight": "Peso",
-      "volume": "Volumen",
-      "dimensions": "Dimensiones (L x A x A)",
+      "volume": "Volume",
+      "dimensions": "Dimensões (C x L x A)",
       "sku": "SKU",
       "barcode": "Código de Barras",
-      "productName": "Nombre del Producto",
-      "warehouseName": "Nombre del Almacén",
+      "productName": "Nome do Produto",
+      "warehouseName": "Nome do Armazém",
       "code": "Código",
-      "companyName": "Razón Social",
-      "tradeName": "Nombre Comercial",
-      "expectedDate": "Fecha Esperada",
-      "shippingAddress": "Dirección de Envío",
-      "specialInstructions": "Instrucciones Especiales",
-      "location": "Ubicación",
-      "contact": "Contacto",
-      "document": "Documento",
-      "vehicle": "Vehículo",
-      "driver": "Conductor",
-      "originWarehouse": "Almacén Origen",
+      "companyName": "Nome Razão Social",
+      "tradeName": "Nome Fantasia",
+      "expectedDate": "Data Esperada",
+      "shippingAddress": "Endereço de Entrega",
+      "specialInstructions": "Instruções Especiais",
+      "vehicle": "Veículo",
+      "driver": "Motorista",
+      "originWarehouse": "Armazém Origem",
       "destinationType": "Tipo de Destino",
       "customer": "Cliente",
-      "warehouse": "Almacén",
-      "destinationWarehouse": "Almacén Destino",
+      "warehouse": "Armazém",
+      "destinationWarehouse": "Armazém Destino",
       "customerDestination": "Cliente Destino",
-      "trackingNumber": "Código de Seguimiento",
+      "trackingNumber": "Código Rastreio",
       "estimatedDeliveryDate": "Entrega Estimada",
-      "priority": "Prioridad",
-      "warehouseTransfer": "Almacén (Transferencia)",
-      "length": "Largo",
-      "width": "Ancho",
-      "height": "Alto",
-      "validityDays": "Validez (días)",
-      "minimumStock": "Stock Mínimo",
-      "safetyStock": "Stock de Seguridad",
-      "abcClassification": "Clasificación ABC",
-      "cnh": "Licencia de Conducir",
-      "orders": "Pedidos",
-      "products": "Productos",
-      "drivers": "Conductores",
-      "vehicles": "Vehículos",
-      "storageLocations": "Ubicaciones de Almacenamiento",
-      "commonExtensions": "Extensiones Comunes"
+      "priority": "Prioridade",
+      "warehouseTransfer": "Armazém (Transferência)",
+      "length": "Comprimento",
+      "width": "Largura",
+      "height": "Altura",
+      "validityDays": "Validade (dias)",
+      "minimumStock": "Estoque Mínimo",
+      "safetyStock": "Estoque de Segurança",
+      "abcClassification": "Classificação ABC",
+      "cnh": "CNH",
+      "type": "Tipo",
+      "location": "Localização",
+      "contact": "Contato",
+      "document": "Documento"
     },
     "placeholders": {
-      "fullName": "Nombre completo",
-      "email": "correo@ejemplo.com",
-      "phone": "+34 000 000 000",
-      "taxId": "00000000-A",
-      "companyTaxId": "A00000000",
-      "zipCode": "00000",
-      "address": "Calle, número, complemento",
-      "city": "Ciudad",
-      "state": "Estado",
-      "stateAbbr": "Est",
-      "country": "España",
-      "search": "Buscar...",
-      "searchCustomer": " Buscar por nombre, NIF/CIF, correo...",
-      "searchSupplier": "Buscar...",
-      "searchProduct": "Buscar por SKU, nombre...",
-      "searchOrder": " Buscar por número, cliente...",
-      "searchWarehouse": " Buscar...",
-      "selectVehicle": "Seleccionar vehículo...",
-      "selectDriver": "Seleccionar conductor...",
-      "selectWarehouse": "Seleccionar almacén...",
-      "selectCustomer": "Seleccionar cliente...",
-      "productDescription": "Descripción detallada del producto...",
-      "exampleProduct": "Ej: Portátil Dell Inspiron",
-      "exampleSKU": "Ej: PROD-001",
-      "exampleBarcode": "Ej: 7891234567890",
+      "fullName": "Nome completo",
+      "email": "email@exemplo.com",
+      "phone": "(00) 00000-0000",
+      "taxId": "000.000.000-00",
+      "companyTaxId": "00.000.000/0000-00",
+      "zipCode": "00000-000",
+      "address": "Rua, número, complemento",
+      "city": "Cidade",
+      "state": "UF",
+      "stateAbbr": "SP",
+      "country": "Brasil",
+      "search": "Pesquisar...",
+      "searchCustomer": "Buscar cliente por nome ou documento...",
+      "searchSupplier": "Pesquisar...",
+      "searchProduct": "Pesquisar por SKU, nome...",
+      "searchOrder": "🔍 Pesquisar por número, cliente...",
+      "searchWarehouse": "🔍 Pesquisar...",
+      "selectVehicle": "Selecionar veículo...",
+      "selectDriver": "Selecionar motorista...",
+      "selectWarehouse": "Selecionar armazém...",
+      "selectCustomer": "Selecione um cliente",
+      "productDescription": "Descrição detalhada do produto...",
+      "exampleProduct": "Ex: Notebook Dell Inspiron",
+      "exampleSKU": "Ex: PROD-001",
+      "exampleBarcode": "Ex: 7891234567890",
       "exampleWeight": "0.00",
       "exampleVolume": "0.00",
-      "exampleValidity": "Ej: 30",
+      "exampleValidity": "Ex: 30",
       "exampleStock": "0",
-      "exampleCode": "ALM001",
+      "exampleCode": "WH001",
       "exampleWarehouse": "CD Principal",
-      "exampleCity": "Madrid",
-      "addressStreet": "Calle, número",
-      "trackingCode": "ES123456789ES"
+      "exampleCity": "São Paulo",
+      "addressStreet": "Rua, número",
+      "trackingCode": "BR123456789BR"
     },
     "loading": {
-      "default": "Cargando...",
-      "customers": "Cargando clientes...",
-      "orders": "Cargando pedidos...",
-      "products": "Cargando productos..."
+      "default": "Carregando...",
+      "customers": "Carregando clientes...",
+      "orders": "Carregando pedidos...",
+      "products": "Carregando produtos..."
     },
-    "saving": "Guardando...",
+    "saving": "Salvando...",
     "activeStatus": {
-      "activeCustomer": "Cliente Activo"
+      "activeCustomer": "Cliente Ativo"
     },
     "orderStatus": {
-      "draft": "Borrador",
-      "pending": "Pendiente",
+      "draft": "Rascunho",
+      "pending": "Pendente",
       "confirmed": "Confirmado",
-      "inProgress": "En Curso",
-      "partiallyFulfilled": "Parcialmente Cumplido",
-      "fulfilled": "Cumplido",
+      "inProgress": "Em Andamento",
+      "partiallyFulfilled": "Parcialmente Atendido",
+      "fulfilled": "Atendido",
       "shipped": "Enviado",
-      "delivered": "Entregado",
+      "delivered": "Entregue",
       "cancelled": "Cancelado",
-      "onHold": "En Espera"
+      "onHold": "Em Espera"
     },
     "empty": {
-      "noResults": "No se encontraron resultados",
-      "noCustomers": "No se encontraron clientes"
+      "noResults": "Nenhum resultado encontrado",
+      "noCustomers": "Nenhum cliente encontrado"
     },
     "confirmations": {
-      "deleteCompany": "¿Desea eliminar la empresa",
-      "deleteCustomer": "¿Desea eliminar el cliente",
-      "deleteSupplier": "¿Desea eliminar el proveedor",
-      "deleteProduct": "¿Desea eliminar el producto",
-      "deleteOrder": "¿Desea eliminar el pedido",
-      "deleteWarehouse": "¿Desea eliminar el almacén",
-      "deleteVehicle": "¿Desea eliminar el vehículo",
-      "deleteLocation": "¿Desea eliminar la ubicación",
-      "unlockLocation": "¿Desbloquear esta ubicación?"
+      "deleteCompany": "Deseja realmente excluir a empresa",
+      "deleteCustomer": "Deseja realmente excluir o cliente",
+      "deleteSupplier": "Deseja realmente excluir o fornecedor",
+      "deleteProduct": "Deseja realmente excluir o produto",
+      "deleteOrder": "Deseja realmente excluir o pedido",
+      "deleteWarehouse": "Deseja excluir o armazém",
+      "deleteVehicle": "Deseja realmente excluir o veículo",
+      "deleteLocation": "Deseja realmente excluir a localização",
+      "unlockLocation": "Desbloquear esta localização?"
     },
     "errors": {
-      "generic": "Error al procesar",
-      "companyIdNotFound": "Error: CompanyId no encontrado",
-      "createCompany": "Error al crear empresa",
-      "updateCompany": "Error al actualizar empresa",
-      "deleteCompany": "Error al eliminar empresa",
-      "createCustomer": "Error al crear cliente",
-      "updateCustomer": "Error al actualizar cliente",
-      "deleteCustomer": "Error al eliminar cliente",
-      "createSupplier": "Error al crear proveedor",
-      "updateSupplier": "Error al actualizar proveedor",
-      "deleteSupplier": "Error al eliminar proveedor",
-      "createProduct": "Error al crear producto",
-      "updateProduct": "Error al actualizar producto",
-      "deleteProduct": "Error al eliminar producto",
-      "createWarehouse": "Error al crear almacén",
-      "updateWarehouse": "Error al actualizar almacén",
-      "deleteWarehouse": "Error al eliminar almacén",
-      "createLocation": "Error al crear ubicación",
-      "updateLocation": "Error al actualizar ubicación",
-      "deleteLocation": "Error al eliminar ubicación",
-      "blockLocation": "Error al bloquear ubicación",
-      "unblockLocation": "Error al desbloquear"
+      "generic": "Erro ao processar",
+      "companyIdNotFound": "Erro: CompanyId não encontrado",
+      "createCompany": "Erro ao criar empresa",
+      "updateCompany": "Erro ao atualizar empresa",
+      "deleteCompany": "Erro ao excluir empresa",
+      "createCustomer": "Erro ao criar cliente",
+      "updateCustomer": "Erro ao atualizar cliente",
+      "deleteCustomer": "Erro ao excluir cliente",
+      "createSupplier": "Erro ao criar fornecedor",
+      "updateSupplier": "Erro ao atualizar fornecedor",
+      "deleteSupplier": "Erro ao excluir fornecedor",
+      "createProduct": "Erro ao criar produto",
+      "updateProduct": "Erro ao atualizar produto",
+      "deleteProduct": "Erro ao excluir produto",
+      "createWarehouse": "Erro ao criar armazém",
+      "updateWarehouse": "Erro ao atualizar armazém",
+      "deleteWarehouse": "Erro ao excluir armazém",
+      "createLocation": "Erro ao criar localização",
+      "updateLocation": "Erro ao atualizar localização",
+      "deleteLocation": "Erro ao excluir localização",
+      "blockLocation": "Erro ao bloquear localização",
+      "unblockLocation": "Erro ao desbloquear"
     },
     "tooltips": {
       "edit": "Editar",
-      "delete": "Eliminar",
+      "delete": "Excluir",
       "block": "Bloquear",
       "unblock": "Desbloquear",
-      "toggleDarkMode": "Alternar modo oscuro",
+      "toggleDarkMode": "Alternar modo escuro",
       "filter": "Filtrar",
-      "tryAgain": "Intentar de Nuevo"
+      "tryAgain": "Tentar Novamente"
     }
   },
   "modals": {
-    "selectCustomer": "Seleccionar Cliente",
-    "selectSupplier": "Seleccionar Proveedor",
-    "selectProduct": "Seleccionar Producto",
-    "selectOrder": "Seleccionar Pedido",
-    "selectWarehouse": "Seleccionar Almacén",
-    "newCustomer": "Nuevo Cliente",
+    "selectCustomer": "Selecionar Cliente",
+    "selectSupplier": "Selecionar Fornecedor",
+    "selectProduct": "Selecionar Produto",
+    "selectOrder": "Selecionar Pedido",
+    "selectWarehouse": "Selecionar Armazém",
+    "newCustomer": "Novo Cliente",
     "editCustomer": "Editar Cliente",
-    "newSupplier": "Nuevo Proveedor",
-    "editSupplier": "Editar Proveedor",
-    "newProduct": "Crear Nuevo Producto",
+    "newSupplier": "Novo Fornecedor",
+    "editSupplier": "Editar Fornecedor",
+    "newProduct": "Criar Novo Produto",
     "confirmCustomer": "✓ Confirmar Cliente",
     "editOrder": "Editar Pedido",
-    "newWarehouse": "Nuevo Almacén",
-    "editWarehouse": "Editar Almacén",
+    "newWarehouse": "Novo Armazém",
+    "editWarehouse": "Editar Armazém",
     "editCompany": "Editar Empresa",
-    "newCompany": "Nueva Empresa",
-    "deliveryRoute": "Ruta de Entrega",
-    "origin": "ORIGEN",
+    "newCompany": "Nova Empresa",
+    "deliveryRoute": "Rota de Entrega",
+    "origin": "ORIGEM",
     "destination": "DESTINO",
     "wmsLogistics": "Logística WMS",
-    "tracking": "Seguimiento"
+    "tracking": "Rastreamento"
   },
   "companies": {
     "title": "Empresas",
-    "newCompany": "Nueva Empresa",
-    "activeCompany": "Empresa Activa",
+    "newCompany": "Nova Empresa",
+    "activeCompany": "Empresa Ativa",
     "empty": {
-      "message": "No hay empresas registradas"
+      "message": "Nenhuma empresa cadastrada"
     },
     "fields": {
-      "companyName": "Razón Social",
-      "tradeName": "Nombre Comercial",
-      "companyTaxId": "CIF",
-      "name": "Nombre",
-      "location": "Ubicación"
+      "companyName": "Razão Social",
+      "tradeName": "Nome Fantasia",
+      "companyTaxId": "CNPJ",
+      "name": "Nome",
+      "location": "Localização"
     }
   },
   "auth": {
     "login": {
-      "title": "Bienvenido",
-      "subtitle": "Sistema de Gestión ERP",
-      "email": "Correo",
-      "password": "Contraseña",
-      "loginButton": "Ingresar",
-      "emailRequired": "El correo es obligatorio",
-      "passwordRequired": "La contraseña es obligatoria",
-      "invalidCredentials": "Credenciales inválidas",
-      "loggingIn": "Iniciando sesión...",
+      "title": "Bem-vindo",
+      "subtitle": "Sistema de Gestão ERP",
+      "email": "E-mail",
+      "password": "Senha",
+      "loginButton": "Entrar",
+      "emailRequired": "E-mail é obrigatório",
+      "passwordRequired": "Senha é obrigatória",
+      "invalidCredentials": "Credenciais inválidas",
+      "loggingIn": "Entrando...",
       "validation": {
-        "emailRequired": "El correo es obligatorio",
-        "passwordRequired": "La contraseña es obligatoria"
-      }
+        "emailRequired": "E-mail é obrigatório",
+        "passwordRequired": "Senha é obrigatória"
+      },
+      "footer": "© 2024 NEXUS ADMIN. Todos os direitos reservados.",
+      "forgotPassword": "Esqueceu sua senha?"
     }
   },
   "dashboard": {
-    "title": "Resumen",
-    "subtitle": "Bienvenido de nuevo, esto es lo que está sucediendo hoy.",
+    "title": "Visão Geral",
+    "subtitle": "Bem-vindo de volta, aqui está o que está acontecendo hoje.",
     "stats": {
-      "revenue": "Ingresos Totales",
+      "revenue": "Receita Total",
       "orders": "Pedidos",
       "customers": "Clientes",
-      "products": "Productos"
+      "products": "Produtos"
     },
     "charts": {
-      "monthlyRevenue": "Ingresos Mensuales",
-      "viewReport": "Ver Informe"
+      "monthlyRevenue": "Receita Mensal",
+      "viewReport": "Ver Relatório"
     },
     "recentOrders": {
-      "title": "Pedidos Recientes",
-      "viewAll": "Ver Todos los Pedidos"
+      "title": "Pedidos Recentes",
+      "viewAll": "Ver Todos os Pedidos"
     }
   },
   "products": {
-    "title": "Productos",
-    "subtitle": "Gestione su catálogo de productos",
-    "newProduct": "Nuevo Producto",
-    "editProduct": "Editar Producto",
-    "activeProduct": "Producto Activo",
-    "perishable": "Perecedero",
+    "title": "Produtos",
+    "subtitle": "Gerencie o catálogo de produtos",
+    "newProduct": "Novo Produto",
+    "editProduct": "Editar Produto",
+    "activeProduct": "Produto Ativo",
+    "perishable": "Perecível",
     "normal": "Normal",
-    "searchPlaceholder": "Buscar por nombre, SKU o categoría...",
+    "searchPlaceholder": "Buscar por nome, SKU ou categoria...",
     "buttons": {
-      "new": "Nuevo Producto"
+      "new": "Novo Produto"
+    },
+    "table": {
+      "sku": "SKU",
+      "product": "Produto",
+      "category": "Categoria",
+      "price": "Preço",
+      "status": "Status",
+      "actions": "Ações"
     },
     "empty": {
-      "title": "No se encontraron productos",
-      "subtitle": "Comience creando su primer producto",
-      "button": "Crear Producto"
+      "title": "Nenhum produto encontrado",
+      "subtitle": "Comece criando seu primeiro produto",
+      "button": "Criar Produto"
     },
-    "loading": "Cargando productos...",
-    "total": "Total: {{count}} productos",
+    "loading": "Carregando produtos...",
+    "total": "Total: {{count}} produtos",
     "fields": {
-      "productName": "Nombre del Producto",
+      "productName": "Nome do Produto",
       "sku": "SKU",
       "barcode": "Código de Barras",
-      "description": "Descripción",
+      "description": "Descrição",
       "weight": "Peso",
-      "volume": "Volumen",
-      "dimensions": "Dimensiones (L x A x A)",
-      "requiresLotTracking": "Requiere Seguimiento por Lote",
-      "requiresSerialTracking": "Requiere Seguimiento por Serie",
-      "perishable": "Producto Perecedero",
-      "shelfLifeDays": "Validez (días)",
-      "minimumStock": "Stock Mínimo",
-      "safetyStock": "Stock de Seguridad",
-      "abcClassification": "Clasificación ABC",
-      "highTurnover": "A - Alta rotación",
-      "mediumTurnover": "B - Media rotación",
-      "lowTurnover": "C - Baja rotación"
+      "volume": "Volume",
+      "dimensions": "Dimensões (C x L x A)",
+      "requiresLotTracking": "Requer Rastreamento por Lote",
+      "requiresSerialTracking": "Requer Rastreamento por Série",
+      "perishable": "Produto Perecível",
+      "shelfLifeDays": "Validade (dias)",
+      "minimumStock": "Estoque Mínimo",
+      "safetyStock": "Estoque de Segurança",
+      "abcClassification": "Classificação ABC",
+      "highTurnover": "A - Alta rotatividade",
+      "mediumTurnover": "B - Média rotatividade",
+      "lowTurnover": "C - Baixa rotatividade"
     }
   },
   "customers": {
     "title": "Clientes",
-    "subtitle": "Gestione sus clientes",
-    "newCustomer": "Nuevo Cliente",
-    "searchPlaceholder": "Buscar por nombre, correo o documento...",
+    "subtitle": "Gerencie seus clientes",
+    "newCustomer": "Novo Cliente",
+    "searchPlaceholder": "Buscar por nome, e-mail ou documento...",
     "table": {
       "customer": "Cliente",
-      "contact": "Contacto",
+      "contact": "Contato",
       "document": "Documento",
-      "city": "Ciudad",
-      "status": "Estado",
-      "actions": "Acciones"
+      "city": "Cidade",
+      "status": "Status",
+      "actions": "Ações"
     },
     "empty": {
-      "title": "No se encontraron clientes",
-      "subtitle": "Comience agregando su primer cliente",
-      "button": "Crear Cliente"
+      "title": "Nenhum cliente encontrado",
+      "subtitle": "Comece adicionando seu primeiro cliente",
+      "button": "Criar Cliente"
     },
-    "loading": "Cargando clientes..."
+    "loading": "Carregando clientes..."
   },
   "orders": {
     "title": "Pedidos",
-    "subtitle": "Gestione todos los pedidos",
-    "newOrder": "Nuevo Pedido",
-    "createOrder": "Crear Pedido",
-    "orderInfo": "Información del Pedido",
-    "customerSupplier": "Cliente/Proveedor",
-    "deliveryDetails": "Detalles de Entrega",
-    "orderItems": "Items del Pedido",
-    "addItem": "Agregar Item",
+    "subtitle": "Gerencie todos os pedidos",
+    "newOrder": "Novo Pedido",
+    "createOrder": "Criar Pedido",
+    "orderInfo": "Informações do Pedido",
+    "customerSupplier": "Cliente/Fornecedor",
+    "deliveryDetails": "Detalhes de Entrega",
+    "orderItems": "Items do Pedido",
+    "addItem": "Adicionar Item",
     "totalItems": "Total de Items:",
-    "totalQty": "Cantidad Total:",
+    "totalQty": "Quantidade Total:",
     "totalValue": "Valor Total:",
     "fields": {
-      "orderNumber": "Número de Pedido",
+      "orderNumber": "Número do Pedido",
       "type": "Tipo",
-      "source": "Fuente",
-      "priority": "Prioridad",
-      "expectedDate": "Fecha Esperada",
-      "bopis": "BOPIS (Compra Online Recoge en Tienda)",
-      "shippingAddress": "Dirección de Envío",
-      "specialInstructions": "Instrucciones Especiales",
-      "productId": "ID Producto (GUID)",
-      "qty": "Cant",
-      "unitPrice": "Precio Unit.",
+      "source": "Fonte",
+      "priority": "Prioridade",
+      "expectedDate": "Data Esperada",
+      "bopis": "BOPIS (Retirada na Loja)",
+      "shippingAddress": "Endereço de Entrega",
+      "specialInstructions": "Instruções Especiais",
+      "productId": "ID Produto (GUID)",
+      "qty": "Qtd",
+      "unitPrice": "Preço Unit.",
       "subtotal": "Subtotal"
     },
     "priority": {
-      "low": "Baja",
+      "low": "Baixa",
       "normal": "Normal",
       "high": "Alta",
       "urgent": "Urgente"
@@ -409,212 +432,240 @@
     "stats": {
       "total": "Total Pedidos",
       "totalValue": "Valor Total",
-      "qtyPending": "Cant Pendientes",
-      "valuePending": "Valor Pendientes",
-      "qtyNonPending": "En Proceso",
-      "valueNonPending": "Valor Proceso",
-      "completed": "Completados",
-      "pending": "Pendientes",
-      "processing": "En Procesamiento",
-      "delivered": "Entregados"
+      "qtyPending": "Qtd Pendentes",
+      "valuePending": "Valor Pendentes",
+      "qtyNonPending": "Em Processo",
+      "valueNonPending": "Valor Processo",
+      "completed": "Concluídos",
+      "pending": "Pendentes",
+      "processing": "Em Processamento",
+      "delivered": "Entregues"
     },
     "table": {
       "orderNumber": "Nº Pedido",
       "customer": "Cliente",
-      "date": "Fecha",
-      "totalAmount": "Monto Total",
-      "status": "Estado",
-      "actions": "Acciones"
+      "date": "Data",
+      "totalAmount": "Valor Total",
+      "status": "Status",
+      "actions": "Ações",
+      "totalValue": "Valor Total"
     },
     "empty": {
-      "title": "No se encontraron pedidos",
-      "subtitle": "Comience creando un nuevo pedido",
-      "button": "Crear Pedido"
+      "title": "Nenhum pedido encontrado",
+      "subtitle": "Comece criando um novo pedido",
+      "button": "Criar Pedido",
+      "createButton": "Criar Primeiro Pedido",
+      "message": "Nenhum pedido cadastrado ainda"
     },
-    "loading": "Cargando pedidos..."
+    "loading": "Carregando pedidos..."
   },
   "inventory": {
-    "title": "Inventario",
-    "subtitle": "Control de stock e inventario",
+    "title": "Inventário",
+    "subtitle": "Controle de estoque e inventário",
     "stats": {
-      "totalStock": "Stock Total",
-      "lowStock": "Stock Bajo",
-      "outOfStock": "Sin Stock",
+      "totalStock": "Total em Estoque",
+      "lowStock": "Estoque Baixo",
+      "outOfStock": "Sem Estoque",
       "totalValue": "Valor Total"
     },
     "module": {
-      "title": "Control de Inventario",
-      "subtitle": "Módulo de inventario en desarrollo"
+      "title": "Controle de Inventário",
+      "subtitle": "Módulo de inventário em desenvolvimento"
     }
   },
   "suppliers": {
-    "title": "Proveedores",
-    "subtitle": "Gestione sus proveedores",
-    "newSupplier": "Nuevo Proveedor",
-    "activeSupplier": "Proveedor Activo",
+    "title": "Fornecedores",
+    "subtitle": "Gerencie seus fornecedores",
+    "newSupplier": "Novo Fornecedor",
+    "activeSupplier": "Fornecedor Ativo",
     "table": {
-      "supplier": "Proveedor",
-      "contact": "Contacto",
-      "cnpj": "CIF",
-      "location": "Ubicación",
-      "status": "Estado",
-      "actions": "Acciones"
+      "supplier": "Fornecedor",
+      "contact": "Contato",
+      "cnpj": "CNPJ",
+      "location": "Localização",
+      "status": "Status",
+      "actions": "Ações"
     },
     "module": {
-      "title": "Gestión de Proveedores",
-      "subtitle": "Módulo de proveedores en desarrollo"
+      "title": "Gestão de Fornecedores",
+      "subtitle": "Módulo de fornecedores em desenvolvimento"
     },
     "fields": {
-      "supplierTaxId": "CIF"
-    }
-  },
-  "stats": {
-    "total": "Total Pedidos",
-    "totalValue": "Valor Total",
-    "qtyPending": "Cant Pendientes",
-    "valuePending": "Valor Pendientes",
-    "qtyNonPending": "En Proceso",
-    "valueNonPending": "Valor Proceso",
-    "completed": "Completados",
-    "pending": "Pendientes",
-    "processing": "En Procesamiento",
-    "delivered": "Entregados"
+      "supplierTaxId": "CNPJ"
+    },
+    "empty": {
+      "title": "Nenhum fornecedor encontrado",
+      "subtitle": "Comece adicionando seu primeiro fornecedor"
+    },
+    "loading": "Carregando fornecedores..."
   },
   "warehouses": {
-    "title": "Almacenes",
-    "subtitle": "Gestione sus almacenes y ubicaciones de stock",
-    "newWarehouse": "Nuevo Almacén",
-    "activeWarehouse": "Almacén Activo",
+    "title": "Armazéns",
+    "subtitle": "Gerencie seus armazéns e locais de estoque",
+    "newWarehouse": "Novo Armazém",
+    "activeWarehouse": "Armazém Ativo",
     "module": {
-      "title": "Gestión de Almacenes",
-      "subtitle": "Módulo de almacenes en desarrollo"
+      "title": "Gestão de Armazéns",
+      "subtitle": "Módulo de armazéns em desenvolvimento"
     }
   },
   "drivers": {
-    "title": "Conductores",
-    "subtitle": "Gestione su flota de conductores",
-    "newDriver": "Nuevo Conductor",
-    "editDriver": "Editar Conductor",
-    "createDriver": "Crear Conductor",
+    "title": "Motoristas",
+    "subtitle": "Gerencie sua frota de motoristas",
+    "newDriver": "Novo Motorista",
+    "editDriver": "Editar Motorista",
+    "createDriver": "Criar Motorista",
     "fields": {
-      "licenseNumber": "Licencia de Conducir"
+      "licenseNumber": "CNH"
     },
     "placeholders": {
-      "licenseNumber": "Número de licencia"
+      "licenseNumber": "Número da CNH"
     },
     "module": {
-      "title": "Gestión de Conductores",
-      "subtitle": "Módulo de conductores en desarrollo"
+      "title": "Gestão de Motoristas",
+      "subtitle": "Módulo de motoristas em desenvolvimento"
     }
   },
   "vehicles": {
-    "title": "Vehículos",
-    "subtitle": "Gestione su flota de vehículos",
-    "newVehicle": "Nuevo Vehículo",
-    "editVehicle": "Editar Vehículo",
-    "createVehicle": "Crear Vehículo",
+    "title": "Veículos",
+    "subtitle": "Gerencie sua frota de veículos",
+    "newVehicle": "Novo Veículo",
+    "editVehicle": "Editar Veículo",
+    "createVehicle": "Criar Veículo",
     "fields": {
       "plateNumber": "Placa",
       "type": "Tipo",
       "model": "Modelo",
-      "capacity": "Capacidad (kg)"
+      "capacity": "Capacidade (kg)"
     },
     "placeholders": {
       "plate": "ABC-1234",
-      "type": "Camión, Furgoneta, etc",
-      "model": "Modelo del vehículo",
+      "type": "Caminhão, Van, etc",
+      "model": "Modelo do veículo",
       "capacity": "1000"
     },
     "status": {
-      "available": "Disponible",
-      "inUse": "En Uso",
-      "maintenance": "Mantenimiento"
+      "available": "Disponível",
+      "inUse": "Em Uso",
+      "maintenance": "Manutenção"
     },
     "module": {
-      "title": "Gestión de Vehículos",
-      "subtitle": "Módulo de vehículos en desarrollo"
+      "title": "Gestão de Veículos",
+      "subtitle": "Módulo de veículos em desenvolvimento"
     }
   },
   "storageLocations": {
-    "title": "Ubicaciones de Almacenamiento",
-    "newLocation": "Nueva Ubicación",
-    "editLocation": "Editar Ubicación",
-    "createLocation": "Crear Ubicación",
-    "activeLocation": "Ubicación Activa",
+    "title": "Localizações de Estoque",
+    "newLocation": "Nova Localização",
+    "editLocation": "Editar Localização",
+    "createLocation": "Criar Localização",
+    "activeLocation": "Localização Ativa",
     "status": {
-      "available": "Disponible"
+      "available": "Disponível"
     },
     "empty": {
-      "message": "No hay ubicaciones registradas"
+      "message": "Nenhuma localização cadastrada"
     },
     "fields": {
-      "warehouseId": "ID del Almacén",
-      "zoneId": "ID de Zona (opcional)",
-      "aisle": "Pasillo",
-      "rack": "Estantería",
-      "shelf": "Estante",
-      "bin": "Compartimiento (opcional)",
-      "capacity": "Capacidad (opcional)"
+      "warehouseId": "ID do Armazém",
+      "zoneId": "ID da Zona (opcional)",
+      "aisle": "Corredor",
+      "rack": "Rack",
+      "shelf": "Prateleira",
+      "bin": "Bin (opcional)",
+      "capacity": "Capacidade (opcional)"
     }
   },
   "pickingTasks": {
-    "title": "Tareas de Separación",
-    "subtitle": "Gestione las tareas de picking",
-    "newTask": "Nueva Tarea",
+    "title": "Tarefas de Separação",
+    "subtitle": "Gerencie as tarefas de picking",
+    "newTask": "Nova Tarefa",
     "module": {
-      "title": "Tareas de Separación",
-      "subtitle": "Módulo de separación en desarrollo"
+      "title": "Tarefas de Separação",
+      "subtitle": "Módulo de separação em desenvolvimento"
     }
   },
   "packingTasks": {
-    "title": "Tareas de Embalaje",
-    "subtitle": "Gestione las tareas de packing",
-    "newTask": "Nueva Tarea",
+    "title": "Tarefas de Embalagem",
+    "subtitle": "Gerencie as tarefas de packing",
+    "newTask": "Nova Tarefa",
     "module": {
-      "title": "Tareas de Embalaje",
-      "subtitle": "Módulo de embalaje en desarrollo"
+      "title": "Tarefas de Embalagem",
+      "subtitle": "Módulo de embalagem em desenvolvimento"
     }
   },
   "inboundShipments": {
-    "title": "Recepciones",
-    "subtitle": "Gestione recepciones de mercancías",
-    "newShipment": "Nueva Recepción",
+    "title": "Recebimentos",
+    "subtitle": "Gerencie recebimentos de mercadorias",
+    "newShipment": "Novo Recebimento",
     "module": {
-      "title": "Recepciones",
-      "subtitle": "Módulo de recepciones en desarrollo"
+      "title": "Recebimentos",
+      "subtitle": "Módulo de recebimentos em desenvolvimento"
     }
   },
   "outboundShipments": {
-    "title": "Expediciones",
-    "subtitle": "Gestione expediciones de mercancías",
-    "newShipment": "Nueva Expedición",
+    "title": "Expedições",
+    "subtitle": "Gerencie expedições de mercadorias",
+    "newShipment": "Nova Expedição",
     "module": {
-      "title": "Expediciones",
-      "subtitle": "Módulo de expediciones en desarrollo"
+      "title": "Expedições",
+      "subtitle": "Módulo de expedições em desenvolvimento"
     }
   },
   "layout": {
     "header": {
       "search": "Buscar...",
-      "notifications": "Notificaciones",
+      "notifications": "Notificações",
       "profile": "Perfil",
-      "logout": "Salir"
+      "logout": "Sair"
     },
     "sidebar": {
-      "menu": "Menú",
-      "dashboard": "Panel",
-      "products": "Productos",
+      "menu": "Menu",
+      "dashboard": "Dashboard",
+      "products": "Produtos",
       "customers": "Clientes",
       "orders": "Pedidos",
-      "inventory": "Inventario",
-      "suppliers": "Proveedores",
-      "warehouses": "Almacenes",
-      "drivers": "Conductores",
-      "vehicles": "Vehículos",
-      "pickingTasks": "Separación",
-      "packingTasks": "Embalaje",
-      "inboundShipments": "Recepciones",
-      "outboundShipments": "Expediciones"
+      "inventory": "Inventário",
+      "suppliers": "Fornecedores",
+      "warehouses": "Armazéns",
+      "drivers": "Motoristas",
+      "vehicles": "Veículos",
+      "pickingTasks": "Separação",
+      "packingTasks": "Embalagem",
+      "inboundShipments": "Recebimentos",
+      "outboundShipments": "Expedições"
     }
+  },
+  "product_categories": {
+    "title": "Categorias de Produtos",
+    "subtitle": "Gerencie as categorias de produtos",
+    "create_new": "Nova Categoria",
+    "create_category": "Criar Categoria",
+    "edit_category": "Editar Categoria",
+    "no_categories": "Nenhuma categoria encontrada",
+    "name": "Nome",
+    "code": "Código",
+    "description": "Descrição",
+    "barcode": "Código de Barras",
+    "reference": "Referência",
+    "status": "Status",
+    "is_maintenance": "É manutenção"
+  },
+  "purchase_orders": {
+    "title": "Pedidos de Compra",
+    "subtitle": "Gerencie pedidos de compra",
+    "create_new": "Novo Pedido de Compra",
+    "no_orders": "Nenhum pedido encontrado",
+    "po_number": "Número do Pedido",
+    "supplier": "Fornecedor",
+    "status": "Status",
+    "total_quantity": "Quantidade Total",
+    "total_value": "Valor Total",
+    "items": "Itens",
+    "select_category": "Selecione uma categoria",
+    "select_product": "Selecione um produto",
+    "quantity": "Quantidade",
+    "unit_price": "Preço Unitário",
+    "add_item": "Adicionar Item"
   }
 }

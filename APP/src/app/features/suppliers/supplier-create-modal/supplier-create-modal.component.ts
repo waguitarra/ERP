@@ -6,6 +6,7 @@ import { FormFieldComponent } from '@shared/components/form-field/form-field.com
 import { SuppliersService } from '../suppliers.service';
 import { AuthService } from '@core/services/auth.service';
 import { CreateSupplierDto } from '@core/models/supplier.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-supplier-create-modal',
@@ -18,6 +19,7 @@ export class SupplierCreateModalComponent {
   private readonly fb = inject(FormBuilder);
   private readonly suppliersService = inject(SuppliersService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
   
   closeModal = output<void>();
   supplierCreated = output<void>();

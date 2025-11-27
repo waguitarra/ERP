@@ -1,39 +1,39 @@
-<app-modal [isOpen]="isOpen" [title]="'modals.editCustomer' | translate" [size]="'lg'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="i18n.t('modals.editCustomer')" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="md:col-span-2">
-        <app-form-field [label]="'common.fields.name' | translate" [control]="form.controls['name']" [type]="'text'" [placeholder]="'common.placeholders.fullName' | translate" [required]="true"></app-form-field>
+        <app-form-field [label]="i18n.t('common.fields.name')" [control]="form.controls['name']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.fullName')" [required]="true"></app-form-field>
       </div>
       
-      <app-form-field [label]="'common.fields.email' | translate" [control]="form.controls['email']" [type]="'email'" [placeholder]="'common.placeholders.email' | translate" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.email')" [control]="form.controls['email']" [type]="'email'" [placeholder]="i18n.t('common.placeholders.email')" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'common.fields.phone' | translate" [control]="form.controls['phone']" [type]="'text'" [placeholder]="'common.placeholders.phone' | translate" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.phone')" [control]="form.controls['phone']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.phone')" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'common.fields.taxId' | translate" [control]="form.controls['document']" [type]="'text'" [placeholder]="'common.placeholders.taxId' | translate" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.taxId')" [control]="form.controls['document']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.taxId')" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'common.fields.zipCode' | translate" [control]="form.controls['zipCode']" [type]="'text'" [placeholder]="'common.placeholders.zipCode' | translate" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.zipCode')" [control]="form.controls['zipCode']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.zipCode')" [required]="true"></app-form-field>
       
       <div class="md:col-span-2">
-        <app-form-field [label]="'common.fields.address' | translate" [control]="form.controls['address']" [type]="'text'" [placeholder]="'common.placeholders.address' | translate" [required]="true"></app-form-field>
+        <app-form-field [label]="i18n.t('common.fields.address')" [control]="form.controls['address']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.address')" [required]="true"></app-form-field>
       </div>
       
-      <app-form-field [label]="'common.fields.city' | translate" [control]="form.controls['city']" [type]="'text'" [placeholder]="'common.placeholders.city' | translate" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.city')" [control]="form.controls['city']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.city')" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'common.fields.state' | translate" [control]="form.controls['state']" [type]="'text'" [placeholder]="'common.fields.stateAbbr' | translate" [required]="true"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.state')" [control]="form.controls['state']" [type]="'text'" [placeholder]="i18n.t('common.fields.stateAbbr')" [required]="true"></app-form-field>
       
-      <app-form-field [label]="'common.fields.country' | translate" [control]="form.controls['country']" [type]="'text'" [placeholder]="'common.placeholders.country' | translate"></app-form-field>
+      <app-form-field [label]="i18n.t('common.fields.country')" [control]="form.controls['country']" [type]="'text'" [placeholder]="i18n.t('common.placeholders.country')"></app-form-field>
 
       <div class="md:col-span-2">
         <label class="flex items-center space-x-2 cursor-pointer">
           <input type="checkbox" formControlName="isActive" class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"/>
-          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'common.activeStatus.activeCustomer' | translate }}</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ i18n.t('common.activeStatus.activeCustomer')}}</span>
         </label>
       </div>
     </div>
 
     <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
       <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50">
-        {{ 'common.buttons.cancel' | translate }}
+        {{ i18n.t('common.buttons.cancel')}}
       </button>
       <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2">
         @if (isSaving) {
@@ -41,9 +41,9 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          {{ 'common.saving' | translate }}
+          {{ i18n.t('common.saving')}}
         } @else {
-          {{ 'common.buttons.saveChanges' | translate }}
+          {{ i18n.t('common.buttons.saveChanges')}}
         }
       </button>
     </div>

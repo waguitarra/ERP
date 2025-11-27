@@ -67,6 +67,63 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.TrackingNumber)
             .HasMaxLength(100);
 
+        // Purchase Order - Preços
+        builder.Property(o => o.UnitCost)
+            .HasPrecision(18, 2);
+
+        builder.Property(o => o.TotalCost)
+            .HasPrecision(18, 2);
+
+        builder.Property(o => o.TaxAmount)
+            .HasPrecision(18, 2);
+
+        builder.Property(o => o.TaxPercentage)
+            .HasPrecision(5, 2);
+
+        builder.Property(o => o.DesiredMarginPercentage)
+            .HasPrecision(5, 2);
+
+        builder.Property(o => o.SuggestedSalePrice)
+            .HasPrecision(18, 2);
+
+        builder.Property(o => o.EstimatedProfit)
+            .HasPrecision(18, 2);
+
+        builder.Property(o => o.ShippingCost)
+            .HasPrecision(18, 2);
+
+        // Purchase Order - Logística
+        builder.Property(o => o.ShippingDistance)
+            .HasMaxLength(50);
+
+        builder.Property(o => o.DockDoorNumber)
+            .HasMaxLength(50);
+
+        // Purchase Order - Internacional
+        builder.Property(o => o.OriginCountry)
+            .HasMaxLength(100);
+
+        builder.Property(o => o.PortOfEntry)
+            .HasMaxLength(100);
+
+        builder.Property(o => o.CustomsBroker)
+            .HasMaxLength(200);
+
+        builder.Property(o => o.ThirdPartyCarrier)
+            .HasMaxLength(200);
+
+        builder.Property(o => o.ContainerNumber)
+            .HasMaxLength(50);
+
+        builder.Property(o => o.BillOfLading)
+            .HasMaxLength(100);
+
+        builder.Property(o => o.ImportLicenseNumber)
+            .HasMaxLength(100);
+
+        builder.Property(o => o.Incoterm)
+            .HasMaxLength(10);
+
         // Relationships
         builder.HasOne(o => o.Company)
             .WithMany()
@@ -86,6 +143,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.HasMany(o => o.Items)
             .WithOne(i => i.Order)
             .HasForeignKey(i => i.OrderId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(o => o.Documents)
+            .WithOne(d => d.Order)
+            .HasForeignKey(d => d.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // WMS Relationships
@@ -120,5 +182,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.HasIndex(o => o.OriginWarehouseId);
         builder.HasIndex(o => o.DestinationWarehouseId);
         builder.HasIndex(o => o.TrackingNumber);
+        builder.HasIndex(o => o.ContainerNumber);
+        builder.HasIndex(o => o.IsInternational);
     }
 }

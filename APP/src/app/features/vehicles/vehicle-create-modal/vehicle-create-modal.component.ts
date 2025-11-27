@@ -6,6 +6,7 @@ import { FormFieldComponent } from '@shared/components/form-field/form-field.com
 import { VehiclesService } from '../vehicles.service';
 import { AuthService } from '@core/services/auth.service';
 import { CreateVehicleDto } from '@core/models/vehicle.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-vehicle-create-modal',
@@ -18,6 +19,7 @@ export class VehicleCreateModalComponent {
   private readonly fb = inject(FormBuilder);
   private readonly vehiclesService = inject(VehiclesService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
   
   closeModal = output<void>();
   vehicleCreated = output<void>();

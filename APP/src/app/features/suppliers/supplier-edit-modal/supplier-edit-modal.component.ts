@@ -5,6 +5,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { SuppliersService } from '../suppliers.service';
 import { Supplier, UpdateSupplierDto } from '@core/models/supplier.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-supplier-edit-modal',
@@ -16,6 +17,7 @@ import { Supplier, UpdateSupplierDto } from '@core/models/supplier.model';
 export class SupplierEditModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly suppliersService = inject(SuppliersService);
+  protected readonly i18n = inject(I18nService);
   
   supplier = input.required<Supplier>();
   closeModal = output<void>();

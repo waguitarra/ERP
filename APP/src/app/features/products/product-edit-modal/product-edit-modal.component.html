@@ -1,53 +1,53 @@
-<app-modal [isOpen]="isOpen" [title]="'products.editProduct' | translate" [size]="'lg'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="i18n.t('products.editProduct')" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Nome -->
       <div class="md:col-span-2">
         <app-form-field
-          [label]="'products.fields.productName' | translate"
+          [label]="i18n.t('products.fields.productName')"
           [control]="form.controls['name']"
           [type]="'text'"
-          [placeholder]="'common.placeholders.exampleProduct' | translate"
+          [placeholder]="i18n.t('common.placeholders.exampleProduct')"
           [required]="true"
         ></app-form-field>
       </div>
 
       <!-- SKU -->
       <app-form-field
-        [label]="'products.fields.sku' | translate"
+        [label]="i18n.t('products.fields.sku')"
         [control]="form.controls['sku']"
         [type]="'text'"
-        [placeholder]="'common.placeholders.exampleSKU' | translate"
+        [placeholder]="i18n.t('common.placeholders.exampleSKU')"
         [required]="true"
       ></app-form-field>
 
       <!-- Código de Barras -->
       <app-form-field
-        [label]="'products.fields.barcode' | translate"
+        [label]="i18n.t('products.fields.barcode')"
         [control]="form.controls['barcode']"
         [type]="'text'"
-        [placeholder]="'common.placeholders.exampleBarcode' | translate"
+        [placeholder]="i18n.t('common.placeholders.exampleBarcode')"
       ></app-form-field>
 
       <!-- Descrição -->
       <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.description' | translate }}</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('products.fields.description')}}</label>
         <textarea
           formControlName="description"
           rows="3"
-          [placeholder]="'common.placeholders.productDescription' | translate"
+          [placeholder]="i18n.t('common.placeholders.productDescription')"
           class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
         ></textarea>
       </div>
 
       <!-- Peso -->
       <div>
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.weight' | translate }} <span class="text-red-500">*</span></label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('products.fields.weight')}} <span class="text-red-500">*</span></label>
         <div class="flex gap-2">
           <input
             type="number"
             formControlName="weight"
-            [placeholder]="'common.placeholders.exampleWeight' | translate"
+            [placeholder]="i18n.t('common.placeholders.exampleWeight')"
             class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -63,12 +63,12 @@
 
       <!-- Volume -->
       <div>
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.volume' | translate }}</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('products.fields.volume')}}</label>
         <div class="flex gap-2">
           <input
             type="number"
             formControlName="volume"
-            [placeholder]="'common.placeholders.exampleWeight' | translate"
+            [placeholder]="i18n.t('common.placeholders.exampleWeight')"
             class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -83,24 +83,24 @@
 
       <!-- Dimensões -->
       <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'common.fields.dimensions' | translate }}</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('common.fields.dimensions')}}</label>
         <div class="grid grid-cols-4 gap-2">
           <input
             type="number"
             formControlName="length"
-            [placeholder]="'common.fields.length' | translate"
+            [placeholder]="i18n.t('common.fields.length')"
             class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
             formControlName="width"
-            [placeholder]="'common.fields.width' | translate"
+            [placeholder]="i18n.t('common.fields.width')"
             class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
             formControlName="height"
-            [placeholder]="'common.fields.height' | translate"
+            [placeholder]="i18n.t('common.fields.height')"
             class="px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -122,7 +122,7 @@
             formControlName="requiresLotTracking"
             class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
           />
-          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'products.fields.requiresLotTracking' | translate }}</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ i18n.t('products.fields.requiresLotTracking')}}</span>
         </label>
 
         <label class="flex items-center space-x-2 cursor-pointer">
@@ -131,7 +131,7 @@
             formControlName="requiresSerialTracking"
             class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
           />
-          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'products.fields.requiresSerialTracking' | translate }}</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ i18n.t('products.fields.requiresSerialTracking')}}</span>
         </label>
 
         <label class="flex items-center space-x-2 cursor-pointer">
@@ -140,7 +140,7 @@
             formControlName="isPerishable"
             class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
           />
-          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'products.fields.perishable' | translate }}</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ i18n.t('products.fields.perishable')}}</span>
         </label>
 
         <label class="flex items-center space-x-2 cursor-pointer">
@@ -149,47 +149,47 @@
             formControlName="isActive"
             class="w-4 h-4 text-blue-600 border-slate-300 dark:border-slate-600 rounded focus:ring-blue-500"
           />
-          <span class="text-sm text-slate-700 dark:text-slate-300">{{ 'products.activeProduct' | translate }}</span>
+          <span class="text-sm text-slate-700 dark:text-slate-300">{{ i18n.t('products.activeProduct')}}</span>
         </label>
       </div>
 
       <!-- Validade (condicional) -->
       @if (form.value.isPerishable) {
         <app-form-field
-          [label]="'products.fields.shelfLifeDays' | translate"
+          [label]="i18n.t('products.fields.shelfLifeDays')"
           [control]="form.controls['shelfLifeDays']"
           [type]="'number'"
-          [placeholder]="'common.placeholders.exampleValidity' | translate"
+          [placeholder]="i18n.t('common.placeholders.exampleValidity')"
           [required]="true"
         ></app-form-field>
       }
 
       <!-- Estoque Mínimo -->
       <app-form-field
-        [label]="'products.fields.minimumStock' | translate"
+        [label]="i18n.t('products.fields.minimumStock')"
         [control]="form.controls['minimumStock']"
         [type]="'number'"
-        [placeholder]="'common.placeholders.exampleStock' | translate"
+        [placeholder]="i18n.t('common.placeholders.exampleStock')"
       ></app-form-field>
 
       <!-- Estoque de Segurança -->
       <app-form-field
-        [label]="'products.fields.safetyStock' | translate"
+        [label]="i18n.t('products.fields.safetyStock')"
         [control]="form.controls['safetyStock']"
         [type]="'number'"
-        [placeholder]="'common.placeholders.exampleStock' | translate"
+        [placeholder]="i18n.t('common.placeholders.exampleStock')"
       ></app-form-field>
 
       <!-- Classificação ABC -->
       <div>
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ 'products.fields.abcClassification' | translate }}</label>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('products.fields.abcClassification')}}</label>
         <select
           formControlName="abcClassification"
           class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="A">{{ 'products.fields.highTurnover' | translate }}</option>
-          <option value="B">{{ 'products.fields.mediumTurnover' | translate }}</option>
-          <option value="C">{{ 'products.fields.lowTurnover' | translate }}</option>
+          <option value="A">{{ i18n.t('products.fields.highTurnover')}}</option>
+          <option value="B">{{ i18n.t('products.fields.mediumTurnover')}}</option>
+          <option value="C">{{ i18n.t('products.fields.lowTurnover')}}</option>
         </select>
       </div>
     </div>
@@ -202,7 +202,7 @@
         [disabled]="isSaving"
         class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50"
       >
-        {{ 'common.buttons.cancel' | translate }}
+        {{ i18n.t('common.buttons.cancel')}}
       </button>
       <button
         type="submit"
@@ -214,9 +214,9 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          {{ 'common.saving' | translate }}
+          {{ i18n.t('common.saving')}}
         } @else {
-          {{ 'common.buttons.saveChanges' | translate }}
+          {{ i18n.t('common.buttons.saveChanges')}}
         }
       </button>
     </div>

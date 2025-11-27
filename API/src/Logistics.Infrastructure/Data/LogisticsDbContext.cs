@@ -15,6 +15,7 @@ public class LogisticsDbContext : DbContext
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<Driver> Drivers { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
     public DbSet<Warehouse> Warehouses { get; set; }
@@ -24,14 +25,29 @@ public class LogisticsDbContext : DbContext
     
     // WMS Entities
     public DbSet<WarehouseZone> WarehouseZones { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<Order> Orders => Set<Order>();
+    public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+    
+    // Purchase Orders (Compras)
+    public DbSet<PurchaseOrder> PurchaseOrders => Set<PurchaseOrder>();
+    public DbSet<PurchaseOrderItem> PurchaseOrderItems => Set<PurchaseOrderItem>();
+    public DbSet<PurchaseOrderDocument> PurchaseOrderDocuments => Set<PurchaseOrderDocument>();
+    
+    // Sales Orders (Vendas)
+    public DbSet<SalesOrder> SalesOrders => Set<SalesOrder>();
+    public DbSet<SalesOrderItem> SalesOrderItems => Set<SalesOrderItem>();
+    
+    public DbSet<OrderDocument> OrderDocuments { get; set; }
     public DbSet<OrderStatusConfig> OrderStatusConfigs { get; set; }
     public DbSet<OrderPriorityConfig> OrderPriorityConfigs { get; set; }
     public DbSet<Lot> Lots { get; set; }
     
     // WMS Receiving (Inbound)
     public DbSet<InboundShipment> InboundShipments { get; set; }
+    public DbSet<InboundParcel> InboundParcels { get; set; }
+    public DbSet<InboundParcelItem> InboundParcelItems { get; set; }
+    public DbSet<InboundCarton> InboundCartons { get; set; }
+    public DbSet<InboundCartonItem> InboundCartonItems { get; set; }
     public DbSet<Receipt> Receipts { get; set; }
     public DbSet<ReceiptLine> ReceiptLines { get; set; }
     public DbSet<PutawayTask> PutawayTasks { get; set; }

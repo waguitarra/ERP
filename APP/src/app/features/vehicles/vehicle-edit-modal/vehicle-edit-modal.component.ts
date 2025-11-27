@@ -5,6 +5,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { VehiclesService } from '../vehicles.service';
 import { Vehicle, UpdateVehicleDto } from '@core/models/vehicle.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-vehicle-edit-modal',
@@ -16,6 +17,7 @@ import { Vehicle, UpdateVehicleDto } from '@core/models/vehicle.model';
 export class VehicleEditModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly vehiclesService = inject(VehiclesService);
+  protected readonly i18n = inject(I18nService);
   
   vehicle = input.required<Vehicle>();
   closeModal = output<void>();

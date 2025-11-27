@@ -6,6 +6,7 @@ import { FormFieldComponent } from '@shared/components/form-field/form-field.com
 import { CustomersService } from '../customers.service';
 import { AuthService } from '@core/services/auth.service';
 import { CreateCustomerDto } from '@core/models/customer.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-customer-create-modal',
@@ -18,6 +19,7 @@ export class CustomerCreateModalComponent {
   private readonly fb = inject(FormBuilder);
   private readonly customersService = inject(CustomersService);
   private readonly authService = inject(AuthService);
+  protected readonly i18n = inject(I18nService);
   
   closeModal = output<void>();
   customerCreated = output<void>();

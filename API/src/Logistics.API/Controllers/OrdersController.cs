@@ -56,4 +56,29 @@ public class OrdersController : ControllerBase
             return NotFound();
         }
     }
+
+    [HttpPost("{id}/purchase-details")]
+    public async Task<ActionResult> SetPurchaseDetails(Guid id, [FromBody] SetPurchaseDetailsRequest request)
+    {
+        var order = await _service.SetPurchaseDetailsAsync(id, request);
+        return Ok(order);
+    }
+
+    [HttpPost("{id}/packaging-hierarchy")]
+    public async Task<ActionResult> SetPackagingHierarchy(Guid id, [FromBody] SetPackagingHierarchyRequest request)
+    {
+        var order = await _service.SetPackagingHierarchyAsync(id, request);
+        return Ok(order);
+    }
+
+    [HttpPost("{id}/set-international")]
+    public async Task<ActionResult> SetAsInternational(Guid id, [FromBody] SetInternationalRequest request)
+    {
+        var order = await _service.SetAsInternationalAsync(id, request);
+        return Ok(order);
+    }
 }
+
+public record SetPurchaseDetailsRequest(decimal UnitCost, decimal TaxPercentage, decimal DesiredMarginPercentage);
+public record SetPackagingHierarchyRequest(int ExpectedParcels, int CartonsPerParcel, int UnitsPerCarton);
+public record SetInternationalRequest(string OriginCountry, string PortOfEntry, string ContainerNumber, string Incoterm);

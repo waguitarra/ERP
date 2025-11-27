@@ -5,6 +5,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { WarehousesService } from '../warehouses.service';
 import { Warehouse, UpdateWarehouseDto } from '@core/models/warehouse.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-warehouse-edit-modal',
@@ -16,6 +17,7 @@ import { Warehouse, UpdateWarehouseDto } from '@core/models/warehouse.model';
 export class WarehouseEditModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly warehousesService = inject(WarehousesService);
+  protected readonly i18n = inject(I18nService);
   
   warehouse = input.required<Warehouse>();
   closeModal = output<void>();

@@ -5,6 +5,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { ProductsService } from '../products.service';
 import { Product, UpdateProductDto } from '@core/models/product.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-product-edit-modal',
@@ -16,6 +17,7 @@ import { Product, UpdateProductDto } from '@core/models/product.model';
 export class ProductEditModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly productsService = inject(ProductsService);
+  protected readonly i18n = inject(I18nService);
   
   product = input.required<Product>();
   

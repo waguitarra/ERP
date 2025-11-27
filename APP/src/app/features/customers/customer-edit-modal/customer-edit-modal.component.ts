@@ -5,6 +5,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { CustomersService } from '../customers.service';
 import { Customer, UpdateCustomerDto } from '@core/models/customer.model';
+import { I18nService } from '@core/services/i18n.service';
 
 @Component({
   selector: 'app-customer-edit-modal',
@@ -16,6 +17,7 @@ import { Customer, UpdateCustomerDto } from '@core/models/customer.model';
 export class CustomerEditModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly customersService = inject(CustomersService);
+  protected readonly i18n = inject(I18nService);
   
   customer = input.required<Customer>();
   closeModal = output<void>();
