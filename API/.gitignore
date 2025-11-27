@@ -71,7 +71,7 @@ bld/
 *.nuget.targets
 
 # Entity Framework Migrations
-**/Migrations/
+# **/Migrations/
 
 # Logs
 logs/
