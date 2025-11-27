@@ -141,17 +141,39 @@
             @for (item of items.controls; track $index) {
               <div [formGroup]="$any(item)" class="p-4 border border-slate-200 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700/30">
                 <div class="grid grid-cols-12 gap-3">
+                  
+                  <!-- CATEGORIA - Campo obrigatório -->
                   <div class="col-span-3">
-                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ i18n.t('orders.fields.productId')}} *</label>
-                    <input type="text" formControlName="productId" autocomplete="off"
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ i18n.t('orders.fields.category')}} *</label>
+                    <select formControlName="categoryId" 
+                      (change)="onCategoryChange($any($event.target).value, $index)"
                       class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                      [class.border-red-500]="item.get('categoryId')?.invalid && item.get('categoryId')?.touched">
+                      <option value="">Escolha a categoria</option>
+                      @for (category of categories(); track category.id) {
+                        <option [value]="category.id">{{ category.name }}</option>
+                      }
+                    </select>
+                  </div>
+
+                  <!-- PRODUTO - Desabilitado se não tiver categoria -->
+                  <div class="col-span-3">
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ i18n.t('orders.fields.product')}} *</label>
+                    <select formControlName="productId"
+                      (change)="onProductChange($any($event.target).value, $index)"
+                      [disabled]="!item.get('categoryId')?.value"
+                      class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
                       [class.border-red-500]="item.get('productId')?.invalid && item.get('productId')?.touched">
+                      <option value="">Escolha o produto</option>
+                      @for (product of products(); track product.id) {
+                        <option [value]="product.id">{{ product.name }} ({{ product.sku }})</option>
+                      }
+                    </select>
                   </div>
                   <div class="col-span-2">
                     <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ i18n.t('products.fields.sku')}} *</label>
-                    <input type="text" formControlName="sku" autocomplete="off"
-                      class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                      [class.border-red-500]="item.get('sku')?.invalid && item.get('sku')?.touched">
+                    <input type="text" formControlName="sku" readonly
+                      class="w-full px-2 py-1.5 text-sm border rounded dark:bg-slate-700 dark:border-slate-600 dark:text-white bg-gray-100 dark:bg-slate-800">
                   </div>
                   <div class="col-span-2">
                     <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">{{ i18n.t('orders.fields.qty')}} *</label>

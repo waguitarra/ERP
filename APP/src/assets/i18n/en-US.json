@@ -418,7 +418,9 @@
       "bopis": "BOPIS (Retirada na Loja)",
       "shippingAddress": "Endereço de Entrega",
       "specialInstructions": "Instruções Especiais",
-      "productId": "ID Produto (GUID)",
+      "category": "Categoria",
+      "product": "Produto",
+      "productId": "ID do Produto (GUID)",
       "qty": "Qtd",
       "unitPrice": "Preço Unit.",
       "subtotal": "Subtotal"
@@ -638,11 +640,27 @@
   },
   "product_categories": {
     "title": "Categorias de Produtos",
-    "subtitle": "Gerencie as categorias de produtos",
-    "create_new": "Nova Categoria",
+    "subtitle": "Gerencie as categorias de produtos do sistema",
+    "newCategory": "Nova Categoria",
     "create_category": "Criar Categoria",
     "edit_category": "Editar Categoria",
-    "no_categories": "Nenhuma categoria encontrada",
+    "loading": "Carregando categorias...",
+    "confirm_delete": "Tem certeza que deseja excluir esta categoria?",
+    "created_success": "Categoria criada com sucesso",
+    "updated_success": "Categoria atualizada com sucesso",
+    "deleted_success": "Categoria excluída com sucesso",
+    "activated_success": "Categoria ativada com sucesso",
+    "deactivated_success": "Categoria desativada com sucesso",
+    "empty": {
+      "title": "Nenhuma categoria encontrada",
+      "subtitle": "Comece criando sua primeira categoria de produto"
+    },
+    "table": {
+      "name": "Nome",
+      "code": "Código",
+      "barcode": "Código de Barras",
+      "status": "Status"
+    },
     "name": "Nome",
     "code": "Código",
     "description": "Descrição",
@@ -655,10 +673,15 @@
     "title": "Pedidos de Compra",
     "subtitle": "Gerencie pedidos de compra",
     "create_new": "Novo Pedido de Compra",
+    "create_order": "Criar Pedido",
     "no_orders": "Nenhum pedido encontrado",
+    "order_info": "Informações do Pedido",
     "po_number": "Número do Pedido",
     "supplier": "Fornecedor",
     "status": "Status",
+    "priority": "Prioridade",
+    "expected_date": "Data Esperada",
+    "total_items": "Total de Itens",
     "total_quantity": "Quantidade Total",
     "total_value": "Valor Total",
     "items": "Itens",
@@ -666,6 +689,27 @@
     "select_product": "Selecione um produto",
     "quantity": "Quantidade",
     "unit_price": "Preço Unitário",
-    "add_item": "Adicionar Item"
+    "add_item": "Adicionar Item",
+    "loading": "Carregando pedidos...",
+    "empty_subtitle": "Comece criando seu primeiro pedido de compra",
+    "created_success": "Pedido de compra criado com sucesso",
+    "deleted_success": "Pedido de compra excluído com sucesso",
+    "confirm_delete": "Tem certeza que deseja excluir este pedido?",
+    "validation": {
+      "required_fields": "Preencha todos os campos obrigatórios"
+    },
+    "stats": {
+      "total": "Total Pedidos",
+      "totalValue": "Valor Total",
+      "qtyPending": "Qtd Pendentes",
+      "valuePending": "Valor Pendente",
+      "qtyNonPending": "Qtd Não Pendentes",
+      "valueNonPending": "Valor Não Pendente"
+    },
+    "empty": {
+      "title": "Nenhum pedido de compra encontrado",
+      "message": "Comece criando seu primeiro pedido de compra",
+      "createButton": "Criar Primeiro Pedido"
+    }
   }
 }

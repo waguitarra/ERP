@@ -105,7 +105,22 @@ public class ProductCategoriesController : ControllerBase
         await _repository.UpdateAsync(category);
         await _unitOfWork.CommitAsync();
 
-        return Ok(category);
+        var result = new
+        {
+            id = category.Id,
+            name = category.Name,
+            code = category.Code,
+            description = category.Description,
+            barcode = category.Barcode,
+            reference = category.Reference,
+            isMaintenance = category.IsMaintenance,
+            isActive = category.IsActive,
+            attributes = category.Attributes,
+            createdAt = category.CreatedAt,
+            updatedAt = category.UpdatedAt
+        };
+
+        return Ok(result);
     }
 
     [HttpPost("{id}/activate")]
@@ -120,7 +135,22 @@ public class ProductCategoriesController : ControllerBase
         await _repository.UpdateAsync(category);
         await _unitOfWork.CommitAsync();
 
-        return Ok(category);
+        var result = new
+        {
+            id = category.Id,
+            name = category.Name,
+            code = category.Code,
+            description = category.Description,
+            barcode = category.Barcode,
+            reference = category.Reference,
+            isMaintenance = category.IsMaintenance,
+            isActive = category.IsActive,
+            attributes = category.Attributes,
+            createdAt = category.CreatedAt,
+            updatedAt = category.UpdatedAt
+        };
+
+        return Ok(result);
     }
 
     [HttpPost("{id}/deactivate")]
@@ -135,7 +165,22 @@ public class ProductCategoriesController : ControllerBase
         await _repository.UpdateAsync(category);
         await _unitOfWork.CommitAsync();
 
-        return Ok(category);
+        var result = new
+        {
+            id = category.Id,
+            name = category.Name,
+            code = category.Code,
+            description = category.Description,
+            barcode = category.Barcode,
+            reference = category.Reference,
+            isMaintenance = category.IsMaintenance,
+            isActive = category.IsActive,
+            attributes = category.Attributes,
+            createdAt = category.CreatedAt,
+            updatedAt = category.UpdatedAt
+        };
+
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]

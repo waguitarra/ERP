@@ -1,7 +1,9 @@
-import { Component, signal, inject, output } from '@angular/core';
+import { Component, signal, inject, output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { OrdersService } from '../orders.service';
+import { ProductCategoriesService, ProductCategory } from '@core/services/product-categories.service';
+import { ProductsService } from '../../products/products.service';
 import { AuthService } from '@core/services/auth.service';
 import { OrderType, OrderSource, OrderPriority } from '@core/models/enums';
 import { I18nService } from '@core/services/i18n.service';
@@ -13,9 +15,11 @@ import { I18nService } from '@core/services/i18n.service';
   templateUrl: './order-create-modal.component.html',
   styleUrls: ['./order-create-modal.component.scss']
 })
-export class OrderCreateModalComponent {
+export class OrderCreateModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly ordersService = inject(OrdersService);
+  private readonly categoriesService = inject(ProductCategoriesService);
+  private readonly productsService = inject(ProductsService);
   private readonly authService = inject(AuthService);
   protected readonly i18n = inject(I18nService);
 
@@ -23,6 +27,10 @@ export class OrderCreateModalComponent {
   loading = signal<boolean>(false);
   
   orderCreated = output<void>();
+  
+  categories = signal<ProductCategory[]>([]);
+  products = signal<any[]>([]);
+  selectedCategoryId = signal<string>('');
   
   // Enums para template
   OrderType = OrderType;
@@ -47,6 +55,50 @@ export class OrderCreateModalComponent {
     return this.form.get('items') as FormArray;
   }
 
+  async ngOnInit(): Promise<void> {
+    await this.loadCategories();
+  }
+
+  async loadCategories(): Promise<void> {
+    try {
+      const data = await this.categoriesService.getActive();
+      this.categories.set(data);
+    } catch (error) {
+      console.error('Erro ao carregar categorias:', error);
+    }
+  }
+
+  async onCategoryChange(categoryId: string, itemIndex: number): Promise<void> {
+    this.selectedCategoryId.set(categoryId);
+    if (categoryId) {
+      try {
+        const companyId = this.authService.currentUser()?.companyId || '';
+        const response: any = await this.productsService.getAll(companyId);
+        const allProducts = response.products || response || [];
+        const filtered = allProducts.filter((p: any) => p.categoryId === categoryId);
+        this.products.set(filtered);
+        
+        const item = this.items.at(itemIndex);
+        item.patchValue({ productId: '', sku: '' });
+      } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+      }
+    } else {
+      this.products.set([]);
+    }
+  }
+
+  onProductChange(productId: string, itemIndex: number): void {
+    const product = this.products().find(p => p.id === productId);
+    if (product) {
+      const item = this.items.at(itemIndex);
+      item.patchValue({ 
+        sku: product.sku,
+        unitPrice: product.unitCost || 0
+      });
+    }
+  }
+
   open(): void {
     this.isOpen.set(true);
     this.form.reset({
@@ -67,6 +119,7 @@ export class OrderCreateModalComponent {
 
   addItem(): void {
     const itemGroup = this.fb.group({
+      categoryId: ['', [Validators.required]],
       productId: ['', [Validators.required]],
       sku: ['', [Validators.required]],
       quantityOrdered: [1, [Validators.required, Validators.min(1)]],
@@ -77,6 +130,9 @@ export class OrderCreateModalComponent {
 
   removeItem(index: number): void {
     this.items.removeAt(index);
+    if (this.items.length === 0) {
+      this.addItem();
+    }
   }
 
   getTotalQuantity(): number {

@@ -1,49 +1,30 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ProductCategoriesService, ProductCategory, CreateProductCategoryRequest } from '../../core/services/product-categories.service';
-import { I18nService } from '../../core/services/i18n.service';
-import { NotificationService } from '../../core/services/notification.service';
+import { I18nService } from '@core/services/i18n.service';
+import { NotificationService } from '@core/services/notification.service';
+import { ProductCategoriesService, ProductCategory } from '@core/services/product-categories.service';
+import { ProductCategoryCreateModalComponent } from './product-category-create-modal/product-category-create-modal.component';
+import { ProductCategoryEditModalComponent } from './product-category-edit-modal/product-category-edit-modal.component';
 
 @Component({
   selector: 'app-product-categories',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ProductCategoryCreateModalComponent, ProductCategoryEditModalComponent],
   templateUrl: './product-categories.component.html',
   styleUrl: './product-categories.component.scss'
 })
 export class ProductCategoriesComponent implements OnInit {
+  readonly i18n = inject(I18nService);
   private readonly categoriesService = inject(ProductCategoriesService);
-  private readonly router = inject(Router);
-  protected readonly i18n = inject(I18nService);
   private readonly notification = inject(NotificationService);
 
-  loading = signal<boolean>(false);
   categories = signal<ProductCategory[]>([]);
-  filteredCategories = computed(() => {
-    const search = this.searchTerm().toLowerCase();
-    if (!search) return this.categories();
-    return this.categories().filter(c => 
-      c.name.toLowerCase().includes(search) ||
-      c.code.toLowerCase().includes(search) ||
-      (c.description && c.description.toLowerCase().includes(search))
-    );
-  });
+  loading = signal(false);
+  showCreateModal = signal(false);
+  showEditModal = signal(false);
+  selectedCategory = signal<ProductCategory | null>(null);
 
-  searchTerm = signal<string>('');
-  showModal = signal<boolean>(false);
-  editingCategory = signal<ProductCategory | null>(null);
-  
-  formData = signal<CreateProductCategoryRequest>({
-    name: '',
-    code: '',
-    description: '',
-    barcode: '',
-    reference: '',
-    isMaintenance: false,
-    attributes: ''
-  });
+  hasData = () => this.categories().length > 0;
 
   async ngOnInit(): Promise<void> {
     await this.loadCategories();
@@ -62,79 +43,29 @@ export class ProductCategoriesComponent implements OnInit {
   }
 
   openCreateModal(): void {
-    this.editingCategory.set(null);
-    this.formData.set({
-      name: '',
-      code: '',
-      description: '',
-      barcode: '',
-      reference: '',
-      isMaintenance: false,
-      attributes: ''
-    });
-    this.showModal.set(true);
+    this.showCreateModal.set(true);
   }
 
   openEditModal(category: ProductCategory): void {
-    this.editingCategory.set(category);
-    this.formData.set({
-      name: category.name,
-      code: category.code,
-      description: category.description,
-      barcode: category.barcode,
-      reference: category.reference,
-      isMaintenance: category.isMaintenance,
-      attributes: category.attributes
-    });
-    this.showModal.set(true);
+    this.selectedCategory.set(category);
+    this.showEditModal.set(true);
   }
 
-  closeModal(): void {
-    this.showModal.set(false);
-    this.editingCategory.set(null);
+  closeCreateModal(): void {
+    this.showCreateModal.set(false);
   }
 
-  async saveCategory(): Promise<void> {
-    if (!this.formData().name || !this.formData().code) {
-      this.notification.error(this.i18n.t('product_categories.validation.required_fields'));
-      return;
-    }
-
-    this.loading.set(true);
-    try {
-      const editing = this.editingCategory();
-      if (editing) {
-        await this.categoriesService.update(editing.id, this.formData());
-        this.notification.success(this.i18n.t('product_categories.updated_success'));
-      } else {
-        await this.categoriesService.create(this.formData());
-        this.notification.success(this.i18n.t('product_categories.created_success'));
-      }
-      await this.loadCategories();
-      this.closeModal();
-    } catch (error: any) {
-      this.notification.error(error.message || this.i18n.t('errors.save_failed'));
-    } finally {
-      this.loading.set(false);
-    }
+  closeEditModal(): void {
+    this.showEditModal.set(false);
+    this.selectedCategory.set(null);
   }
 
-  async toggleActive(category: ProductCategory): Promise<void> {
-    this.loading.set(true);
-    try {
-      if (category.isActive) {
-        await this.categoriesService.deactivate(category.id);
-        this.notification.success(this.i18n.t('product_categories.deactivated_success'));
-      } else {
-        await this.categoriesService.activate(category.id);
-        this.notification.success(this.i18n.t('product_categories.activated_success'));
-      }
-      await this.loadCategories();
-    } catch (error: any) {
-      this.notification.error(error.message || this.i18n.t('errors.operation_failed'));
-    } finally {
-      this.loading.set(false);
-    }
+  async onCreated(): Promise<void> {
+    await this.loadCategories();
+  }
+
+  async onUpdated(): Promise<void> {
+    await this.loadCategories();
   }
 
   async deleteCategory(category: ProductCategory): Promise<void> {
@@ -150,9 +81,5 @@ export class ProductCategoriesComponent implements OnInit {
     } finally {
       this.loading.set(false);
     }
-  }
-
-  updateFormField(field: keyof CreateProductCategoryRequest, value: any): void {
-    this.formData.update(data => ({ ...data, [field]: value }));
   }
 }

@@ -35,8 +35,9 @@ export const routes: Routes = [
       },
       {
         path: 'purchase-orders',
-        loadComponent: () => import('./features/purchase-orders/purchase-orders.component')
-          .then(m => m.PurchaseOrdersComponent)
+        loadComponent: () => import('./features/purchase-orders/purchase-orders-list/purchase-orders-list.component')
+          .then(m => m.PurchaseOrdersListComponent),
+        canActivate: [authGuard]
       },
       {
         path: 'customers',

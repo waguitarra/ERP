@@ -31,7 +31,7 @@ export interface CreateProductCategoryRequest {
 })
 export class ProductCategoriesService {
   private readonly api = inject(ApiService);
-  private readonly baseUrl = '/api/product-categories';
+  private readonly baseUrl = '/product-categories';
 
   async getAll(): Promise<ProductCategory[]> {
     return this.api.get<ProductCategory[]>(this.baseUrl);
