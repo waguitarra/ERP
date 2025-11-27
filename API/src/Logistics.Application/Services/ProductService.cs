@@ -27,6 +27,7 @@ public class ProductService : IProductService
 
         var product = new Product(request.CompanyId, request.Name, request.SKU, request.Barcode);
         product.Update(request.Name, request.SKU, request.Barcode, request.Description, request.Weight, request.WeightUnit);
+        product.SetCategory(request.CategoryId);
         
         await _productRepository.AddAsync(product);
         await _unitOfWork.CommitAsync();

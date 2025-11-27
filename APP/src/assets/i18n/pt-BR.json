@@ -151,6 +151,13 @@
       "fullName": "Nome completo",
       "email": "email@exemplo.com",
       "phone": "(00) 00000-0000",
+      "selectSupplier": "Selecione um fornecedor",
+      "selectWarehouse": "Selecione um galpão",
+      "selectVehicle": "Selecione um veículo",
+      "selectDriver": "Selecione um motorista",
+      "selectCustomer": "Selecione um cliente",
+      "selectCategory": "Selecione uma categoria",
+      "selectProduct": "Selecione um produto",
       "taxId": "000.000.000-00",
       "companyTaxId": "00.000.000/0000-00",
       "zipCode": "00000-000",
@@ -165,10 +172,6 @@
       "searchProduct": "Pesquisar por SKU, nome...",
       "searchOrder": "🔍 Pesquisar por número, cliente...",
       "searchWarehouse": "🔍 Pesquisar...",
-      "selectVehicle": "Selecionar veículo...",
-      "selectDriver": "Selecionar motorista...",
-      "selectWarehouse": "Selecionar armazém...",
-      "selectCustomer": "Selecione um cliente",
       "productDescription": "Descrição detalhada do produto...",
       "exampleProduct": "Ex: Notebook Dell Inspiron",
       "exampleSKU": "Ex: PROD-001",
@@ -673,18 +676,28 @@
     "title": "Pedidos de Compra",
     "subtitle": "Gerencie pedidos de compra",
     "create_new": "Novo Pedido de Compra",
+    "create_title": "Criar Pedido de Compra",
+    "edit_title": "Editar Pedido de Compra",
     "create_order": "Criar Pedido",
     "no_orders": "Nenhum pedido encontrado",
     "order_info": "Informações do Pedido",
     "po_number": "Número do Pedido",
     "supplier": "Fornecedor",
+    "category": "Categoria",
     "status": "Status",
-    "priority": "Prioridade",
     "expected_date": "Data Esperada",
     "total_items": "Total de Itens",
     "total_quantity": "Quantidade Total",
     "total_value": "Valor Total",
-    "items": "Itens",
+    "items": {
+      "title": "Itens do Pedido",
+      "category": "Categoria",
+      "product": "Produto",
+      "sku": "SKU",
+      "quantity": "Quantidade",
+      "unitPrice": "Preço Unitário",
+      "addItem": "Adicionar Item"
+    },
     "select_category": "Selecione uma categoria",
     "select_product": "Selecione um produto",
     "quantity": "Quantidade",
@@ -693,8 +706,8 @@
     "loading": "Carregando pedidos...",
     "empty_subtitle": "Comece criando seu primeiro pedido de compra",
     "created_success": "Pedido de compra criado com sucesso",
+    "updated_success": "Pedido de compra atualizado com sucesso",
     "deleted_success": "Pedido de compra excluído com sucesso",
-    "confirm_delete": "Tem certeza que deseja excluir este pedido?",
     "validation": {
       "required_fields": "Preencha todos os campos obrigatórios"
     },
@@ -746,6 +759,12 @@
       "incoterm": "Incoterm",
       "billOfLading": "Bill of Lading (BL)",
       "importLicense": "Licença de Importação"
+    },
+    "priority": {
+      "low": "Baixa",
+      "normal": "Normal",
+      "high": "Alta",
+      "urgent": "Urgente"
     }
   }
 }

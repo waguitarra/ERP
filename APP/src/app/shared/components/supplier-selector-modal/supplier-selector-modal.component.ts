@@ -1,7 +1,8 @@
 import { Component, signal, output, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SuppliersService, Supplier } from '@core/services/suppliers.service';
+import { SuppliersService } from '../../../features/suppliers/suppliers.service';
+import { Supplier } from '@core/models/supplier.model';
 
 @Component({
   selector: 'app-supplier-selector-modal',
@@ -31,7 +32,7 @@ export class SupplierSelectorModalComponent implements OnInit {
     return this.suppliers().filter(supplier => 
       supplier.name.toLowerCase().includes(term) ||
       (supplier.email && supplier.email.toLowerCase().includes(term)) ||
-      (supplier.taxId && supplier.taxId.toLowerCase().includes(term)) ||
+      (supplier.document && supplier.document.toLowerCase().includes(term)) ||
       (supplier.phone && supplier.phone.toLowerCase().includes(term))
     );
   }

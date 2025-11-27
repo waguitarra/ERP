@@ -1,6 +1,24 @@
 <app-modal [isOpen]="isOpen" [title]="i18n.t('modals.newProduct')" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Categoria -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          {{ i18n.t('product_categories.name') }} <span class="text-red-500">*</span>
+        </label>
+        <select
+          formControlName="categoryId"
+          class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="form.get('categoryId')?.invalid && form.get('categoryId')?.touched"
+        >
+          <option value="">Selecione uma categoria</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+        @if (form.get('categoryId')?.invalid && form.get('categoryId')?.touched) {
+          <p class="text-red-500 text-xs mt-1">Categoria é obrigatória</p>
+        }
+      </div>
+
       <!-- Nome -->
       <div class="md:col-span-2">
         <app-form-field

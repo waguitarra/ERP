@@ -14,6 +14,7 @@ export interface PurchaseOrder {
   companyId: string;
   purchaseOrderNumber: string;
   supplierId: string;
+  supplierName: string;
   status: string;
   expectedDate?: string;
   priority: number;
@@ -59,8 +60,8 @@ export class PurchaseOrdersService {
   private readonly api = inject(ApiService);
   private readonly baseUrl = '/purchase-orders';
 
-  async getAll(companyId: string): Promise<PurchaseOrder[]> {
-    return this.api.get<PurchaseOrder[]>(`${this.baseUrl}/company/${companyId}`);
+  async getAll(companyId: string): Promise<any> {
+    return this.api.get<any>(`${this.baseUrl}/company/${companyId}`);
   }
 
   async getById(id: string): Promise<PurchaseOrder> {

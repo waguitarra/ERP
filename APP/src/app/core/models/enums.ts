@@ -34,6 +34,13 @@ export enum OrderPriority {
   Urgent = 3
 }
 
+export enum PurchaseOrderPriority {
+  Low = 1,
+  Normal = 2,
+  High = 3,
+  Urgent = 4
+}
+
 export enum VehicleStatus {
   Available = 0,
   InUse = 1,

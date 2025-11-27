@@ -1,0 +1,388 @@
+@if (isOpen()) {
+  <div class="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center z-50 animate-fade-in" (click)="close()">
+    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden" (click)="$event.stopPropagation()">
+      
+      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+        <div>
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ isCreateMode() ? i18n.t('purchase_orders.create_title') : i18n.t('purchase_orders.edit_title')}}</h2>
+          @if (!isCreateMode()) {
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{order()?.purchaseOrderNumber}}</p>
+          }
+        </div>
+        <button (click)="close()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+        
+        <!-- Informações Básicas -->
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">{{ i18n.t('purchase_orders.order_info')}}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.supplier')}} <span class="text-red-500">*</span>
+              </label>
+              <button type="button" (click)="openSupplierSelector()"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-blue-500 text-left flex items-center justify-between transition">
+                @if (selectedSupplier()) {
+                  <span class="font-medium">{{selectedSupplier()?.name}}</span>
+                } @else {
+                  <span class="text-slate-400">{{ i18n.t('common.placeholders.selectSupplier')}}</span>
+                }
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+            @if (isCreateMode()) {
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  {{ i18n.t('purchase_orders.purchaseOrderNumber')}} <span class="text-red-500">*</span>
+                </label>
+                <input type="text" formControlName="purchaseOrderNumber"
+                  class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ex: PO-2025-001">
+              </div>
+            }
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.expected_date')}}
+              </label>
+              <input type="date" formControlName="expectedDate"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.priority')}} <span class="text-red-500">*</span>
+              </label>
+              <select formControlName="priority"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+                <option [value]="1">Baixa</option>
+                <option [value]="2">Normal</option>
+                <option [value]="3">Alta</option>
+                <option [value]="4">Urgente</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Preços e Margens -->
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">💰 {{ i18n.t('purchase_orders.pricing.title')}}</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.pricing.unitCost')}}
+              </label>
+              <input type="number" formControlName="unitCost" step="0.01" min="0"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.pricing.taxPercentage')}}
+              </label>
+              <input type="number" formControlName="taxPercentage" step="0.1" min="0" max="100"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.pricing.desiredMargin')}}
+              </label>
+              <input type="number" formControlName="desiredMarginPercentage" step="0.1" min="0"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+            </div>
+          </div>
+          <div class="mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <span class="text-sm text-slate-600 dark:text-slate-400">{{ i18n.t('purchase_orders.pricing.suggestedPrice')}}</span>
+                <p class="text-xl font-bold text-green-600 dark:text-green-400">R$ {{suggestedPrice() | number:'1.2-2'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hierarquia de Embalagem -->
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">📦 {{ i18n.t('purchase_orders.hierarchy.title')}}</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.hierarchy.expectedParcels')}}
+              </label>
+              <input type="number" formControlName="expectedParcels" min="0"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                placeholder="Ex: 10">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.hierarchy.cartonsPerParcel')}}
+              </label>
+              <input type="number" formControlName="cartonsPerParcel" min="0"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                placeholder="Ex: 10">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.hierarchy.unitsPerCarton')}}
+              </label>
+              <input type="number" formControlName="unitsPerCarton" min="0"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                placeholder="Ex: 50">
+            </div>
+          </div>
+          <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+            <p class="text-sm font-medium text-blue-800 dark:text-blue-300">
+              {{ i18n.t('purchase_orders.hierarchy.calculated')}}: {{calculatedUnits()}} unidades
+            </p>
+            <p class="text-xs text-blue-600 dark:text-blue-400">
+              {{form.get('expectedParcels')?.value || 0}} pallets × {{form.get('cartonsPerParcel')?.value || 0}} caixas × {{form.get('unitsPerCarton')?.value || 0}} unidades
+            </p>
+          </div>
+        </div>
+
+        <!-- Logística -->
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">🚚 {{ i18n.t('purchase_orders.logistics.title')}}</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('common.fields.warehouse')}}
+              </label>
+              <button type="button" (click)="openWarehouseSelector()"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-blue-500 text-left flex items-center justify-between transition">
+                @if (selectedWarehouse()) {
+                  <span class="font-medium">{{selectedWarehouse()?.code}} - {{selectedWarehouse()?.name}}</span>
+                } @else {
+                  <span class="text-slate-400">{{ i18n.t('common.placeholders.selectWarehouse')}}</span>
+                }
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('common.fields.vehicle')}}
+              </label>
+              <button type="button" (click)="openVehicleSelector()"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-blue-500 text-left flex items-center justify-between transition">
+                @if (selectedVehicle()) {
+                  <span class="font-medium">{{selectedVehicle()?.licensePlate}} - {{selectedVehicle()?.model}}</span>
+                } @else {
+                  <span class="text-slate-400">{{ i18n.t('common.placeholders.selectVehicle')}}</span>
+                }
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('common.fields.driver')}}
+              </label>
+              <button type="button" (click)="openDriverSelector()"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-blue-500 text-left flex items-center justify-between transition">
+                @if (selectedDriver()) {
+                  <span class="font-medium">{{selectedDriver()?.name}} - {{ i18n.t('common.fields.cnh')}}: {{selectedDriver()?.licenseNumber}}</span>
+                } @else {
+                  <span class="text-slate-400">{{ i18n.t('common.placeholders.selectDriver')}}</span>
+                }
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.logistics.dockDoor')}}
+              </label>
+              <input type="text" formControlName="dockDoorNumber"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                placeholder="Ex: DOCK-01">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.logistics.distance')}}
+              </label>
+              <input type="text" formControlName="shippingDistance"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                placeholder="Ex: 850 km">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {{ i18n.t('purchase_orders.logistics.shippingCost')}}
+              </label>
+              <input type="number" formControlName="shippingCost" step="0.01" min="0"
+                class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                placeholder="0.00">
+            </div>
+          </div>
+        </div>
+
+        <!-- Importação -->
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">✈️ {{ i18n.t('purchase_orders.international.title')}}</h3>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" formControlName="isInternational" class="w-4 h-4 text-blue-600 rounded">
+              <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ i18n.t('purchase_orders.international.isInternational')}}</span>
+            </label>
+          </div>
+          
+          @if (form.get('isInternational')?.value) {
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  {{ i18n.t('purchase_orders.international.originCountry')}}
+                </label>
+                <input type="text" formControlName="originCountry"
+                  class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ex: China">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  {{ i18n.t('purchase_orders.international.portOfEntry')}}
+                </label>
+                <input type="text" formControlName="portOfEntry"
+                  class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ex: Santos/SP">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  {{ i18n.t('purchase_orders.international.container')}}
+                </label>
+                <input type="text" formControlName="containerNumber"
+                  class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ex: MSCU1234567">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  {{ i18n.t('purchase_orders.international.incoterm')}}
+                </label>
+                <input type="text" formControlName="incoterm"
+                  class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ex: FOB">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  {{ i18n.t('purchase_orders.international.billOfLading')}}
+                </label>
+                <input type="text" formControlName="billOfLading"
+                  class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ex: BL-2025-001">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  {{ i18n.t('purchase_orders.international.importLicense')}}
+                </label>
+                <input type="text" formControlName="importLicenseNumber"
+                  class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ex: LI-123456">
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (isCreateMode()) {
+          <!-- Items -->
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">📦 {{ i18n.t('purchase_orders.items.title')}}</h3>
+            <div formArrayName="items">
+              @for (item of itemControls; track $index) {
+                <div [formGroupName]="$index" class="border rounded-lg p-4 mb-4 bg-slate-50 dark:bg-slate-700">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        {{ i18n.t('purchase_orders.items.category')}} <span class="text-red-500">*</span>
+                      </label>
+                      <select formControlName="categoryId" (change)="onCategoryChange($event, $index)"
+                        class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+                        <option value="">{{ i18n.t('common.placeholders.selectCategory')}}</option>
+                        @for (category of categories(); track category.id) {
+                          <option [value]="category.id">{{category.name}}</option>
+                        }
+                      </select>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        {{ i18n.t('purchase_orders.items.product')}} <span class="text-red-500">*</span>
+                      </label>
+                      <select formControlName="productId" (change)="onProductChange($event, $index)"
+                        class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+                        <option value="">{{ i18n.t('common.placeholders.selectProduct')}}</option>
+                        @for (product of products(); track product.id) {
+                          <option [value]="product.id">{{product.name}} ({{product.sku}})</option>
+                        }
+                      </select>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        {{ i18n.t('purchase_orders.items.sku')}} <span class="text-red-500">*</span>
+                      </label>
+                      <input type="text" formControlName="sku" readonly
+                        class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white bg-slate-100 dark:bg-slate-600">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        {{ i18n.t('purchase_orders.items.quantity')}} <span class="text-red-500">*</span>
+                      </label>
+                      <input type="number" formControlName="quantityOrdered" min="1"
+                        class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        {{ i18n.t('purchase_orders.items.unitPrice')}} <span class="text-red-500">*</span>
+                      </label>
+                      <input type="number" formControlName="unitPrice" step="0.01" min="0"
+                        class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
+                    </div>
+                  </div>
+                  <div class="flex justify-end mt-4">
+                    <button type="button" (click)="removeItem($index)" class="text-red-600 hover:text-red-700 text-sm">
+                      {{ i18n.t('common.buttons.remove')}}
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+            <button type="button" (click)="addItem()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+              {{ i18n.t('purchase_orders.items.addItem')}}
+            </button>
+          </div>
+        }
+
+      </form>
+
+      <!-- Footer -->
+      <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3">
+        <button type="button" (click)="close()" [disabled]="loading()"
+          class="px-4 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition">
+          {{ i18n.t('common.buttons.cancel')}}
+        </button>
+        <button type="submit" (click)="onSubmit()" [disabled]="loading()"
+          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition disabled:opacity-50 flex items-center gap-2">
+          @if (loading()) {
+            <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          }
+          {{ i18n.t('common.buttons.saveChanges')}}
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
+
+<app-supplier-selector-modal #supplierModal (supplierSelected)="onSupplierSelected($event)"></app-supplier-selector-modal>
+<app-vehicle-selector-modal #vehicleModal (vehicleSelected)="onVehicleSelected($event)"></app-vehicle-selector-modal>
+<app-driver-selector-modal #driverModal (driverSelected)="onDriverSelected($event)"></app-driver-selector-modal>
+<app-warehouse-selector-modal #warehouseModal [title]="'Selecionar Armazém'" (warehouseSelected)="onWarehouseSelected($event)"></app-warehouse-selector-modal>

@@ -86,4 +86,9 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.storageService.getToken();
   }
+
+  isAdmin(): boolean {
+    const user = this.currentUser();
+    return user?.role === 'Admin';
+  }
 }

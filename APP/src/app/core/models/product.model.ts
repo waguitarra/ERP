@@ -34,6 +34,7 @@ export interface Product {
 
 export interface CreateProductDto {
   companyId: string;  // SEMPRE obrigatório
+  categoryId: string;
   name: string;
   sku: string;
   barcode?: string;

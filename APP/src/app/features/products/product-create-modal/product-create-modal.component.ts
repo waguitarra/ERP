@@ -1,4 +1,4 @@
-import { Component, output, inject } from '@angular/core';
+import { Component, output, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from '@shared/components/modal/modal.component';
@@ -7,6 +7,7 @@ import { ProductsService } from '../products.service';
 import { AuthService } from '@core/services/auth.service';
 import { CreateProductDto } from '@core/models/product.model';
 import { I18nService } from '@core/services/i18n.service';
+import { ProductCategoriesService, ProductCategory } from '@core/services/product-categories.service';
 
 @Component({
   selector: 'app-product-create-modal',
@@ -15,10 +16,11 @@ import { I18nService } from '@core/services/i18n.service';
   templateUrl: './product-create-modal.component.html',
   styleUrls: ['./product-create-modal.component.scss']
 })
-export class ProductCreateModalComponent {
+export class ProductCreateModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly productsService = inject(ProductsService);
   private readonly authService = inject(AuthService);
+  private readonly categoriesService = inject(ProductCategoriesService);
   protected readonly i18n = inject(I18nService);
   
   closeModal = output<void>();
@@ -26,8 +28,10 @@ export class ProductCreateModalComponent {
   
   isOpen = true;
   isSaving = false;
+  categories: ProductCategory[] = [];
   
   form: FormGroup = this.fb.group({
+    categoryId: ['', Validators.required],
     name: ['', [Validators.required, Validators.minLength(3)]],
     sku: ['', [Validators.required]],
     barcode: [''],
@@ -48,6 +52,18 @@ export class ProductCreateModalComponent {
     safetyStock: [0],
     abcClassification: ['B']
   });
+  
+  async ngOnInit(): Promise<void> {
+    await this.loadCategories();
+  }
+  
+  async loadCategories(): Promise<void> {
+    try {
+      this.categories = await this.categoriesService.getActive();
+    } catch (error) {
+      console.error('Erro ao carregar categorias:', error);
+    }
+  }
   
   onClose(): void {
     this.closeModal.emit();

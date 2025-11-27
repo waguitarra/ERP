@@ -4,61 +4,81 @@ import { PurchaseOrdersService, PurchaseOrder } from '@core/services/purchase-or
 import { AuthService } from '@core/services/auth.service';
 import { I18nService } from '@core/services/i18n.service';
 import { NotificationService } from '@core/services/notification.service';
-import { PurchaseOrderCreateModalComponent } from '../purchase-order-create-modal/purchase-order-create-modal.component';
+import { PurchaseOrderModalComponent } from '../purchase-order-modal/purchase-order-modal.component';
+import { CompaniesService } from '../../companies/companies.service';
 
 @Component({
   selector: 'app-purchase-orders-list',
   standalone: true,
-  imports: [CommonModule, PurchaseOrderCreateModalComponent],
+  imports: [CommonModule, PurchaseOrderModalComponent],
   templateUrl: './purchase-orders-list.component.html'
 })
 export class PurchaseOrdersListComponent implements OnInit {
   private readonly purchaseOrdersService = inject(PurchaseOrdersService);
   private readonly authService = inject(AuthService);
+  private readonly companiesService = inject(CompaniesService);
   protected readonly i18n = inject(I18nService);
   private readonly notification = inject(NotificationService);
 
   loading = signal<boolean>(true);
   purchaseOrders = signal<PurchaseOrder[]>([]);
-  hasData = computed(() => this.purchaseOrders().length > 0);
+  selectedOrder = signal<PurchaseOrder | null>(null);
+  hasData = computed(() => (this.purchaseOrders() || []).length > 0);
 
   // Computed totals - IGUAL orders-list
-  totalOrders = computed(() => this.purchaseOrders().length);
-  totalValue = computed(() => this.purchaseOrders().reduce((sum, order) => sum + (order.totalValue || 0), 0));
+  totalOrders = computed(() => (this.purchaseOrders() || []).length);
+  totalValue = computed(() => (this.purchaseOrders() || []).reduce((sum, order) => sum + (order.totalValue || 0), 0));
   
   // Pending orders (Pending, Confirmed)
-  pendingOrders = computed(() => this.purchaseOrders().filter(o => 
+  pendingOrders = computed(() => (this.purchaseOrders() || []).filter(o => 
     o.status === 'Pending' || o.status === 'Confirmed'
   ).length);
-  pendingValue = computed(() => this.purchaseOrders()
+  pendingValue = computed(() => (this.purchaseOrders() || [])
     .filter(o => o.status === 'Pending' || o.status === 'Confirmed')
     .reduce((sum, order) => sum + (order.totalValue || 0), 0));
   
   // Non-pending orders (all other statuses)
-  nonPendingOrders = computed(() => this.purchaseOrders().filter(o => 
+  nonPendingOrders = computed(() => (this.purchaseOrders() || []).filter(o => 
     o.status !== 'Pending' && o.status !== 'Confirmed'
   ).length);
-  nonPendingValue = computed(() => this.purchaseOrders()
+  nonPendingValue = computed(() => (this.purchaseOrders() || [])
     .filter(o => o.status !== 'Pending' && o.status !== 'Confirmed')
     .reduce((sum, order) => sum + (order.totalValue || 0), 0));
 
-  createModal = viewChild<PurchaseOrderCreateModalComponent>('createModal');
+  modal = viewChild<PurchaseOrderModalComponent>('modal');
 
   async ngOnInit(): Promise<void> {
     await this.loadPurchaseOrders();
   }
 
   async loadPurchaseOrders(): Promise<void> {
-    const companyId = this.authService.currentUser()?.companyId;
-    if (!companyId) return;
+    let companyId = this.authService.currentUser()?.companyId;
+    
+    // Se usuário for admin e não tiver companyId, tenta carregar da primeira empresa
+    if (this.authService.isAdmin() && !companyId) {
+      try {
+        const response = await this.companiesService.getAll();
+        if (response.data && response.data.length > 0) {
+          companyId = response.data[0].id;
+        }
+      } catch (error) {
+        console.error('Erro ao carregar empresas:', error);
+      }
+    }
+    
+    if (!companyId) {
+      console.warn('Nenhuma empresa disponível para carregar purchase orders');
+      this.purchaseOrders.set([]); // Garante que seja array vazio
+      return;
+    }
 
     this.loading.set(true);
     try {
-      const data = await this.purchaseOrdersService.getAll(companyId);
-      this.purchaseOrders.set(data);
-      console.log(`✅ Purchase Orders carregados: ${this.purchaseOrders().length}`);
+      const response = await this.purchaseOrdersService.getAll(companyId);
+      this.purchaseOrders.set(response.data || response || []);
     } catch (error: any) {
       console.error('❌ Erro ao carregar purchase orders:', error);
+      this.purchaseOrders.set([]); // Garante que seja array vazio em caso de erro
       this.notification.error(error.message || this.i18n.t('errors.load_failed'));
     } finally {
       this.loading.set(false);
@@ -66,7 +86,13 @@ export class PurchaseOrdersListComponent implements OnInit {
   }
 
   openCreateModal(): void {
-    this.createModal()?.open();
+    this.selectedOrder.set(null);
+    this.modal()?.open();
+  }
+
+  openEditModal(order: PurchaseOrder): void {
+    this.selectedOrder.set(order);
+    this.modal()?.open();
   }
 
   async deletePurchaseOrder(order: PurchaseOrder): Promise<void> {

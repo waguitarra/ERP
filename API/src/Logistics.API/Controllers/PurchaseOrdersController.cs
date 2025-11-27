@@ -1,3 +1,5 @@
+using Logistics.Application.DTOs.Common;
+using Logistics.Application.DTOs.PurchaseOrder;
 using Logistics.Domain.Entities;
 using Logistics.Domain.Enums;
 using Logistics.Domain.Interfaces;
@@ -32,33 +34,38 @@ public class PurchaseOrdersController : ControllerBase
     }
 
     [HttpGet("company/{companyId}")]
-    public async Task<ActionResult> GetByCompany(Guid companyId)
+    public async Task<ActionResult<ApiResponse<IEnumerable<PurchaseOrderResponse>>>> GetByCompany(Guid companyId)
     {
         var purchaseOrders = await _repository.GetByCompanyIdAsync(companyId);
-        return Ok(purchaseOrders);
+        var responses = new List<PurchaseOrderResponse>();
+        foreach (var po in purchaseOrders)
+        {
+            responses.Add(await MapToResponse(po));
+        }
+        return Ok(ApiResponse<IEnumerable<PurchaseOrderResponse>>.SuccessResponse(responses));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult> GetById(Guid id)
+    public async Task<ActionResult<ApiResponse<PurchaseOrderResponse>>> GetById(Guid id)
     {
         var purchaseOrder = await _repository.GetByIdAsync(id);
         if (purchaseOrder == null)
-            return NotFound();
-        return Ok(purchaseOrder);
+            return NotFound(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Purchase order não encontrado"));
+        return Ok(ApiResponse<PurchaseOrderResponse>.SuccessResponse(await MapToResponse(purchaseOrder)));
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create([FromBody] CreatePurchaseOrderRequest request)
+    public async Task<ActionResult<ApiResponse<PurchaseOrderResponse>>> Create([FromBody] CreatePurchaseOrderRequest request)
     {
         // Validações
         if (await _companyRepository.GetByIdAsync(request.CompanyId) == null)
-            return BadRequest("Empresa não encontrada");
+            return BadRequest(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Empresa não encontrada"));
 
         if (await _supplierRepository.GetByIdAsync(request.SupplierId) == null)
-            return BadRequest("Fornecedor não encontrado");
+            return BadRequest(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Fornecedor não encontrado"));
 
         if (await _repository.GetByPurchaseOrderNumberAsync(request.PurchaseOrderNumber, request.CompanyId) != null)
-            return BadRequest("Número de Purchase Order já existe");
+            return BadRequest(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Número de Purchase Order já existe"));
 
         // Criar PurchaseOrder
         var purchaseOrder = new PurchaseOrder(request.CompanyId, request.PurchaseOrderNumber, request.SupplierId);
@@ -77,7 +84,7 @@ public class PurchaseOrdersController : ControllerBase
         {
             var product = await _productRepository.GetByIdAsync(itemRequest.ProductId);
             if (product == null)
-                return BadRequest($"Produto {itemRequest.ProductId} não encontrado");
+                return BadRequest(ApiResponse<PurchaseOrderResponse>.ErrorResponse($"Produto {itemRequest.ProductId} não encontrado"));
 
             var item = new PurchaseOrderItem(
                 itemRequest.ProductId,
@@ -96,30 +103,30 @@ public class PurchaseOrdersController : ControllerBase
         await _repository.AddAsync(purchaseOrder);
         await _unitOfWork.CommitAsync();
 
-        return CreatedAtAction(nameof(GetById), new { id = purchaseOrder.Id }, purchaseOrder);
+        return Ok(ApiResponse<PurchaseOrderResponse>.SuccessResponse(await MapToResponse(purchaseOrder), "Purchase order criado com sucesso"));
     }
 
     [HttpPost("{id}/purchase-details")]
-    public async Task<ActionResult> SetPurchaseDetails(Guid id, [FromBody] PurchaseOrderSetDetailsRequest request)
+    public async Task<ActionResult<ApiResponse<PurchaseOrderResponse>>> SetPurchaseDetails(Guid id, [FromBody] PurchaseOrderSetDetailsRequest request)
     {
         var purchaseOrder = await _repository.GetByIdAsync(id);
         if (purchaseOrder == null)
-            return NotFound();
+            return NotFound(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Purchase order não encontrado"));
 
         purchaseOrder.SetPurchaseDetails(request.UnitCost, request.TaxPercentage, request.DesiredMarginPercentage);
         
         await _repository.UpdateAsync(purchaseOrder);
         await _unitOfWork.CommitAsync();
 
-        return Ok(purchaseOrder);
+        return Ok(ApiResponse<PurchaseOrderResponse>.SuccessResponse(await MapToResponse(purchaseOrder), "Detalhes de compra atualizados"));
     }
 
     [HttpPost("{id}/packaging-hierarchy")]
-    public async Task<ActionResult> SetPackagingHierarchy(Guid id, [FromBody] PurchaseOrderPackagingRequest request)
+    public async Task<ActionResult<ApiResponse<PurchaseOrderResponse>>> SetPackagingHierarchy(Guid id, [FromBody] PurchaseOrderPackagingRequest request)
     {
         var purchaseOrder = await _repository.GetByIdAsync(id);
         if (purchaseOrder == null)
-            return NotFound();
+            return NotFound(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Purchase order não encontrado"));
 
         try
         {
@@ -127,36 +134,36 @@ public class PurchaseOrdersController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(ApiResponse<PurchaseOrderResponse>.ErrorResponse(ex.Message));
         }
 
         await _repository.UpdateAsync(purchaseOrder);
         await _unitOfWork.CommitAsync();
 
-        return Ok(purchaseOrder);
+        return Ok(ApiResponse<PurchaseOrderResponse>.SuccessResponse(await MapToResponse(purchaseOrder), "Hierarquia de embalagem definida"));
     }
 
     [HttpPost("{id}/set-international")]
-    public async Task<ActionResult> SetAsInternational(Guid id, [FromBody] PurchaseOrderInternationalRequest request)
+    public async Task<ActionResult<ApiResponse<PurchaseOrderResponse>>> SetAsInternational(Guid id, [FromBody] PurchaseOrderInternationalRequest request)
     {
         var purchaseOrder = await _repository.GetByIdAsync(id);
         if (purchaseOrder == null)
-            return NotFound();
+            return NotFound(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Purchase order não encontrado"));
 
         purchaseOrder.SetAsInternational(request.OriginCountry, request.PortOfEntry, request.ContainerNumber, request.Incoterm);
 
         await _repository.UpdateAsync(purchaseOrder);
         await _unitOfWork.CommitAsync();
 
-        return Ok(purchaseOrder);
+        return Ok(ApiResponse<PurchaseOrderResponse>.SuccessResponse(await MapToResponse(purchaseOrder), "Configuração internacional definida"));
     }
 
     [HttpPost("{id}/set-logistics")]
-    public async Task<ActionResult> SetLogistics(Guid id, [FromBody] PurchaseOrderLogisticsRequest request)
+    public async Task<ActionResult<ApiResponse<PurchaseOrderResponse>>> SetLogistics(Guid id, [FromBody] PurchaseOrderLogisticsRequest request)
     {
         var purchaseOrder = await _repository.GetByIdAsync(id);
         if (purchaseOrder == null)
-            return NotFound();
+            return NotFound(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Purchase order não encontrado"));
 
         purchaseOrder.SetLogistics(request.DestinationWarehouseId, request.VehicleId, request.DriverId, request.DockDoorNumber);
 
@@ -166,7 +173,67 @@ public class PurchaseOrdersController : ControllerBase
         await _repository.UpdateAsync(purchaseOrder);
         await _unitOfWork.CommitAsync();
 
-        return Ok(purchaseOrder);
+        return Ok(ApiResponse<PurchaseOrderResponse>.SuccessResponse(await MapToResponse(purchaseOrder), "Configuração logística definida"));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ApiResponse<PurchaseOrderResponse>>> Update(Guid id, [FromBody] UpdatePurchaseOrderRequest request)
+    {
+        var purchaseOrder = await _repository.GetByIdAsync(id);
+        if (purchaseOrder == null)
+            return NotFound(ApiResponse<PurchaseOrderResponse>.ErrorResponse("Purchase order não encontrado"));
+
+        // Atualizar campos básicos
+        if (request.ExpectedDate.HasValue)
+            purchaseOrder.SetExpectedDate(request.ExpectedDate.Value);
+        
+        if (request.Priority.HasValue)
+            purchaseOrder.SetPriority(request.Priority.Value);
+
+        await _repository.UpdateAsync(purchaseOrder);
+        await _unitOfWork.CommitAsync();
+
+        return Ok(ApiResponse<PurchaseOrderResponse>.SuccessResponse(await MapToResponse(purchaseOrder), "Purchase order atualizado com sucesso"));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<ApiResponse<object>>> Delete(Guid id)
+    {
+        var purchaseOrder = await _repository.GetByIdAsync(id);
+        if (purchaseOrder == null)
+            return NotFound(ApiResponse<object>.ErrorResponse("Purchase order não encontrado"));
+
+        purchaseOrder.SetStatus(OrderStatus.Cancelled);
+        await _repository.UpdateAsync(purchaseOrder);
+        await _unitOfWork.CommitAsync();
+
+        return Ok(ApiResponse<object>.SuccessResponse(null, "Purchase order cancelado com sucesso"));
+    }
+
+    private async Task<PurchaseOrderResponse> MapToResponse(PurchaseOrder po)
+    {
+        var supplier = await _supplierRepository.GetByIdAsync(po.SupplierId);
+        var response = new PurchaseOrderResponse();
+        response.Id = po.Id;
+        response.CompanyId = po.CompanyId;
+        response.PurchaseOrderNumber = po.PurchaseOrderNumber;
+        response.SupplierId = po.SupplierId;
+        response.SupplierName = supplier?.Name ?? "Fornecedor não encontrado";
+        response.OrderDate = po.OrderDate;
+        response.ExpectedDate = po.ExpectedDate;
+        response.Priority = po.Priority;
+        response.Status = po.Status;
+        response.TotalQuantity = po.TotalQuantity;
+        response.TotalValue = po.TotalValue;
+        response.Items = po.Items.Select(i => new PurchaseOrderItemResponse(
+            i.Id,
+            i.ProductId,
+            i.SKU,
+            i.QuantityOrdered,
+            i.QuantityReceived,
+            i.UnitPrice
+        )).ToList();
+        return response;
     }
 }
 
@@ -212,4 +279,9 @@ public record PurchaseOrderLogisticsRequest(
     string? DockDoorNumber,
     string? ShippingDistance,
     decimal? ShippingCost
+);
+
+public record UpdatePurchaseOrderRequest(
+    DateTime? ExpectedDate,
+    OrderPriority? Priority
 );
