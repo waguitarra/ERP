@@ -73,7 +73,7 @@ export class CompanyEditModalComponent {
       this.close();
     } catch (error) {
       console.error('Erro ao atualizar empresa:', error);
-      alert('Erro ao atualizar empresa');
+      alert(this.i18n.t('common.errors.updateCompany'));
     } finally {
       this.loading.set(false);
     }

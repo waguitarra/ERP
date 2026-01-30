@@ -1,5 +1,3 @@
-using Logistics.Domain.Enums;
-
 namespace Logistics.Application.DTOs.PackingTask;
 
 public record PackingTaskResponse(
@@ -7,8 +5,12 @@ public record PackingTaskResponse(
     string TaskNumber,
     Guid OrderId,
     string OrderNumber,
-    WMSTaskStatus Status,
+    int Status,
+    string StatusName,
     Guid AssignedTo,
+    string AssignedToName,
+    int PackageCount,
     DateTime? CompletedAt,
-    DateTime CreatedAt
+    DateTime CreatedAt,
+    DateTime? UpdatedAt
 );

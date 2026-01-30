@@ -1,6 +1,7 @@
 using Logistics.Application.DTOs.OutboundShipment;
 using Logistics.Application.Interfaces;
 using Logistics.Domain.Entities;
+using Logistics.Domain.Enums;
 using Logistics.Domain.Interfaces;
 
 namespace Logistics.Application.Services;
@@ -51,10 +52,50 @@ public class OutboundShipmentService : IOutboundShipmentService
         return MapToResponse(shipment);
     }
 
+    public async Task<IEnumerable<OutboundShipmentResponse>> GetAllAsync()
+    {
+        var shipments = await _repository.GetAllWithDetailsAsync();
+        return shipments.Select(MapToResponse);
+    }
+
     public async Task<IEnumerable<OutboundShipmentResponse>> GetByOrderIdAsync(Guid orderId)
     {
         var shipments = await _repository.GetByOrderIdAsync(orderId);
         return shipments.Select(MapToResponse);
+    }
+
+    public async Task<IEnumerable<OutboundShipmentResponse>> GetByStatusAsync(OutboundStatus status)
+    {
+        var shipments = await _repository.GetByStatusAsync(status);
+        return shipments.Select(MapToResponse);
+    }
+
+    public async Task<IEnumerable<OutboundShipmentResponse>> GetPendingAsync()
+    {
+        var shipments = await _repository.GetPendingAsync();
+        return shipments.Select(MapToResponse);
+    }
+
+    public async Task<IEnumerable<OutboundShipmentResponse>> GetShippedAsync()
+    {
+        var shipments = await _repository.GetShippedAsync();
+        return shipments.Select(MapToResponse);
+    }
+
+    public async Task<IEnumerable<OutboundShipmentResponse>> GetInTransitAsync()
+    {
+        var shipments = await _repository.GetInTransitAsync();
+        return shipments.Select(MapToResponse);
+    }
+
+    public async Task MarkReadyToShipAsync(Guid id)
+    {
+        var shipment = await _repository.GetByIdAsync(id);
+        if (shipment == null) throw new KeyNotFoundException("Expedição não encontrada");
+
+        shipment.MarkReadyToShip();
+        await _repository.UpdateAsync(shipment);
+        await _unitOfWork.CommitAsync();
     }
 
     public async Task ShipAsync(Guid id)
@@ -63,6 +104,16 @@ public class OutboundShipmentService : IOutboundShipmentService
         if (shipment == null) throw new KeyNotFoundException("Expedição não encontrada");
 
         shipment.Ship(DateTime.UtcNow);
+        await _repository.UpdateAsync(shipment);
+        await _unitOfWork.CommitAsync();
+    }
+
+    public async Task MarkInTransitAsync(Guid id)
+    {
+        var shipment = await _repository.GetByIdAsync(id);
+        if (shipment == null) throw new KeyNotFoundException("Expedição não encontrada");
+
+        shipment.MarkInTransit();
         await _repository.UpdateAsync(shipment);
         await _unitOfWork.CommitAsync();
     }
@@ -77,6 +128,25 @@ public class OutboundShipmentService : IOutboundShipmentService
         await _unitOfWork.CommitAsync();
     }
 
+    public async Task CancelAsync(Guid id)
+    {
+        var shipment = await _repository.GetByIdAsync(id);
+        if (shipment == null) throw new KeyNotFoundException("Expedição não encontrada");
+
+        shipment.Cancel();
+        await _repository.UpdateAsync(shipment);
+        await _unitOfWork.CommitAsync();
+    }
+
+    public async Task DeleteAsync(Guid id)
+    {
+        var shipment = await _repository.GetByIdAsync(id);
+        if (shipment == null) throw new KeyNotFoundException("Expedição não encontrada");
+
+        await _repository.DeleteAsync(shipment);
+        await _unitOfWork.CommitAsync();
+    }
+
     private static OutboundShipmentResponse MapToResponse(OutboundShipment shipment)
     {
         return new OutboundShipmentResponse(
@@ -86,7 +156,8 @@ public class OutboundShipmentService : IOutboundShipmentService
             shipment.Order?.OrderNumber ?? "",
             shipment.CarrierId,
             shipment.TrackingNumber,
-            shipment.Status,
+            (int)shipment.Status,
+            shipment.Status.ToString(),
             shipment.ShippedDate,
             shipment.DeliveredDate,
             shipment.DeliveryAddress,

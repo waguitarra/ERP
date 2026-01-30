@@ -1,6 +1,7 @@
 using Logistics.Application.DTOs.InboundShipment;
 using Logistics.Application.Interfaces;
 using Logistics.Domain.Entities;
+using Logistics.Domain.Enums;
 using Logistics.Domain.Interfaces;
 
 namespace Logistics.Application.Services;
@@ -75,7 +76,25 @@ public class InboundShipmentService : IInboundShipmentService
 
     public async Task<IEnumerable<InboundShipmentResponse>> GetAllAsync()
     {
-        var shipments = await _repository.GetAllAsync();
+        var shipments = await _repository.GetAllWithDetailsAsync();
+        return shipments.Select(MapToResponse);
+    }
+
+    public async Task<IEnumerable<InboundShipmentResponse>> GetByStatusAsync(InboundStatus status)
+    {
+        var shipments = await _repository.GetByStatusAsync(status);
+        return shipments.Select(MapToResponse);
+    }
+
+    public async Task<IEnumerable<InboundShipmentResponse>> GetScheduledAsync()
+    {
+        var shipments = await _repository.GetScheduledAsync();
+        return shipments.Select(MapToResponse);
+    }
+
+    public async Task<IEnumerable<InboundShipmentResponse>> GetInProgressAsync()
+    {
+        var shipments = await _repository.GetInProgressAsync();
         return shipments.Select(MapToResponse);
     }
 
@@ -97,26 +116,47 @@ public class InboundShipmentService : IInboundShipmentService
         await _unitOfWork.CommitAsync();
     }
 
+    public async Task CancelAsync(Guid id)
+    {
+        var shipment = await _repository.GetByIdAsync(id);
+        if (shipment == null) throw new KeyNotFoundException("Inbound Shipment não encontrado");
+
+        shipment.Cancel();
+        await _unitOfWork.CommitAsync();
+    }
+
+    public async Task DeleteAsync(Guid id)
+    {
+        await _repository.DeleteAsync(id);
+        await _unitOfWork.CommitAsync();
+    }
+
     private static InboundShipmentResponse MapToResponse(InboundShipment shipment)
     {
         return new InboundShipmentResponse(
             shipment.Id,
             shipment.CompanyId,
+            shipment.Company?.Name ?? "",
             shipment.ShipmentNumber,
             shipment.OrderId,
+            shipment.Order?.OrderNumber ?? "",
             shipment.SupplierId,
             shipment.Supplier?.Name ?? "",
             shipment.VehicleId,
+            shipment.Vehicle?.LicensePlate ?? null,
             shipment.DriverId,
+            shipment.Driver?.Name ?? null,
             shipment.ExpectedArrivalDate,
             shipment.ActualArrivalDate,
             shipment.DockDoorNumber,
-            shipment.Status,
+            (int)shipment.Status,
+            shipment.Status.ToString(),
             shipment.TotalQuantityExpected,
             shipment.TotalQuantityReceived,
             shipment.ASNNumber,
             shipment.HasQualityIssues,
-            shipment.CreatedAt
+            shipment.CreatedAt,
+            shipment.UpdatedAt
         );
     }
 }

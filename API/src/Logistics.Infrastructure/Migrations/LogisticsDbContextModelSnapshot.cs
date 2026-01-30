@@ -1368,9 +1368,14 @@ namespace Logistics.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<Guid?>("VehicleId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("OutboundShipments");
                 });
@@ -2623,11 +2628,62 @@ namespace Logistics.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Brand")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<decimal?>("Capacity")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Color")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CurrentAddress")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid?>("CurrentShipmentId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<double?>("CurrentSpeed")
+                        .HasColumnType("double");
+
+                    b.Property<Guid?>("DriverId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("DriverName")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("DriverPhone")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("FuelType")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<bool>("IsMoving")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<double?>("LastLatitude")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime?>("LastLocationUpdate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<double?>("LastLongitude")
+                        .HasColumnType("double");
 
                     b.Property<string>("LicensePlate")
                         .IsRequired()
@@ -2639,11 +2695,28 @@ namespace Logistics.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<bool>("TrackingEnabled")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("TrackingToken")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("VehicleType")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -2651,6 +2724,10 @@ namespace Logistics.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("CurrentShipmentId");
+
+                    b.HasIndex("DriverId");
 
                     b.HasIndex("LicensePlate")
                         .IsUnique();

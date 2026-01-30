@@ -1,24 +1,184 @@
 <div class="space-y-6 animate-fade-in">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('pickingTasks.title') }}</h1>
-          <p class="text-slate-500 dark:text-slate-400 mt-1">{{ i18n.t('pickingTasks.subtitle') }}</p>
-        </div>
-        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center space-x-2 self-start">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          <span>{{ i18n.t('pickingTasks.newTask') }}</span>
-        </button>
-      </div>
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('pickingTasks.title') }}</h1>
+      <p class="text-slate-500 dark:text-slate-400 mt-1">{{ i18n.t('pickingTasks.subtitle') }}</p>
+    </div>
+    <button (click)="loadTasks()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center space-x-2 self-start">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+      <span>{{ i18n.t('common.buttons.refresh') }}</span>
+    </button>
+  </div>
 
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm text-center py-20">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/30 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-          </svg>
-        </div>
-        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('pickingTasks.module.title') }}</h2>
-        <p class="text-slate-500 dark:text-slate-400 mt-2">{{ i18n.t('pickingTasks.module.subtitle') }}</p>
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:border-blue-500 transition-colors"
+         [class.ring-2]="selectedFilter() === 'all'"
+         [class.ring-blue-500]="selectedFilter() === 'all'"
+         (click)="onFilterChange('all')">
+      <div class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ stats().total }}</div>
+      <div class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('orders.stats.total') }}</div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:border-yellow-500 transition-colors"
+         [class.ring-2]="selectedFilter() === 'pending'"
+         [class.ring-yellow-500]="selectedFilter() === 'pending'"
+         (click)="onFilterChange('pending')">
+      <div class="text-2xl font-bold text-yellow-600">{{ stats().pending }}</div>
+      <div class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('common.status.pending') }}</div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:border-blue-500 transition-colors"
+         [class.ring-2]="selectedFilter() === 'in-progress'"
+         [class.ring-blue-500]="selectedFilter() === 'in-progress'"
+         (click)="onFilterChange('in-progress')">
+      <div class="text-2xl font-bold text-blue-600">{{ stats().inProgress }}</div>
+      <div class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('common.orderStatus.inProgress') }}</div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:border-green-500 transition-colors"
+         [class.ring-2]="selectedFilter() === 'completed'"
+         [class.ring-green-500]="selectedFilter() === 'completed'"
+         (click)="onFilterChange('completed')">
+      <div class="text-2xl font-bold text-green-600">{{ stats().completed }}</div>
+      <div class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('common.status.completed') }}</div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+      <div class="text-2xl font-bold text-red-600">{{ stats().cancelled }}</div>
+      <div class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('common.status.cancelled') }}</div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+    <div class="relative">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input type="text" 
+             [placeholder]="i18n.t('common.placeholders.search')"
+             class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-800 dark:text-slate-200"
+             (input)="onSearch($event)">
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (loading()) {
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm text-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+      <p class="mt-4 text-slate-500 dark:text-slate-400">{{ i18n.t('common.messages.loading') }}</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error()) {
+    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
+      <p class="text-red-600 dark:text-red-400">{{ error() }}</p>
+      <button (click)="loadTasks()" class="mt-2 text-sm text-red-600 dark:text-red-400 underline">{{ i18n.t('common.buttons.tryAgain') }}</button>
+    </div>
+  }
+
+  <!-- Tasks Table -->
+  @if (!loading() && !error() && hasData()) {
+    <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-slate-50 dark:bg-slate-900/50">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('pickingTasks.table.task') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('pickingTasks.table.order') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('pickingTasks.table.wave') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('common.fields.priority') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('common.fields.status') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('pickingTasks.table.progress') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('pickingTasks.table.assignedTo') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">{{ i18n.t('common.fields.actions') }}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+            @for (task of filteredTasks(); track task.id) {
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                <td class="px-4 py-3">
+                  <div class="font-medium text-slate-800 dark:text-slate-200">{{ task.taskNumber }}</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400">{{ task.totalLines }} {{ i18n.t('pickingTasks.table.items') }}</div>
+                </td>
+                <td class="px-4 py-3">
+                  <span class="text-slate-700 dark:text-slate-300">{{ task.orderNumber || '-' }}</span>
+                </td>
+                <td class="px-4 py-3">
+                  <span class="text-slate-700 dark:text-slate-300">{{ task.waveNumber || '-' }}</span>
+                </td>
+                <td class="px-4 py-3">
+                  <span [class]="'px-2 py-1 text-xs font-medium rounded-full ' + getPriorityClass(task.priority)">
+                    {{ task.priorityName }}
+                  </span>
+                </td>
+                <td class="px-4 py-3">
+                  <span [class]="'px-2 py-1 text-xs font-medium rounded-full ' + getStatusClass(task.status)">
+                    {{ task.statusName }}
+                  </span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-24 bg-slate-200 dark:bg-slate-600 rounded-full h-2">
+                      <div class="bg-blue-600 h-2 rounded-full" [style.width.%]="getProgress(task)"></div>
+                    </div>
+                    <span class="text-xs text-slate-500 dark:text-slate-400">{{ getProgress(task) }}%</span>
+                  </div>
+                </td>
+                <td class="px-4 py-3">
+                  <span class="text-slate-700 dark:text-slate-300">{{ task.assignedToName || '-' }}</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center space-x-2">
+                    @if (task.status === 0) {
+                      <button (click)="startTask(task)" 
+                              class="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+                              [title]="i18n.t('pickingTasks.actions.start')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </button>
+                    }
+                    @if (task.status === 1) {
+                      <button (click)="completeTask(task)" 
+                              class="p-1.5 text-green-600 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-lg transition-colors"
+                              [title]="i18n.t('pickingTasks.actions.complete')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </button>
+                    }
+                    @if (task.status !== 2 && task.status !== 3) {
+                      <button (click)="cancelTask(task)" 
+                              class="p-1.5 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors"
+                              [title]="i18n.t('common.buttons.cancel')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
     </div>
+  }
+
+  <!-- Empty State -->
+  @if (!loading() && !error() && !hasData()) {
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm text-center py-20">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/30 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+      </div>
+      <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('pickingTasks.empty.title') }}</h2>
+      <p class="text-slate-500 dark:text-slate-400 mt-2">{{ i18n.t('pickingTasks.empty.subtitle') }}</p>
+    </div>
+  }
+</div>

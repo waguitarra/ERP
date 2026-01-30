@@ -24,6 +24,33 @@ export class ProductsListComponent implements OnInit {
   error = signal<string | null>(null);
   products = signal<Product[]>([]);
   searchTerm = signal<string>('');
+  statusFilter = signal<string>('all');
+  categoryFilter = signal<string>('all');
+
+  filteredProducts = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const status = this.statusFilter();
+    const allProducts = this.products();
+    
+    let result = allProducts;
+    
+    if (term) {
+      result = result.filter(product => 
+        product.name?.toLowerCase().includes(term) ||
+        product.sku?.toLowerCase().includes(term) ||
+        product.barcode?.toLowerCase().includes(term) ||
+        product.description?.toLowerCase().includes(term)
+      );
+    }
+    
+    if (status !== 'all') {
+      const isActive = status === 'active';
+      result = result.filter(product => product.isActive === isActive);
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => this.products().length > 0);
   
   showCreateModal = signal<boolean>(false);
@@ -51,9 +78,22 @@ export class ProductsListComponent implements OnInit {
   }
 
   onSearch(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.searchTerm.set(value);
-    this.loadProducts();
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  onStatusChange(event: Event): void {
+    this.statusFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  onCategoryChange(event: Event): void {
+    this.categoryFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.statusFilter.set('all');
+    this.categoryFilter.set('all');
   }
 
   openCreateModal(): void {
@@ -92,7 +132,7 @@ export class ProductsListComponent implements OnInit {
       await this.loadProducts();
     } catch (error) {
       console.error('Erro ao excluir produto:', error);
-      alert('Erro ao excluir produto');
+      alert(this.i18n.t('common.errors.deleteProduct'));
     }
   }
 }

@@ -65,7 +65,7 @@ export class DriverEditModalComponent implements OnInit {
       this.onClose();
     } catch (error) {
       console.error('Erro ao atualizar motorista:', error);
-      alert('Erro ao atualizar motorista');
+      alert(this.i18n.t('common.errors.updateDriver'));
     } finally {
       this.isSaving = false;
     }

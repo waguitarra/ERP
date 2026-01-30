@@ -1,36 +1,419 @@
 <div class="space-y-6 animate-fade-in">
   <div class="flex justify-between items-center">
     <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('vehicles.title') }}</h1>
-    <button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">{{ i18n.t('vehicles.newVehicle') }}</button>
+    <button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      {{ i18n.t('vehicles.newVehicle') }}
+    </button>
   </div>
+  
+  <!-- Filtros -->
+  <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="lg:col-span-2">
+        <input type="search" [placeholder]="i18n.t('vehicles.searchPlaceholder')" [value]="searchTerm()" (input)="onSearch($event)" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div>
+        <select [value]="statusFilter()" (change)="onStatusChange($event)" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="all">{{ i18n.t('common.filters.allStatus') }}</option>
+          <option value="0">{{ i18n.t('vehicles.status.available') }}</option>
+          <option value="1">{{ i18n.t('vehicles.status.inTransit') }}</option>
+          <option value="2">{{ i18n.t('vehicles.status.maintenance') }}</option>
+          <option value="3">{{ i18n.t('vehicles.status.inactive') }}</option>
+        </select>
+      </div>
+      <div>
+        <select [value]="trackingFilter()" (change)="onTrackingChange($event)" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="all">{{ i18n.t('vehicles.tracking.allTracking') }}</option>
+          <option value="enabled">{{ i18n.t('vehicles.tracking.enabled') }}</option>
+          <option value="disabled">{{ i18n.t('vehicles.tracking.disabled') }}</option>
+        </select>
+      </div>
+      <div class="flex gap-2">
+        <button (click)="clearFilters()" class="px-3 py-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700" [title]="i18n.t('common.filters.clear')">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Veículos -->
   <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
     @if (loading()) {
       <div class="p-12 text-center"><div class="inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>
     } @else if (hasData()) {
-      <table class="min-w-full">
-        <thead class="bg-slate-50 dark:bg-slate-900"><tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.plateNumber') }}</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.model') }}</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.capacity') }}</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.status') }}</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.actions') }}</th>
-        </tr></thead>
-        <tbody class="bg-white dark:bg-slate-800">
-          @for (vehicle of vehicles(); track vehicle.id) {
-            <tr class="border-t border-slate-200 dark:border-slate-700">
-              <td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-slate-100">{{vehicle.plateNumber}}</td>
-              <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{vehicle.model}}</td>
-              <td class="px-6 py-4 text-sm text-slate-900 dark:text-slate-100">{{vehicle.capacity}} kg</td>
-              <td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">{{vehicle.status}}</span></td>
-              <td class="px-6 py-4 text-sm"><button (click)="openEditModal(vehicle)" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 mr-3">{{ i18n.t('common.buttons.edit') }}</button><button (click)="deleteVehicle(vehicle)" class="text-red-600 dark:text-red-400 hover:text-red-700">{{ i18n.t('common.buttons.delete') }}</button></td>
+      <div class="overflow-x-auto">
+        <table class="min-w-full">
+          <thead class="bg-slate-50 dark:bg-slate-900">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.licensePlate') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.brand') }} / {{ i18n.t('vehicles.fields.model') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.fields.driver') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.status') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.tracking.title') }}</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('vehicles.tracking.lastUpdate') }}</th>
+              <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">{{ i18n.t('common.fields.actions') }}</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
+            @for (vehicle of filteredVehicles(); track vehicle.id) {
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                      <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="font-semibold text-slate-900 dark:text-slate-100">{{ vehicle.licensePlate }}</span>
+                      @if (vehicle.color) {
+                        <span class="ml-2 text-xs text-slate-500 dark:text-slate-400">{{ vehicle.color }}</span>
+                      }
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4">
+                  <div class="text-sm">
+                    <span class="font-medium text-slate-900 dark:text-slate-100">{{ vehicle.brand || '-' }}</span>
+                    <span class="text-slate-500 dark:text-slate-400"> {{ vehicle.model }}</span>
+                    @if (vehicle.year) {
+                      <span class="text-slate-400 dark:text-slate-500"> ({{ vehicle.year }})</span>
+                    }
+                  </div>
+                  @if (vehicle.vehicleType) {
+                    <div class="text-xs text-slate-500 dark:text-slate-400">{{ vehicle.vehicleType }}</div>
+                  }
+                </td>
+                <td class="px-4 py-4">
+                  @if (vehicle.driverName) {
+                    <div class="text-sm font-medium text-slate-900 dark:text-slate-100">{{ vehicle.driverName }}</div>
+                    @if (vehicle.driverPhone) {
+                      <div class="text-xs text-slate-500 dark:text-slate-400">{{ vehicle.driverPhone }}</div>
+                    }
+                  } @else {
+                    <span class="text-sm text-slate-400 dark:text-slate-500">{{ i18n.t('vehicles.noDriver') }}</span>
+                  }
+                </td>
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-2">
+                    <span [class]="'px-2 py-1 text-xs font-medium rounded-full ' + getStatusClass(vehicle.status)">
+                      {{ vehicle.statusName || i18n.t('vehicles.status.' + vehicle.status) }}
+                    </span>
+                    @if (vehicle.isMoving) {
+                      <span class="flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        {{ i18n.t('vehicles.tracking.moving') }}
+                      </span>
+                    }
+                  </div>
+                </td>
+                <td class="px-4 py-4">
+                  <button (click)="toggleTracking(vehicle)" 
+                          [class]="vehicle.trackingEnabled 
+                            ? 'flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors'
+                            : 'flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors'">
+                    @if (vehicle.trackingEnabled) {
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      <span class="text-xs font-medium">{{ i18n.t('vehicles.tracking.on') }}</span>
+                    } @else {
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                      <span class="text-xs font-medium">{{ i18n.t('vehicles.tracking.off') }}</span>
+                    }
+                  </button>
+                </td>
+                <td class="px-4 py-4 text-sm text-slate-500 dark:text-slate-400">
+                  @if (vehicle.trackingEnabled && vehicle.lastLocationUpdate) {
+                    <div class="text-xs">{{ formatLastUpdate(vehicle.lastLocationUpdate) }}</div>
+                    @if (vehicle.currentSpeed !== undefined && vehicle.currentSpeed !== null) {
+                      <div class="text-xs text-blue-600 dark:text-blue-400">{{ vehicle.currentSpeed }} km/h</div>
+                    }
+                  } @else {
+                    <span class="text-slate-400">-</span>
+                  }
+                </td>
+                <td class="px-4 py-4 text-right">
+                  <div class="flex items-center justify-end gap-2">
+                    @if (vehicle.trackingEnabled) {
+                      <button (click)="openMapView(vehicle)" class="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-colors" [title]="i18n.t('vehicles.viewOnMap')">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                      </button>
+                    }
+                    <button (click)="openEditModal(vehicle)" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors" [title]="i18n.t('common.buttons.edit')">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    </button>
+                    <button (click)="deleteVehicle(vehicle)" class="p-2 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors" [title]="i18n.t('common.buttons.delete')">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     } @else {
-      <div class="p-12 text-center"><button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">{{ i18n.t('vehicles.newVehicle') }}</button></div>
+      <div class="p-12 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+          <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+          </svg>
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 mb-4">{{ i18n.t('vehicles.noVehicles') }}</p>
+        <button (click)="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">{{ i18n.t('vehicles.newVehicle') }}</button>
+      </div>
     }
   </div>
 </div>
-@if (showCreateModal()) { <app-vehicle-create-modal (closeModal)="closeCreateModal()" (vehicleCreated)="onVehicleCreated()"></app-vehicle-create-modal> }
-@if (showEditModal() && selectedVehicle()) { <app-vehicle-edit-modal [vehicle]="selectedVehicle()!" (closeModal)="closeEditModal()" (vehicleUpdated)="onVehicleUpdated()"></app-vehicle-edit-modal> }
+
+<!-- Modais -->
+@if (showCreateModal()) { 
+  <app-vehicle-create-modal (closeModal)="closeCreateModal()" (vehicleCreated)="onVehicleCreated()"></app-vehicle-create-modal> 
+}
+@if (showEditModal() && selectedVehicle()) { 
+  <app-vehicle-edit-modal [vehicle]="selectedVehicle()!" (closeModal)="closeEditModal()" (vehicleUpdated)="onVehicleUpdated()"></app-vehicle-edit-modal> 
+}
+
+<!-- Map View Modal -->
+@if (showMapView() && selectedVehicleForMap()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" (click)="closeMapView()">
+    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden m-4" (click)="$event.stopPropagation()">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
+        <div class="flex items-center gap-3">
+          <div [class]="'w-12 h-12 rounded-lg flex items-center justify-center ' + (selectedVehicleForMap()!.isMoving ? 'bg-green-100 dark:bg-green-900/30' : 'bg-blue-100 dark:bg-blue-900/30')">
+            @if (selectedVehicleForMap()!.isMoving) {
+              <svg class="w-7 h-7 text-green-600 dark:text-green-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            } @else {
+              <svg class="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            }
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100">{{ i18n.t('vehicles.tracking.liveTracking') }}</h2>
+              @if (selectedVehicleForMap()!.isMoving) {
+                <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 animate-pulse">
+                  {{ i18n.t('vehicles.tracking.inMotion') }}
+                </span>
+              } @else {
+                <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400">
+                  {{ i18n.t('vehicles.tracking.stopped') }}
+                </span>
+              }
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400">{{ selectedVehicleForMap()!.licensePlate }} - {{ selectedVehicleForMap()!.brand }} {{ selectedVehicleForMap()!.model }}</p>
+          </div>
+        </div>
+        <button (click)="closeMapView()" class="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      
+      <!-- Info Cards -->
+      <div class="p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <!-- Speed -->
+          <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+            <span class="text-xs text-slate-500 dark:text-slate-400 block mb-1">{{ i18n.t('vehicles.tracking.speed') }}</span>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span class="text-xl font-bold text-slate-900 dark:text-slate-100">{{ selectedVehicleForMap()!.currentSpeed || 0 }}</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400">km/h</span>
+            </div>
+          </div>
+
+          <!-- Driver with WhatsApp -->
+          <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+            <span class="text-xs text-slate-500 dark:text-slate-400 block mb-1">{{ i18n.t('vehicles.fields.driver') }}</span>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-medium text-slate-900 dark:text-slate-100 truncate">{{ selectedVehicleForMap()!.driverName || '-' }}</span>
+              @if (selectedVehicleForMap()!.driverPhone) {
+                <a [href]="getWhatsAppLink(selectedVehicleForMap()!.driverPhone)" target="_blank" 
+                   class="p-1.5 text-green-600 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-lg transition-colors"
+                   [title]="i18n.t('vehicles.tracking.callWhatsApp')">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+              }
+            </div>
+          </div>
+
+          <!-- Last Update -->
+          <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+            <span class="text-xs text-slate-500 dark:text-slate-400 block mb-1">{{ i18n.t('vehicles.tracking.lastUpdate') }}</span>
+            <span class="text-sm font-medium text-slate-900 dark:text-slate-100">{{ formatLastUpdate(selectedVehicleForMap()!.lastLocationUpdate) }}</span>
+          </div>
+
+          <!-- GPS Status -->
+          <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+            <span class="text-xs text-slate-500 dark:text-slate-400 block mb-1">{{ i18n.t('vehicles.tracking.gpsStatus') }}</span>
+            <div class="flex items-center gap-2">
+              @if (selectedVehicleForMap()!.trackingEnabled) {
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-sm font-medium text-green-600 dark:text-green-400">{{ i18n.t('vehicles.tracking.gpsOn') }}</span>
+              } @else {
+                <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                <span class="text-sm font-medium text-slate-500">{{ i18n.t('vehicles.tracking.gpsOff') }}</span>
+              }
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 md:col-span-1">
+            <span class="text-xs text-slate-500 dark:text-slate-400 block mb-1">{{ i18n.t('vehicles.tracking.currentLocation') }}</span>
+            <span class="text-sm text-slate-900 dark:text-slate-100 line-clamp-2">{{ selectedVehicleForMap()!.currentAddress || i18n.t('vehicles.tracking.noAddress') }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Shipment Info (if any) -->
+      @if (selectedVehicleForMap()!.currentShipmentId) {
+        <div class="p-4 border-b border-slate-200 dark:border-slate-700 bg-blue-50 dark:bg-blue-900/20">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-bold text-slate-900 dark:text-slate-100">{{ i18n.t('vehicles.tracking.currentDelivery') }}</span>
+                  <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
+                    {{ selectedVehicleForMap()!.currentShipmentNumber }}
+                  </span>
+                  @if (selectedVehicleForMap()!.currentShipmentStatus) {
+                    <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400">
+                      {{ selectedVehicleForMap()!.currentShipmentStatus }}
+                    </span>
+                  }
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                  <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                  {{ selectedVehicleForMap()!.currentShipmentAddress || i18n.t('vehicles.tracking.noDestination') }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Customer Info with WhatsApp -->
+            @if (selectedVehicleForMap()!.currentOrderCustomerName) {
+              <div class="text-right">
+                <span class="text-xs text-slate-500 dark:text-slate-400 block">{{ i18n.t('vehicles.tracking.customer') }}</span>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="text-sm font-medium text-slate-900 dark:text-slate-100">{{ selectedVehicleForMap()!.currentOrderCustomerName }}</span>
+                  @if (selectedVehicleForMap()!.currentOrderCustomerPhone) {
+                    <a [href]="getWhatsAppLink(selectedVehicleForMap()!.currentOrderCustomerPhone)" target="_blank" 
+                       class="p-1.5 text-green-600 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-lg transition-colors"
+                       [title]="i18n.t('vehicles.tracking.callCustomerWhatsApp')">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </a>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      
+      <!-- Map Container - Google Maps Embed -->
+      <div class="relative h-96 bg-slate-200 dark:bg-slate-700">
+        @if (selectedVehicleForMap()!.lastLatitude && selectedVehicleForMap()!.lastLongitude) {
+          <!-- Google Maps iframe with vehicle location -->
+          <div class="absolute inset-0">
+            <iframe 
+              [src]="getGoogleMapsUrl(selectedVehicleForMap()!)" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full">
+            </iframe>
+          </div>
+          
+          <!-- Vehicle indicator overlay -->
+          <div class="absolute top-4 right-4 z-10">
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-3 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center gap-3">
+                <div [class]="'w-10 h-10 rounded-full flex items-center justify-center ' + (selectedVehicleForMap()!.isMoving ? 'bg-green-500' : 'bg-blue-500')">
+                  @if (selectedVehicleForMap()!.isMoving) {
+                    <svg class="w-5 h-5 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  } @else {
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    </svg>
+                  }
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-slate-900 dark:text-slate-100">{{ selectedVehicleForMap()!.licensePlate }}</div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400">
+                    @if (selectedVehicleForMap()!.isMoving) {
+                      <span class="text-green-600 dark:text-green-400">● {{ i18n.t('vehicles.tracking.inMotion') }} - {{ selectedVehicleForMap()!.currentSpeed || 0 }} km/h</span>
+                    } @else {
+                      <span class="text-slate-500">● {{ i18n.t('vehicles.tracking.stopped') }}</span>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coordinates display -->
+          <div class="absolute bottom-4 left-4 z-10 bg-white/95 dark:bg-slate-800/95 px-3 py-2 rounded-lg shadow-lg text-xs border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              </svg>
+              <span class="font-mono text-slate-700 dark:text-slate-300">
+                {{ selectedVehicleForMap()!.lastLatitude?.toFixed(6) }}, {{ selectedVehicleForMap()!.lastLongitude?.toFixed(6) }}
+              </span>
+            </div>
+          </div>
+        } @else {
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center bg-white/80 dark:bg-slate-800/80 p-6 rounded-xl">
+              <svg class="w-12 h-12 mx-auto text-slate-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <p class="text-slate-600 dark:text-slate-400 font-medium">{{ i18n.t('vehicles.tracking.noLocationData') }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-500 mt-1">{{ i18n.t('vehicles.tracking.waitingGpsSignal') }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Action buttons -->
+      <div class="p-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
+        <div class="flex gap-2">
+          @if (selectedVehicleForMap()!.driverPhone) {
+            <a [href]="'tel:' + selectedVehicleForMap()!.driverPhone" 
+               class="flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              {{ i18n.t('vehicles.tracking.callDriver') }}
+            </a>
+          }
+          @if (selectedVehicleForMap()!.driverPhone) {
+            <a [href]="getWhatsAppLink(selectedVehicleForMap()!.driverPhone)" target="_blank"
+               class="flex items-center gap-2 px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+          }
+        </div>
+        <button (click)="closeMapView()" class="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+          {{ i18n.t('common.buttons.close') }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

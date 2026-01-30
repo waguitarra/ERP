@@ -52,7 +52,7 @@ export class DriverCreateModalComponent {
       const companyId = user?.companyId;
       
       if (!companyId) {
-        alert('Erro: CompanyId não encontrado');
+        alert(this.i18n.t('common.errors.companyIdNotFound'));
         return;
       }
       
@@ -66,7 +66,7 @@ export class DriverCreateModalComponent {
       this.onClose();
     } catch (error) {
       console.error('Erro ao criar motorista:', error);
-      alert('Erro ao criar motorista');
+      alert(this.i18n.t('common.errors.createDriver'));
     } finally {
       this.isSaving = false;
     }

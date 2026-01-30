@@ -45,4 +45,11 @@ export class LoginComponent {
       this.isLoading.set(false);
     }
   }
+
+  fillDemoCredentials(): void {
+    this.loginForm.patchValue({
+      email: 'admin@nexus.com',
+      password: 'admin@123456'
+    });
+  }
 }

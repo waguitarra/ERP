@@ -44,7 +44,7 @@
             <input type="text" formControlName="document" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('document')?.invalid && form.get('document')?.touched"
-              placeholder="00.000.000/0000-00">
+              [placeholder]="i18n.t('companies.placeholders.document')">
             @if (form.get('document')?.invalid && form.get('document')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('document')}}</p>
             }
@@ -71,7 +71,7 @@
             <input type="tel" formControlName="phone" autocomplete="tel"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('phone')?.invalid && form.get('phone')?.touched"
-              placeholder="(00) 0000-0000">
+              [placeholder]="i18n.t('companies.placeholders.phone')">
             @if (form.get('phone')?.invalid && form.get('phone')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('phone')}}</p>
             }
@@ -111,7 +111,7 @@
             <input type="text" formControlName="state" autocomplete="address-level1"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('state')?.invalid && form.get('state')?.touched"
-              placeholder="SP">
+              [placeholder]="i18n.t('companies.placeholders.state')">
             @if (form.get('state')?.invalid && form.get('state')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('state')}}</p>
             }
@@ -125,7 +125,7 @@
             <input type="text" formControlName="zipCode" autocomplete="postal-code"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('zipCode')?.invalid && form.get('zipCode')?.touched"
-              placeholder="00000-000">
+              [placeholder]="i18n.t('companies.placeholders.zipCode')">
             @if (form.get('zipCode')?.invalid && form.get('zipCode')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('zipCode')}}</p>
             }

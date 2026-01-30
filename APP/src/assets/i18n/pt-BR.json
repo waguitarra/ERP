@@ -79,6 +79,12 @@
       "cancelled": "Cancelado",
       "delivered": "Entregue"
     },
+    "filters": {
+      "allStatus": "Todos os Status",
+      "dateFrom": "Data inicial",
+      "dateTo": "Data final",
+      "clear": "Limpar filtros"
+    },
     "messages": {
       "loading": "Carregando...",
       "saving": "Salvando...",
@@ -223,6 +229,13 @@
       "deleteLocation": "Deseja realmente excluir a localização",
       "unlockLocation": "Desbloquear esta localização?"
     },
+    "confirms": {
+      "unlockLocation": "Desbloquear esta localização?",
+      "deleteLocation": "Deseja realmente excluir esta localização?"
+    },
+    "prompts": {
+      "blockReason": "Motivo do bloqueio:"
+    },
     "errors": {
       "generic": "Erro ao processar",
       "companyIdNotFound": "Erro: CompanyId não encontrado",
@@ -245,7 +258,17 @@
       "updateLocation": "Erro ao atualizar localização",
       "deleteLocation": "Erro ao excluir localização",
       "blockLocation": "Erro ao bloquear localização",
-      "unblockLocation": "Erro ao desbloquear"
+      "unblockLocation": "Erro ao desbloquear",
+      "createVehicle": "Erro ao criar veículo",
+      "updateVehicle": "Erro ao atualizar veículo",
+      "deleteVehicle": "Erro ao excluir veículo",
+      "toggleTracking": "Erro ao alterar rastreamento",
+      "createDriver": "Erro ao criar motorista",
+      "updateDriver": "Erro ao atualizar motorista",
+      "deleteDriver": "Erro ao excluir motorista",
+      "createOrder": "Erro ao criar pedido",
+      "updateOrder": "Erro ao atualizar pedido",
+      "deleteOrder": "Erro ao excluir pedido"
     },
     "tooltips": {
       "edit": "Editar",
@@ -293,6 +316,12 @@
       "companyTaxId": "CNPJ",
       "name": "Nome",
       "location": "Localização"
+    },
+    "placeholders": {
+      "document": "00.000.000/0000-00",
+      "phone": "(00) 0000-0000",
+      "state": "SP",
+      "zipCode": "00000-000"
     }
   },
   "auth": {
@@ -306,10 +335,17 @@
       "passwordRequired": "Senha é obrigatória",
       "invalidCredentials": "Credenciais inválidas",
       "loggingIn": "Entrando...",
+      "demoCredentials": "Credenciais de Demonstração",
+      "useDemoCredentials": "Clique para preencher automaticamente",
       "validation": {
         "emailRequired": "E-mail é obrigatório",
         "passwordRequired": "Senha é obrigatória"
       },
+      "placeholders": {
+        "email": "seu@email.com",
+        "password": "••••••••"
+      },
+      "categoryRequired": "Categoria é obrigatória",
       "footer": "© 2024 NEXUS ADMIN. Todos os direitos reservados.",
       "forgotPassword": "Esqueceu sua senha?"
     }
@@ -401,7 +437,8 @@
   },
   "orders": {
     "title": "Pedidos",
-    "subtitle": "Gerencie todos os pedidos",
+    "subtitle": "Gerencie os pedidos de venda",
+    "searchPlaceholder": "Buscar por número do pedido ou cliente...",
     "newOrder": "Novo Pedido",
     "createOrder": "Criar Pedido",
     "orderInfo": "Informações do Pedido",
@@ -434,6 +471,15 @@
       "high": "Alta",
       "urgent": "Urgente"
     },
+    "validation": {
+      "requiredFieldsAndItems": "Preencha todos os campos obrigatórios e adicione pelo menos 1 item"
+    },
+    "placeholders": {
+      "orderNumber": "ORD-2025-001",
+      "guid": "00000000-0000-0000-0000-000000000000",
+      "shippingAddress": "Rua, Número, Bairro, Cidade - Estado",
+      "specialInstructions": "Observações ou instruções especiais para este pedido"
+    },
     "stats": {
       "total": "Total Pedidos",
       "totalValue": "Valor Total",
@@ -445,6 +491,15 @@
       "pending": "Pendentes",
       "processing": "Em Processamento",
       "delivered": "Entregues"
+    },
+    "status": {
+      "draft": "Rascunho",
+      "pending": "Pendente",
+      "confirmed": "Confirmado",
+      "inProgress": "Em Andamento",
+      "shipped": "Enviado",
+      "delivered": "Entregue",
+      "cancelled": "Cancelado"
     },
     "table": {
       "orderNumber": "Nº Pedido",
@@ -481,6 +536,7 @@
   "suppliers": {
     "title": "Fornecedores",
     "subtitle": "Gerencie seus fornecedores",
+    "searchPlaceholder": "Buscar por nome, e-mail, telefone ou documento...",
     "newSupplier": "Novo Fornecedor",
     "activeSupplier": "Fornecedor Ativo",
     "table": {
@@ -506,7 +562,8 @@
   },
   "warehouses": {
     "title": "Armazéns",
-    "subtitle": "Gerencie seus armazéns e locais de estoque",
+    "subtitle": "Gerencie seus armazéns",
+    "searchPlaceholder": "Buscar por nome, código ou cidade...",
     "newWarehouse": "Novo Armazém",
     "activeWarehouse": "Armazém Ativo",
     "module": {
@@ -516,7 +573,8 @@
   },
   "drivers": {
     "title": "Motoristas",
-    "subtitle": "Gerencie sua frota de motoristas",
+    "subtitle": "Gerencie os motoristas",
+    "searchPlaceholder": "Buscar por nome, CNH ou telefone...",
     "newDriver": "Novo Motorista",
     "editDriver": "Editar Motorista",
     "createDriver": "Criar Motorista",
@@ -533,26 +591,76 @@
   },
   "vehicles": {
     "title": "Veículos",
-    "subtitle": "Gerencie sua frota de veículos",
+    "subtitle": "Gerencie a frota de veículos",
+    "searchPlaceholder": "Buscar por placa, modelo, marca ou motorista...",
     "newVehicle": "Novo Veículo",
     "editVehicle": "Editar Veículo",
     "createVehicle": "Criar Veículo",
+    "noVehicles": "Nenhum veículo cadastrado",
+    "noDriver": "Sem motorista",
+    "viewOnMap": "Ver no Mapa",
     "fields": {
+      "licensePlate": "Placa",
       "plateNumber": "Placa",
       "type": "Tipo",
+      "vehicleType": "Tipo de Veículo",
       "model": "Modelo",
-      "capacity": "Capacidade (kg)"
+      "brand": "Marca",
+      "year": "Ano",
+      "capacity": "Capacidade",
+      "color": "Cor",
+      "fuelType": "Combustível",
+      "notes": "Observações",
+      "driver": "Motorista"
     },
     "placeholders": {
-      "plate": "ABC-1234",
+      "plate": "ABC1D23",
       "type": "Caminhão, Van, etc",
       "model": "Modelo do veículo",
-      "capacity": "1000"
+      "capacity": "1000",
+      "notes": "Observações sobre o veículo..."
+    },
+    "validation": {
+      "licensePlateFormat": "Formato inválido. Use ABC1D23 (Mercosul) ou ABC1234"
     },
     "status": {
       "available": "Disponível",
+      "inTransit": "Em Trânsito",
       "inUse": "Em Uso",
-      "maintenance": "Manutenção"
+      "maintenance": "Manutenção",
+      "inactive": "Inativo"
+    },
+    "tracking": {
+      "title": "Rastreamento",
+      "allTracking": "Todos os Rastreamentos",
+      "enabled": "Rastreamento Ativo",
+      "disabled": "Rastreamento Inativo",
+      "on": "GPS Ligado",
+      "off": "GPS Desligado",
+      "enableTracking": "Ativar rastreamento GPS",
+      "enableTrackingHint": "Permite rastrear a localização do veículo em tempo real",
+      "liveTracking": "Rastreamento ao Vivo",
+      "lastUpdate": "Última Atualização",
+      "speed": "Velocidade",
+      "address": "Endereço",
+      "currentLocation": "Localização Atual",
+      "noAddress": "Endereço não disponível",
+      "noLocationData": "Sem dados de localização",
+      "waitingGpsSignal": "Aguardando sinal GPS...",
+      "simulatedLocation": "Localização Simulada",
+      "token": "Token de Rastreamento",
+      "inMotion": "Em Movimento",
+      "stopped": "Parado",
+      "moving": "Movendo",
+      "gpsStatus": "Status GPS",
+      "gpsOn": "GPS Ativo",
+      "gpsOff": "GPS Inativo",
+      "currentDelivery": "Entrega Atual",
+      "noDestination": "Destino não definido",
+      "customer": "Cliente",
+      "callDriver": "Ligar para Motorista",
+      "callWhatsApp": "Chamar no WhatsApp",
+      "callCustomerWhatsApp": "Chamar cliente no WhatsApp"
     },
     "module": {
       "title": "Gestão de Veículos",
@@ -561,6 +669,7 @@
   },
   "storageLocations": {
     "title": "Localizações de Estoque",
+    "searchPlaceholder": "Buscar por código, corredor ou tipo...",
     "newLocation": "Nova Localização",
     "editLocation": "Editar Localização",
     "createLocation": "Criar Localização",
@@ -574,11 +683,22 @@
     "fields": {
       "warehouseId": "ID do Armazém",
       "zoneId": "ID da Zona (opcional)",
+      "code": "Código",
       "aisle": "Corredor",
       "rack": "Rack",
       "shelf": "Prateleira",
       "bin": "Bin (opcional)",
       "capacity": "Capacidade (opcional)"
+    },
+    "placeholders": {
+      "warehouseId": "GUID do armazém",
+      "zoneId": "GUID da zona",
+      "code": "A-01-2-B",
+      "aisle": "A",
+      "rack": "01",
+      "shelf": "2",
+      "bin": "B",
+      "capacity": "100"
     }
   },
   "pickingTasks": {
@@ -588,6 +708,22 @@
     "module": {
       "title": "Tarefas de Separação",
       "subtitle": "Módulo de separação em desenvolvimento"
+    },
+    "actions": {
+      "start": "Iniciar",
+      "complete": "Concluir"
+    },
+    "empty": {
+      "title": "Nenhuma tarefa encontrada",
+      "subtitle": "Não há tarefas de picking para exibir no momento."
+    },
+    "table": {
+      "task": "Task",
+      "order": "Pedido",
+      "wave": "Wave",
+      "progress": "Progresso",
+      "assignedTo": "Atribuído",
+      "items": "itens"
     }
   },
   "packingTasks": {
@@ -603,6 +739,46 @@
     "title": "Recebimentos",
     "subtitle": "Gerencie recebimentos de mercadorias",
     "newShipment": "Novo Recebimento",
+    "searchPlaceholder": "Buscar por número, pedido, fornecedor ou ASN...",
+    "loading": "Carregando recebimentos...",
+    "qc": "QC",
+    "asn": "ASN",
+    "arrived": "Chegou",
+    "errors": {
+      "loadFailed": "Erro ao carregar recebimentos"
+    },
+    "confirm": {
+      "cancel": "Deseja realmente cancelar este recebimento?",
+      "delete": "Deseja realmente excluir este recebimento? Esta ação não pode ser desfeita."
+    },
+    "stats": {
+      "total": "Total"
+    },
+    "status": {
+      "scheduled": "Agendados",
+      "inProgress": "Em Andamento",
+      "completed": "Concluídos",
+      "cancelled": "Cancelados",
+      "unknown": "Desconhecido"
+    },
+    "table": {
+      "shipment": "Shipment",
+      "supplier": "Fornecedor",
+      "order": "Pedido",
+      "dock": "Doca",
+      "status": "Status",
+      "progress": "Progresso",
+      "expectedArrival": "Chegada Prevista"
+    },
+    "actions": {
+      "receive": "Receber",
+      "complete": "Concluir",
+      "cancel": "Cancelar"
+    },
+    "empty": {
+      "title": "Nenhum recebimento encontrado",
+      "subtitle": "Não há recebimentos para exibir no momento."
+    },
     "module": {
       "title": "Recebimentos",
       "subtitle": "Módulo de recebimentos em desenvolvimento"
@@ -612,6 +788,51 @@
     "title": "Expedições",
     "subtitle": "Gerencie expedições de mercadorias",
     "newShipment": "Nova Expedição",
+    "searchPlaceholder": "Buscar por expedição, pedido, rastreio ou endereço...",
+    "loading": "Carregando expedições...",
+    "errors": {
+      "loadFailed": "Erro ao carregar expedições"
+    },
+    "confirm": {
+      "cancel": "Deseja realmente cancelar esta expedição?",
+      "delete": "Deseja realmente excluir esta expedição?"
+    },
+    "stats": {
+      "total": "Total"
+    },
+    "status": {
+      "pending": "Pendente",
+      "readyToShip": "Pronto para Envio",
+      "shipped": "Enviado",
+      "inTransit": "Em Trânsito",
+      "delivered": "Entregue",
+      "cancelled": "Cancelado",
+      "unknown": "Desconhecido"
+    },
+    "table": {
+      "shipmentNumber": "Expedição",
+      "orderNumber": "Pedido",
+      "tracking": "Rastreio",
+      "status": "Status",
+      "shippedDate": "Data de Envio",
+      "deliveredDate": "Data de Entrega",
+      "address": "Endereço",
+      "actions": "Ações"
+    },
+    "actions": {
+      "markReadyToShip": "Marcar como pronto para envio",
+      "ship": "Enviar",
+      "markInTransit": "Marcar em trânsito",
+      "markDelivered": "Marcar entregue",
+      "cancel": "Cancelar",
+      "delete": "Excluir"
+    },
+    "empty": {
+      "title": "Nenhuma expedição encontrada"
+    },
+    "footer": {
+      "showing": "Mostrando {{shown}} de {{total}} expedições"
+    },
     "module": {
       "title": "Expedições",
       "subtitle": "Módulo de expedições em desenvolvimento"
@@ -674,7 +895,8 @@
   },
   "purchase_orders": {
     "title": "Pedidos de Compra",
-    "subtitle": "Gerencie pedidos de compra",
+    "subtitle": "Gerencie os pedidos de compra de fornecedores",
+    "searchPlaceholder": "Buscar por número do pedido ou fornecedor...",
     "create_new": "Novo Pedido de Compra",
     "create_title": "Criar Pedido de Compra",
     "edit_title": "Editar Pedido de Compra",
@@ -708,8 +930,23 @@
     "created_success": "Pedido de compra criado com sucesso",
     "updated_success": "Pedido de compra atualizado com sucesso",
     "deleted_success": "Pedido de compra excluído com sucesso",
+    "confirm_delete": "Tem certeza que deseja excluir este pedido?",
     "validation": {
       "required_fields": "Preencha todos os campos obrigatórios"
+    },
+    "placeholders": {
+      "purchaseOrderNumber": "Ex: PO-2025-001",
+      "expectedParcels": "Ex: 10",
+      "cartonsPerParcel": "Ex: 10",
+      "unitsPerCarton": "Ex: 50",
+      "dockDoorNumber": "Ex: DOCK-01",
+      "shippingDistance": "Ex: 850 km",
+      "originCountry": "Ex: China",
+      "portOfEntry": "Ex: Santos/SP",
+      "containerNumber": "Ex: MSCU1234567",
+      "incoterm": "Ex: FOB",
+      "billOfLading": "Ex: BL-2025-001",
+      "importLicenseNumber": "Ex: LI-123456"
     },
     "stats": {
       "total": "Total Pedidos",
@@ -718,6 +955,13 @@
       "valuePending": "Valor Pendente",
       "qtyNonPending": "Qtd Não Pendentes",
       "valueNonPending": "Valor Não Pendente"
+    },
+    "statusLabels": {
+      "pending": "Pendente",
+      "confirmed": "Confirmado",
+      "inTransit": "Em Trânsito",
+      "received": "Recebido",
+      "cancelled": "Cancelado"
     },
     "empty": {
       "title": "Nenhum pedido de compra encontrado",

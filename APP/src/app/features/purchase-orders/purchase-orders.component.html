@@ -87,7 +87,7 @@
                   {{ order.totalQuantity }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                  R$ {{ order.totalValue | number:'1.2-2' }}
+                  {{ order.totalValue | currency:'BRL':'symbol':'1.2-2' }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                   <button
@@ -246,8 +246,8 @@
                     <div class="flex-1">
                       <span class="text-sm font-medium text-gray-900 dark:text-white">{{ item.sku }}</span>
                       <span class="text-sm text-gray-600 dark:text-gray-400 ml-2">
-                        {{ item.quantityOrdered }} × R$ {{ item.unitPrice | number:'1.2-2' }} = 
-                        R$ {{ (item.quantityOrdered * item.unitPrice) | number:'1.2-2' }}
+                        {{ item.quantityOrdered }} × {{ item.unitPrice | currency:'BRL':'symbol':'1.2-2' }} = 
+                        {{ (item.quantityOrdered * item.unitPrice) | currency:'BRL':'symbol':'1.2-2' }}
                       </span>
                     </div>
                     <button
@@ -267,7 +267,7 @@
                 </div>
                 <div class="flex justify-between text-sm mt-2">
                   <span class="font-medium text-gray-700 dark:text-gray-300">{{ i18n.t('purchase_orders.total_value') }}:</span>
-                  <span class="font-bold text-gray-900 dark:text-white">R$ {{ getTotalValue() | number:'1.2-2' }}</span>
+                  <span class="font-bold text-gray-900 dark:text-white">{{ getTotalValue() | currency:'BRL':'symbol':'1.2-2' }}</span>
                 </div>
               </div>
             }

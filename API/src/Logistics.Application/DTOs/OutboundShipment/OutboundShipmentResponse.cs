@@ -1,5 +1,3 @@
-using Logistics.Domain.Enums;
-
 namespace Logistics.Application.DTOs.OutboundShipment;
 
 public record OutboundShipmentResponse(
@@ -9,7 +7,8 @@ public record OutboundShipmentResponse(
     string OrderNumber,
     Guid? CarrierId,
     string? TrackingNumber,
-    OutboundStatus Status,
+    int Status,
+    string StatusName,
     DateTime? ShippedDate,
     DateTime? DeliveredDate,
     string? DeliveryAddress,

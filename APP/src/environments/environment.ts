@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:5000',
+  apiUrl: '', // Em produção (Docker), usa proxy nginx para /api
   appName: 'NEXUS ADMIN',
   version: '1.0.0'
 };

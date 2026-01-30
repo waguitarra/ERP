@@ -1,4 +1,5 @@
 using Logistics.Domain.Entities;
+using Logistics.Domain.Enums;
 using Logistics.Domain.Interfaces;
 using Logistics.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,55 @@ public class InboundShipmentRepository : IInboundShipmentRepository
     {
         return await _context.InboundShipments
             .Include(i => i.Supplier)
+            .OrderByDescending(i => i.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<InboundShipment>> GetAllWithDetailsAsync()
+    {
+        return await _context.InboundShipments
+            .Include(i => i.Supplier)
+            .Include(i => i.Order)
+            .Include(i => i.Vehicle)
+            .Include(i => i.Driver)
+            .Include(i => i.Company)
+            .OrderByDescending(i => i.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<InboundShipment>> GetByStatusAsync(InboundStatus status)
+    {
+        return await _context.InboundShipments
+            .Include(i => i.Supplier)
+            .Include(i => i.Order)
+            .Include(i => i.Vehicle)
+            .Include(i => i.Driver)
+            .Where(i => i.Status == status)
+            .OrderByDescending(i => i.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<InboundShipment>> GetScheduledAsync()
+    {
+        return await _context.InboundShipments
+            .Include(i => i.Supplier)
+            .Include(i => i.Order)
+            .Include(i => i.Vehicle)
+            .Include(i => i.Driver)
+            .Where(i => i.Status == InboundStatus.Scheduled)
+            .OrderByDescending(i => i.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<InboundShipment>> GetInProgressAsync()
+    {
+        return await _context.InboundShipments
+            .Include(i => i.Supplier)
+            .Include(i => i.Order)
+            .Include(i => i.Vehicle)
+            .Include(i => i.Driver)
+            .Where(i => i.Status == InboundStatus.InProgress)
+            .OrderByDescending(i => i.CreatedAt)
             .ToListAsync();
     }
 

@@ -21,6 +21,30 @@ export class WarehousesListComponent implements OnInit {
 
   loading = signal<boolean>(true);
   warehouses = signal<Warehouse[]>([]);
+  searchTerm = signal<string>('');
+  statusFilter = signal<string>('all');
+  
+  filteredWarehouses = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const status = this.statusFilter();
+    let result = this.warehouses();
+    
+    if (term) {
+      result = result.filter(warehouse =>
+        warehouse.name?.toLowerCase().includes(term) ||
+        warehouse.code?.toLowerCase().includes(term) ||
+        warehouse.city?.toLowerCase().includes(term)
+      );
+    }
+    
+    if (status !== 'all') {
+      const isActive = status === 'active';
+      result = result.filter(warehouse => warehouse.isActive === isActive);
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => this.warehouses().length > 0);
   showCreateModal = signal<boolean>(false);
   showEditModal = signal<boolean>(false);
@@ -40,6 +64,20 @@ export class WarehousesListComponent implements OnInit {
     } finally {
       this.loading.set(false);
     }
+  }
+
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  onStatusChange(event: Event): void {
+    this.statusFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.statusFilter.set('all');
   }
 
   openCreateModal(): void { this.showCreateModal.set(true); }
@@ -65,7 +103,7 @@ export class WarehousesListComponent implements OnInit {
       await this.loadWarehouses();
     } catch (error) {
       console.error('Erro ao excluir armazém:', error);
-      alert('Erro ao excluir armazém');
+      alert(this.i18n.t('common.errors.deleteWarehouse'));
     }
   }
 }

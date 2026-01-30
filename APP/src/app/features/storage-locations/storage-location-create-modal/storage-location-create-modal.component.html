@@ -21,7 +21,7 @@
             <input type="text" formControlName="warehouseId" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('warehouseId')?.invalid && form.get('warehouseId')?.touched"
-              placeholder="GUID do armazém">
+              [placeholder]="i18n.t('storageLocations.placeholders.warehouseId')">
             @if (form.get('warehouseId')?.invalid && form.get('warehouseId')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('warehouseId')}}</p>
             }
@@ -31,7 +31,7 @@
             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ i18n.t('storageLocations.fields.zoneId')}}</label>
             <input type="text" formControlName="zoneId" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-              placeholder="GUID da zona">
+              [placeholder]="i18n.t('storageLocations.placeholders.zoneId')">
           </div>
 
           <div class="col-span-2">
@@ -41,7 +41,7 @@
             <input type="text" formControlName="code" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('code')?.invalid && form.get('code')?.touched"
-              placeholder="A-01-2-B">
+              [placeholder]="i18n.t('storageLocations.placeholders.code')">
             @if (form.get('code')?.invalid && form.get('code')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('code')}}</p>
             }
@@ -54,7 +54,7 @@
             <input type="text" formControlName="aisle" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('aisle')?.invalid && form.get('aisle')?.touched"
-              placeholder="A">
+              [placeholder]="i18n.t('storageLocations.placeholders.aisle')">
             @if (form.get('aisle')?.invalid && form.get('aisle')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('aisle')}}</p>
             }
@@ -67,7 +67,7 @@
             <input type="text" formControlName="rack" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('rack')?.invalid && form.get('rack')?.touched"
-              placeholder="01">
+              [placeholder]="i18n.t('storageLocations.placeholders.rack')">
             @if (form.get('rack')?.invalid && form.get('rack')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('rack')}}</p>
             }
@@ -80,7 +80,7 @@
             <input type="text" formControlName="shelf" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
               [class.border-red-500]="form.get('shelf')?.invalid && form.get('shelf')?.touched"
-              placeholder="2">
+              [placeholder]="i18n.t('storageLocations.placeholders.shelf')">
             @if (form.get('shelf')?.invalid && form.get('shelf')?.touched) {
               <p class="text-red-500 text-xs mt-1">{{getError('shelf')}}</p>
             }
@@ -90,7 +90,7 @@
             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ i18n.t('storageLocations.fields.bin')}}</label>
             <input type="text" formControlName="bin" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-              placeholder="B">
+              [placeholder]="i18n.t('storageLocations.placeholders.bin')">
           </div>
 
           <div>
@@ -113,7 +113,7 @@
             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ i18n.t('storageLocations.fields.capacity')}}</label>
             <input type="number" formControlName="capacity" autocomplete="off"
               class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-              placeholder="100">
+              [placeholder]="i18n.t('storageLocations.placeholders.capacity')">
           </div>
 
         </div>

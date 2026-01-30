@@ -83,7 +83,7 @@ export class ProductCreateModalComponent implements OnInit {
       const companyId = user?.companyId;
       
       if (!companyId) {
-        alert('Erro: CompanyId não encontrado');
+        alert(this.i18n.t('common.errors.companyIdNotFound'));
         return;
       }
       
@@ -97,7 +97,7 @@ export class ProductCreateModalComponent implements OnInit {
       this.onClose();
     } catch (error) {
       console.error('Erro ao criar produto:', error);
-      alert('Erro ao criar produto');
+      alert(this.i18n.t('common.errors.createProduct'));
     } finally {
       this.isSaving = false;
     }

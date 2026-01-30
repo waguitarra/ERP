@@ -57,7 +57,7 @@ export class CompaniesListComponent implements OnInit {
       await this.loadCompanies();
     } catch (error) {
       console.error('Erro ao excluir empresa:', error);
-      alert('Erro ao excluir empresa');
+      alert(this.i18n.t('common.errors.deleteCompany'));
     }
   }
 }

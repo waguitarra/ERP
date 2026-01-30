@@ -58,7 +58,7 @@ export class StorageLocationCreateModalComponent {
       this.close();
     } catch (error) {
       console.error('Erro ao criar localização:', error);
-      alert('Erro ao criar localização');
+      alert(this.i18n.t('common.errors.createLocation'));
     } finally {
       this.loading.set(false);
     }

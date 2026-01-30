@@ -1,23 +1,135 @@
-<app-modal [isOpen]="isOpen" [title]="i18n.t('vehicles.editVehicle')" [size]="'md'" (close)="onClose()">
+<app-modal [isOpen]="isOpen" [title]="i18n.t('vehicles.editVehicle')" [size]="'lg'" (close)="onClose()">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="space-y-4">
-      <app-form-field [label]="i18n.t('vehicles.fields.plateNumber')" [control]="form.controls['plateNumber']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="i18n.t('vehicles.fields.type')" [control]="form.controls['vehicleType']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="i18n.t('vehicles.fields.model')" [control]="form.controls['model']" [type]="'text'" [required]="true"></app-form-field>
-      <app-form-field [label]="i18n.t('vehicles.fields.capacity')" [control]="form.controls['capacity']" [type]="'number'" [required]="true"></app-form-field>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Placa -->
       <div>
-        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('common.fields.status')}}</label>
-        <select formControlName="status" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="Available">{{ i18n.t('vehicles.status.available')}}</option>
-          <option value="InUse">{{ i18n.t('vehicles.status.inUse')}}</option>
-          <option value="Maintenance">{{ i18n.t('vehicles.status.maintenance')}}</option>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          {{ i18n.t('vehicles.fields.licensePlate') }} <span class="text-red-500">*</span>
+        </label>
+        <input 
+          type="text" 
+          formControlName="licensePlate" 
+          (input)="formatLicensePlate($event)"
+          [placeholder]="'ABC1D23'"
+          maxlength="7"
+          class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase"
+        >
+        @if (form.get('licensePlate')?.invalid && form.get('licensePlate')?.touched) {
+          <p class="text-red-500 text-xs mt-1">{{ i18n.t('vehicles.validation.licensePlateFormat') }}</p>
+        }
+      </div>
+
+      <!-- Marca -->
+      <app-form-field 
+        [label]="i18n.t('vehicles.fields.brand')" 
+        [control]="form.controls['brand']" 
+        [type]="'text'" 
+        [placeholder]="'Ex: Volkswagen, Mercedes, Fiat'"
+      ></app-form-field>
+
+      <!-- Modelo -->
+      <app-form-field 
+        [label]="i18n.t('vehicles.fields.model')" 
+        [control]="form.controls['model']" 
+        [type]="'text'" 
+        [placeholder]="'Ex: Delivery, Sprinter, Fiorino'" 
+        [required]="true"
+      ></app-form-field>
+
+      <!-- Ano -->
+      <app-form-field 
+        [label]="i18n.t('vehicles.fields.year')" 
+        [control]="form.controls['year']" 
+        [type]="'number'" 
+        [placeholder]="'2024'" 
+        [required]="true"
+      ></app-form-field>
+
+      <!-- Tipo de Veículo -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('vehicles.fields.vehicleType') }}</label>
+        <select formControlName="vehicleType" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">{{ i18n.t('common.select') }}</option>
+          @for (type of vehicleTypes; track type.value) {
+            <option [value]="type.value">{{ type.label }}</option>
+          }
         </select>
       </div>
-      <label class="flex items-center space-x-2"><input type="checkbox" formControlName="isActive" class="w-4 h-4"/><span class="text-sm text-slate-700 dark:text-slate-300">{{ i18n.t('common.status.active')}}</span></label>
+
+      <!-- Capacidade -->
+      <app-form-field 
+        [label]="i18n.t('vehicles.fields.capacity') + ' (kg)'" 
+        [control]="form.controls['capacity']" 
+        [type]="'number'" 
+        [placeholder]="'1000'"
+      ></app-form-field>
+
+      <!-- Cor -->
+      <app-form-field 
+        [label]="i18n.t('vehicles.fields.color')" 
+        [control]="form.controls['color']" 
+        [type]="'text'" 
+        [placeholder]="'Ex: Branco, Preto, Prata'"
+      ></app-form-field>
+
+      <!-- Tipo de Combustível -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('vehicles.fields.fuelType') }}</label>
+        <select formControlName="fuelType" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">{{ i18n.t('common.select') }}</option>
+          @for (fuel of fuelTypes; track fuel.value) {
+            <option [value]="fuel.value">{{ fuel.label }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Observações (colspan 2) -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{{ i18n.t('vehicles.fields.notes') }}</label>
+        <textarea 
+          formControlName="notes" 
+          rows="2"
+          [placeholder]="i18n.t('vehicles.placeholders.notes')"
+          class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+        ></textarea>
+      </div>
+
+      <!-- Rastreamento -->
+      <div class="md:col-span-2">
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input 
+            type="checkbox" 
+            formControlName="trackingEnabled"
+            class="w-5 h-5 rounded border-slate-300 dark:border-slate-600 text-blue-600 focus:ring-blue-500"
+          >
+          <div>
+            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ i18n.t('vehicles.tracking.enableTracking') }}</span>
+            <p class="text-xs text-slate-500 dark:text-slate-400">{{ i18n.t('vehicles.tracking.enableTrackingHint') }}</p>
+          </div>
+        </label>
+      </div>
+
+      <!-- Tracking Token (readonly) -->
+      @if (vehicle().trackingToken) {
+        <div class="md:col-span-2 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700">
+          <span class="text-xs text-slate-500 dark:text-slate-400 block mb-1">{{ i18n.t('vehicles.tracking.token') }}</span>
+          <code class="text-sm font-mono text-slate-700 dark:text-slate-300">{{ vehicle().trackingToken }}</code>
+        </div>
+      }
     </div>
+
     <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
-      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">{{ i18n.t('common.buttons.cancel')}}</button>
-      <button type="submit" [disabled]="isSaving" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">@if (isSaving) { {{ i18n.t('common.saving')}} } @else { {{ i18n.t('common.buttons.save')}} }</button>
+      <button type="button" (click)="onClose()" [disabled]="isSaving" class="px-6 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50">
+        {{ i18n.t('common.buttons.cancel') }}
+      </button>
+      <button type="submit" [disabled]="isSaving || form.invalid" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2">
+        @if (isSaving) {
+          <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
+          {{ i18n.t('common.saving') }}
+        } @else {
+          {{ i18n.t('common.buttons.save') }}
+        }
+      </button>
     </div>
   </form>
 </app-modal>

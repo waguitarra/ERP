@@ -28,6 +28,47 @@ export class OrdersListComponent implements OnInit {
   loading = signal<boolean>(true);
   orders = signal<Order[]>([]);
   selectedOrder = signal<Order | null>(null);
+  
+  // Filtros
+  searchTerm = signal<string>('');
+  dateFrom = signal<string>('');
+  dateTo = signal<string>('');
+  statusFilter = signal<string>('all');
+  
+  filteredOrders = computed(() => {
+    let result = this.orders();
+    const term = this.searchTerm().toLowerCase().trim();
+    const fromDate = this.dateFrom();
+    const toDate = this.dateTo();
+    const status = this.statusFilter();
+    
+    // Filtro por texto
+    if (term) {
+      result = result.filter(order => 
+        order.orderNumber?.toLowerCase().includes(term) ||
+        order.customerName?.toLowerCase().includes(term)
+      );
+    }
+    
+    // Filtro por data
+    if (fromDate) {
+      const from = new Date(fromDate);
+      result = result.filter(order => order.orderDate && new Date(order.orderDate) >= from);
+    }
+    if (toDate) {
+      const to = new Date(toDate);
+      to.setHours(23, 59, 59, 999);
+      result = result.filter(order => order.orderDate && new Date(order.orderDate) <= to);
+    }
+    
+    // Filtro por status
+    if (status !== 'all') {
+      result = result.filter(order => order.status === parseInt(status));
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => this.orders().length > 0);
 
   // Computed totals
@@ -123,6 +164,33 @@ export class OrdersListComponent implements OnInit {
     return labels[status] || 'Desconhecido';
   }
 
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  onDateFromChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.dateFrom.set(input.value);
+  }
+
+  onDateToChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.dateTo.set(input.value);
+  }
+
+  onStatusChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.statusFilter.set(select.value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.dateFrom.set('');
+    this.dateTo.set('');
+    this.statusFilter.set('all');
+  }
+
   openCreateModal(): void {
     this.createModal()?.open();
   }
@@ -139,7 +207,7 @@ export class OrdersListComponent implements OnInit {
       await this.loadOrders();
     } catch (error) {
       console.error('Erro ao excluir pedido:', error);
-      alert('Erro ao excluir pedido');
+      alert(this.i18n.t('common.errors.deleteOrder'));
     }
   }
 }

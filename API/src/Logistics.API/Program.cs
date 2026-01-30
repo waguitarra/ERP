@@ -72,6 +72,8 @@ builder.Services.AddScoped<IOrderPriorityRepository, OrderPriorityRepository>();
 builder.Services.AddScoped<IInboundShipmentRepository, InboundShipmentRepository>();
 builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
 builder.Services.AddScoped<IPickingWaveRepository, PickingWaveRepository>();
+builder.Services.AddScoped<IPickingTaskRepository, PickingTaskRepository>();
+builder.Services.AddScoped<IPickingLineRepository, PickingLineRepository>();
 builder.Services.AddScoped<IVehicleAppointmentRepository, VehicleAppointmentRepository>();
 builder.Services.AddScoped<IDockDoorRepository, DockDoorRepository>();
 builder.Services.AddScoped<ILotRepository, LotRepository>();
@@ -107,6 +109,7 @@ builder.Services.AddScoped<IOrderPriorityService, OrderPriorityService>();
 builder.Services.AddScoped<IInboundShipmentService, InboundShipmentService>();
 builder.Services.AddScoped<IReceiptService, ReceiptService>();
 builder.Services.AddScoped<IPickingWaveService, PickingWaveService>();
+builder.Services.AddScoped<IPickingTaskService, PickingTaskService>();
 builder.Services.AddScoped<IVehicleAppointmentService, VehicleAppointmentService>();
 builder.Services.AddScoped<IDockDoorService, DockDoorService>();
 builder.Services.AddScoped<ILotService, LotService>();
@@ -205,6 +208,39 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty; // Swagger na raiz
 });
 
+// Auto-migrate database
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<LogisticsDbContext>();
+    try
+    {
+        Log.Information("Aplicando migrations do banco de dados...");
+        db.Database.Migrate();
+        Log.Information("Migrations aplicadas com sucesso!");
+        
+        // Criar usuário admin se não existir
+        if (!db.Users.Any(u => u.Email == "admin@nexus.com"))
+        {
+            Log.Information("Criando usuário admin padrão...");
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword("admin@123456");
+            var admin = new Logistics.Domain.Entities.User(
+                "Admin",
+                "admin@nexus.com",
+                passwordHash,
+                Logistics.Domain.Enums.UserRole.Admin,
+                null
+            );
+            db.Users.Add(admin);
+            db.SaveChanges();
+            Log.Information("Usuário admin criado com sucesso!");
+        }
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex, "Erro ao aplicar migrations");
+    }
+}
+
 // app.UseHttpsRedirection(); // Desabilitado para testes
 
 app.UseCors("AllowAll");
@@ -213,6 +249,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Health check endpoint
+app.MapGet("/api/health", () => Results.Ok(new { status = "Healthy", timestamp = DateTime.UtcNow }));
 
 // Logging de inicialização
 Log.Information("Iniciando Logistics API");

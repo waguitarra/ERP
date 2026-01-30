@@ -75,7 +75,7 @@ export class CustomerEditModalComponent implements OnInit {
       this.onClose();
     } catch (error) {
       console.error('Erro ao atualizar cliente:', error);
-      alert('Erro ao atualizar cliente');
+      alert(this.i18n.t('common.errors.updateCustomer'));
     } finally {
       this.isSaving = false;
     }

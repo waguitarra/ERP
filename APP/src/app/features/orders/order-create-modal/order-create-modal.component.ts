@@ -153,7 +153,7 @@ export class OrderCreateModalComponent implements OnInit {
     if (this.form.invalid || this.items.length === 0) {
       this.form.markAllAsTouched();
       this.items.controls.forEach(c => c.markAllAsTouched());
-      alert('Preencha todos os campos obrigatórios e adicione pelo menos 1 item');
+      alert(this.i18n.t('orders.validation.requiredFieldsAndItems'));
       return;
     }
 
@@ -163,7 +163,7 @@ export class OrderCreateModalComponent implements OnInit {
       const companyId = user?.companyId;
       
       if (!companyId) {
-        alert('Usuário sem empresa vinculada');
+        alert(this.i18n.t('common.errors.companyIdNotFound'));
         return;
       }
 
@@ -194,7 +194,7 @@ export class OrderCreateModalComponent implements OnInit {
       this.close();
     } catch (error) {
       console.error('Erro ao criar pedido:', error);
-      alert('Erro ao criar pedido');
+      alert(this.i18n.t('common.errors.createOrder'));
     } finally {
       this.loading.set(false);
     }

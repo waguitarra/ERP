@@ -23,6 +23,44 @@ export class PurchaseOrdersListComponent implements OnInit {
   loading = signal<boolean>(true);
   purchaseOrders = signal<PurchaseOrder[]>([]);
   selectedOrder = signal<PurchaseOrder | null>(null);
+  
+  // Filtros
+  searchTerm = signal<string>('');
+  dateFrom = signal<string>('');
+  dateTo = signal<string>('');
+  statusFilter = signal<string>('all');
+  
+  filteredPurchaseOrders = computed(() => {
+    let result = this.purchaseOrders() || [];
+    const term = this.searchTerm().toLowerCase().trim();
+    const fromDate = this.dateFrom();
+    const toDate = this.dateTo();
+    const status = this.statusFilter();
+    
+    if (term) {
+      result = result.filter(order => 
+        order.purchaseOrderNumber?.toLowerCase().includes(term) ||
+        order.supplierName?.toLowerCase().includes(term)
+      );
+    }
+    
+    if (fromDate) {
+      const from = new Date(fromDate);
+      result = result.filter(order => order.expectedDate && new Date(order.expectedDate) >= from);
+    }
+    if (toDate) {
+      const to = new Date(toDate);
+      to.setHours(23, 59, 59, 999);
+      result = result.filter(order => order.expectedDate && new Date(order.expectedDate) <= to);
+    }
+    
+    if (status !== 'all') {
+      result = result.filter(order => order.status === status);
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => (this.purchaseOrders() || []).length > 0);
 
   // Computed totals - IGUAL orders-list
@@ -85,6 +123,30 @@ export class PurchaseOrdersListComponent implements OnInit {
     }
   }
 
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  onDateFromChange(event: Event): void {
+    this.dateFrom.set((event.target as HTMLInputElement).value);
+  }
+
+  onDateToChange(event: Event): void {
+    this.dateTo.set((event.target as HTMLInputElement).value);
+  }
+
+  onStatusChange(event: Event): void {
+    this.statusFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.dateFrom.set('');
+    this.dateTo.set('');
+    this.statusFilter.set('all');
+  }
+
   openCreateModal(): void {
     this.selectedOrder.set(null);
     this.modal()?.open();
@@ -122,13 +184,15 @@ export class PurchaseOrdersListComponent implements OnInit {
   }
 
   getStatusLabel(status: string): string {
-    const labels: Record<string, string> = {
-      'Pending': 'Pendente',
-      'Confirmed': 'Confirmado',
-      'InTransit': 'Em Trânsito',
-      'Received': 'Recebido',
-      'Cancelled': 'Cancelado'
+    const keys: Record<string, string> = {
+      'Pending': 'purchase_orders.statusLabels.pending',
+      'Confirmed': 'purchase_orders.statusLabels.confirmed',
+      'InTransit': 'purchase_orders.statusLabels.inTransit',
+      'Received': 'purchase_orders.statusLabels.received',
+      'Cancelled': 'purchase_orders.statusLabels.cancelled'
     };
-    return labels[status] || status;
+
+    const key = keys[status];
+    return key ? this.i18n.t(key) : status;
   }
 }

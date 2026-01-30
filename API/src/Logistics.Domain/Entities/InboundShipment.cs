@@ -96,4 +96,10 @@ public class InboundShipment
         Status = InboundStatus.Completed;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public void Cancel()
+    {
+        Status = InboundStatus.Cancelled;
+        UpdatedAt = DateTime.UtcNow;
+    }
 }

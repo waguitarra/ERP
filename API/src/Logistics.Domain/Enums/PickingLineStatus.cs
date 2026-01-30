@@ -2,8 +2,10 @@ namespace Logistics.Domain.Enums;
 
 public enum PickingLineStatus
 {
-    Pending = 1,
+    Pending = 0,
+    InProgress = 1,
     Partial = 2,
-    Completed = 3,
+    Picked = 3,
+    Completed = 3,  // Alias para Picked
     Cancelled = 4
 }

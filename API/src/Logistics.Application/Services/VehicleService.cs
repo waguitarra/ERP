@@ -37,8 +37,16 @@ public class VehicleService : IVehicleService
             request.CompanyId,
             request.LicensePlate,
             request.Model,
-            request.Year
+            request.Year,
+            request.Brand,
+            request.VehicleType,
+            request.Capacity,
+            request.Color,
+            request.FuelType
         );
+
+        if (request.TrackingEnabled)
+            vehicle.EnableTracking();
 
         await _vehicleRepository.AddAsync(vehicle);
         await _unitOfWork.CommitAsync();
@@ -82,7 +90,13 @@ public class VehicleService : IVehicleService
         if (await _vehicleRepository.LicensePlateExistsAsync(request.LicensePlate, id))
             throw new InvalidOperationException($"Já existe outro veículo com a placa {request.LicensePlate}");
 
-        vehicle.Update(request.LicensePlate, request.Model, request.Year);
+        vehicle.Update(request.LicensePlate, request.Model, request.Year, request.Brand,
+                       request.VehicleType, request.Capacity, request.Color, request.FuelType, request.Notes);
+
+        if (request.TrackingEnabled && !vehicle.TrackingEnabled)
+            vehicle.EnableTracking();
+        else if (!request.TrackingEnabled && vehicle.TrackingEnabled)
+            vehicle.DisableTracking();
 
         await _vehicleRepository.UpdateAsync(vehicle);
         await _unitOfWork.CommitAsync();
@@ -117,6 +131,93 @@ public class VehicleService : IVehicleService
         return MapToResponse(vehicle);
     }
 
+    public async Task<VehicleResponse> EnableTrackingAsync(Guid id)
+    {
+        var vehicle = await _vehicleRepository.GetByIdAsync(id);
+        if (vehicle == null)
+            throw new KeyNotFoundException($"Veículo com ID {id} não encontrado");
+
+        vehicle.EnableTracking();
+        await _vehicleRepository.UpdateAsync(vehicle);
+        await _unitOfWork.CommitAsync();
+
+        return MapToResponse(vehicle);
+    }
+
+    public async Task<VehicleResponse> DisableTrackingAsync(Guid id)
+    {
+        var vehicle = await _vehicleRepository.GetByIdAsync(id);
+        if (vehicle == null)
+            throw new KeyNotFoundException($"Veículo com ID {id} não encontrado");
+
+        vehicle.DisableTracking();
+        await _vehicleRepository.UpdateAsync(vehicle);
+        await _unitOfWork.CommitAsync();
+
+        return MapToResponse(vehicle);
+    }
+
+    public async Task<VehicleResponse> RegenerateTrackingTokenAsync(Guid id)
+    {
+        var vehicle = await _vehicleRepository.GetByIdAsync(id);
+        if (vehicle == null)
+            throw new KeyNotFoundException($"Veículo com ID {id} não encontrado");
+
+        vehicle.RegenerateTrackingToken();
+        await _vehicleRepository.UpdateAsync(vehicle);
+        await _unitOfWork.CommitAsync();
+
+        return MapToResponse(vehicle);
+    }
+
+    public async Task<VehicleResponse> UpdateLocationAsync(Guid id, UpdateVehicleLocationRequest request)
+    {
+        var vehicle = await _vehicleRepository.GetByIdAsync(id);
+        if (vehicle == null)
+            throw new KeyNotFoundException($"Veículo com ID {id} não encontrado");
+
+        if (!vehicle.TrackingEnabled)
+            throw new InvalidOperationException("Rastreamento não está habilitado para este veículo");
+
+        vehicle.UpdateLocation(request.Latitude, request.Longitude, request.Speed, request.Address);
+        await _vehicleRepository.UpdateAsync(vehicle);
+        await _unitOfWork.CommitAsync();
+
+        return MapToResponse(vehicle);
+    }
+
+    public async Task<VehicleResponse> AssignDriverAsync(Guid id, AssignDriverRequest request)
+    {
+        var vehicle = await _vehicleRepository.GetByIdAsync(id);
+        if (vehicle == null)
+            throw new KeyNotFoundException($"Veículo com ID {id} não encontrado");
+
+        vehicle.AssignDriver(request.DriverName, request.DriverPhone);
+        await _vehicleRepository.UpdateAsync(vehicle);
+        await _unitOfWork.CommitAsync();
+
+        return MapToResponse(vehicle);
+    }
+
+    public async Task<VehicleResponse> RemoveDriverAsync(Guid id)
+    {
+        var vehicle = await _vehicleRepository.GetByIdAsync(id);
+        if (vehicle == null)
+            throw new KeyNotFoundException($"Veículo com ID {id} não encontrado");
+
+        vehicle.RemoveDriver();
+        await _vehicleRepository.UpdateAsync(vehicle);
+        await _unitOfWork.CommitAsync();
+
+        return MapToResponse(vehicle);
+    }
+
+    public async Task<IEnumerable<VehicleResponse>> GetWithTrackingEnabledAsync()
+    {
+        var vehicles = await _vehicleRepository.GetAllAsync();
+        return vehicles.Where(v => v.TrackingEnabled).Select(MapToResponse);
+    }
+
     private static VehicleResponse MapToResponse(Vehicle vehicle)
     {
         return new VehicleResponse
@@ -125,8 +226,33 @@ public class VehicleService : IVehicleService
             CompanyId = vehicle.CompanyId,
             LicensePlate = vehicle.LicensePlate,
             Model = vehicle.Model,
+            Brand = vehicle.Brand,
+            VehicleType = vehicle.VehicleType,
             Year = vehicle.Year,
-            Status = vehicle.Status.ToString(),
+            Capacity = vehicle.Capacity,
+            Status = (int)vehicle.Status,
+            StatusName = vehicle.Status.ToString(),
+            TrackingToken = vehicle.TrackingToken,
+            TrackingEnabled = vehicle.TrackingEnabled,
+            LastLatitude = vehicle.LastLatitude,
+            LastLongitude = vehicle.LastLongitude,
+            LastLocationUpdate = vehicle.LastLocationUpdate,
+            CurrentSpeed = vehicle.CurrentSpeed,
+            CurrentAddress = vehicle.CurrentAddress,
+            IsMoving = vehicle.IsMoving,
+            DriverId = vehicle.DriverId,
+            DriverName = vehicle.DriverName,
+            DriverPhone = vehicle.DriverPhone,
+            DriverLicenseNumber = vehicle.Driver?.LicenseNumber,
+            CurrentShipmentId = vehicle.CurrentShipmentId,
+            CurrentShipmentNumber = vehicle.CurrentShipment?.ShipmentNumber,
+            CurrentShipmentAddress = vehicle.CurrentShipment?.DeliveryAddress,
+            CurrentShipmentStatus = vehicle.CurrentShipment?.Status.ToString(),
+            CurrentOrderCustomerName = vehicle.CurrentShipment?.Order?.Customer?.Name,
+            CurrentOrderCustomerPhone = vehicle.CurrentShipment?.Order?.Customer?.Phone,
+            Color = vehicle.Color,
+            FuelType = vehicle.FuelType,
+            Notes = vehicle.Notes,
             CreatedAt = vehicle.CreatedAt,
             UpdatedAt = vehicle.UpdatedAt,
             CompanyName = vehicle.Company?.Name

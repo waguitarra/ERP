@@ -175,7 +175,7 @@ export class OrderEditModalComponent {
       this.close();
     } catch (error) {
       console.error('Erro ao atualizar pedido:', error);
-      alert('Erro ao atualizar pedido');
+      alert(this.i18n.t('common.errors.updateOrder'));
     } finally {
       this.loading.set(false);
     }

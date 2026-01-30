@@ -170,6 +170,160 @@ public class VehiclesController : ControllerBase
             return StatusCode(500, ApiResponse<object>.ErrorResponse("Erro interno no servidor"));
         }
     }
+
+    /// <summary>
+    /// Habilitar rastreamento do veículo
+    /// </summary>
+    [HttpPost("{id}/tracking/enable")]
+    public async Task<ActionResult<ApiResponse<VehicleResponse>>> EnableTracking(Guid id)
+    {
+        try
+        {
+            var response = await _vehicleService.EnableTrackingAsync(id);
+            return Ok(ApiResponse<VehicleResponse>.SuccessResponse(response, "Rastreamento habilitado com sucesso"));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ApiResponse<VehicleResponse>.ErrorResponse(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao habilitar rastreamento");
+            return StatusCode(500, ApiResponse<VehicleResponse>.ErrorResponse("Erro interno no servidor"));
+        }
+    }
+
+    /// <summary>
+    /// Desabilitar rastreamento do veículo
+    /// </summary>
+    [HttpPost("{id}/tracking/disable")]
+    public async Task<ActionResult<ApiResponse<VehicleResponse>>> DisableTracking(Guid id)
+    {
+        try
+        {
+            var response = await _vehicleService.DisableTrackingAsync(id);
+            return Ok(ApiResponse<VehicleResponse>.SuccessResponse(response, "Rastreamento desabilitado com sucesso"));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ApiResponse<VehicleResponse>.ErrorResponse(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao desabilitar rastreamento");
+            return StatusCode(500, ApiResponse<VehicleResponse>.ErrorResponse("Erro interno no servidor"));
+        }
+    }
+
+    /// <summary>
+    /// Regenerar token de rastreamento
+    /// </summary>
+    [HttpPost("{id}/tracking/regenerate-token")]
+    public async Task<ActionResult<ApiResponse<VehicleResponse>>> RegenerateTrackingToken(Guid id)
+    {
+        try
+        {
+            var response = await _vehicleService.RegenerateTrackingTokenAsync(id);
+            return Ok(ApiResponse<VehicleResponse>.SuccessResponse(response, "Token de rastreamento regenerado com sucesso"));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ApiResponse<VehicleResponse>.ErrorResponse(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao regenerar token de rastreamento");
+            return StatusCode(500, ApiResponse<VehicleResponse>.ErrorResponse("Erro interno no servidor"));
+        }
+    }
+
+    /// <summary>
+    /// Atualizar localização do veículo
+    /// </summary>
+    [HttpPost("{id}/location")]
+    public async Task<ActionResult<ApiResponse<VehicleResponse>>> UpdateLocation(Guid id, [FromBody] UpdateVehicleLocationRequest request)
+    {
+        try
+        {
+            var response = await _vehicleService.UpdateLocationAsync(id, request);
+            return Ok(ApiResponse<VehicleResponse>.SuccessResponse(response, "Localização atualizada com sucesso"));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ApiResponse<VehicleResponse>.ErrorResponse(ex.Message));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ApiResponse<VehicleResponse>.ErrorResponse(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao atualizar localização");
+            return StatusCode(500, ApiResponse<VehicleResponse>.ErrorResponse("Erro interno no servidor"));
+        }
+    }
+
+    /// <summary>
+    /// Listar veículos com rastreamento habilitado
+    /// </summary>
+    [HttpGet("tracking/enabled")]
+    public async Task<ActionResult<ApiResponse<IEnumerable<VehicleResponse>>>> GetWithTrackingEnabled()
+    {
+        try
+        {
+            var response = await _vehicleService.GetWithTrackingEnabledAsync();
+            return Ok(ApiResponse<IEnumerable<VehicleResponse>>.SuccessResponse(response));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao listar veículos com rastreamento");
+            return StatusCode(500, ApiResponse<IEnumerable<VehicleResponse>>.ErrorResponse("Erro interno no servidor"));
+        }
+    }
+
+    /// <summary>
+    /// Atribuir motorista ao veículo
+    /// </summary>
+    [HttpPost("{id}/driver")]
+    public async Task<ActionResult<ApiResponse<VehicleResponse>>> AssignDriver(Guid id, [FromBody] AssignDriverRequest request)
+    {
+        try
+        {
+            var response = await _vehicleService.AssignDriverAsync(id, request);
+            return Ok(ApiResponse<VehicleResponse>.SuccessResponse(response, "Motorista atribuído com sucesso"));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ApiResponse<VehicleResponse>.ErrorResponse(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao atribuir motorista");
+            return StatusCode(500, ApiResponse<VehicleResponse>.ErrorResponse("Erro interno no servidor"));
+        }
+    }
+
+    /// <summary>
+    /// Remover motorista do veículo
+    /// </summary>
+    [HttpDelete("{id}/driver")]
+    public async Task<ActionResult<ApiResponse<VehicleResponse>>> RemoveDriver(Guid id)
+    {
+        try
+        {
+            var response = await _vehicleService.RemoveDriverAsync(id);
+            return Ok(ApiResponse<VehicleResponse>.SuccessResponse(response, "Motorista removido com sucesso"));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ApiResponse<VehicleResponse>.ErrorResponse(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao remover motorista");
+            return StatusCode(500, ApiResponse<VehicleResponse>.ErrorResponse("Erro interno no servidor"));
+        }
+    }
 }
 
 public class UpdateStatusRequest

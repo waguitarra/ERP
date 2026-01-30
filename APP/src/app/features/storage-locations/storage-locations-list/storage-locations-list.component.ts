@@ -20,6 +20,36 @@ export class StorageLocationsListComponent implements OnInit {
   loading = signal<boolean>(true);
   locations = signal<StorageLocation[]>([]);
   selectedLocation = signal<StorageLocation | null>(null);
+  searchTerm = signal<string>('');
+  statusFilter = signal<string>('all');
+  
+  filteredLocations = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const status = this.statusFilter();
+    let result = this.locations();
+    
+    if (term) {
+      result = result.filter(loc =>
+        loc.code?.toLowerCase().includes(term) ||
+        loc.aisle?.toLowerCase().includes(term) ||
+        loc.rack?.toLowerCase().includes(term) ||
+        loc.locationType?.toLowerCase().includes(term)
+      );
+    }
+    
+    if (status !== 'all') {
+      if (status === 'blocked') {
+        result = result.filter(loc => loc.isBlocked === true);
+      } else if (status === 'active') {
+        result = result.filter(loc => loc.isActive === true && !loc.isBlocked);
+      } else if (status === 'inactive') {
+        result = result.filter(loc => loc.isActive === false);
+      }
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => this.locations().length > 0);
 
   createModal = viewChild<StorageLocationCreateModalComponent>('createModal');
@@ -42,26 +72,39 @@ export class StorageLocationsListComponent implements OnInit {
   }
 
   async blockLocation(location: StorageLocation): Promise<void> {
-    const reason = prompt('Motivo do bloqueio:');
+    const reason = prompt(this.i18n.t('common.prompts.blockReason'));
     if (!reason) return;
     try {
       await this.storageLocationsService.block(location.id, { reason });
       await this.loadLocations();
     } catch (error) {
       console.error('Erro ao bloquear localização:', error);
-      alert('Erro ao bloquear localização');
+      alert(this.i18n.t('common.errors.blockLocation'));
     }
   }
 
   async unblockLocation(location: StorageLocation): Promise<void> {
-    if (!confirm('Desbloquear esta localização?')) return;
+    if (!confirm(this.i18n.t('common.confirms.unlockLocation'))) return;
     try {
       await this.storageLocationsService.unblock(location.id);
       await this.loadLocations();
     } catch (error) {
       console.error('Erro ao desbloquear:', error);
-      alert('Erro ao desbloquear');
+      alert(this.i18n.t('common.errors.unblockLocation'));
     }
+  }
+
+  onSearch(event: Event): void {
+    this.searchTerm.set((event.target as HTMLInputElement).value);
+  }
+
+  onStatusChange(event: Event): void {
+    this.statusFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.statusFilter.set('all');
   }
 
   openCreateModal(): void {
@@ -74,13 +117,13 @@ export class StorageLocationsListComponent implements OnInit {
   }
 
   async deleteLocation(location: StorageLocation): Promise<void> {
-    if (!confirm(`Deseja realmente excluir a localização "${location.code}"?`)) return;
+    if (!confirm(this.i18n.t('common.confirms.deleteLocation'))) return;
     try {
       await this.storageLocationsService.delete(location.id);
       await this.loadLocations();
     } catch (error) {
       console.error('Erro ao excluir localização:', error);
-      alert('Erro ao excluir localização');
+      alert(this.i18n.t('common.errors.deleteLocation'));
     }
   }
 }

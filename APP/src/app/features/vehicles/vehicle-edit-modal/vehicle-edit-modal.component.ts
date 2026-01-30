@@ -27,28 +27,61 @@ export class VehicleEditModalComponent implements OnInit {
   isSaving = false;
   
   form: FormGroup = this.fb.group({
-    plateNumber: ['', [Validators.required]],
-    vehicleType: ['', [Validators.required]],
+    licensePlate: ['', [Validators.required, Validators.pattern(/^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$/)]],
+    brand: [''],
     model: ['', [Validators.required]],
-    capacity: [0, [Validators.required, Validators.min(0)]],
-    status: ['Available'],
-    isActive: [true]
+    vehicleType: [''],
+    year: [new Date().getFullYear(), [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear() + 1)]],
+    capacity: [null],
+    color: [''],
+    fuelType: [''],
+    notes: [''],
+    trackingEnabled: [false]
   });
+
+  vehicleTypes = [
+    { value: 'Truck', label: 'Caminhão' },
+    { value: 'Van', label: 'Van' },
+    { value: 'Car', label: 'Carro' },
+    { value: 'Motorcycle', label: 'Motocicleta' },
+    { value: 'Pickup', label: 'Pickup' },
+    { value: 'Other', label: 'Outro' }
+  ];
+
+  fuelTypes = [
+    { value: 'Gasoline', label: 'Gasolina' },
+    { value: 'Diesel', label: 'Diesel' },
+    { value: 'Ethanol', label: 'Etanol' },
+    { value: 'Flex', label: 'Flex' },
+    { value: 'Electric', label: 'Elétrico' },
+    { value: 'Hybrid', label: 'Híbrido' }
+  ];
   
   ngOnInit(): void {
     const v = this.vehicle();
     this.form.patchValue({
-      plateNumber: v.plateNumber,
-      vehicleType: v.vehicleType,
+      licensePlate: v.licensePlate,
+      brand: v.brand || '',
       model: v.model,
+      vehicleType: v.vehicleType || '',
+      year: v.year,
       capacity: v.capacity,
-      status: v.status,
-      isActive: v.isActive
+      color: v.color || '',
+      fuelType: v.fuelType || '',
+      notes: v.notes || '',
+      trackingEnabled: v.trackingEnabled
     });
   }
   
   onClose(): void {
     this.closeModal.emit();
+  }
+
+  formatLicensePlate(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (value.length > 7) value = value.substring(0, 7);
+    this.form.get('licensePlate')?.setValue(value);
   }
   
   async onSubmit(): Promise<void> {
@@ -61,13 +94,26 @@ export class VehicleEditModalComponent implements OnInit {
     
     this.isSaving = true;
     try {
-      const data: UpdateVehicleDto = this.form.value;
+      const formValue = this.form.value;
+      const data: UpdateVehicleDto = {
+        companyId: this.vehicle().companyId,
+        licensePlate: formValue.licensePlate,
+        model: formValue.model,
+        brand: formValue.brand || undefined,
+        vehicleType: formValue.vehicleType || undefined,
+        year: formValue.year,
+        capacity: formValue.capacity || undefined,
+        color: formValue.color || undefined,
+        fuelType: formValue.fuelType || undefined,
+        notes: formValue.notes || undefined,
+        trackingEnabled: formValue.trackingEnabled
+      };
       await this.vehiclesService.update(this.vehicle().id, data);
       this.vehicleUpdated.emit();
       this.onClose();
     } catch (error) {
       console.error('Erro ao atualizar veículo:', error);
-      alert('Erro ao atualizar veículo');
+      alert(this.i18n.t('common.errors.updateVehicle'));
     } finally {
       this.isSaving = false;
     }

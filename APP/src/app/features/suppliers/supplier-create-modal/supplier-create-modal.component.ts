@@ -57,7 +57,7 @@ export class SupplierCreateModalComponent {
       const companyId = user?.companyId;
       
       if (!companyId) {
-        alert('Erro: CompanyId não encontrado');
+        alert(this.i18n.t('common.errors.companyIdNotFound'));
         return;
       }
       
@@ -71,7 +71,7 @@ export class SupplierCreateModalComponent {
       this.onClose();
     } catch (error) {
       console.error('Erro ao criar fornecedor:', error);
-      alert('Erro ao criar fornecedor');
+      alert(this.i18n.t('common.errors.createSupplier'));
     } finally {
       this.isSaving = false;
     }

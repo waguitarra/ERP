@@ -21,6 +21,35 @@ export class CustomersListComponent implements OnInit {
 
   loading = signal<boolean>(true);
   customers = signal<Customer[]>([]);
+  searchTerm = signal<string>('');
+  dateFrom = signal<string>('');
+  dateTo = signal<string>('');
+  statusFilter = signal<string>('all');
+  
+  filteredCustomers = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const status = this.statusFilter();
+    let result = this.customers();
+    
+    if (term) {
+      result = result.filter(customer => 
+        customer.name?.toLowerCase().includes(term) ||
+        customer.email?.toLowerCase().includes(term) ||
+        customer.phone?.toLowerCase().includes(term) ||
+        customer.document?.toLowerCase().includes(term) ||
+        customer.city?.toLowerCase().includes(term) ||
+        customer.state?.toLowerCase().includes(term)
+      );
+    }
+    
+    if (status !== 'all') {
+      const isActive = status === 'active';
+      result = result.filter(customer => customer.isActive === isActive);
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => this.customers().length > 0);
   
   showCreateModal = signal<boolean>(false);
@@ -75,6 +104,30 @@ export class CustomersListComponent implements OnInit {
     this.loadCustomers();
   }
   
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  onDateFromChange(event: Event): void {
+    this.dateFrom.set((event.target as HTMLInputElement).value);
+  }
+
+  onDateToChange(event: Event): void {
+    this.dateTo.set((event.target as HTMLInputElement).value);
+  }
+
+  onStatusChange(event: Event): void {
+    this.statusFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.dateFrom.set('');
+    this.dateTo.set('');
+    this.statusFilter.set('all');
+  }
+
   async deleteCustomer(customer: Customer): Promise<void> {
     if (!confirm(`Deseja realmente excluir o cliente "${customer.name}"?`)) return;
     try {
@@ -82,7 +135,7 @@ export class CustomersListComponent implements OnInit {
       await this.loadCustomers();
     } catch (error) {
       console.error('Erro ao excluir cliente:', error);
-      alert('Erro ao excluir cliente');
+      alert(this.i18n.t('common.errors.deleteCustomer'));
     }
   }
 }

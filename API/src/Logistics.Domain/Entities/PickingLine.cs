@@ -45,14 +45,14 @@ public class PickingLine
     public StorageLocation Location { get; private set; } = null!;
     public Lot? Lot { get; private set; }
 
-    public void Pick(decimal quantity, Guid pickedBy, Guid? lotId = null, string? serialNumber = null)
+    public void Pick(decimal quantity, Guid? pickedBy, Guid? lotId = null, string? serialNumber = null)
     {
         QuantityPicked = quantity;
         PickedBy = pickedBy;
         PickedAt = DateTime.UtcNow;
         LotId = lotId;
         SerialNumber = serialNumber;
-        Status = quantity >= QuantityToPick ? PickingLineStatus.Completed : PickingLineStatus.Partial;
+        Status = quantity >= QuantityToPick ? PickingLineStatus.Picked : PickingLineStatus.Partial;
         UpdatedAt = DateTime.UtcNow;
     }
 }

@@ -71,7 +71,7 @@ export class WarehouseEditModalComponent implements OnInit {
       this.onClose();
     } catch (error) {
       console.error('Erro ao atualizar armazém:', error);
-      alert('Erro ao atualizar armazém');
+      alert(this.i18n.t('common.errors.updateWarehouse'));
     } finally {
       this.isSaving = false;
     }

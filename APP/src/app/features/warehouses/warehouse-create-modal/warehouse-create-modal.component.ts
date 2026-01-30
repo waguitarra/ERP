@@ -55,7 +55,7 @@ export class WarehouseCreateModalComponent {
       const companyId = user?.companyId;
       
       if (!companyId) {
-        alert('Erro: CompanyId não encontrado');
+        alert(this.i18n.t('common.errors.companyIdNotFound'));
         return;
       }
       
@@ -69,7 +69,7 @@ export class WarehouseCreateModalComponent {
       this.onClose();
     } catch (error) {
       console.error('Erro ao criar armazém:', error);
-      alert('Erro ao criar armazém');
+      alert(this.i18n.t('common.errors.createWarehouse'));
     } finally {
       this.isSaving = false;
     }

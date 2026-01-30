@@ -56,4 +56,10 @@ public class PickingTask
         CompletedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public void Cancel()
+    {
+        Status = WMSTaskStatus.Cancelled;
+        UpdatedAt = DateTime.UtcNow;
+    }
 }

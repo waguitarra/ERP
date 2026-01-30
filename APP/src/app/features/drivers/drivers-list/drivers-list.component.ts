@@ -21,6 +21,30 @@ export class DriversListComponent implements OnInit {
 
   loading = signal<boolean>(true);
   drivers = signal<Driver[]>([]);
+  searchTerm = signal<string>('');
+  statusFilter = signal<string>('all');
+  
+  filteredDrivers = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const status = this.statusFilter();
+    let result = this.drivers();
+    
+    if (term) {
+      result = result.filter(driver =>
+        driver.name?.toLowerCase().includes(term) ||
+        driver.licenseNumber?.toLowerCase().includes(term) ||
+        driver.phone?.toLowerCase().includes(term)
+      );
+    }
+    
+    if (status !== 'all') {
+      const isActive = status === 'active';
+      result = result.filter(driver => driver.isActive === isActive);
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => this.drivers().length > 0);
   showCreateModal = signal<boolean>(false);
   showEditModal = signal<boolean>(false);
@@ -40,6 +64,20 @@ export class DriversListComponent implements OnInit {
     } finally {
       this.loading.set(false);
     }
+  }
+
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  onStatusChange(event: Event): void {
+    this.statusFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.statusFilter.set('all');
   }
 
   openCreateModal(): void { this.showCreateModal.set(true); }
@@ -65,7 +103,7 @@ export class DriversListComponent implements OnInit {
       await this.loadDrivers();
     } catch (error) {
       console.error('Erro ao excluir motorista:', error);
-      alert('Erro ao excluir motorista');
+      alert(this.i18n.t('common.errors.deleteDriver'));
     }
   }
 }

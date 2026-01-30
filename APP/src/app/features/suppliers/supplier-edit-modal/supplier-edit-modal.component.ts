@@ -75,7 +75,7 @@ export class SupplierEditModalComponent implements OnInit {
       this.onClose();
     } catch (error) {
       console.error('Erro ao atualizar fornecedor:', error);
-      alert('Erro ao atualizar fornecedor');
+      alert(this.i18n.t('common.errors.updateSupplier'));
     } finally {
       this.isSaving = false;
     }

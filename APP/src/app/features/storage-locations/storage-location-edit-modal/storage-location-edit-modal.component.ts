@@ -69,7 +69,7 @@ export class StorageLocationEditModalComponent {
       this.close();
     } catch (error) {
       console.error('Erro ao atualizar localização:', error);
-      alert('Erro ao atualizar localização');
+      alert(this.i18n.t('common.errors.updateLocation'));
     } finally {
       this.loading.set(false);
     }

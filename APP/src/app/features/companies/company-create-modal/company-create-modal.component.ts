@@ -57,7 +57,7 @@ export class CompanyCreateModalComponent {
       this.close();
     } catch (error) {
       console.error('Erro ao criar empresa:', error);
-      alert('Erro ao criar empresa');
+      alert(this.i18n.t('common.errors.createCompany'));
     } finally {
       this.loading.set(false);
     }

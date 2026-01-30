@@ -21,6 +21,32 @@ export class SuppliersListComponent implements OnInit {
 
   loading = signal<boolean>(true);
   suppliers = signal<Supplier[]>([]);
+  searchTerm = signal<string>('');
+  statusFilter = signal<string>('all');
+  
+  filteredSuppliers = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const status = this.statusFilter();
+    let result = this.suppliers();
+    
+    if (term) {
+      result = result.filter(supplier => 
+        supplier.name?.toLowerCase().includes(term) ||
+        supplier.email?.toLowerCase().includes(term) ||
+        supplier.phone?.toLowerCase().includes(term) ||
+        supplier.document?.toLowerCase().includes(term) ||
+        supplier.city?.toLowerCase().includes(term)
+      );
+    }
+    
+    if (status !== 'all') {
+      const isActive = status === 'active';
+      result = result.filter(supplier => supplier.isActive === isActive);
+    }
+    
+    return result;
+  });
+  
   hasData = computed(() => this.suppliers().length > 0);
   
   showCreateModal = signal<boolean>(false);
@@ -71,6 +97,20 @@ export class SuppliersListComponent implements OnInit {
     this.loadSuppliers();
   }
   
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  onStatusChange(event: Event): void {
+    this.statusFilter.set((event.target as HTMLSelectElement).value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.statusFilter.set('all');
+  }
+
   async deleteSupplier(supplier: Supplier): Promise<void> {
     if (!confirm(`Deseja realmente excluir o fornecedor "${supplier.name}"?`)) return;
     try {
@@ -78,7 +118,7 @@ export class SuppliersListComponent implements OnInit {
       await this.loadSuppliers();
     } catch (error) {
       console.error('Erro ao excluir fornecedor:', error);
-      alert('Erro ao excluir fornecedor');
+      alert(this.i18n.t('common.errors.deleteSupplier'));
     }
   }
 }

@@ -1,24 +1,239 @@
 <div class="space-y-6 animate-fade-in">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('outboundShipments.title') }}</h1>
-          <p class="text-slate-500 dark:text-slate-400 mt-1">{{ i18n.t('outboundShipments.subtitle') }}</p>
-        </div>
-        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center space-x-2 self-start">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          <span>{{ i18n.t('outboundShipments.newShipment') }}</span>
-        </button>
-      </div>
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('outboundShipments.title') }}</h1>
+      <p class="text-slate-500 dark:text-slate-400 mt-1">{{ i18n.t('outboundShipments.subtitle') }}</p>
+    </div>
+    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center space-x-2 self-start">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      <span>{{ i18n.t('outboundShipments.newShipment') }}</span>
+    </button>
+  </div>
 
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm text-center py-20">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 dark:bg-orange-900/30 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-          </svg>
-        </div>
-        <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('outboundShipments.module.title') }}</h2>
-        <p class="text-slate-500 dark:text-slate-400 mt-2">{{ i18n.t('outboundShipments.module.subtitle') }}</p>
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+    <div (click)="filterByStatus(null)" 
+         class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+         [class.ring-2]="statusFilter() === null"
+         [class.ring-blue-500]="statusFilter() === null">
+      <p class="text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('outboundShipments.stats.total') }}</p>
+      <p class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ stats().total }}</p>
+    </div>
+    <div (click)="filterByStatus(OutboundStatus.Pending)" 
+         class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+         [class.ring-2]="statusFilter() === OutboundStatus.Pending"
+         [class.ring-yellow-500]="statusFilter() === OutboundStatus.Pending">
+      <p class="text-sm text-yellow-600 dark:text-yellow-400">{{ i18n.t('outboundShipments.status.pending') }}</p>
+      <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{{ stats().pending }}</p>
+    </div>
+    <div (click)="filterByStatus(OutboundStatus.ReadyToShip)" 
+         class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+         [class.ring-2]="statusFilter() === OutboundStatus.ReadyToShip"
+         [class.ring-cyan-500]="statusFilter() === OutboundStatus.ReadyToShip">
+      <p class="text-sm text-cyan-600 dark:text-cyan-400">{{ i18n.t('outboundShipments.status.readyToShip') }}</p>
+      <p class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{{ stats().readyToShip }}</p>
+    </div>
+    <div (click)="filterByStatus(OutboundStatus.Shipped)" 
+         class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+         [class.ring-2]="statusFilter() === OutboundStatus.Shipped"
+         [class.ring-blue-500]="statusFilter() === OutboundStatus.Shipped">
+      <p class="text-sm text-blue-600 dark:text-blue-400">{{ i18n.t('outboundShipments.status.shipped') }}</p>
+      <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ stats().shipped }}</p>
+    </div>
+    <div (click)="filterByStatus(OutboundStatus.InTransit)" 
+         class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+         [class.ring-2]="statusFilter() === OutboundStatus.InTransit"
+         [class.ring-purple-500]="statusFilter() === OutboundStatus.InTransit">
+      <p class="text-sm text-purple-600 dark:text-purple-400">{{ i18n.t('outboundShipments.status.inTransit') }}</p>
+      <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ stats().inTransit }}</p>
+    </div>
+    <div (click)="filterByStatus(OutboundStatus.Delivered)" 
+         class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+         [class.ring-2]="statusFilter() === OutboundStatus.Delivered"
+         [class.ring-green-500]="statusFilter() === OutboundStatus.Delivered">
+      <p class="text-sm text-green-600 dark:text-green-400">{{ i18n.t('outboundShipments.status.delivered') }}</p>
+      <p class="text-2xl font-bold text-green-600 dark:text-green-400">{{ stats().delivered }}</p>
+    </div>
+    <div (click)="filterByStatus(OutboundStatus.Cancelled)" 
+         class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+         [class.ring-2]="statusFilter() === OutboundStatus.Cancelled"
+         [class.ring-red-500]="statusFilter() === OutboundStatus.Cancelled">
+      <p class="text-sm text-red-600 dark:text-red-400">{{ i18n.t('outboundShipments.status.cancelled') }}</p>
+      <p class="text-2xl font-bold text-red-600 dark:text-red-400">{{ stats().cancelled }}</p>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="flex-1 relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text"
+               [value]="searchTerm()"
+               (input)="onSearch($event)"
+               [placeholder]="i18n.t('outboundShipments.searchPlaceholder')"
+               class="w-full pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <button (click)="loadShipments()" 
+              class="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        {{ i18n.t('common.buttons.refresh') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (loading()) {
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+      <div class="flex items-center justify-center">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <span class="ml-3 text-slate-600 dark:text-slate-400">{{ i18n.t('outboundShipments.loading') }}</span>
       </div>
     </div>
+  }
+
+  <!-- Error State -->
+  @if (error()) {
+    <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl border border-red-200 dark:border-red-800">
+      <div class="flex items-center gap-2 text-red-600 dark:text-red-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{ error() }}</span>
+        <button (click)="loadShipments()" class="ml-auto underline">{{ i18n.t('common.buttons.tryAgain') }}</button>
+      </div>
+    </div>
+  }
+
+  <!-- Data Table -->
+  @if (!loading() && !error()) {
+    <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-slate-50 dark:bg-slate-700/50">
+            <tr>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.shipmentNumber') }}</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.orderNumber') }}</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.tracking') }}</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.status') }}</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.shippedDate') }}</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.deliveredDate') }}</th>
+              <th class="px-4 py-3 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.address') }}</th>
+              <th class="px-4 py-3 text-center text-sm font-semibold text-slate-600 dark:text-slate-300">{{ i18n.t('outboundShipments.table.actions') }}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+            @for (shipment of filteredShipments(); track shipment.id) {
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                <td class="px-4 py-3 text-sm font-medium text-slate-800 dark:text-slate-100">
+                  {{ shipment.shipmentNumber }}
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+                  {{ shipment.orderNumber || '-' }}
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+                  {{ shipment.trackingNumber || '-' }}
+                </td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-1 text-xs font-medium rounded-full" [ngClass]="getStatusClass(shipment.status)">
+                    {{ getStatusLabel(shipment.status) }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+                  {{ formatDate(shipment.shippedDate) }}
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
+                  {{ formatDate(shipment.deliveredDate) }}
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400 max-w-xs truncate" [title]="shipment.deliveryAddress || ''">
+                  {{ shipment.deliveryAddress || '-' }}
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center justify-center gap-1">
+                    @if (shipment.status === OutboundStatus.Pending) {
+                      <button (click)="markReadyToShip(shipment)" 
+                              [title]="i18n.t('outboundShipments.actions.markReadyToShip')"
+                              class="p-1.5 text-cyan-600 hover:bg-cyan-50 dark:hover:bg-cyan-900/30 rounded-lg transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </button>
+                    }
+                    @if (shipment.status === OutboundStatus.ReadyToShip) {
+                      <button (click)="shipShipment(shipment)" 
+                              [title]="i18n.t('outboundShipments.actions.ship')"
+                              class="p-1.5 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
+                      </button>
+                    }
+                    @if (shipment.status === OutboundStatus.Shipped) {
+                      <button (click)="markInTransit(shipment)" 
+                              [title]="i18n.t('outboundShipments.actions.markInTransit')"
+                              class="p-1.5 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-lg transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                        </svg>
+                      </button>
+                    }
+                    @if (shipment.status === OutboundStatus.InTransit) {
+                      <button (click)="deliverShipment(shipment)" 
+                              [title]="i18n.t('outboundShipments.actions.markDelivered')"
+                              class="p-1.5 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </button>
+                    }
+                    @if (shipment.status !== OutboundStatus.Cancelled && shipment.status !== OutboundStatus.Delivered) {
+                      <button (click)="cancelShipment(shipment)" 
+                              [title]="i18n.t('outboundShipments.actions.cancel')"
+                              class="p-1.5 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    }
+                    <button (click)="deleteShipment(shipment)" 
+                            [title]="i18n.t('outboundShipments.actions.delete')"
+                            class="p-1.5 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 rounded-lg transition-colors">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="8" class="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
+                  <div class="flex flex-col items-center">
+                    <svg class="w-12 h-12 text-slate-300 dark:text-slate-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    </svg>
+                    <p>{{ i18n.t('outboundShipments.empty.title') }}</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Footer with count -->
+      <div class="px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          {{ i18n.t('outboundShipments.footer.showing', { shown: filteredShipments().length, total: shipments().length }) }}
+        </p>
+      </div>
+    </div>
+  }
+</div>

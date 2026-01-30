@@ -96,7 +96,7 @@ export class ProductEditModalComponent implements OnInit {
       this.onClose();
     } catch (error) {
       console.error('Erro ao atualizar produto:', error);
-      alert('Erro ao atualizar produto');
+      alert(this.i18n.t('common.errors.updateProduct'));
     } finally {
       this.isSaving = false;
     }

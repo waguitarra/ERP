@@ -23,6 +23,7 @@ public class OutboundShipment
     public string ShipmentNumber { get; private set; } = string.Empty;
     public Guid OrderId { get; private set; }
     public Guid? CarrierId { get; private set; }
+    public Guid? VehicleId { get; private set; }
     public string? TrackingNumber { get; private set; }
     public OutboundStatus Status { get; private set; }
     public DateTime? ShippedDate { get; private set; }
@@ -33,6 +34,19 @@ public class OutboundShipment
 
     // Navigation
     public Order Order { get; private set; } = null!;
+    public Vehicle? Vehicle { get; private set; }
+
+    public void AssignVehicle(Guid vehicleId)
+    {
+        VehicleId = vehicleId;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void RemoveVehicle()
+    {
+        VehicleId = null;
+        UpdatedAt = DateTime.UtcNow;
+    }
 
     public void SetTracking(string trackingNumber)
     {
@@ -57,6 +71,24 @@ public class OutboundShipment
     public void SetAddress(string address)
     {
         DeliveryAddress = address;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void Cancel()
+    {
+        Status = OutboundStatus.Cancelled;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void MarkReadyToShip()
+    {
+        Status = OutboundStatus.ReadyToShip;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void MarkInTransit()
+    {
+        Status = OutboundStatus.InTransit;
         UpdatedAt = DateTime.UtcNow;
     }
 }

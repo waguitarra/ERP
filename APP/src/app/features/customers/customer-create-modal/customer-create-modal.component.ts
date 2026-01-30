@@ -57,7 +57,7 @@ export class CustomerCreateModalComponent {
       const companyId = user?.companyId;
       
       if (!companyId) {
-        alert('Erro: CompanyId não encontrado');
+        alert(this.i18n.t('common.errors.companyIdNotFound'));
         return;
       }
       
@@ -71,7 +71,7 @@ export class CustomerCreateModalComponent {
       this.onClose();
     } catch (error) {
       console.error('Erro ao criar cliente:', error);
-      alert('Erro ao criar cliente');
+      alert(this.i18n.t('common.errors.createCustomer'));
     } finally {
       this.isSaving = false;
     }

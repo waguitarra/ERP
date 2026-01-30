@@ -354,7 +354,7 @@ export class PurchaseOrderModalComponent implements OnInit {
         const companyId = user?.companyId;
         
         if (!companyId) {
-          alert('Usuário sem empresa vinculada');
+          this.notification.error(this.i18n.t('common.errors.companyIdNotFound'));
           return;
         }
 

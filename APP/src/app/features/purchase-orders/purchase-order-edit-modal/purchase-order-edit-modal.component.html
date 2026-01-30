@@ -47,7 +47,7 @@
                 </label>
                 <input type="text" formControlName="purchaseOrderNumber"
                   class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ex: PO-2025-001">
+                  [placeholder]="i18n.t('purchase_orders.placeholders.purchaseOrderNumber')">
               </div>
             }
 
@@ -65,10 +65,10 @@
               </label>
               <select formControlName="priority"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500">
-                <option [value]="1">Baixa</option>
-                <option [value]="2">Normal</option>
-                <option [value]="3">Alta</option>
-                <option [value]="4">Urgente</option>
+                <option [value]="1">{{ i18n.t('purchase_orders.priority.low') }}</option>
+                <option [value]="2">{{ i18n.t('purchase_orders.priority.normal') }}</option>
+                <option [value]="3">{{ i18n.t('purchase_orders.priority.high') }}</option>
+                <option [value]="4">{{ i18n.t('purchase_orders.priority.urgent') }}</option>
               </select>
             </div>
 
@@ -105,7 +105,7 @@
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <span class="text-sm text-slate-600 dark:text-slate-400">{{ i18n.t('purchase_orders.pricing.suggestedPrice')}}</span>
-                <p class="text-xl font-bold text-green-600 dark:text-green-400">R$ {{suggestedPrice() | number:'1.2-2'}}</p>
+                <p class="text-xl font-bold text-green-600 dark:text-green-400">{{ suggestedPrice() | currency:'BRL':'symbol':'1.2-2' }}</p>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@
               </label>
               <input type="number" formControlName="expectedParcels" min="0"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                placeholder="Ex: 10">
+                [placeholder]="i18n.t('purchase_orders.placeholders.expectedParcels')">
             </div>
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -129,7 +129,7 @@
               </label>
               <input type="number" formControlName="cartonsPerParcel" min="0"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                placeholder="Ex: 10">
+                [placeholder]="i18n.t('purchase_orders.placeholders.cartonsPerParcel')">
             </div>
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -137,7 +137,7 @@
               </label>
               <input type="number" formControlName="unitsPerCarton" min="0"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                placeholder="Ex: 50">
+                [placeholder]="i18n.t('purchase_orders.placeholders.unitsPerCarton')">
             </div>
           </div>
           <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
@@ -208,7 +208,7 @@
               </label>
               <input type="text" formControlName="dockDoorNumber"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                placeholder="Ex: DOCK-01">
+                [placeholder]="i18n.t('purchase_orders.placeholders.dockDoorNumber')">
             </div>
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -216,7 +216,7 @@
               </label>
               <input type="text" formControlName="shippingDistance"
                 class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                placeholder="Ex: 850 km">
+                [placeholder]="i18n.t('purchase_orders.placeholders.shippingDistance')">
             </div>
             <div>
               <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -247,7 +247,7 @@
                 </label>
                 <input type="text" formControlName="originCountry"
                   class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ex: China">
+                  [placeholder]="i18n.t('purchase_orders.placeholders.originCountry')">
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -255,7 +255,7 @@
                 </label>
                 <input type="text" formControlName="portOfEntry"
                   class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ex: Santos/SP">
+                  [placeholder]="i18n.t('purchase_orders.placeholders.portOfEntry')">
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -263,7 +263,7 @@
                 </label>
                 <input type="text" formControlName="containerNumber"
                   class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ex: MSCU1234567">
+                  [placeholder]="i18n.t('purchase_orders.placeholders.containerNumber')">
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -271,7 +271,7 @@
                 </label>
                 <input type="text" formControlName="incoterm"
                   class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ex: FOB">
+                  [placeholder]="i18n.t('purchase_orders.placeholders.incoterm')">
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -279,7 +279,7 @@
                 </label>
                 <input type="text" formControlName="billOfLading"
                   class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ex: BL-2025-001">
+                  [placeholder]="i18n.t('purchase_orders.placeholders.billOfLading')">
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -287,7 +287,7 @@
                 </label>
                 <input type="text" formControlName="importLicenseNumber"
                   class="w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600 dark:text-white focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ex: LI-123456">
+                  [placeholder]="i18n.t('purchase_orders.placeholders.importLicenseNumber')">
               </div>
             </div>
           }
@@ -385,4 +385,4 @@
 <app-supplier-selector-modal #supplierModal (supplierSelected)="onSupplierSelected($event)"></app-supplier-selector-modal>
 <app-vehicle-selector-modal #vehicleModal (vehicleSelected)="onVehicleSelected($event)"></app-vehicle-selector-modal>
 <app-driver-selector-modal #driverModal (driverSelected)="onDriverSelected($event)"></app-driver-selector-modal>
-<app-warehouse-selector-modal #warehouseModal [title]="'Selecionar Armazém'" (warehouseSelected)="onWarehouseSelected($event)"></app-warehouse-selector-modal>
+<app-warehouse-selector-modal #warehouseModal [title]="i18n.t('common.modals.selectWarehouse')" (warehouseSelected)="onWarehouseSelected($event)"></app-warehouse-selector-modal>

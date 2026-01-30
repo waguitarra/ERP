@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 
 export type Language = 'pt-BR' | 'en-US' | 'es-ES';
 
@@ -22,6 +22,14 @@ export class I18nService {
     'en-US': {},
     'es-ES': {}
   });
+
+  // Traduções atuais baseadas no idioma selecionado (computed para reatividade)
+  private currentTranslations = computed(() => {
+    return this.translationsSignal()[this.currentLanguageSignal()];
+  });
+
+  // Contador de versão para forçar reatividade nos templates
+  private translationVersion = signal(0);
 
   constructor() {
     // Carregar idioma salvo ou usar padrão do navegador
@@ -64,6 +72,8 @@ export class I18nService {
         'en-US': enUS,
         'es-ES': esES
       });
+      // Incrementar versão após carregar traduções
+      this.translationVersion.update(v => v + 1);
     } catch (error) {
       console.error('Erro ao carregar traduções:', error);
     }
@@ -75,6 +85,8 @@ export class I18nService {
   setLanguage(lang: Language): void {
     this.currentLanguageSignal.set(lang);
     localStorage.setItem(this.STORAGE_KEY, lang);
+    // Incrementar versão para forçar reatividade nos templates
+    this.translationVersion.update(v => v + 1);
   }
 
   /**
@@ -129,8 +141,12 @@ export class I18nService {
 
   /**
    * Atalho para tradução (usar nos componentes)
+   * Acessa o signal de versão para garantir reatividade
    */
   t = (key: string, params?: Record<string, string | number>): string => {
+    // Acessar signals para garantir que Angular detecte mudanças
+    this.translationVersion();
+    this.currentLanguageSignal();
     return this.translate(key, params);
   };
 

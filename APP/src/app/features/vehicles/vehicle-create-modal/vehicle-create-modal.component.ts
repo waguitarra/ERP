@@ -28,15 +28,45 @@ export class VehicleCreateModalComponent {
   isSaving = false;
   
   form: FormGroup = this.fb.group({
-    plateNumber: ['', [Validators.required]],
-    vehicleType: ['', [Validators.required]],
+    licensePlate: ['', [Validators.required, Validators.pattern(/^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$/)]],
+    brand: [''],
     model: ['', [Validators.required]],
-    capacity: [0, [Validators.required, Validators.min(0)]],
-    status: ['Available']
+    vehicleType: [''],
+    year: [new Date().getFullYear(), [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear() + 1)]],
+    capacity: [null],
+    color: [''],
+    fuelType: [''],
+    notes: [''],
+    trackingEnabled: [false]
   });
+
+  vehicleTypes = [
+    { value: 'Truck', label: 'Caminhão' },
+    { value: 'Van', label: 'Van' },
+    { value: 'Car', label: 'Carro' },
+    { value: 'Motorcycle', label: 'Motocicleta' },
+    { value: 'Pickup', label: 'Pickup' },
+    { value: 'Other', label: 'Outro' }
+  ];
+
+  fuelTypes = [
+    { value: 'Gasoline', label: 'Gasolina' },
+    { value: 'Diesel', label: 'Diesel' },
+    { value: 'Ethanol', label: 'Etanol' },
+    { value: 'Flex', label: 'Flex' },
+    { value: 'Electric', label: 'Elétrico' },
+    { value: 'Hybrid', label: 'Híbrido' }
+  ];
   
   onClose(): void {
     this.closeModal.emit();
+  }
+
+  formatLicensePlate(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (value.length > 7) value = value.substring(0, 7);
+    this.form.get('licensePlate')?.setValue(value);
   }
   
   async onSubmit(): Promise<void> {
@@ -53,13 +83,23 @@ export class VehicleCreateModalComponent {
       const companyId = user?.companyId;
       
       if (!companyId) {
-        alert('Erro: CompanyId não encontrado');
+        alert(this.i18n.t('common.errors.companyIdNotFound'));
         return;
       }
       
+      const formValue = this.form.value;
       const data: CreateVehicleDto = {
         companyId,
-        ...this.form.value
+        licensePlate: formValue.licensePlate,
+        model: formValue.model,
+        brand: formValue.brand || undefined,
+        vehicleType: formValue.vehicleType || undefined,
+        year: formValue.year,
+        capacity: formValue.capacity || undefined,
+        color: formValue.color || undefined,
+        fuelType: formValue.fuelType || undefined,
+        notes: formValue.notes || undefined,
+        trackingEnabled: formValue.trackingEnabled
       };
       
       await this.vehiclesService.create(data);
@@ -67,7 +107,7 @@ export class VehicleCreateModalComponent {
       this.onClose();
     } catch (error) {
       console.error('Erro ao criar veículo:', error);
-      alert('Erro ao criar veículo');
+      alert(this.i18n.t('common.errors.createVehicle'));
     } finally {
       this.isSaving = false;
     }
