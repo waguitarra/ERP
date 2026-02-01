@@ -4,11 +4,13 @@ using Logistics.Application.Services;
 using Logistics.Domain.Interfaces;
 using Logistics.Infrastructure.Data;
 using Logistics.Infrastructure.Repositories;
+using Logistics.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +24,12 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Add services to the container.
-var mvcBuilder = builder.Services.AddControllers();
+var mvcBuilder = builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Removido JsonStringEnumConverter para retornar enums como números
+        // Isso permite que o frontend faça filtros corretamente
+    });
 
 // LOG: Descobrir controllers registrados
 Log.Information("========== CONTROLLERS REGISTRADOS ==========");
@@ -92,6 +99,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IVehicleManagementService, VehicleManagementService>();
 builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
@@ -219,13 +227,13 @@ using (var scope = app.Services.CreateScope())
         Log.Information("Migrations aplicadas com sucesso!");
         
         // Criar usuário admin se não existir
-        if (!db.Users.Any(u => u.Email == "admin@nexus.com"))
+        if (!db.Users.Any(u => u.Email == "admin@WMS.com"))
         {
             Log.Information("Criando usuário admin padrão...");
             var passwordHash = BCrypt.Net.BCrypt.HashPassword("admin@123456");
             var admin = new Logistics.Domain.Entities.User(
                 "Admin",
-                "admin@nexus.com",
+                "admin@WMS.com",
                 passwordHash,
                 Logistics.Domain.Enums.UserRole.Admin,
                 null

@@ -10,6 +10,9 @@ import {
   VehicleResponse
 } from '@core/models/vehicle.model';
 
+// Re-export Vehicle for convenience
+export { Vehicle } from '@core/models/vehicle.model';
+
 @Injectable({
   providedIn: 'root'
 })

@@ -1,4 +1,4 @@
-# 🚀 ERP NEXUS ADMIN - Docker Setup
+# 🚀 ERP WMS ADMIN - Docker Setup
 
 Sistema ERP completo containerizado com Docker.
 
@@ -36,7 +36,7 @@ Sistema ERP completo containerizado com Docker.
 
 | Serviço | Usuário | Senha |
 |---------|---------|-------|
-| **Sistema** | admin@nexus.com | admin@123456 |
+| **Sistema** | admin@WMS.com | admin@123456 |
 | **MySQL** | logistics_user | password |
 | **MySQL Root** | root | root123 |
 
@@ -189,4 +189,4 @@ Para produção, altere:
 
 ---
 
-**NEXUS ADMIN** © 2024 - Sistema ERP Containerizado
+**WMS ADMIN** © 2024 - Sistema ERP Containerizado

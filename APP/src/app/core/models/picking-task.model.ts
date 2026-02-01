@@ -61,8 +61,9 @@ export enum TaskPriority {
 
 // Status enum
 export enum PickingTaskStatus {
-  Pending = 0,
-  InProgress = 1,
-  Completed = 2,
-  Cancelled = 3
+  Pending = 1,
+  Assigned = 2,
+  InProgress = 3,
+  Completed = 4,
+  Cancelled = 5
 }

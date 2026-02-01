@@ -75,8 +75,34 @@ export class OrderEditModalComponent {
       priority: ord.priority,
       expectedDate: ord.expectedDate ? new Date(ord.expectedDate).toISOString().split('T')[0] : '',
       shippingAddress: ord.shippingAddress || '',
-      specialInstructions: ord.specialInstructions || ''
+      specialInstructions: ord.specialInstructions || '',
+      vehicleId: ord.vehicleId || '',
+      driverId: ord.driverId || '',
+      originWarehouseId: ord.originWarehouseId || '',
+      destinationWarehouseId: ord.destinationWarehouseId || '',
+      customerId: ord.customerId || '',
+      shippingZipCode: ord.shippingZipCode || '',
+      shippingCity: ord.shippingCity || '',
+      shippingState: ord.shippingState || '',
+      shippingCountry: ord.shippingCountry || 'España',
+      trackingNumber: ord.trackingNumber || '',
+      estimatedDeliveryDate: ord.estimatedDeliveryDate ? new Date(ord.estimatedDeliveryDate).toISOString().split('T')[0] : ''
     });
+    
+    // Carregar objetos selecionados se existirem IDs
+    if (ord.vehicle) this.selectedVehicle.set(ord.vehicle as any);
+    if (ord.driver) this.selectedDriver.set(ord.driver as any);
+    if (ord.originWarehouse) this.selectedOriginWarehouse.set(ord.originWarehouse as any);
+    if (ord.destinationWarehouse) this.selectedDestinationWarehouse.set(ord.destinationWarehouse as any);
+    if (ord.customer) this.selectedCustomer.set(ord.customer as any);
+    
+    // Definir tipo de destino baseado nos dados existentes
+    if (ord.customerId) {
+      this.destinationType.set('customer');
+    } else if (ord.destinationWarehouseId) {
+      this.destinationType.set('warehouse');
+    }
+    
     this.isOpen.set(true);
   }
 
@@ -148,6 +174,7 @@ export class OrderEditModalComponent {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       const formValue = this.form.value;

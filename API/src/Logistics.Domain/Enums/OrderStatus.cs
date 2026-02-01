@@ -5,11 +5,15 @@ public enum OrderStatus
     Draft = 1,              // Rascunho
     Pending = 2,            // Pendente
     Confirmed = 3,          // Confirmado
-    InProgress = 4,         // Em progresso
-    PartiallyFulfilled = 5, // Parcialmente atendido
-    Fulfilled = 6,          // Atendido
-    Shipped = 7,            // Enviado
-    Delivered = 8,          // Entregue
-    Cancelled = 9,          // Cancelado
-    OnHold = 10            // Em espera
+    Approved = 4,           // Aprovado
+    Processing = 5,         // Processando (alias InProgress)
+    InProgress = 5,         // Em progresso
+    PartiallyFulfilled = 6, // Parcialmente atendido
+    Fulfilled = 7,          // Atendido
+    Completed = 7,          // Completo (alias Fulfilled)
+    InTransit = 8,          // Em trânsito (alias Shipped)
+    Shipped = 8,            // Enviado
+    Delivered = 9,          // Entregue
+    Cancelled = 10,         // Cancelado
+    OnHold = 11             // Em espera
 }

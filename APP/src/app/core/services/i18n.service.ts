@@ -10,12 +10,16 @@ export interface TranslationData {
   providedIn: 'root'
 })
 export class I18nService {
-  private readonly STORAGE_KEY = 'nexus_language';
+  private readonly STORAGE_KEY = 'WMS_language';
   
   // Idioma atual como signal
   private currentLanguageSignal = signal<Language>('pt-BR');
   currentLanguage = this.currentLanguageSignal.asReadonly();
   
+  // Signal para indicar se as traduções foram carregadas
+  private translationsLoadedSignal = signal<boolean>(false);
+  translationsLoaded = this.translationsLoadedSignal.asReadonly();
+
   // Traduções carregadas
   private translationsSignal = signal<Record<Language, TranslationData>>({
     'pt-BR': {},
@@ -72,10 +76,13 @@ export class I18nService {
         'en-US': enUS,
         'es-ES': esES
       });
-      // Incrementar versão após carregar traduções
+      // Marcar como carregado e incrementar versão
+      this.translationsLoadedSignal.set(true);
       this.translationVersion.update(v => v + 1);
     } catch (error) {
       console.error('Erro ao carregar traduções:', error);
+      // Mesmo com erro, marcar como carregado para não bloquear a UI
+      this.translationsLoadedSignal.set(true);
     }
   }
 
@@ -108,6 +115,11 @@ export class I18nService {
   translate(key: string, params?: Record<string, string | number>): string {
     const lang = this.currentLanguageSignal();
     const translations = this.translationsSignal()[lang];
+    
+    // Se traduções não carregadas, retorna a chave
+    if (!translations || Object.keys(translations).length === 0) {
+      return key;
+    }
     
     // Navegar pelas chaves aninhadas
     const keys = key.split('.');
@@ -147,6 +159,7 @@ export class I18nService {
     // Acessar signals para garantir que Angular detecte mudanças
     this.translationVersion();
     this.currentLanguageSignal();
+    this.translationsLoadedSignal();
     return this.translate(key, params);
   };
 
@@ -155,5 +168,31 @@ export class I18nService {
    */
   getAvailableLanguages(): Language[] {
     return ['pt-BR', 'en-US', 'es-ES'];
+  }
+
+  /**
+   * Aguarda o carregamento das traduções (usado pelo APP_INITIALIZER)
+   */
+  async waitForTranslations(): Promise<void> {
+    // Se já carregou, retorna imediatamente
+    if (this.translationsLoadedSignal()) {
+      return;
+    }
+    
+    // Aguarda até as traduções serem carregadas (máximo 5 segundos)
+    return new Promise((resolve) => {
+      const checkInterval = setInterval(() => {
+        if (this.translationsLoadedSignal()) {
+          clearInterval(checkInterval);
+          resolve();
+        }
+      }, 50);
+      
+      // Timeout de segurança
+      setTimeout(() => {
+        clearInterval(checkInterval);
+        resolve();
+      }, 5000);
+    });
   }
 }

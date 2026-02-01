@@ -88,6 +88,7 @@ export class ProductEditModalComponent implements OnInit {
       return;
     }
     
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.isSaving = true;
     try {
       const data: UpdateProductDto = this.form.value;

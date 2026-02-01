@@ -34,6 +34,8 @@ public class OrderRepository : IOrderRepository
     {
         return await _context.Orders
             .Include(o => o.Items)
+            .Include(o => o.Customer)
+            .Include(o => o.Supplier)
             .Where(o => o.CompanyId == companyId)
             .OrderByDescending(o => o.CreatedAt)
             .ToListAsync();
@@ -43,6 +45,8 @@ public class OrderRepository : IOrderRepository
     {
         return await _context.Orders
             .Include(o => o.Items)
+            .Include(o => o.Customer)
+            .Include(o => o.Supplier)
             .ToListAsync();
     }
 

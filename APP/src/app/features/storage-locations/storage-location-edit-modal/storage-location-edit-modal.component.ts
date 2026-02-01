@@ -62,6 +62,7 @@ export class StorageLocationEditModalComponent {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       await this.storageLocationsService.update(this.location().id, this.form.value);

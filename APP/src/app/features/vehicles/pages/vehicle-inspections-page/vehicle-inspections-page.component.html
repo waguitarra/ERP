@@ -1,0 +1,58 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+  <!-- Header -->
+  <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-md ">
+    <div class="px-4 py-3">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="p-2 rounded-lg bg-gradient-to-br from-teal-500 to-teal-600 shadow flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="min-w-0">
+            <h1 class="text-base font-bold text-slate-900 dark:text-white truncate">{{ i18n.t('sidebar.menu.vehicleInspections') }}</h1>
+          </div>
+        </div>
+        <select [(ngModel)]="selectedVehicleId" (ngModelChange)="onVehicleChange()" class="flex-shrink-0 px-2 py-1.5 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white max-w-[140px]">
+          <option value="">{{ i18n.t('fleetPages.common.allVehicles') }}</option>
+          @for (v of vehicles(); track v.id) { <option [value]="v.id">{{ v.licensePlate }}</option> }
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="px-3 py-3">
+    @if (loading()) { <div class="flex justify-center py-8"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div></div> }
+    @if (error()) { <div class="bg-red-50 dark:bg-red-900/20 rounded-lg p-3 mb-3"><p class="text-xs text-red-800 dark:text-red-300">{{ error() }}</p></div> }
+    @if (!loading() && !error()) {
+      @if (inspections().length === 0) {
+        <div class="bg-white/70 dark:bg-slate-800/70 rounded-lg shadow p-6 text-center"><p class="text-slate-500 text-sm">{{ i18n.t('fleetPages.inspections.noInspections') }}</p></div>
+      } @else {
+        <div class="grid grid-cols-1 gap-3">
+          @for (insp of inspections(); track insp.id) {
+            <div (click)="openVehicleDetail(insp.vehicleId)" class="bg-white dark:bg-slate-800 rounded-lg shadow overflow-hidden cursor-pointer active:bg-slate-50 dark:active:bg-slate-700">
+              <div class="flex">
+                <div class="w-16 h-auto flex-shrink-0 bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="flex-1 p-2.5 min-w-0">
+                  <div class="flex items-start justify-between gap-2 mb-1">
+                    <h3 class="text-sm font-semibold text-slate-900 dark:text-white truncate">{{ insp.vehicleLicensePlate }}</h3>
+                    <span [class]="'flex-shrink-0 px-1.5 py-0.5 rounded text-[10px] font-medium ' + getStatusClass(insp)">{{ getStatusLabel(insp) }}</span>
+                  </div>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">{{ insp.typeName }} • {{ formatDate(insp.inspectionDate) }}</p>
+                  <p class="text-xs truncate">
+                    <span [class.text-green-600]="insp.resultName === 'Approved'" [class.text-red-600]="insp.resultName === 'Rejected'" class="font-medium">{{ insp.resultName }}</span>
+                    <span class="text-slate-500"> • {{ formatCurrency(insp.cost) }}</span>
+                  </p>
+                </div>
+                <div class="flex items-center px-2">
+                  <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</div>

@@ -1,0 +1,44 @@
+// Custom scrollbar for sidebar navigation
+nav {
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.5) transparent;
+  
+  // Webkit browsers (Chrome, Safari, Edge)
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 116, 139, 0.5);
+    border-radius: 3px;
+    
+    &:hover {
+      background-color: rgba(100, 116, 139, 0.7);
+    }
+  }
+}
+
+// Collapsible submenu animation
+.submenu-container {
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.submenu-expanded {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.submenu-collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+// Chevron rotation
+.rotate-180 {
+  transform: rotate(180deg);
+}

@@ -1,1 +1,110 @@
 // Estilos do componente
+
+// Leaflet vehicle marker styles
+.vehicle-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.vehicle-marker .relative {
+  position: relative;
+}
+
+.vehicle-marker .absolute {
+  position: absolute;
+}
+
+.vehicle-marker .-inset-4 {
+  top: -1rem;
+  right: -1rem;
+  bottom: -1rem;
+  left: -1rem;
+}
+
+.vehicle-marker .-inset-2 {
+  top: -0.5rem;
+  right: -0.5rem;
+  bottom: -0.5rem;
+  left: -0.5rem;
+}
+
+.vehicle-marker .w-10 {
+  width: 2.5rem;
+}
+
+.vehicle-marker .h-10 {
+  height: 2.5rem;
+}
+
+.vehicle-marker .w-6 {
+  width: 1.5rem;
+}
+
+.vehicle-marker .h-6 {
+  height: 1.5rem;
+}
+
+.vehicle-marker .bg-green-500 {
+  background-color: #22c55e;
+}
+
+.vehicle-marker .bg-green-500\/30 {
+  background-color: rgba(34, 197, 94, 0.3);
+}
+
+.vehicle-marker .bg-green-500\/50 {
+  background-color: rgba(34, 197, 94, 0.5);
+}
+
+.vehicle-marker .rounded-full {
+  border-radius: 9999px;
+}
+
+.vehicle-marker .flex {
+  display: flex;
+}
+
+.vehicle-marker .items-center {
+  align-items: center;
+}
+
+.vehicle-marker .justify-center {
+  justify-content: center;
+}
+
+.vehicle-marker .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.vehicle-marker .shadow-green-500\/50 {
+  --tw-shadow-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -2px var(--tw-shadow-color);
+}
+
+.vehicle-marker .text-white {
+  color: white;
+}
+
+.vehicle-marker .animate-ping {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.vehicle-marker .animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

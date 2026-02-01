@@ -1,7 +1,7 @@
-# 📋 PADRÃO DE DESENVOLVIMENTO - NEXUS ADMIN ANGULAR 18
+# 📋 PADRÃO DE DESENVOLVIMENTO - WMS ADMIN ANGULAR 18
 
 ## 🎯 Visão Geral
-Este documento estabelece os padrões de desenvolvimento para o projeto NEXUS ADMIN, um sistema ERP completo construído com Angular 18 e Tailwind CSS.
+Este documento estabelece os padrões de desenvolvimento para o projeto WMS ADMIN, um sistema ERP completo construído com Angular 18 e Tailwind CSS.
 
 ---
 
@@ -271,7 +271,7 @@ import { Injectable, signal, effect } from '@angular/core';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly THEME_KEY = 'nexus_theme';
+  private readonly THEME_KEY = 'WMS_theme';
   
   isDarkMode = signal<boolean>(false);
 

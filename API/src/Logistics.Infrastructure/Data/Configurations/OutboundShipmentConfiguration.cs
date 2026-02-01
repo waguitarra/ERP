@@ -31,11 +31,7 @@ public class OutboundShipmentConfiguration : IEntityTypeConfiguration<OutboundSh
             .HasForeignKey(s => s.OrderId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Relacionamento com Vehicle
-        builder.HasOne(s => s.Vehicle)
-            .WithMany()
-            .HasForeignKey(s => s.VehicleId)
-            .OnDelete(DeleteBehavior.SetNull);
+        // Relacionamento com Vehicle - configurado em VehicleConfiguration
 
         builder.HasIndex(s => s.OrderId);
         builder.HasIndex(s => s.VehicleId);

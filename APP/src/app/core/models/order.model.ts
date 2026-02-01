@@ -23,6 +23,22 @@ export interface Order {
   items: OrderItem[];
   createdAt: Date;
   updatedAt?: Date;
+  // WMS Fields
+  vehicleId?: string;
+  vehicle?: any;
+  driverId?: string;
+  driver?: any;
+  originWarehouseId?: string;
+  originWarehouse?: any;
+  destinationWarehouseId?: string;
+  destinationWarehouse?: any;
+  customer?: any;
+  shippingZipCode?: string;
+  shippingCity?: string;
+  shippingState?: string;
+  shippingCountry?: string;
+  trackingNumber?: string;
+  estimatedDeliveryDate?: Date;
 }
 
 export interface OrderItem {
@@ -71,4 +87,16 @@ export interface UpdateOrderDto {
   expectedDate?: Date | string;
   shippingAddress?: string;
   specialInstructions?: string;
+  // WMS Fields
+  vehicleId?: string;
+  driverId?: string;
+  originWarehouseId?: string;
+  destinationWarehouseId?: string;
+  customerId?: string;
+  shippingZipCode?: string;
+  shippingCity?: string;
+  shippingState?: string;
+  shippingCountry?: string;
+  trackingNumber?: string;
+  estimatedDeliveryDate?: Date | string;
 }

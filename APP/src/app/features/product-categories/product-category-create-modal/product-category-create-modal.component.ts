@@ -39,6 +39,7 @@ export class ProductCategoryCreateModalComponent {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       await this.categoriesService.create(data);

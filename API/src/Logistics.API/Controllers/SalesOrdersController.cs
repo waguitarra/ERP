@@ -35,7 +35,35 @@ public class SalesOrdersController : ControllerBase
     public async Task<ActionResult> GetByCompany(Guid companyId)
     {
         var salesOrders = await _repository.GetByCompanyIdAsync(companyId);
-        return Ok(salesOrders);
+        var response = salesOrders.Select(so => new SalesOrderResponse
+        {
+            Id = so.Id,
+            CompanyId = so.CompanyId,
+            SalesOrderNumber = so.SalesOrderNumber,
+            CustomerId = so.CustomerId,
+            CustomerName = so.Customer?.Name,
+            OrderDate = so.OrderDate,
+            ExpectedDate = so.ExpectedDate,
+            Priority = so.Priority.ToString(),
+            Status = so.Status.ToString(),
+            TotalQuantity = so.TotalQuantity,
+            TotalValue = so.TotalValue,
+            ShippingAddress = so.ShippingAddress,
+            IsBOPIS = so.IsBOPIS,
+            CreatedAt = so.CreatedAt,
+            Items = so.Items.Select(i => new SalesOrderItemResponse
+            {
+                Id = i.Id,
+                ProductId = i.ProductId,
+                Sku = i.SKU,
+                QuantityOrdered = i.QuantityOrdered,
+                QuantityAllocated = i.QuantityAllocated,
+                QuantityPicked = i.QuantityPicked,
+                QuantityShipped = i.QuantityShipped,
+                UnitPrice = i.UnitPrice
+            }).ToList()
+        }).ToList();
+        return Ok(response);
     }
 
     [HttpGet("{id}")]
@@ -177,3 +205,34 @@ public record SalesOrderPackagingRequest(
     int CartonsPerParcel,
     int UnitsPerCarton
 );
+
+public class SalesOrderResponse
+{
+    public Guid Id { get; set; }
+    public Guid CompanyId { get; set; }
+    public string SalesOrderNumber { get; set; } = string.Empty;
+    public Guid CustomerId { get; set; }
+    public string? CustomerName { get; set; }
+    public DateTime OrderDate { get; set; }
+    public DateTime? ExpectedDate { get; set; }
+    public string Priority { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
+    public decimal TotalQuantity { get; set; }
+    public decimal TotalValue { get; set; }
+    public string? ShippingAddress { get; set; }
+    public bool IsBOPIS { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public List<SalesOrderItemResponse> Items { get; set; } = new();
+}
+
+public class SalesOrderItemResponse
+{
+    public Guid Id { get; set; }
+    public Guid ProductId { get; set; }
+    public string Sku { get; set; } = string.Empty;
+    public decimal QuantityOrdered { get; set; }
+    public decimal QuantityAllocated { get; set; }
+    public decimal QuantityPicked { get; set; }
+    public decimal QuantityShipped { get; set; }
+    public decimal UnitPrice { get; set; }
+}

@@ -344,6 +344,7 @@ export class PurchaseOrderModalComponent implements OnInit {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       const formValue = this.form.value;

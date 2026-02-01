@@ -1,8 +1,8 @@
-# 🔐 CREDENCIAIS DE TESTE - NEXUS ADMIN
+# 🔐 CREDENCIAIS DE TESTE - WMS ADMIN
 
 ## Usuário Administrador
 
-**Email:** `admin@nexus.com`  
+**Email:** `admin@WMS.com`  
 **Senha:** `Admin@123456`  
 **Role:** Admin Master (sem vínculo com empresa)
 
@@ -41,7 +41,7 @@ npm start
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "admin@nexus.com",
+    "email": "admin@WMS.com",
     "password": "Admin@123456"
   }'
 

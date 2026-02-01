@@ -1,0 +1,250 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+      {{ i18n.t('vehicleDetail.maintenance.title') }}
+    </h3>
+    <button (click)="openCreateModal()"
+            class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+      <span class="material-icons mr-2 text-lg">add</span>
+      {{ i18n.t('vehicleDetail.maintenance.add') }}
+    </button>
+  </div>
+
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="flex justify-center py-12">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (error()) {
+    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-4">
+      <p class="text-red-800 dark:text-red-300">{{ error() }}</p>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!loading() && maintenances().length === 0) {
+    <div class="text-center py-12">
+      <span class="material-icons text-6xl text-gray-300 dark:text-gray-600">build</span>
+      <p class="mt-4 text-gray-500 dark:text-gray-400">{{ i18n.t('vehicleDetail.maintenance.empty') }}</p>
+    </div>
+  }
+
+  <!-- Maintenances Table -->
+  @if (!loading() && maintenances().length > 0) {
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-gray-50 dark:bg-gray-800">
+          <tr>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              {{ i18n.t('common.date') }}
+            </th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              {{ i18n.t('vehicleDetail.maintenance.type') }}
+            </th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              {{ i18n.t('common.description') }}
+            </th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              {{ i18n.t('vehicleDetail.maintenance.mileage') }}
+            </th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              {{ i18n.t('common.cost') }}
+            </th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              {{ i18n.t('vehicleDetail.maintenance.provider') }}
+            </th>
+            <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              {{ i18n.t('common.actions') }}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+          @for (m of maintenances(); track m.id) {
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+              <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                {{ formatDate(m.maintenanceDate) }}
+              </td>
+              <td class="px-4 py-3 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                  {{ getMaintenanceTypeLabel(m.type) }}
+                </span>
+              </td>
+              <td class="px-4 py-3 text-sm text-gray-900 dark:text-white max-w-xs truncate">
+                {{ m.description }}
+              </td>
+              <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                {{ formatNumber(m.mileageAtMaintenance) }} km
+              </td>
+              <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                {{ formatCurrency(m.totalCost) }}
+                <span class="block text-xs text-gray-500">
+                  ({{ formatCurrency(m.laborCost) }} + {{ formatCurrency(m.partsCost) }})
+                </span>
+              </td>
+              <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                {{ m.serviceProvider || '-' }}
+              </td>
+              <td class="px-4 py-3 whitespace-nowrap text-right text-sm">
+                <button (click)="openEditModal(m)"
+                        class="p-1 text-gray-500 hover:text-primary-600 rounded transition-colors">
+                  <span class="material-icons text-lg">edit</span>
+                </button>
+                <button (click)="deleteMaintenance(m)"
+                        class="p-1 text-gray-500 hover:text-red-600 rounded transition-colors ml-2">
+                  <span class="material-icons text-lg">delete</span>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
+
+<!-- Modal -->
+@if (showModal()) {
+  <div class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" (click)="closeModal()"></div>
+
+    <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto z-[10000]">
+      <div class="sticky top-0 bg-white dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          {{ editingMaintenance() ? i18n.t('vehicleDetail.maintenance.edit') : i18n.t('vehicleDetail.maintenance.add') }}
+        </h3>
+      </div>
+
+        <form (ngSubmit)="saveMaintenance()" class="p-6 space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Type -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('vehicleDetail.maintenance.type') }} *
+              </label>
+              <select [(ngModel)]="formData.type" name="type" required
+                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                @for (type of maintenanceTypes; track type.value) {
+                  <option [ngValue]="type.value">{{ getMaintenanceTypeLabel(type.value) }}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('common.date') }} *
+              </label>
+              <input type="date" [(ngModel)]="formData.maintenanceDate" name="maintenanceDate" required
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              {{ i18n.t('common.description') }} *
+            </label>
+            <input type="text" [(ngModel)]="formData.description" name="description" required
+                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Mileage -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('vehicleDetail.maintenance.mileage') }} (km) *
+              </label>
+              <input type="number" [(ngModel)]="formData.mileageAtMaintenance" name="mileageAtMaintenance" required
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            </div>
+
+            <!-- Next Mileage -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('vehicleDetail.maintenance.nextMileage') }} (km)
+              </label>
+              <input type="number" [(ngModel)]="formData.nextMaintenanceMileage" name="nextMaintenanceMileage"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Labor Cost -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('vehicleDetail.maintenance.laborCost') }} (€)
+              </label>
+              <input type="number" step="0.01" [(ngModel)]="formData.laborCost" name="laborCost"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            </div>
+
+            <!-- Parts Cost -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('vehicleDetail.maintenance.partsCost') }} (€)
+              </label>
+              <input type="number" step="0.01" [(ngModel)]="formData.partsCost" name="partsCost"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Service Provider -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('vehicleDetail.maintenance.provider') }}
+              </label>
+              <input type="text" [(ngModel)]="formData.serviceProvider" name="serviceProvider"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            </div>
+
+            <!-- Invoice Number -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ i18n.t('vehicleDetail.maintenance.invoiceNumber') }}
+              </label>
+              <input type="text" [(ngModel)]="formData.invoiceNumber" name="invoiceNumber"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            </div>
+          </div>
+
+          <!-- Next Maintenance Date -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              {{ i18n.t('vehicleDetail.maintenance.nextDate') }}
+            </label>
+            <input type="date" [(ngModel)]="formData.nextMaintenanceDate" name="nextMaintenanceDate"
+                   class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+          </div>
+
+          <!-- Notes -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              {{ i18n.t('common.notes') }}
+            </label>
+            <textarea [(ngModel)]="formData.notes" name="notes" rows="2"
+                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
+            <button type="button" (click)="closeModal()"
+                    class="px-5 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors font-medium">
+              {{ i18n.t('common.cancel') }}
+            </button>
+            <button type="submit" [disabled]="saving()"
+                    class="px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors font-medium">
+              @if (saving()) {
+                <span class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"></span>
+              }
+              {{ i18n.t('common.save') }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+}

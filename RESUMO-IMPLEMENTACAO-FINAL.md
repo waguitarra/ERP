@@ -139,7 +139,7 @@ GET /api/orderpriority/code/{code}
 ```
 POST /api/auth/login
 {
-  "email": "admin@nexus.com",
+  "email": "admin@WMS.com",
   "password": "Admin@123456"
 }
 ```

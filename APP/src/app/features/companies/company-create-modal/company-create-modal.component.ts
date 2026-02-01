@@ -50,6 +50,7 @@ export class CompanyCreateModalComponent {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       await this.companiesService.create(this.form.value);

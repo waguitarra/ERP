@@ -24,6 +24,28 @@ public class Vehicle
     public string? CurrentAddress { get; private set; }
     public bool IsMoving { get; private set; }
     
+    // Mileage/Odometer
+    public decimal CurrentMileage { get; private set; }  // Quilometragem atual total
+    public decimal TotalDistanceTraveled { get; private set; }  // Distância total percorrida (calculada)
+    
+    // Financial info
+    public decimal? PurchasePrice { get; private set; }  // Preço de compra
+    public DateTime? PurchaseDate { get; private set; }  // Data da compra
+    public decimal? CurrentValue { get; private set; }   // Valor atual estimado
+    public string? ChassisNumber { get; private set; }   // Número do chassi/VIN
+    public string? EngineNumber { get; private set; }    // Número do motor
+    
+    // Insurance & Documentation
+    public DateTime? InsuranceExpiryDate { get; private set; }  // Vencimento do seguro
+    public DateTime? LicenseExpiryDate { get; private set; }    // Vencimento do licenciamento
+    public DateTime? LastInspectionDate { get; private set; }   // Última inspeção (ITV/DETRAN)
+    public DateTime? NextInspectionDate { get; private set; }   // Próxima inspeção
+    
+    // Last maintenance info
+    public DateTime? LastMaintenanceDate { get; private set; }  // Última manutenção
+    public decimal? LastMaintenanceMileage { get; private set; } // KM da última manutenção
+    public decimal TotalMaintenanceCost { get; private set; }   // Custo total de manutenção
+    
     // Driver relationship
     public Guid? DriverId { get; private set; }
     public string? DriverName { get; private set; }
@@ -44,6 +66,14 @@ public class Vehicle
     public Company Company { get; private set; }
     public Driver? Driver { get; private set; }
     public OutboundShipment? CurrentShipment { get; private set; }
+    
+    // Collections
+    public ICollection<VehicleMaintenance> Maintenances { get; private set; } = new List<VehicleMaintenance>();
+    public ICollection<VehicleInspection> Inspections { get; private set; } = new List<VehicleInspection>();
+    public ICollection<VehicleDocument> Documents { get; private set; } = new List<VehicleDocument>();
+    public ICollection<VehicleDamage> Damages { get; private set; } = new List<VehicleDamage>();
+    public ICollection<VehicleMileageLog> MileageLogs { get; private set; } = new List<VehicleMileageLog>();
+    public ICollection<OutboundShipment> DeliveryHistory { get; private set; } = new List<OutboundShipment>();
 
     // Constructor privado para EF
     private Vehicle() { }
@@ -169,6 +199,67 @@ public class Vehicle
         IsMoving = false;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public void UpdateMileage(decimal mileage)
+    {
+        if (mileage > CurrentMileage)
+        {
+            TotalDistanceTraveled += (mileage - CurrentMileage);
+            CurrentMileage = mileage;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
+
+    public void UpdateFinancialInfo(decimal? purchasePrice, DateTime? purchaseDate, decimal? currentValue)
+    {
+        PurchasePrice = purchasePrice;
+        PurchaseDate = purchaseDate;
+        CurrentValue = currentValue;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void UpdateVehicleIdentification(string? chassisNumber, string? engineNumber)
+    {
+        ChassisNumber = chassisNumber;
+        EngineNumber = engineNumber;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void UpdateInsuranceInfo(DateTime? insuranceExpiryDate, DateTime? licenseExpiryDate)
+    {
+        InsuranceExpiryDate = insuranceExpiryDate;
+        LicenseExpiryDate = licenseExpiryDate;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void UpdateInspectionDates(DateTime? lastInspectionDate, DateTime? nextInspectionDate)
+    {
+        LastInspectionDate = lastInspectionDate;
+        NextInspectionDate = nextInspectionDate;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void RecordMaintenance(DateTime maintenanceDate, decimal mileageAtMaintenance, decimal cost)
+    {
+        LastMaintenanceDate = maintenanceDate;
+        LastMaintenanceMileage = mileageAtMaintenance;
+        TotalMaintenanceCost += cost;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void UpdateMaintenanceInfo(DateTime maintenanceDate, decimal mileageAtMaintenance, decimal cost)
+    {
+        RecordMaintenance(maintenanceDate, mileageAtMaintenance, cost);
+    }
+
+    public bool IsInsuranceExpired => InsuranceExpiryDate.HasValue && InsuranceExpiryDate.Value < DateTime.UtcNow;
+    public bool IsInsuranceExpiringSoon => InsuranceExpiryDate.HasValue && 
+                                           InsuranceExpiryDate.Value < DateTime.UtcNow.AddDays(30) && 
+                                           !IsInsuranceExpired;
+    public bool IsInspectionExpired => NextInspectionDate.HasValue && NextInspectionDate.Value < DateTime.UtcNow;
+    public bool IsInspectionExpiringSoon => NextInspectionDate.HasValue && 
+                                            NextInspectionDate.Value < DateTime.UtcNow.AddDays(30) && 
+                                            !IsInspectionExpired;
 
     private static string GenerateTrackingToken()
     {

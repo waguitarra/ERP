@@ -216,7 +216,7 @@ bash restart-app.sh
 - **Orders**: http://localhost:4200/orders
 
 ### 3. Login
-- Email: `admin@nexus.com`
+- Email: `admin@WMS.com`
 - Senha: `Admin@123456`
 
 ### 4. Testar Orders

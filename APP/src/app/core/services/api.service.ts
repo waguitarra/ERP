@@ -12,7 +12,7 @@ export interface QueryParams {
 })
 export class ApiService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.apiUrl}/api`;
+  private readonly baseUrl = environment.apiUrl;
 
   // GET request
   get<T>(endpoint: string, params?: QueryParams): Promise<T> {

@@ -57,6 +57,7 @@ export class DriverEditModalComponent implements OnInit {
       return;
     }
     
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.isSaving = true;
     try {
       const data: UpdateDriverDto = this.form.value;

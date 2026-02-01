@@ -40,6 +40,21 @@ export const routes: Routes = [
         canActivate: [authGuard]
       },
       {
+        path: 'purchase-orders/new',
+        loadComponent: () => import('./features/purchase-orders/purchase-orders-list/purchase-orders-list.component')
+          .then(m => m.PurchaseOrdersListComponent)
+      },
+      {
+        path: 'sales-orders',
+        loadComponent: () => import('./features/purchase-orders/purchase-orders-list/purchase-orders-list.component')
+          .then(m => m.PurchaseOrdersListComponent)
+      },
+      {
+        path: 'sales-orders/new',
+        loadComponent: () => import('./features/purchase-orders/purchase-orders-list/purchase-orders-list.component')
+          .then(m => m.PurchaseOrdersListComponent)
+      },
+      {
         path: 'customers',
         loadComponent: () => import('./features/customers/customers-list/customers-list.component')
           .then(m => m.CustomersListComponent)
@@ -88,6 +103,36 @@ export const routes: Routes = [
         path: 'vehicles',
         loadComponent: () => import('./features/vehicles/vehicles-list/vehicles-list.component')
           .then(m => m.VehiclesListComponent)
+      },
+      {
+        path: 'vehicles/:id',
+        loadComponent: () => import('./features/vehicles/vehicle-detail/vehicle-detail.component')
+          .then(m => m.VehicleDetailComponent)
+      },
+      {
+        path: 'vehicle-documents',
+        loadComponent: () => import('./features/vehicles/pages/vehicle-documents-page/vehicle-documents-page.component')
+          .then(m => m.VehicleDocumentsPageComponent)
+      },
+      {
+        path: 'vehicle-maintenance',
+        loadComponent: () => import('./features/vehicles/pages/vehicle-maintenance-page/vehicle-maintenance-page.component')
+          .then(m => m.VehicleMaintenancePageComponent)
+      },
+      {
+        path: 'vehicle-inspections',
+        loadComponent: () => import('./features/vehicles/pages/vehicle-inspections-page/vehicle-inspections-page.component')
+          .then(m => m.VehicleInspectionsPageComponent)
+      },
+      {
+        path: 'vehicle-damages',
+        loadComponent: () => import('./features/vehicles/pages/vehicle-damages-page/vehicle-damages-page.component')
+          .then(m => m.VehicleDamagesPageComponent)
+      },
+      {
+        path: 'mileage-logs',
+        loadComponent: () => import('./features/vehicles/pages/mileage-logs-page/mileage-logs-page.component')
+          .then(m => m.MileageLogsPageComponent)
       },
       {
         path: 'drivers',

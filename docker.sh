@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 print_header() {
     echo -e "${BLUE}"
     echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                    ERP NEXUS ADMIN                           ║"
+    echo "║                    ERP WMS ADMIN                           ║"
     echo "║                Docker Management Script                       ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
@@ -26,7 +26,7 @@ print_credentials() {
     echo "╔══════════════════════════════════════════════════════════════╗"
     echo "║                   CREDENCIAIS DE ACESSO                       ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║  📧 Email:    admin@nexus.com                                 ║"
+    echo "║  📧 Email:    admin@WMS.com                                 ║"
     echo "║  🔑 Senha:    admin@123456                                    ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
     echo "║                        URLS                                   ║"

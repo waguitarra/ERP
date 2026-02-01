@@ -23,6 +23,36 @@ public class VehicleResponse
     public string? CurrentAddress { get; set; }
     public bool IsMoving { get; set; }
     
+    // Mileage info
+    public decimal CurrentMileage { get; set; }
+    public decimal TotalDistanceTraveled { get; set; }
+    
+    // Financial info
+    public decimal? PurchasePrice { get; set; }
+    public DateTime? PurchaseDate { get; set; }
+    public decimal? CurrentValue { get; set; }
+    public string? ChassisNumber { get; set; }
+    public string? EngineNumber { get; set; }
+    
+    // Insurance & Documentation
+    public DateTime? InsuranceExpiryDate { get; set; }
+    public DateTime? LicenseExpiryDate { get; set; }
+    public DateTime? LastInspectionDate { get; set; }
+    public DateTime? NextInspectionDate { get; set; }
+    public bool IsInsuranceExpired { get; set; }
+    public bool IsInsuranceExpiringSoon { get; set; }
+    public bool IsInspectionExpired { get; set; }
+    public bool IsInspectionExpiringSoon { get; set; }
+    
+    // Maintenance info
+    public DateTime? LastMaintenanceDate { get; set; }
+    public decimal? LastMaintenanceMileage { get; set; }
+    public decimal TotalMaintenanceCost { get; set; }
+    public int MaintenanceCount { get; set; }
+    public int DocumentCount { get; set; }
+    public int InspectionCount { get; set; }
+    public int DeliveryCount { get; set; }
+    
     // Driver info
     public Guid? DriverId { get; set; }
     public string? DriverName { get; set; }

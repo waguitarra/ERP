@@ -63,6 +63,7 @@ export class WarehouseEditModalComponent implements OnInit {
       return;
     }
     
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.isSaving = true;
     try {
       const data: UpdateWarehouseDto = this.form.value;

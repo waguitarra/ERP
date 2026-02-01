@@ -69,6 +69,13 @@ public class LogisticsDbContext : DbContext
     // WMS Dock Management
     public DbSet<VehicleAppointment> VehicleAppointments { get; set; }
     public DbSet<DockDoor> DockDoors { get; set; }
+    
+    // Vehicle Management
+    public DbSet<VehicleMaintenance> VehicleMaintenances { get; set; }
+    public DbSet<VehicleInspection> VehicleInspections { get; set; }
+    public DbSet<VehicleDocument> VehicleDocuments { get; set; }
+    public DbSet<VehicleDamage> VehicleDamages { get; set; }
+    public DbSet<VehicleMileageLog> VehicleMileageLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

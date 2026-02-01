@@ -140,7 +140,9 @@ public class OrderService : IOrderService
             order.Type,
             order.Source,
             order.CustomerId,
+            order.Customer?.Name,
             order.SupplierId,
+            order.Supplier?.Name,
             order.OrderDate,
             order.ExpectedDate,
             order.Priority,
@@ -148,6 +150,7 @@ public class OrderService : IOrderService
             order.TotalQuantity,
             order.TotalValue,
             order.ShippingAddress,
+            order.SpecialInstructions,
             order.IsBOPIS,
             order.Items.Select(i => new OrderItemResponse(
                 i.Id,
@@ -159,7 +162,18 @@ public class OrderService : IOrderService
                 i.QuantityShipped,
                 i.UnitPrice
             )).ToList(),
-            order.CreatedAt
+            order.CreatedAt,
+            // WMS Fields
+            order.VehicleId,
+            order.DriverId,
+            order.OriginWarehouseId,
+            order.DestinationWarehouseId,
+            order.ShippingZipCode,
+            order.ShippingCity,
+            order.ShippingState,
+            order.ShippingCountry,
+            order.TrackingNumber,
+            order.EstimatedDeliveryDate
         );
     }
 

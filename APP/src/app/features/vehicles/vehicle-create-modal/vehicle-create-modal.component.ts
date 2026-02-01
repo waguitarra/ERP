@@ -77,6 +77,7 @@ export class VehicleCreateModalComponent {
       return;
     }
     
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.isSaving = true;
     try {
       const user = this.authService.currentUser();

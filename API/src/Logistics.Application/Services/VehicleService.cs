@@ -240,16 +240,51 @@ public class VehicleService : IVehicleService
             CurrentSpeed = vehicle.CurrentSpeed,
             CurrentAddress = vehicle.CurrentAddress,
             IsMoving = vehicle.IsMoving,
+            
+            // Mileage info
+            CurrentMileage = vehicle.CurrentMileage,
+            TotalDistanceTraveled = vehicle.TotalDistanceTraveled,
+            
+            // Financial info
+            PurchasePrice = vehicle.PurchasePrice,
+            PurchaseDate = vehicle.PurchaseDate,
+            CurrentValue = vehicle.CurrentValue,
+            ChassisNumber = vehicle.ChassisNumber,
+            EngineNumber = vehicle.EngineNumber,
+            
+            // Insurance & Documentation
+            InsuranceExpiryDate = vehicle.InsuranceExpiryDate,
+            LicenseExpiryDate = vehicle.LicenseExpiryDate,
+            LastInspectionDate = vehicle.LastInspectionDate,
+            NextInspectionDate = vehicle.NextInspectionDate,
+            IsInsuranceExpired = vehicle.IsInsuranceExpired,
+            IsInsuranceExpiringSoon = vehicle.IsInsuranceExpiringSoon,
+            IsInspectionExpired = vehicle.IsInspectionExpired,
+            IsInspectionExpiringSoon = vehicle.IsInspectionExpiringSoon,
+            
+            // Maintenance info
+            LastMaintenanceDate = vehicle.LastMaintenanceDate,
+            LastMaintenanceMileage = vehicle.LastMaintenanceMileage,
+            TotalMaintenanceCost = vehicle.TotalMaintenanceCost,
+            MaintenanceCount = vehicle.Maintenances?.Count ?? 0,
+            DocumentCount = vehicle.Documents?.Count ?? 0,
+            InspectionCount = vehicle.Inspections?.Count ?? 0,
+            DeliveryCount = vehicle.DeliveryHistory?.Count ?? 0,
+            
+            // Driver info
             DriverId = vehicle.DriverId,
             DriverName = vehicle.DriverName,
             DriverPhone = vehicle.DriverPhone,
             DriverLicenseNumber = vehicle.Driver?.LicenseNumber,
+            
+            // Current shipment
             CurrentShipmentId = vehicle.CurrentShipmentId,
             CurrentShipmentNumber = vehicle.CurrentShipment?.ShipmentNumber,
             CurrentShipmentAddress = vehicle.CurrentShipment?.DeliveryAddress,
             CurrentShipmentStatus = vehicle.CurrentShipment?.Status.ToString(),
             CurrentOrderCustomerName = vehicle.CurrentShipment?.Order?.Customer?.Name,
             CurrentOrderCustomerPhone = vehicle.CurrentShipment?.Order?.Customer?.Phone,
+            
             Color = vehicle.Color,
             FuelType = vehicle.FuelType,
             Notes = vehicle.Notes,

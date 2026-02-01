@@ -22,7 +22,7 @@
 ### 3. FRONTEND - BUILD PASSOU
 - ✅ Comando: `npm run build --configuration production`
 - ✅ Resultado: `Application bundle generation complete. [8.801 seconds]`
-- ✅ Output: `/home/wagnerfb/Projetos/ERP/APP/dist/nexus-admin`
+- ✅ Output: `/home/wagnerfb/Projetos/ERP/APP/dist/WMS-admin`
 - ✅ Sem erros de compilação TypeScript
 - ✅ Componente `purchase-order-edit-modal` compila
 - ✅ Imports corrigidos (supplier-selector-modal)

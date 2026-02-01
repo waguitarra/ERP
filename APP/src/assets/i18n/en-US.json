@@ -7,8 +7,11 @@
   "sidebar": {
     "categories": {
       "main": "Main",
+      "commercial": "Commercial",
+      "products": "Products",
       "inventory": "Inventory Management",
       "logistics": "Logistics",
+      "fleet": "Fleet Management",
       "settings": "Settings"
     },
     "menu": {
@@ -28,20 +31,42 @@
       "outboundShipments": "Outbound Shipments",
       "vehicles": "Vehicles",
       "drivers": "Drivers",
+      "vehicleDocuments": "Vehicle Documents",
+      "vehicleMaintenance": "Maintenance",
+      "vehicleInspections": "Inspections (ITV/MOT)",
+      "vehicleDamages": "Damages",
+      "mileageLogs": "Mileage Logs",
       "settings": "Settings"
     }
   },
   "common": {
     "search": "Search...",
+    "retry": "Retry",
     "active": "Active",
     "inactive": "Inactive",
     "actions": "Actions",
+    "modals": {
+      "selectWarehouse": "Select Warehouse"
+    },
     "activate": "Activate",
     "deactivate": "Deactivate",
     "edit": "Edit",
     "delete": "Delete",
     "save": "Save",
     "cancel": "Cancel",
+    "date": "Date",
+    "description": "Description",
+    "notes": "Notes",
+    "cost": "Cost",
+    "statusLabel": "Status",
+    "location": "Location",
+    "other": "Other",
+    "valid": "Valid",
+    "expired": "Expired",
+    "approved": "Approved",
+    "addPhoto": "Add Photo",
+    "select": "Select",
+    "confirmDelete": "Are you sure you want to delete this record?",
     "buttons": {
       "save": "Save",
       "saveChanges": "Save Changes",
@@ -67,7 +92,8 @@
       "createWarehouse": "Create Warehouse",
       "createCompany": "Create Company",
       "toggleDarkMode": "Toggle dark mode",
-      "tryAgain": "Try Again"
+      "tryAgain": "Try Again",
+      "viewDetails": "View Details"
     },
     "status": {
       "active": "Active",
@@ -92,6 +118,8 @@
       "error": "Error processing",
       "noData": "No records found",
       "confirmDelete": "Are you sure you want to delete?",
+      "confirmSave": "Do you want to save the changes?",
+      "fillRequired": "Please fill the required fields",
       "deleteSuccess": "Deleted successfully",
       "createSuccess": "Created successfully",
       "updateSuccess": "Updated successfully"
@@ -340,7 +368,7 @@
         "password": "••••••••"
       },
       "categoryRequired": "Category is required",
-      "footer": "© 2024 NEXUS ADMIN. All rights reserved.",
+      "footer": "© 2024 WMS ADMIN. All rights reserved.",
       "forgotPassword": "Forgot your password?"
     }
   },
@@ -351,15 +379,52 @@
       "revenue": "Total Revenue",
       "orders": "Orders",
       "customers": "Customers",
-      "products": "Products"
+      "products": "Products",
+      "suppliers": "Suppliers",
+      "vehicles": "Vehicles",
+      "drivers": "Drivers",
+      "inboundShipments": "Pending Inbound",
+      "outboundShipments": "Pending Outbound",
+      "totalSales": "Total Sales",
+      "newOrders": "New Orders",
+      "productsInStock": "Products in Stock",
+      "activeCustomers": "Active Customers"
     },
     "charts": {
       "monthlyRevenue": "Monthly Revenue",
       "viewReport": "View Report"
     },
+    "quickActions": {
+      "title": "Quick Actions",
+      "newPurchaseOrder": "New Purchase Order",
+      "newSalesOrder": "New Sales Order",
+      "viewProducts": "View Products",
+      "viewVehicles": "View Vehicles"
+    },
+    "recentPurchaseOrders": {
+      "title": "Recent Purchase Orders"
+    },
+    "recentSalesOrders": {
+      "title": "Recent Sales Orders"
+    },
+    "viewAll": "View All",
+    "noData": "No records found",
+    "table": {
+      "orderNumber": "Order Number",
+      "type": "Type",
+      "customer": "Customer/Supplier",
+      "value": "Value",
+      "status": "Status",
+      "date": "Date"
+    },
     "recentOrders": {
       "title": "Recent Orders",
-      "viewAll": "View All Orders"
+      "viewAll": "View All Orders",
+      "status": {
+        "completed": "Completed",
+        "pending": "Pending",
+        "cancelled": "Cancelled"
+      }
     }
   },
   "products": {
@@ -518,9 +583,36 @@
     "subtitle": "Stock and inventory control",
     "stats": {
       "totalStock": "Total in Stock",
+      "totalItems": "Total Items",
       "lowStock": "Low Stock",
       "outOfStock": "Out of Stock",
       "totalValue": "Total Value"
+    },
+    "search": {
+      "placeholder": "Search by product, location or warehouse..."
+    },
+    "filter": {
+      "allWarehouses": "All Warehouses",
+      "allStock": "All Stock"
+    },
+    "status": {
+      "inStock": "In Stock",
+      "lowStock": "Low Stock",
+      "outOfStock": "Out of Stock"
+    },
+    "table": {
+      "product": "Product",
+      "warehouse": "Warehouse",
+      "location": "Location",
+      "quantity": "Quantity",
+      "minStock": "Min. Stock",
+      "maxStock": "Max. Stock",
+      "status": "Status",
+      "lastUpdated": "Last Updated"
+    },
+    "empty": "No items found in inventory",
+    "errors": {
+      "loadFailed": "Failed to load inventory"
     },
     "module": {
       "title": "Inventory Control",
@@ -590,6 +682,9 @@
     "newVehicle": "New Vehicle",
     "editVehicle": "Edit Vehicle",
     "createVehicle": "Create Vehicle",
+    "noVehicles": "No vehicles registered",
+    "noDriver": "No driver",
+    "viewOnMap": "View on Map",
     "fields": {
       "plateNumber": "Plate Number",
       "licensePlate": "License Plate",
@@ -602,7 +697,9 @@
       "color": "Color",
       "fuelType": "Fuel Type",
       "notes": "Notes",
-      "driver": "Driver"
+      "driver": "Driver",
+      "driverName": "Driver Name",
+      "driverPhone": "Driver Phone"
     },
     "placeholders": {
       "plate": "ABC-1234",
@@ -649,9 +746,433 @@
       "callWhatsApp": "Call on WhatsApp",
       "callCustomerWhatsApp": "Call customer on WhatsApp"
     },
+    "mileage": {
+      "current": "Current Mileage",
+      "total": "Total Distance Traveled",
+      "update": "Update Mileage"
+    },
+    "financial": {
+      "title": "Financial Information",
+      "purchasePrice": "Purchase Price",
+      "purchaseDate": "Purchase Date",
+      "currentValue": "Current Estimated Value",
+      "chassisNumber": "Chassis Number",
+      "engineNumber": "Engine Number",
+      "depreciation": "Depreciation"
+    },
+    "insurance": {
+      "title": "Insurance & Licensing",
+      "insuranceExpiry": "Insurance Expiry",
+      "licenseExpiry": "License Expiry",
+      "expired": "Expired",
+      "expiringSoon": "Expiring Soon",
+      "valid": "Valid"
+    },
+    "inspection": {
+      "title": "Inspections",
+      "lastInspection": "Last Inspection",
+      "nextInspection": "Next Inspection",
+      "addInspection": "Add Inspection",
+      "inspectionCenter": "Inspection Center",
+      "inspectorName": "Inspector",
+      "certificateNumber": "Certificate Number",
+      "mileageAtInspection": "Mileage at Inspection",
+      "observations": "Observations",
+      "defectsFound": "Defects Found",
+      "types": {
+        "ITV": "ITV (Spain)",
+        "MOT": "MOT (UK)",
+        "TUV": "TÜV (Germany)",
+        "CT": "CT (France)",
+        "Revisione": "Revisione (Italy)",
+        "APK": "APK (Netherlands)",
+        "DETRAN": "Vehicle Inspection (Brazil)",
+        "SafetyInspection": "Safety Inspection",
+        "EmissionsTest": "Emissions Test",
+        "Other": "Other"
+      },
+      "results": {
+        "Approved": "Approved",
+        "ApprovedWithDefects": "Approved with Defects",
+        "Rejected": "Rejected",
+        "Pending": "Pending"
+      }
+    },
+    "maintenance": {
+      "title": "Maintenance",
+      "history": "Maintenance History",
+      "addMaintenance": "Add Maintenance",
+      "lastMaintenance": "Last Maintenance",
+      "lastMaintenanceMileage": "Mileage at Last Maintenance",
+      "totalCost": "Total Maintenance Cost",
+      "maintenanceCount": "Total Maintenances",
+      "maintenanceDate": "Maintenance Date",
+      "nextMaintenanceDate": "Next Maintenance",
+      "mileageAtMaintenance": "Mileage",
+      "nextMaintenanceMileage": "Next Mileage",
+      "laborCost": "Labor Cost",
+      "partsCost": "Parts Cost",
+      "serviceProvider": "Service Provider",
+      "serviceProviderContact": "Provider Contact",
+      "invoiceNumber": "Invoice Number",
+      "types": {
+        "Preventive": "Preventive",
+        "Corrective": "Corrective",
+        "OilChange": "Oil Change",
+        "TireChange": "Tire Change",
+        "BrakeService": "Brake Service",
+        "EngineRepair": "Engine Repair",
+        "Transmission": "Transmission",
+        "Electrical": "Electrical",
+        "BodyWork": "Body Work",
+        "AirConditioning": "Air Conditioning",
+        "Other": "Other"
+      }
+    },
+    "documents": {
+      "title": "Documents",
+      "addDocument": "Add Document",
+      "documentNumber": "Document Number",
+      "issueDate": "Issue Date",
+      "expiryDate": "Expiry Date",
+      "issuingAuthority": "Issuing Authority",
+      "alertOnExpiry": "Alert on Expiry",
+      "alertDaysBefore": "Days Before",
+      "types": {
+        "RegistrationCertificate": "Registration Certificate",
+        "OwnershipTitle": "Ownership Title",
+        "Insurance": "Insurance Policy",
+        "ThirdPartyInsurance": "Third Party Insurance",
+        "CargoInsurance": "Cargo Insurance",
+        "OperatingLicense": "Operating License",
+        "TransportLicense": "Transport License",
+        "HazmatLicense": "Hazmat License",
+        "RoadTax": "Road Tax",
+        "TollTag": "Toll Tag",
+        "TachographCertificate": "Tachograph Certificate",
+        "SpeedometerCertificate": "Speedometer Certificate",
+        "PurchaseInvoice": "Purchase Invoice",
+        "Warranty": "Warranty",
+        "Manual": "Vehicle Manual",
+        "Other": "Other"
+      }
+    },
+    "deliveryHistory": {
+      "title": "Delivery History",
+      "totalDeliveries": "Total Deliveries",
+      "shipmentNumber": "Shipment Number",
+      "shipmentDate": "Date",
+      "customerName": "Customer",
+      "deliveryAddress": "Delivery Address",
+      "distance": "Distance"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "maintenance": "Maintenance",
+      "inspections": "Inspections",
+      "documents": "Documents",
+      "deliveries": "Deliveries",
+      "financial": "Financial"
+    },
+    "alerts": {
+      "insuranceExpired": "Insurance expired!",
+      "insuranceExpiringSoon": "Insurance expiring soon",
+      "inspectionExpired": "Inspection expired!",
+      "inspectionExpiringSoon": "Inspection expiring soon",
+      "documentExpired": "Document expired",
+      "maintenanceDue": "Maintenance due"
+    },
     "module": {
       "title": "Vehicle Management",
       "subtitle": "Vehicle module under development"
+    }
+  },
+  "vehicleDetail": {
+    "backToList": "Back to List",
+    "overview": "Overview",
+    "criticalAlerts": "Critical Alerts",
+    "currentMileage": "Current Mileage",
+    "totalMaintenanceCost": "Total Maintenance Cost",
+    "totalDamageCost": "Total Damage Cost",
+    "totalDeliveries": "Total Deliveries",
+    "tabs": {
+      "overview": "Overview",
+      "documents": "Documents",
+      "maintenance": "Maintenance",
+      "inspections": "Inspections",
+      "damages": "Damages",
+      "mileage": "Mileage"
+    },
+    "summary": {
+      "mileage": "Mileage",
+      "currentMileage": "Current Mileage",
+      "maintenanceCost": "Maintenance Cost",
+      "damageCost": "Damage Cost",
+      "deliveries": "Deliveries",
+      "pending": "pending"
+    },
+    "info": {
+      "basic": "Basic Information",
+      "driver": "Driver",
+      "dates": "Important Dates"
+    },
+    "dates": {
+      "nextMaintenance": "Next Maintenance",
+      "nextInspection": "Next Inspection",
+      "insuranceExpiry": "Insurance Expiry",
+      "licenseExpiry": "License Expiry"
+    },
+    "alerts": {
+      "title": "All Alerts"
+    },
+    "gps": {
+      "active": "GPS Active",
+      "inactive": "GPS Inactive"
+    },
+    "expiry": {
+      "expiredAgo": "Expired {{days}} days ago",
+      "expiresIn": "In {{days}} days"
+    },
+    "documents": {
+      "title": "Vehicle Documents",
+      "add": "Add Document",
+      "edit": "Edit Document",
+      "empty": "No documents registered",
+      "type": "Document Type",
+      "number": "Document Number",
+      "issueDate": "Issue Date",
+      "issued": "Issued",
+      "expires": "Expires",
+      "expired": "Expired",
+      "valid": "Valid",
+      "confirmDelete": "Are you sure you want to delete this document?",
+      "expirationDate": "Expiration Date",
+      "issuingAuthority": "Issuing Authority",
+      "cost": "Cost",
+      "alertEnabled": "Alert Enabled",
+      "alertOnExpiry": "Alert on Expiry",
+      "alertDays": "Days Before",
+      "daysBefore": "days before",
+      "expiryDate": "Expiry Date",
+      "file": "File",
+      "expiringSoon": "Expiring Soon",
+      "types": {
+        "registrationCertificate": "Registration Certificate",
+        "ownershipTitle": "Ownership Title",
+        "insurance": "Insurance Policy",
+        "thirdPartyInsurance": "Third Party Insurance",
+        "cargoInsurance": "Cargo Insurance",
+        "operatingLicense": "Operating License",
+        "transportLicense": "Transport License",
+        "hazmatLicense": "Hazmat License",
+        "roadTax": "Road Tax",
+        "tollTag": "Toll Tag",
+        "tachographCertificate": "Tachograph Certificate",
+        "speedometerCertificate": "Speedometer Certificate",
+        "purchaseInvoice": "Purchase Invoice",
+        "warranty": "Warranty",
+        "manual": "Vehicle Manual",
+        "other": "Other"
+      }
+    },
+    "maintenance": {
+      "title": "Maintenance History",
+      "add": "Add Maintenance",
+      "edit": "Edit Maintenance",
+      "empty": "No maintenance records",
+      "type": "Maintenance Type",
+      "mileage": "Mileage",
+      "nextMileage": "Next Maintenance (KM)",
+      "nextDate": "Next Maintenance (Date)",
+      "laborCost": "Labor Cost",
+      "partsCost": "Parts Cost",
+      "provider": "Service Provider",
+      "invoiceNumber": "Invoice Number",
+      "confirmDelete": "Are you sure you want to delete this maintenance record?",
+      "types": {
+        "preventive": "Preventive",
+        "corrective": "Corrective",
+        "oilChange": "Oil Change",
+        "tireChange": "Tire Change",
+        "brakeService": "Brake Service",
+        "engineRepair": "Engine Repair",
+        "transmission": "Transmission",
+        "electrical": "Electrical",
+        "bodyWork": "Body Work",
+        "airConditioning": "Air Conditioning",
+        "other": "Other"
+      }
+    },
+    "inspections": {
+      "title": "Vehicle Inspections",
+      "add": "Add Inspection",
+      "edit": "Edit Inspection",
+      "empty": "No inspections recorded",
+      "type": "Inspection Type",
+      "inspectionDate": "Inspection Date",
+      "inspector": "Inspector",
+      "certificate": "Certificate Number",
+      "result": "Result",
+      "defects": "Defects Found",
+      "passed": "Passed",
+      "failed": "Failed",
+      "types": {
+        "technical": "Technical Inspection",
+        "emission": "Emission Test",
+        "safety": "Safety Inspection",
+        "roadworthiness": "Roadworthiness Test",
+        "prePurchase": "Pre-Purchase",
+        "postAccident": "Post-Accident"
+      }
+    },
+    "damages": {
+      "title": "Damage Records",
+      "add": "Report Damage",
+      "edit": "Edit Damage",
+      "empty": "No damages recorded",
+      "type": "Damage Type",
+      "severityLabel": "Severity",
+      "photos": "Photos",
+      "photoHint": "Accepted formats: WebP, JPEG, PNG. Max 5MB per photo.",
+      "estimatedCost": "Estimated Cost",
+      "actualCost": "Actual Cost",
+      "reportedBy": "Reported By",
+      "insurance": "Insurance",
+      "insuranceClaim": "Insurance Claim",
+      "fileClaim": "File Claim",
+      "repair": "Repair",
+      "repairDate": "Repair Date",
+      "repairedBy": "Repaired By",
+      "repairNotes": "Repair Notes",
+      "thirdPartyFault": "Third Party Fault",
+      "thirdPartyInfo": "Third Party Information",
+      "types": {
+        "collision": "Collision",
+        "scratch": "Scratch",
+        "dent": "Dent",
+        "glass": "Glass",
+        "tire": "Tire",
+        "mechanical": "Mechanical",
+        "electrical": "Electrical",
+        "interior": "Interior",
+        "weather": "Weather",
+        "vandalism": "Vandalism",
+        "theft": "Theft",
+        "fire": "Fire"
+      },
+      "severity": {
+        "cosmetic": "Cosmetic",
+        "minor": "Minor",
+        "moderate": "Moderate",
+        "major": "Major",
+        "severe": "Severe",
+        "totalLoss": "Total Loss"
+      },
+      "status": {
+        "reported": "Reported",
+        "underAssessment": "Under Assessment",
+        "awaitingParts": "Awaiting Parts",
+        "inRepair": "In Repair",
+        "repaired": "Repaired",
+        "closed": "Closed"
+      }
+    },
+    "mileage": {
+      "title": "Trip Log",
+      "startTrip": "Start Trip",
+      "edit": "Edit Trip",
+      "empty": "No trips recorded",
+      "tripType": "Trip Type",
+      "purpose": "Purpose",
+      "start": "Start",
+      "end": "End",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "startMileage": "Start Mileage",
+      "endMileage": "End Mileage",
+      "startAddress": "Start Address",
+      "endAddress": "End Address",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "distance": "Distance",
+      "inProgress": "In progress...",
+      "completeTrip": "Complete Trip",
+      "enterEndMileage": "Enter end mileage:",
+      "startInfo": "Start Information",
+      "endInfo": "End Information",
+      "tripCosts": "Trip Costs",
+      "costs": "Costs",
+      "fuelConsumed": "Fuel Consumed",
+      "fuelCost": "Fuel Cost",
+      "tollCost": "Toll Cost",
+      "parkingCost": "Parking Cost",
+      "otherCosts": "Other Costs",
+      "totalDistance": "Total Distance",
+      "totalFuelCost": "Total Fuel Cost",
+      "avgEfficiency": "Average Efficiency",
+      "types": {
+        "delivery": "Delivery",
+        "pickup": "Pickup",
+        "transfer": "Transfer",
+        "service": "Service",
+        "personal": "Personal",
+        "business": "Business",
+        "commute": "Commute"
+      },
+      "status": {
+        "planned": "Planned",
+        "inProgress": "In Progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      }
+    }
+  },
+  "fleetPages": {
+    "common": {
+      "allVehicles": "All vehicles",
+      "viewVehicle": "View vehicle",
+      "number": "Number",
+      "issueDate": "Issue Date",
+      "expiryDate": "Expiry Date",
+      "cost": "Cost",
+      "date": "Date",
+      "description": "Description",
+      "vehicle": "Vehicle",
+      "actions": "Actions",
+      "km": "KM",
+      "origin": "Origin",
+      "destination": "Destination",
+      "type": "Type"
+    },
+    "documents": {
+      "subtitle": "Manage documents for all vehicles",
+      "noDocuments": "No documents found"
+    },
+    "maintenance": {
+      "subtitle": "Fleet maintenance history",
+      "noMaintenance": "No maintenance records found"
+    },
+    "inspections": {
+      "subtitle": "ITV / DETRAN fleet inspections",
+      "noInspections": "No inspections found",
+      "performedDate": "Performed",
+      "expiryDate": "Expiry",
+      "result": "Result",
+      "cost": "Cost"
+    },
+    "damages": {
+      "subtitle": "Fleet damage records",
+      "noDamages": "No damages found"
+    },
+    "mileage": {
+      "subtitle": "Fleet mileage control",
+      "noMileage": "No mileage records found",
+      "totalDistance": "Total Distance",
+      "fuelCost": "Fuel Cost",
+      "tollCost": "Toll Costs",
+      "fuel": "Fuel",
+      "toll": "Toll",
+      "distance": "Distance"
     }
   },
   "storageLocations": {

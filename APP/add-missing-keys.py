@@ -5,9 +5,9 @@ from pathlib import Path
 # Traduções das chaves faltantes
 missing_translations = {
     'auth.login.footer': {
-        'pt-BR': '© 2024 NEXUS ADMIN. Todos os direitos reservados.',
-        'en-US': '© 2024 NEXUS ADMIN. All rights reserved.',
-        'es-ES': '© 2024 NEXUS ADMIN. Todos los derechos reservados.'
+        'pt-BR': '© 2024 WMS ADMIN. Todos os direitos reservados.',
+        'en-US': '© 2024 WMS ADMIN. All rights reserved.',
+        'es-ES': '© 2024 WMS ADMIN. Todos los derechos reservados.'
     },
     'auth.login.forgotPassword': {
         'pt-BR': 'Esqueceu sua senha?',

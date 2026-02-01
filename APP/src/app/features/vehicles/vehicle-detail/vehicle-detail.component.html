@@ -1,0 +1,311 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+  <!-- Modern Header with Glassmorphism -->
+  <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="py-5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <button (click)="goBack()" 
+                    class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95">
+              <span class="material-icons text-slate-600 dark:text-slate-400">arrow_back</span>
+            </button>
+            @if (vehicle()) {
+              <div>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+                  {{ vehicle()?.licensePlate }}
+                </h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                  {{ vehicle()?.brand }} {{ vehicle()?.model }} - {{ vehicle()?.year }}
+                </p>
+              </div>
+            }
+          </div>
+          
+          @if (vehicle()) {
+            <div class="flex items-center gap-3">
+              <span [class]="'px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm shadow-sm ' + getStatusClass(vehicle()!.status)">
+                {{ getStatusLabel(vehicle()!.status) }}
+              </span>
+              @if (vehicle()?.trackingEnabled) {
+                <span class="px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-100/80 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300 backdrop-blur-sm shadow-sm flex items-center gap-2">
+                  <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  </span>
+                  {{ i18n.t('vehicleDetail.gps.active') }}
+                </span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="flex justify-center items-center py-20">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (error()) {
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+        <p class="text-red-800 dark:text-red-300">{{ error() }}</p>
+        <button (click)="loadVehicle()" 
+                class="mt-2 text-red-600 dark:text-red-400 underline hover:no-underline">
+          {{ i18n.t('common.retry') }}
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Content -->
+  @if (!loading() && !error() && vehicle()) {
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <!-- Critical Alerts Banner -->
+      @if (criticalAlerts().length > 0) {
+        <div class="mb-6 space-y-2">
+          @for (alert of criticalAlerts(); track alert.alertType + alert.title) {
+            <div [class]="'flex items-center p-4 rounded-lg border ' + getAlertSeverityClass(alert.severity)">
+              <span class="material-icons mr-3">warning</span>
+              <div class="flex-1">
+                <p class="font-medium">{{ alert.title }}</p>
+                <p class="text-sm opacity-80">{{ alert.description }}</p>
+              </div>
+              @if (alert.daysUntilDue !== null && alert.daysUntilDue !== undefined) {
+                <span class="text-sm font-medium">
+                  {{ alert.daysUntilDue < 0 ? i18n.t('vehicleDetail.expiry.expiredAgo', {days: -alert.daysUntilDue}) : i18n.t('vehicleDetail.expiry.expiresIn', {days: alert.daysUntilDue}) }}
+                </span>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Modern Ionic-style Segment Tabs -->
+      <div class="mb-6">
+        <div class="bg-slate-100 dark:bg-slate-800/50 backdrop-blur-lg p-1.5 rounded-2xl shadow-inner">
+          <nav class="flex gap-1 overflow-x-auto scrollbar-hide" aria-label="Tabs">
+            @for (tab of tabs; track tab.id) {
+              <button (click)="setActiveTab(tab.id)"
+                      [class]="'flex items-center gap-2 py-3 px-5 rounded-xl font-medium text-sm whitespace-nowrap transition-all duration-300 ' +
+                               (activeTab() === tab.id 
+                                 ? 'bg-white dark:bg-slate-700 text-primary-600 dark:text-primary-400 shadow-lg shadow-primary-500/10 scale-[1.02]' 
+                                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-700/50')">
+                <span class="material-icons text-xl">{{ tab.icon }}</span>
+                <span class="hidden sm:inline">{{ i18n.t(tab.labelKey) }}</span>
+              </button>
+            }
+          </nav>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-white/50 dark:border-slate-700/50">
+        <!-- Overview Tab -->
+        @if (activeTab() === 'overview') {
+          <div class="p-6">
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+              <!-- Quilometragem -->
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/40 dark:to-blue-800/40 rounded-2xl p-5 border border-blue-100 dark:border-blue-800/50 shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">{{ i18n.t('vehicleDetail.summary.mileage') }}</p>
+                    <p class="text-2xl font-bold text-blue-900 dark:text-blue-100 mt-1">
+                      {{ formatNumber(summary()?.currentMileage || 0) }} km
+                    </p>
+                  </div>
+                  <span class="material-icons text-4xl text-blue-300 dark:text-blue-600">speed</span>
+                </div>
+              </div>
+
+              <!-- Custo Manutenção -->
+              <div class="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 rounded-lg p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm text-orange-600 dark:text-orange-400 font-medium">{{ i18n.t('vehicleDetail.summary.maintenanceCost') }}</p>
+                    <p class="text-2xl font-bold text-orange-900 dark:text-orange-100">
+                      {{ formatCurrency(summary()?.totalMaintenanceCost || 0) }}
+                    </p>
+                  </div>
+                  <span class="material-icons text-4xl text-orange-300 dark:text-orange-600">build</span>
+                </div>
+              </div>
+
+              <!-- Custo Avarias -->
+              <div class="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 rounded-lg p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm text-red-600 dark:text-red-400 font-medium">{{ i18n.t('vehicleDetail.summary.damageCost') }}</p>
+                    <p class="text-2xl font-bold text-red-900 dark:text-red-100">
+                      {{ formatCurrency(summary()?.totalDamageCost || 0) }}
+                    </p>
+                    @if (summary()?.pendingDamages && summary()!.pendingDamages > 0) {
+                      <p class="text-xs text-red-600 dark:text-red-400 mt-1">
+                        {{ summary()?.pendingDamages }} {{ i18n.t('vehicleDetail.summary.pending') }}
+                      </p>
+                    }
+                  </div>
+                  <span class="material-icons text-4xl text-red-300 dark:text-red-600">report_problem</span>
+                </div>
+              </div>
+
+              <!-- Entregas -->
+              <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-lg p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm text-green-600 dark:text-green-400 font-medium">{{ i18n.t('vehicleDetail.summary.deliveries') }}</p>
+                    <p class="text-2xl font-bold text-green-900 dark:text-green-100">
+                      {{ summary()?.totalDeliveries || 0 }}
+                    </p>
+                  </div>
+                  <span class="material-icons text-4xl text-green-300 dark:text-green-600">local_shipping</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vehicle Info Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <!-- Basic Info -->
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  {{ i18n.t('vehicleDetail.info.basic') }}
+                </h3>
+                <dl class="space-y-3">
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.brand') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">{{ vehicle()?.brand || '-' }}</dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.model') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">{{ vehicle()?.model }}</dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.year') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">{{ vehicle()?.year }}</dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.color') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">{{ vehicle()?.color || '-' }}</dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.fuelType') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">{{ vehicle()?.fuelType || '-' }}</dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.capacity') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">
+                      {{ vehicle()?.capacity ? vehicle()!.capacity + ' kg' : '-' }}
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+
+              <!-- Driver & Dates -->
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  {{ i18n.t('vehicleDetail.info.driver') }}
+                </h3>
+                <dl class="space-y-3">
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.driverName') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">{{ vehicle()?.driverName || '-' }}</dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicles.fields.driverPhone') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">{{ vehicle()?.driverPhone || '-' }}</dd>
+                  </div>
+                </dl>
+
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 mt-8">
+                  {{ i18n.t('vehicleDetail.info.dates') }}
+                </h3>
+                <dl class="space-y-3">
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicleDetail.dates.nextMaintenance') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">
+                      {{ formatDate(summary()?.nextMaintenanceDate) }}
+                    </dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicleDetail.dates.nextInspection') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">
+                      {{ formatDate(summary()?.nextInspectionDate) }}
+                    </dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicleDetail.dates.insuranceExpiry') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">
+                      {{ formatDate(vehicle()?.insuranceExpiryDate) }}
+                    </dd>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
+                    <dt class="text-sm text-gray-500 dark:text-gray-400">{{ i18n.t('vehicleDetail.dates.licenseExpiry') }}</dt>
+                    <dd class="text-sm font-medium text-gray-900 dark:text-white">
+                      {{ formatDate(vehicle()?.licenseExpiryDate) }}
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <!-- All Alerts -->
+            @if (alerts().length > 0) {
+              <div class="mt-8">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  {{ i18n.t('vehicleDetail.alerts.title') }}
+                </h3>
+                <div class="space-y-2">
+                  @for (alert of alerts(); track alert.alertType + alert.title) {
+                    <div [class]="'flex items-center p-3 rounded-lg border ' + getAlertSeverityClass(alert.severity)">
+                      <span class="material-icons mr-3 text-lg">
+                        {{ alert.alertType === 'InspectionExpiring' ? 'verified' : 
+                           alert.alertType === 'DocumentExpiring' ? 'description' : 'report_problem' }}
+                      </span>
+                      <div class="flex-1">
+                        <p class="font-medium text-sm">{{ alert.title }}</p>
+                        <p class="text-xs opacity-80">{{ alert.description }}</p>
+                      </div>
+                      @if (alert.dueDate) {
+                        <span class="text-xs">{{ formatDate(alert.dueDate) }}</span>
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- Documents Tab -->
+        @if (activeTab() === 'documents') {
+          <app-vehicle-documents [vehicleId]="vehicleId()" />
+        }
+
+        <!-- Maintenance Tab -->
+        @if (activeTab() === 'maintenance') {
+          <app-vehicle-maintenance [vehicleId]="vehicleId()" />
+        }
+
+        <!-- Inspections Tab -->
+        @if (activeTab() === 'inspections') {
+          <app-vehicle-inspections [vehicleId]="vehicleId()" />
+        }
+
+        <!-- Damages Tab -->
+        @if (activeTab() === 'damages') {
+          <app-vehicle-damages [vehicleId]="vehicleId()" />
+        }
+
+        <!-- Mileage Tab -->
+        @if (activeTab() === 'mileage') {
+          <app-vehicle-mileage [vehicleId]="vehicleId()" />
+        }
+      </div>
+    </div>
+  }
+</div>

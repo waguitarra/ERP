@@ -157,6 +157,7 @@ export class OrderCreateModalComponent implements OnInit {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       const user = this.authService.currentUser();

@@ -4,7 +4,7 @@ import { Injectable, signal, effect } from '@angular/core';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly THEME_KEY = 'nexus_theme';
+  private readonly THEME_KEY = 'WMS_theme';
   
   isDarkMode = signal<boolean>(false);
 

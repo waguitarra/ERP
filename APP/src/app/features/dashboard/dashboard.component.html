@@ -1,88 +1,223 @@
 <div class="animate-fade-in">
-      <div class="mb-8">
-        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.title') }}</h1>
-        <p class="text-slate-500 dark:text-slate-400">{{ i18n.t('dashboard.subtitle') }}</p>
-      </div>
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.title') }}</h1>
+    <p class="text-slate-500 dark:text-slate-400">{{ i18n.t('dashboard.subtitle') }}</p>
+  </div>
 
-      <!-- Cards de Estatísticas -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        @for (stat of stats; track stat.title) {
-          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow duration-300">
-            <div class="flex items-center justify-between mb-4">
-              <div [class]="'p-3 rounded-lg ' + stat.color">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="stat.icon" />
-                </svg>
-              </div>
-              <span [class]="stat.isPositive ? 'text-green-500 bg-green-50 dark:bg-green-900/30 dark:text-green-400' : 'text-red-500 bg-red-50 dark:bg-red-900/30 dark:text-red-400'" class="px-2.5 py-0.5 rounded-full text-xs font-medium">
-                {{stat.change}}
-              </span>
+  <!-- Loading State -->
+  @if (loading()) {
+    <div class="flex items-center justify-center h-64">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+    </div>
+  } @else {
+    <!-- Cards de Estatísticas (Clicáveis) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      @for (stat of statCards; track stat.title) {
+        <div 
+          (click)="navigateTo(stat.route)"
+          class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <div [class]="'p-2.5 rounded-lg ' + stat.bgColor + ' group-hover:scale-110 transition-transform duration-300'">
+              <svg xmlns="http://www.w3.org/2000/svg" [class]="'h-5 w-5 ' + stat.color" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="stat.icon" />
+              </svg>
             </div>
-            <div>
-              <h3 class="text-slate-500 dark:text-slate-400 text-sm font-medium">{{stat.title}}</h3>
-              <p class="text-2xl font-bold text-slate-800 dark:text-slate-100 mt-1">{{stat.value}}</p>
+            @if (stat.trend && stat.trend.length > 0) {
+              <svg class="w-16 h-8 opacity-60" viewBox="0 0 100 30" preserveAspectRatio="none">
+                <polyline
+                  fill="none"
+                  [attr.stroke]="stat.color.includes('purple') ? '#a855f7' : stat.color.includes('emerald') ? '#10b981' : stat.color.includes('orange') ? '#f97316' : '#3b82f6'"
+                  stroke-width="2"
+                  [attr.points]="getSparklinePoints(stat.trend)"
+                />
+              </svg>
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            }
+          </div>
+          <div>
+            <h3 class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wide truncate">{{stat.title}}</h3>
+            <div class="flex items-baseline gap-2 mt-1 min-w-0">
+              <p class="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 truncate min-w-0">{{stat.displayValue}}</p>
+              @if (stat.valueLabel) {
+                <span class="text-xs text-slate-400 truncate min-w-0">{{stat.valueLabel}}</span>
+              }
             </div>
-          </div>
-        }
-      </div>
-
-      <!-- Seção de Gráficos e Tabelas -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Gráfico Simulado (CSS Puro) -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm lg:col-span-2">
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.charts.monthlyRevenue') }}</h2>
-            <button class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">{{ i18n.t('dashboard.charts.viewReport') }}</button>
-          </div>
-          
-          <!-- Barras do Gráfico -->
-          <div class="h-64 flex items-end justify-between space-x-2">
-            @for (bar of chartData; track bar.label) {
-              <div class="flex flex-col items-center flex-1 group">
-                <div 
-                  class="w-full bg-blue-100 rounded-t-sm relative transition-all duration-500 group-hover:bg-blue-200"
-                  [style.height]="bar.height + '%'"
-                >
-                  <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 dark:bg-slate-700 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                    {{bar.value}}
-                  </div>
-                  <div class="w-full bg-blue-500 rounded-t-sm absolute bottom-0" [style.height]="bar.fill + '%'"></div>
-                </div>
-                <span class="text-xs text-slate-400 dark:text-slate-500 mt-2">{{bar.label}}</span>
+            @if (stat.secondaryValue) {
+              <div class="mt-2 pt-2 border-t border-slate-100 dark:border-slate-700">
+                <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 truncate">{{stat.secondaryValue}}</p>
+                <p class="text-xs text-slate-400 truncate">{{stat.secondaryLabel}}</p>
               </div>
             }
           </div>
         </div>
+      }
+    </div>
 
-        <!-- Lista de Atividade Recente -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6">{{ i18n.t('dashboard.recentOrders.title') }}</h2>
-          <div class="space-y-4">
-            @for (order of recentOrders; track order.id) {
-              <div class="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+    <!-- Quick Actions -->
+    <div class="mb-8">
+      <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4">{{ i18n.t('dashboard.quickActions.title') }}</h2>
+      <div class="flex flex-wrap gap-4">
+        @for (action of quickActions; track action.label) {
+          <button 
+            (click)="navigateTo(action.route)"
+            [class]="action.color + ' text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-all duration-300 hover:shadow-lg'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="action.icon" />
+            </svg>
+            {{action.label}}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Seção de Pedidos Recentes -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- Purchase Orders Recentes -->
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.recentPurchaseOrders.title') }}</h2>
+          <button (click)="navigateTo('/purchase-orders')" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">
+            {{ i18n.t('dashboard.viewAll') }}
+          </button>
+        </div>
+        
+        @if (recentPurchaseOrders().length === 0) {
+          <div class="text-center py-8 text-slate-500 dark:text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            {{ i18n.t('dashboard.noData') }}
+          </div>
+        } @else {
+          <div class="space-y-3">
+            @for (order of recentPurchaseOrders(); track order.id) {
+              <div 
+                (click)="navigateTo('/purchase-orders/' + order.id)"
+                class="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer border border-transparent hover:border-slate-200 dark:hover:border-slate-600">
                 <div class="flex items-center space-x-3">
-                  <div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 font-bold text-xs">
-                    {{getInitials(order.customer)}}
+                  <div class="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-xs">
+                    PO
                   </div>
-                  <div>
-                    <p class="text-sm font-medium text-slate-800 dark:text-slate-100">{{order.customer}}</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">{{order.product}}</p>
+                  <div class="min-w-0">
+                    <p class="text-sm font-medium text-slate-800 dark:text-slate-100 truncate">{{order.purchaseOrderNumber || order.orderNumber}}</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 truncate">{{order.supplierName || order.supplier?.name || 'N/A'}}</p>
                   </div>
                 </div>
-                <div class="text-right">
-                  <p class="text-sm font-bold text-slate-800 dark:text-slate-100">{{order.amount}}</p>
-                  <span [ngClass]="getStatusColor(order.status)" class="text-xs font-medium">
+                <div class="text-right min-w-0">
+                  <p class="text-sm font-bold text-slate-800 dark:text-slate-100 truncate">{{formatCompactCurrency(order.totalValue)}}</p>
+                  <span [class]="'text-xs font-medium px-2 py-0.5 rounded-full ' + getStatusColor(order.status)">
                     {{order.status}}
                   </span>
                 </div>
               </div>
             }
           </div>
-          <button class="w-full mt-6 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">
-            {{ i18n.t('dashboard.recentOrders.viewAll') }}
+        }
+      </div>
+
+      <!-- Sales Orders Recentes -->
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.recentSalesOrders.title') }}</h2>
+          <button (click)="navigateTo('/sales-orders')" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">
+            {{ i18n.t('dashboard.viewAll') }}
           </button>
         </div>
-
+        
+        @if (recentSalesOrders().length === 0) {
+          <div class="text-center py-8 text-slate-500 dark:text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            {{ i18n.t('dashboard.noData') }}
+          </div>
+        } @else {
+          <div class="space-y-3">
+            @for (order of recentSalesOrders(); track order.id) {
+              <div 
+                (click)="navigateTo('/sales-orders/' + order.id)"
+                class="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer border border-transparent hover:border-slate-200 dark:hover:border-slate-600">
+                <div class="flex items-center space-x-3">
+                  <div class="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 font-bold text-xs">
+                    SO
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-sm font-medium text-slate-800 dark:text-slate-100 truncate">{{order.salesOrderNumber || order.orderNumber}}</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 truncate">{{order.customerName || order.customer?.name || 'N/A'}}</p>
+                  </div>
+                </div>
+                <div class="text-right min-w-0">
+                  <p class="text-sm font-bold text-slate-800 dark:text-slate-100 truncate">{{formatCompactCurrency(order.totalValue)}}</p>
+                  <span [class]="'text-xs font-medium px-2 py-0.5 rounded-full ' + getStatusColor(order.status)">
+                    {{order.status}}
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+        }
       </div>
+
     </div>
+
+    <!-- Orders Recentes (tabela completa) -->
+    <div class="mt-8 bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">{{ i18n.t('dashboard.recentOrders.title') }}</h2>
+        <button (click)="navigateTo('/orders')" class="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline">
+          {{ i18n.t('dashboard.viewAll') }}
+        </button>
+      </div>
+      
+      @if (recentOrders().length === 0) {
+        <div class="text-center py-8 text-slate-500 dark:text-slate-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          {{ i18n.t('dashboard.noData') }}
+        </div>
+      } @else {
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider border-b border-slate-200 dark:border-slate-700">
+                <th class="pb-3">{{ i18n.t('dashboard.table.orderNumber') }}</th>
+                <th class="pb-3">{{ i18n.t('dashboard.table.type') }}</th>
+                <th class="pb-3">{{ i18n.t('dashboard.table.customer') }}</th>
+                <th class="pb-3">{{ i18n.t('dashboard.table.value') }}</th>
+                <th class="pb-3">{{ i18n.t('dashboard.table.status') }}</th>
+                <th class="pb-3">{{ i18n.t('dashboard.table.date') }}</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+              @for (order of recentOrders(); track order.id) {
+                <tr 
+                  (click)="navigateToOrder(order)"
+                  class="hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors">
+                  <td class="py-3 text-sm font-medium text-slate-800 dark:text-slate-100">{{order.orderNumber}}</td>
+                  <td class="py-3">
+                    <span [class]="order.type === 'Purchase' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400'" class="text-xs font-medium px-2 py-1 rounded-full">
+                      {{order.type}}
+                    </span>
+                  </td>
+                  <td class="py-3 text-sm text-slate-600 dark:text-slate-300">{{order.customerName || order.supplierName}}</td>
+                  <td class="py-3 text-sm font-medium text-slate-800 dark:text-slate-100">{{formatCurrency(order.totalValue)}}</td>
+                  <td class="py-3">
+                    <span [class]="'text-xs font-medium px-2 py-1 rounded-full ' + getStatusColor(order.status)">
+                      {{order.status}}
+                    </span>
+                  </td>
+                  <td class="py-3 text-sm text-slate-500 dark:text-slate-400">{{formatDate(order.orderDate)}}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  }
+</div>

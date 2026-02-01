@@ -30,17 +30,20 @@ export class ProductCategoryEditModalComponent {
   });
 
   constructor() {
-    effect(() => {
-      const cat = this.category();
-      this.formData.set({
-        name: cat.name,
-        code: cat.code,
-        description: cat.description || '',
-        barcode: cat.barcode || '',
-        reference: cat.reference || '',
-        isMaintenance: cat.isMaintenance
-      });
-    });
+    effect(
+      () => {
+        const cat = this.category();
+        this.formData.set({
+          name: cat.name,
+          code: cat.code,
+          description: cat.description || '',
+          barcode: cat.barcode || '',
+          reference: cat.reference || '',
+          isMaintenance: cat.isMaintenance
+        });
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   updateField(field: keyof CreateProductCategoryRequest, value: any): void {
@@ -54,6 +57,7 @@ export class ProductCategoryEditModalComponent {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       await this.categoriesService.update(this.category().id, data);

@@ -1,0 +1,90 @@
+# ============================================
+# Docker Compose - WMS Admin (Produção)
+# ============================================
+# Frontend: exposto na porta 4202 (externo)
+# Backend: apenas interno (rede Docker)
+# MySQL: apenas interno (rede Docker)
+# ============================================
+#
+# ⚠️  ATENÇÃO - REGRAS DE SEGURANÇA DOS DADOS ⚠️
+# ============================================
+# 1. NUNCA use "docker compose down -v" - isso APAGA todos os dados!
+# 2. NUNCA delete o volume "wms-admin-mysql-data"
+# 3. SEMPRE faça backup antes de qualquer manutenção
+# 4. Use apenas: docker compose down (sem -v)
+# 5. Backup: docker exec wms-admin-mysql mysqldump -uroot -p'...' logistics_db > backup.sql
+# ============================================
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: wms-admin-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-WmsAdmin@Prod2024!}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-logistics_db}
+      MYSQL_USER: ${MYSQL_USER:-wms_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-WmsUser@Prod2024!}
+    volumes:
+      # ⚠️ VOLUME PERSISTENTE - NUNCA EXCLUIR!
+      - wms_mysql_data:/var/lib/mysql
+      # Backup local montado para fácil acesso
+      - ./backups:/backups
+    networks:
+      - wms-internal
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-WmsAdmin@Prod2024!}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # NÃO expor porta externamente - apenas rede interna
+
+  api:
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    container_name: wms-admin-api
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+      - ConnectionStrings__DefaultConnection=Server=mysql;Port=3306;Database=${MYSQL_DATABASE:-logistics_db};User=${MYSQL_USER:-wms_user};Password=${MYSQL_PASSWORD:-WmsUser@Prod2024!};
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - wms-internal
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # NÃO expor porta externamente - apenas rede interna
+
+  frontend:
+    build:
+      context: ./APP
+      dockerfile: Dockerfile.prod
+    container_name: wms-admin-frontend
+    restart: unless-stopped
+    ports:
+      - "4202:80"  # Única porta exposta externamente
+    depends_on:
+      - api
+    networks:
+      - wms-internal
+      - wms-external
+
+networks:
+  wms-internal:
+    driver: bridge
+    internal: true  # Rede interna, sem acesso externo
+  wms-external:
+    driver: bridge
+
+volumes:
+  wms_mysql_data:
+    # ⚠️ VOLUME EXTERNO - Protegido contra exclusão por "docker compose down -v"
+    # Se precisar recriar, primeiro: docker volume create wms-admin-mysql-data
+    external: true
+    name: wms-admin-mysql-data

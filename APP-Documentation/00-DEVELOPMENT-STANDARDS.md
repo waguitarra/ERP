@@ -1,7 +1,7 @@
-# 📋 PADRÃO DE DESENVOLVIMENTO - NEXUS ADMIN ANGULAR 18
+# 📋 PADRÃO DE DESENVOLVIMENTO - WMS ADMIN ANGULAR 18
 
 ## 🎯 Visão Geral
-Este documento estabelece os padrões de desenvolvimento para o projeto NEXUS ADMIN, um sistema ERP completo construído com Angular 18 e Tailwind CSS.
+Este documento estabelece os padrões de desenvolvimento para o projeto WMS ADMIN, um sistema ERP completo construído com Angular 18 e Tailwind CSS.
 
 ---
 
@@ -589,7 +589,7 @@ export const routes: Routes = [
 ## 🔐 Padrões de Segurança
 
 1. Sempre usar AuthGuard nas rotas protegidas
-2. Token JWT armazenado em localStorage com prefix `nexus_`
+2. Token JWT armazenado em localStorage com prefix `WMS_`
 3. Interceptor para adicionar token automaticamente
 4. Redirect para login em caso de 401
 5. Sanitização de inputs do usuário

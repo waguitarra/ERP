@@ -92,6 +92,7 @@ export class VehicleEditModalComponent implements OnInit {
       return;
     }
     
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.isSaving = true;
     try {
       const formValue = this.form.value;

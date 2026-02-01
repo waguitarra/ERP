@@ -10,5 +10,5 @@ import { ToastNotificationsComponent } from './shared/components/toast-notificat
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'NEXUS ADMIN';
+  title = 'WMS ADMIN';
 }

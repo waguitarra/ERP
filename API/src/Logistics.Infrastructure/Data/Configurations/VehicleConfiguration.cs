@@ -69,6 +69,36 @@ public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
         // Current shipment
         builder.Property(v => v.CurrentShipmentId);
 
+        // Mileage/Odometer
+        builder.Property(v => v.CurrentMileage)
+            .HasPrecision(12, 2)
+            .HasDefaultValue(0);
+
+        builder.Property(v => v.TotalDistanceTraveled)
+            .HasPrecision(12, 2)
+            .HasDefaultValue(0);
+
+        // Financial info
+        builder.Property(v => v.PurchasePrice)
+            .HasPrecision(18, 2);
+
+        builder.Property(v => v.CurrentValue)
+            .HasPrecision(18, 2);
+
+        builder.Property(v => v.ChassisNumber)
+            .HasMaxLength(50);
+
+        builder.Property(v => v.EngineNumber)
+            .HasMaxLength(50);
+
+        // Maintenance costs
+        builder.Property(v => v.TotalMaintenanceCost)
+            .HasPrecision(18, 2)
+            .HasDefaultValue(0);
+
+        builder.Property(v => v.LastMaintenanceMileage)
+            .HasPrecision(12, 2);
+
         // Additional info
         builder.Property(v => v.Color)
             .HasMaxLength(30);
@@ -100,10 +130,16 @@ public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
             .HasForeignKey(v => v.DriverId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        // Relacionamento com CurrentShipment
+        // Relacionamento com CurrentShipment (um veículo pode ter uma remessa atual)
         builder.HasOne(v => v.CurrentShipment)
-            .WithMany()
-            .HasForeignKey(v => v.CurrentShipmentId)
+            .WithOne()
+            .HasForeignKey<Vehicle>(v => v.CurrentShipmentId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        // DeliveryHistory - remessas já realizadas pelo veículo (via OutboundShipment.VehicleId)
+        builder.HasMany(v => v.DeliveryHistory)
+            .WithOne(s => s.Vehicle)
+            .HasForeignKey(s => s.VehicleId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }

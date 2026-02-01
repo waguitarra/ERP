@@ -1,4 +1,4 @@
-# 🚀 NEXUS ADMIN - Sistema ERP
+# 🚀 WMS ADMIN - Sistema ERP
 
 Sistema de Gestão ERP completo construído com **Angular 18** e **Tailwind CSS**.
 
@@ -50,7 +50,7 @@ Edite o arquivo `src/environments/environment.development.ts` e configure a URL 
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:5000',  // URL da sua API
-  appName: 'NEXUS ADMIN [DEV]',
+  appName: 'WMS ADMIN [DEV]',
   version: '1.0.0-dev'
 };
 ```
@@ -149,7 +149,7 @@ export class ProductsListComponent implements OnInit {
 
 ## 🔐 Autenticação
 
-O sistema usa JWT para autenticação. O token é armazenado no localStorage com o prefixo `nexus_`.
+O sistema usa JWT para autenticação. O token é armazenado no localStorage com o prefixo `WMS_`.
 
 ### Login:
 ```typescript
@@ -178,7 +178,7 @@ Breakpoints Tailwind:
 npm run build
 ```
 
-Os arquivos otimizados serão gerados em `dist/nexus-admin/`
+Os arquivos otimizados serão gerados em `dist/WMS-admin/`
 
 ## 📝 Scripts Disponíveis
 
@@ -230,7 +230,7 @@ Verifique a configuração em `src/environments/environment.development.ts`
 
 ## 📄 Licença
 
-© 2024 NEXUS ADMIN - Todos os direitos reservados
+© 2024 WMS ADMIN - Todos os direitos reservados
 
 ## 👥 Suporte
 

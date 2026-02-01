@@ -48,7 +48,7 @@ export class LoginComponent {
 
   fillDemoCredentials(): void {
     this.loginForm.patchValue({
-      email: 'admin@nexus.com',
+      email: 'admin@WMS.com',
       password: 'admin@123456'
     });
   }

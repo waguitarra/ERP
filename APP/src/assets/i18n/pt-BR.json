@@ -7,8 +7,11 @@
   "sidebar": {
     "categories": {
       "main": "Principal",
+      "commercial": "Comercial",
+      "products": "Produtos",
       "inventory": "Gestão de Estoque",
       "logistics": "Logística",
+      "fleet": "Gestão de Frota",
       "settings": "Configurações"
     },
     "menu": {
@@ -28,20 +31,45 @@
       "outboundShipments": "Expedições",
       "vehicles": "Veículos",
       "drivers": "Motoristas",
+      "vehicleDocuments": "Documentos de Veículos",
+      "vehicleMaintenance": "Manutenções",
+      "vehicleInspections": "Inspeções (ITV/DETRAN)",
+      "vehicleDamages": "Avarias",
+      "mileageLogs": "Registro de Quilometragem",
       "settings": "Ajustes"
     }
   },
   "common": {
     "search": "Buscar...",
+    "retry": "Tentar novamente",
     "active": "Ativo",
     "inactive": "Inativo",
-    "actions": "Ações",
+    "actions": {
+      "label": "Ações",
+      "clearFilters": "Limpar Filtros",
+      "refresh": "Atualizar",
+      "retry": "Tentar Novamente"
+    },
+    "select": "Selecionar",
     "activate": "Ativar",
     "deactivate": "Desativar",
     "edit": "Editar",
     "delete": "Excluir",
     "save": "Salvar",
     "cancel": "Cancelar",
+    "date": "Data",
+    "description": "Descrição",
+    "notes": "Notas",
+    "cost": "Custo",
+    "statusLabel": "Status",
+    "location": "Localização",
+    "other": "Outro",
+    "valid": "Válido",
+    "expired": "Expirado",
+    "approved": "Aprovado",
+    "addPhoto": "Adicionar Foto",
+    "select": "Selecionar",
+    "confirmDelete": "Tem certeza que deseja excluir este registro?",
     "buttons": {
       "save": "Salvar",
       "saveChanges": "Salvar Alterações",
@@ -67,7 +95,9 @@
       "createWarehouse": "Criar Armazém",
       "createCompany": "Criar Empresa",
       "toggleDarkMode": "Alternar modo escuro",
-      "tryAgain": "Tentar Novamente"
+      "tryAgain": "Tentar Novamente",
+      "viewDetails": "Ver Detalhes",
+      "remove": "Remover"
     },
     "status": {
       "active": "Ativo",
@@ -92,6 +122,8 @@
       "error": "Erro ao processar",
       "noData": "Nenhum registro encontrado",
       "confirmDelete": "Tem certeza que deseja excluir?",
+      "confirmSave": "Deseja salvar as alterações?",
+      "fillRequired": "Preencha os campos obrigatórios",
       "deleteSuccess": "Excluído com sucesso",
       "createSuccess": "Criado com sucesso",
       "updateSuccess": "Atualizado com sucesso"
@@ -238,6 +270,9 @@
     },
     "errors": {
       "generic": "Erro ao processar",
+      "load_failed": "Erro ao carregar dados",
+      "save_failed": "Erro ao salvar dados",
+      "delete_failed": "Erro ao excluir dados",
       "companyIdNotFound": "Erro: CompanyId não encontrado",
       "createCompany": "Erro ao criar empresa",
       "updateCompany": "Erro ao atualizar empresa",
@@ -278,7 +313,13 @@
       "toggleDarkMode": "Alternar modo escuro",
       "filter": "Filtrar",
       "tryAgain": "Tentar Novamente"
+    },
+    "modals": {
+      "selectWarehouse": "Selecionar Armazém"
     }
+  },
+  "validation": {
+    "categoryRequired": "Categoria é obrigatória"
   },
   "modals": {
     "selectCustomer": "Selecionar Cliente",
@@ -346,7 +387,7 @@
         "password": "••••••••"
       },
       "categoryRequired": "Categoria é obrigatória",
-      "footer": "© 2024 NEXUS ADMIN. Todos os direitos reservados.",
+      "footer": "© 2024 WMS ADMIN. Todos os direitos reservados.",
       "forgotPassword": "Esqueceu sua senha?"
     }
   },
@@ -357,15 +398,52 @@
       "revenue": "Receita Total",
       "orders": "Pedidos",
       "customers": "Clientes",
-      "products": "Produtos"
+      "products": "Produtos",
+      "suppliers": "Fornecedores",
+      "vehicles": "Veículos",
+      "drivers": "Motoristas",
+      "inboundShipments": "Recebimentos Pendentes",
+      "outboundShipments": "Expedições Pendentes",
+      "totalSales": "Vendas Totais",
+      "newOrders": "Novos Pedidos",
+      "productsInStock": "Produtos em Estoque",
+      "activeCustomers": "Clientes Ativos"
     },
     "charts": {
       "monthlyRevenue": "Receita Mensal",
       "viewReport": "Ver Relatório"
     },
+    "quickActions": {
+      "title": "Ações Rápidas",
+      "newPurchaseOrder": "Nova Ordem de Compra",
+      "newSalesOrder": "Nova Ordem de Venda",
+      "viewProducts": "Ver Produtos",
+      "viewVehicles": "Ver Veículos"
+    },
+    "recentPurchaseOrders": {
+      "title": "Ordens de Compra Recentes"
+    },
+    "recentSalesOrders": {
+      "title": "Ordens de Venda Recentes"
+    },
+    "viewAll": "Ver Todos",
+    "noData": "Nenhum registro encontrado",
+    "table": {
+      "orderNumber": "Número do Pedido",
+      "type": "Tipo",
+      "customer": "Cliente/Fornecedor",
+      "value": "Valor",
+      "status": "Status",
+      "date": "Data"
+    },
     "recentOrders": {
       "title": "Pedidos Recentes",
-      "viewAll": "Ver Todos os Pedidos"
+      "viewAll": "Ver Todos os Pedidos",
+      "status": {
+        "completed": "Concluído",
+        "pending": "Pendente",
+        "cancelled": "Cancelado"
+      }
     }
   },
   "products": {
@@ -524,9 +602,36 @@
     "subtitle": "Controle de estoque e inventário",
     "stats": {
       "totalStock": "Total em Estoque",
+      "totalItems": "Total de Itens",
       "lowStock": "Estoque Baixo",
       "outOfStock": "Sem Estoque",
       "totalValue": "Valor Total"
+    },
+    "search": {
+      "placeholder": "Buscar por produto, localização ou armazém..."
+    },
+    "filter": {
+      "allWarehouses": "Todos os Armazéns",
+      "allStock": "Todo Estoque"
+    },
+    "status": {
+      "inStock": "Em Estoque",
+      "lowStock": "Estoque Baixo",
+      "outOfStock": "Sem Estoque"
+    },
+    "table": {
+      "product": "Produto",
+      "warehouse": "Armazém",
+      "location": "Localização",
+      "quantity": "Quantidade",
+      "minStock": "Estoque Mín.",
+      "maxStock": "Estoque Máx.",
+      "status": "Status",
+      "lastUpdated": "Última Atualização"
+    },
+    "empty": "Nenhum item encontrado no inventário",
+    "errors": {
+      "loadFailed": "Erro ao carregar inventário"
     },
     "module": {
       "title": "Controle de Inventário",
@@ -611,7 +716,9 @@
       "color": "Cor",
       "fuelType": "Combustível",
       "notes": "Observações",
-      "driver": "Motorista"
+      "driver": "Motorista",
+      "driverName": "Nome do Motorista",
+      "driverPhone": "Telefone do Motorista"
     },
     "placeholders": {
       "plate": "ABC1D23",
@@ -662,9 +769,433 @@
       "callWhatsApp": "Chamar no WhatsApp",
       "callCustomerWhatsApp": "Chamar cliente no WhatsApp"
     },
+    "mileage": {
+      "current": "Quilometragem Atual",
+      "total": "Distância Total Percorrida",
+      "update": "Atualizar Quilometragem"
+    },
+    "financial": {
+      "title": "Informações Financeiras",
+      "purchasePrice": "Preço de Compra",
+      "purchaseDate": "Data da Compra",
+      "currentValue": "Valor Atual Estimado",
+      "chassisNumber": "Número do Chassi",
+      "engineNumber": "Número do Motor",
+      "depreciation": "Depreciação"
+    },
+    "insurance": {
+      "title": "Seguro e Licenciamento",
+      "insuranceExpiry": "Vencimento do Seguro",
+      "licenseExpiry": "Vencimento do Licenciamento",
+      "expired": "Vencido",
+      "expiringSoon": "Vence em breve",
+      "valid": "Válido"
+    },
+    "inspection": {
+      "title": "Inspeções",
+      "lastInspection": "Última Inspeção",
+      "nextInspection": "Próxima Inspeção",
+      "addInspection": "Adicionar Inspeção",
+      "inspectionCenter": "Centro de Inspeção",
+      "inspectorName": "Inspetor",
+      "certificateNumber": "Número do Certificado",
+      "mileageAtInspection": "Quilometragem na Inspeção",
+      "observations": "Observações",
+      "defectsFound": "Defeitos Encontrados",
+      "types": {
+        "ITV": "ITV (Espanha)",
+        "MOT": "MOT (Reino Unido)",
+        "TUV": "TÜV (Alemanha)",
+        "CT": "CT (França)",
+        "Revisione": "Revisione (Itália)",
+        "APK": "APK (Holanda)",
+        "DETRAN": "Inspeção Veicular (Brasil)",
+        "SafetyInspection": "Inspeção de Segurança",
+        "EmissionsTest": "Teste de Emissões",
+        "Other": "Outro"
+      },
+      "results": {
+        "Approved": "Aprovado",
+        "ApprovedWithDefects": "Aprovado com Defeitos",
+        "Rejected": "Reprovado",
+        "Pending": "Pendente"
+      }
+    },
+    "maintenance": {
+      "title": "Manutenção",
+      "history": "Histórico de Manutenção",
+      "addMaintenance": "Adicionar Manutenção",
+      "lastMaintenance": "Última Manutenção",
+      "lastMaintenanceMileage": "KM na Última Manutenção",
+      "totalCost": "Custo Total de Manutenção",
+      "maintenanceCount": "Total de Manutenções",
+      "maintenanceDate": "Data da Manutenção",
+      "nextMaintenanceDate": "Próxima Manutenção",
+      "mileageAtMaintenance": "Quilometragem",
+      "nextMaintenanceMileage": "Próxima KM",
+      "laborCost": "Custo de Mão de Obra",
+      "partsCost": "Custo de Peças",
+      "serviceProvider": "Oficina/Fornecedor",
+      "serviceProviderContact": "Contato da Oficina",
+      "invoiceNumber": "Número da Nota Fiscal",
+      "types": {
+        "Preventive": "Preventiva",
+        "Corrective": "Corretiva",
+        "OilChange": "Troca de Óleo",
+        "TireChange": "Troca de Pneus",
+        "BrakeService": "Serviço de Freios",
+        "EngineRepair": "Reparo no Motor",
+        "Transmission": "Transmissão",
+        "Electrical": "Elétrica",
+        "BodyWork": "Funilaria/Pintura",
+        "AirConditioning": "Ar Condicionado",
+        "Other": "Outro"
+      }
+    },
+    "documents": {
+      "title": "Documentos",
+      "addDocument": "Adicionar Documento",
+      "documentNumber": "Número do Documento",
+      "issueDate": "Data de Emissão",
+      "expiryDate": "Data de Vencimento",
+      "issuingAuthority": "Órgão Emissor",
+      "alertOnExpiry": "Alertar ao Vencer",
+      "alertDaysBefore": "Dias de Antecedência",
+      "types": {
+        "RegistrationCertificate": "CRLV/CRV",
+        "OwnershipTitle": "Título de Propriedade",
+        "Insurance": "Apólice de Seguro",
+        "ThirdPartyInsurance": "Seguro Contra Terceiros",
+        "CargoInsurance": "Seguro de Carga",
+        "OperatingLicense": "Licença de Operação",
+        "TransportLicense": "Licença de Transporte",
+        "HazmatLicense": "Licença Produtos Perigosos",
+        "RoadTax": "IPVA",
+        "TollTag": "Tag de Pedágio",
+        "TachographCertificate": "Certificado Tacógrafo",
+        "SpeedometerCertificate": "Certificado Velocímetro",
+        "PurchaseInvoice": "Nota Fiscal de Compra",
+        "Warranty": "Garantia",
+        "Manual": "Manual do Veículo",
+        "Other": "Outro"
+      }
+    },
+    "deliveryHistory": {
+      "title": "Histórico de Entregas",
+      "totalDeliveries": "Total de Entregas",
+      "shipmentNumber": "Número do Embarque",
+      "shipmentDate": "Data",
+      "customerName": "Cliente",
+      "deliveryAddress": "Endereço de Entrega",
+      "distance": "Distância"
+    },
+    "tabs": {
+      "overview": "Visão Geral",
+      "maintenance": "Manutenção",
+      "inspections": "Inspeções",
+      "documents": "Documentos",
+      "deliveries": "Entregas",
+      "financial": "Financeiro"
+    },
+    "alerts": {
+      "insuranceExpired": "Seguro vencido!",
+      "insuranceExpiringSoon": "Seguro vence em breve",
+      "inspectionExpired": "Inspeção vencida!",
+      "inspectionExpiringSoon": "Inspeção vence em breve",
+      "documentExpired": "Documento vencido",
+      "maintenanceDue": "Manutenção prevista"
+    },
     "module": {
       "title": "Gestão de Veículos",
       "subtitle": "Módulo de veículos em desenvolvimento"
+    }
+  },
+  "vehicleDetail": {
+    "backToList": "Voltar para Lista",
+    "overview": "Visão Geral",
+    "criticalAlerts": "Alertas Críticos",
+    "currentMileage": "KM Atual",
+    "totalMaintenanceCost": "Custo Total Manutenção",
+    "totalDamageCost": "Custo Total Avarias",
+    "totalDeliveries": "Total de Entregas",
+    "tabs": {
+      "overview": "Visão Geral",
+      "documents": "Documentos",
+      "maintenance": "Manutenções",
+      "inspections": "Inspeções",
+      "damages": "Avarias",
+      "mileage": "Quilometragem"
+    },
+    "summary": {
+      "mileage": "Quilometragem",
+      "currentMileage": "Quilometragem Atual",
+      "maintenanceCost": "Custo de Manutenção",
+      "damageCost": "Custo de Avarias",
+      "deliveries": "Entregas",
+      "pending": "pendentes"
+    },
+    "info": {
+      "basic": "Informações Básicas",
+      "driver": "Motorista",
+      "dates": "Datas Importantes"
+    },
+    "dates": {
+      "nextMaintenance": "Próxima Manutenção",
+      "nextInspection": "Próxima Inspeção",
+      "insuranceExpiry": "Vencimento Seguro",
+      "licenseExpiry": "Vencimento Licença"
+    },
+    "alerts": {
+      "title": "Todos os Alertas"
+    },
+    "gps": {
+      "active": "GPS Ativo",
+      "inactive": "GPS Inativo"
+    },
+    "expiry": {
+      "expiredAgo": "Vencido há {{days}} dias",
+      "expiresIn": "Em {{days}} dias"
+    },
+    "documents": {
+      "title": "Documentos do Veículo",
+      "add": "Adicionar Documento",
+      "edit": "Editar Documento",
+      "empty": "Nenhum documento cadastrado",
+      "type": "Tipo de Documento",
+      "number": "Número do Documento",
+      "issueDate": "Data de Emissão",
+      "issued": "Emitido",
+      "expires": "Vence",
+      "expired": "Vencido",
+      "valid": "Válido",
+      "confirmDelete": "Tem certeza que deseja excluir este documento?",
+      "expirationDate": "Data de Validade",
+      "issuingAuthority": "Órgão Emissor",
+      "cost": "Custo",
+      "alertEnabled": "Alerta Ativado",
+      "alertOnExpiry": "Alertar no Vencimento",
+      "alertDays": "Dias de Antecedência",
+      "daysBefore": "dias antes",
+      "expiryDate": "Data de Validade",
+      "file": "Arquivo",
+      "expiringSoon": "Vence em Breve",
+      "types": {
+        "registrationCertificate": "CRLV/CRV",
+        "ownershipTitle": "Título de Propriedade",
+        "insurance": "Apólice de Seguro",
+        "thirdPartyInsurance": "Seguro Contra Terceiros",
+        "cargoInsurance": "Seguro de Carga",
+        "operatingLicense": "Licença de Operação",
+        "transportLicense": "Licença de Transporte",
+        "hazmatLicense": "Licença Produtos Perigosos",
+        "roadTax": "IPVA",
+        "tollTag": "Tag de Pedágio",
+        "tachographCertificate": "Certificado Tacógrafo",
+        "speedometerCertificate": "Certificado Velocímetro",
+        "purchaseInvoice": "Nota Fiscal de Compra",
+        "warranty": "Garantia",
+        "manual": "Manual do Veículo",
+        "other": "Outro"
+      }
+    },
+    "maintenance": {
+      "title": "Histórico de Manutenções",
+      "add": "Adicionar Manutenção",
+      "edit": "Editar Manutenção",
+      "empty": "Nenhuma manutenção registrada",
+      "type": "Tipo de Manutenção",
+      "mileage": "Quilometragem",
+      "nextMileage": "Próxima Manutenção (KM)",
+      "nextDate": "Próxima Manutenção (Data)",
+      "laborCost": "Custo Mão de Obra",
+      "partsCost": "Custo de Peças",
+      "provider": "Oficina/Fornecedor",
+      "invoiceNumber": "Número da NF",
+      "confirmDelete": "Tem certeza que deseja excluir esta manutenção?",
+      "types": {
+        "preventive": "Preventiva",
+        "corrective": "Corretiva",
+        "oilChange": "Troca de Óleo",
+        "tireChange": "Troca de Pneus",
+        "brakeService": "Serviço de Freios",
+        "engineRepair": "Reparo no Motor",
+        "transmission": "Transmissão",
+        "electrical": "Elétrica",
+        "bodyWork": "Funilaria/Pintura",
+        "airConditioning": "Ar Condicionado",
+        "other": "Outro"
+      }
+    },
+    "inspections": {
+      "title": "Inspeções Veiculares",
+      "add": "Adicionar Inspeção",
+      "edit": "Editar Inspeção",
+      "empty": "Nenhuma inspeção registrada",
+      "type": "Tipo de Inspeção",
+      "inspectionDate": "Data da Inspeção",
+      "inspector": "Inspetor",
+      "certificate": "Número do Certificado",
+      "result": "Resultado",
+      "defects": "Defeitos Encontrados",
+      "passed": "Aprovado",
+      "failed": "Reprovado",
+      "types": {
+        "technical": "Inspeção Técnica",
+        "emission": "Teste de Emissões",
+        "safety": "Inspeção de Segurança",
+        "roadworthiness": "Aptidão Rodoviária",
+        "prePurchase": "Pré-Compra",
+        "postAccident": "Pós-Acidente"
+      }
+    },
+    "damages": {
+      "title": "Registro de Avarias",
+      "add": "Registrar Avaria",
+      "edit": "Editar Avaria",
+      "empty": "Nenhuma avaria registrada",
+      "type": "Tipo de Avaria",
+      "severityLabel": "Gravidade",
+      "photos": "Fotos",
+      "photoHint": "Formatos aceitos: WebP, JPEG, PNG. Máx 5MB por foto.",
+      "estimatedCost": "Custo Estimado",
+      "actualCost": "Custo Real",
+      "reportedBy": "Reportado Por",
+      "insurance": "Seguro",
+      "insuranceClaim": "Sinistro de Seguro",
+      "fileClaim": "Abrir Sinistro",
+      "repair": "Reparo",
+      "repairDate": "Data do Reparo",
+      "repairedBy": "Reparado Por",
+      "repairNotes": "Notas do Reparo",
+      "thirdPartyFault": "Causado por Terceiro",
+      "thirdPartyInfo": "Informações do Terceiro",
+      "types": {
+        "collision": "Colisão",
+        "scratch": "Arranhão",
+        "dent": "Amassado",
+        "glass": "Vidro",
+        "tire": "Pneu",
+        "mechanical": "Mecânico",
+        "electrical": "Elétrico",
+        "interior": "Interior",
+        "weather": "Clima",
+        "vandalism": "Vandalismo",
+        "theft": "Roubo/Furto",
+        "fire": "Incêndio"
+      },
+      "severity": {
+        "cosmetic": "Cosmético",
+        "minor": "Menor",
+        "moderate": "Moderado",
+        "major": "Grande",
+        "severe": "Severo",
+        "totalLoss": "Perda Total"
+      },
+      "status": {
+        "reported": "Reportado",
+        "underAssessment": "Em Avaliação",
+        "awaitingParts": "Aguardando Peças",
+        "inRepair": "Em Reparo",
+        "repaired": "Reparado",
+        "closed": "Fechado"
+      }
+    },
+    "mileage": {
+      "title": "Registro de Viagens",
+      "startTrip": "Iniciar Viagem",
+      "edit": "Editar Viagem",
+      "empty": "Nenhuma viagem registrada",
+      "tripType": "Tipo de Viagem",
+      "purpose": "Propósito",
+      "start": "Início",
+      "end": "Fim",
+      "startTime": "Hora de Saída",
+      "endTime": "Hora de Chegada",
+      "startMileage": "KM Inicial",
+      "endMileage": "KM Final",
+      "startAddress": "Endereço de Origem",
+      "endAddress": "Endereço de Destino",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "distance": "Distância",
+      "inProgress": "Em andamento...",
+      "completeTrip": "Finalizar Viagem",
+      "enterEndMileage": "Informe a quilometragem final:",
+      "startInfo": "Informações de Saída",
+      "endInfo": "Informações de Chegada",
+      "tripCosts": "Custos da Viagem",
+      "costs": "Custos",
+      "fuelConsumed": "Combustível Consumido",
+      "fuelCost": "Custo Combustível",
+      "tollCost": "Custo Pedágio",
+      "parkingCost": "Custo Estacionamento",
+      "otherCosts": "Outros Custos",
+      "totalDistance": "Distância Total",
+      "totalFuelCost": "Custo Total Combustível",
+      "avgEfficiency": "Consumo Médio",
+      "types": {
+        "delivery": "Entrega",
+        "pickup": "Coleta",
+        "transfer": "Transferência",
+        "service": "Serviço",
+        "personal": "Pessoal",
+        "business": "Negócios",
+        "commute": "Deslocamento"
+      },
+      "status": {
+        "planned": "Planejada",
+        "inProgress": "Em Andamento",
+        "completed": "Concluída",
+        "cancelled": "Cancelada"
+      }
+    }
+  },
+  "fleetPages": {
+    "common": {
+      "allVehicles": "Todos os veículos",
+      "viewVehicle": "Ver veículo",
+      "number": "Número",
+      "issueDate": "Emissão",
+      "expiryDate": "Validade",
+      "cost": "Custo",
+      "date": "Data",
+      "description": "Descrição",
+      "vehicle": "Veículo",
+      "actions": "Ações",
+      "km": "Km",
+      "origin": "Origem",
+      "destination": "Destino",
+      "type": "Tipo"
+    },
+    "documents": {
+      "subtitle": "Gerencie documentos de todos os veículos",
+      "noDocuments": "Nenhum documento encontrado"
+    },
+    "maintenance": {
+      "subtitle": "Histórico de manutenções da frota",
+      "noMaintenance": "Nenhuma manutenção encontrada"
+    },
+    "inspections": {
+      "subtitle": "Vistorias ITV / DETRAN da frota",
+      "noInspections": "Nenhuma inspeção encontrada",
+      "performedDate": "Realizada",
+      "expiryDate": "Validade",
+      "result": "Resultado",
+      "cost": "Custo"
+    },
+    "damages": {
+      "subtitle": "Registro de avarias da frota",
+      "noDamages": "Nenhuma avaria encontrada"
+    },
+    "mileage": {
+      "subtitle": "Controle de quilometragem da frota",
+      "noMileage": "Nenhum registro de quilometragem encontrado",
+      "totalDistance": "Distância Total",
+      "fuelCost": "Custo Combustível",
+      "tollCost": "Custo Pedágios",
+      "fuel": "Combustível",
+      "toll": "Pedágio",
+      "distance": "Distância"
     }
   },
   "storageLocations": {
@@ -1009,6 +1540,7 @@
       "normal": "Normal",
       "high": "Alta",
       "urgent": "Urgente"
-    }
+    },
+    "purchaseOrderNumber": "Número do Pedido"
   }
 }

@@ -67,6 +67,7 @@ export class CustomerEditModalComponent implements OnInit {
       return;
     }
     
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.isSaving = true;
     try {
       const data: UpdateCustomerDto = this.form.value;

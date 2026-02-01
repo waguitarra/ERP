@@ -67,6 +67,7 @@ export class SupplierEditModalComponent implements OnInit {
       return;
     }
     
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.isSaving = true;
     try {
       const data: UpdateSupplierDto = this.form.value;

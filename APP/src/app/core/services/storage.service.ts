@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StorageService {
-  private readonly TOKEN_KEY = 'nexus_auth_token';
-  private readonly USER_KEY = 'nexus_user_data';
+  private readonly TOKEN_KEY = 'WMS_auth_token';
+  private readonly USER_KEY = 'WMS_user_data';
 
   // Token methods
   setToken(token: string): void {

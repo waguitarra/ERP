@@ -134,7 +134,7 @@ Borders: dark:border-slate-700
 ### 1. Acessar Frontend
 ```
 http://localhost:4200
-Login: admin@nexus.com / Admin@123456
+Login: admin@WMS.com / Admin@123456
 ```
 
 ### 2. Ir em Pedidos

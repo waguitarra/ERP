@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+// Smooth tab transitions
+nav button {
+  transition: all 0.2s ease-in-out;
+}
+
+// Card hover effects
+.bg-gradient-to-br {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Alert animations
+.border {
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateX(4px);
+  }
+}

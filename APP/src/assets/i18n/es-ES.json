@@ -7,8 +7,11 @@
   "sidebar": {
     "categories": {
       "main": "Principal",
+      "commercial": "Comercial",
+      "products": "Productos",
       "inventory": "Gestión de Inventario",
       "logistics": "Logística",
+      "fleet": "Gestión de Flota",
       "settings": "Configuración"
     },
     "menu": {
@@ -28,20 +31,39 @@
       "outboundShipments": "Expediciones",
       "vehicles": "Vehículos",
       "drivers": "Conductores",
+      "vehicleDocuments": "Documentos de Vehículos",
+      "vehicleMaintenance": "Mantenimientos",
+      "vehicleInspections": "Inspecciones (ITV)",
+      "vehicleDamages": "Daños",
+      "mileageLogs": "Registro de Kilometraje",
       "settings": "Ajustes"
     }
   },
   "common": {
     "search": "Buscar...",
+    "retry": "Reintentar",
     "active": "Activo",
     "inactive": "Inactivo",
     "actions": "Acciones",
+    "select": "Seleccionar",
     "activate": "Activar",
     "deactivate": "Desactivar",
     "edit": "Editar",
     "delete": "Eliminar",
     "save": "Guardar",
     "cancel": "Cancelar",
+    "date": "Fecha",
+    "description": "Descripción",
+    "notes": "Notas",
+    "cost": "Costo",
+    "statusLabel": "Estado",
+    "location": "Ubicación",
+    "other": "Otro",
+    "valid": "Válido",
+    "expired": "Vencido",
+    "approved": "Aprobado",
+    "addPhoto": "Agregar Foto",
+    "confirmDelete": "¿Estás seguro de que deseas eliminar este registro?",
     "buttons": {
       "save": "Guardar",
       "saveChanges": "Guardar Cambios",
@@ -67,7 +89,9 @@
       "createWarehouse": "Crear Almacén",
       "createCompany": "Crear Empresa",
       "toggleDarkMode": "Alternar modo oscuro",
-      "tryAgain": "Intentar de Nuevo"
+      "tryAgain": "Intentar de Nuevo",
+      "viewDetails": "Ver Detalles",
+      "remove": "Eliminar"
     },
     "status": {
       "active": "Activo",
@@ -92,6 +116,8 @@
       "error": "Error al procesar",
       "noData": "No se encontraron registros",
       "confirmDelete": "¿Está seguro de que desea eliminar?",
+      "confirmSave": "¿Desea guardar los cambios?",
+      "fillRequired": "Complete los campos obligatorios",
       "deleteSuccess": "Eliminado con éxito",
       "createSuccess": "Creado con éxito",
       "updateSuccess": "Actualizado con éxito"
@@ -238,6 +264,9 @@
     },
     "errors": {
       "generic": "Error al procesar",
+      "load_failed": "Error al cargar datos",
+      "save_failed": "Error al guardar datos",
+      "delete_failed": "Error al eliminar datos",
       "companyIdNotFound": "Error: CompanyId no encontrado",
       "createCompany": "Error al crear empresa",
       "updateCompany": "Error al actualizar empresa",
@@ -278,7 +307,18 @@
       "toggleDarkMode": "Alternar modo oscuro",
       "filter": "Filtrar",
       "tryAgain": "Intentar de Nuevo"
+    },
+    "actions": {
+      "clearFilters": "Limpiar Filtros",
+      "refresh": "Actualizar",
+      "retry": "Reintentar"
+    },
+    "modals": {
+      "selectWarehouse": "Seleccionar Almacén"
     }
+  },
+  "validation": {
+    "categoryRequired": "La categoría es obligatoria"
   },
   "modals": {
     "selectCustomer": "Seleccionar Cliente",
@@ -358,15 +398,52 @@
       "revenue": "Ingresos Totales",
       "orders": "Pedidos",
       "customers": "Clientes",
-      "products": "Productos"
+      "products": "Productos",
+      "suppliers": "Proveedores",
+      "vehicles": "Vehículos",
+      "drivers": "Conductores",
+      "inboundShipments": "Recepciones Pendientes",
+      "outboundShipments": "Expediciones Pendientes",
+      "totalSales": "Ventas Totales",
+      "newOrders": "Nuevos Pedidos",
+      "productsInStock": "Productos en Stock",
+      "activeCustomers": "Clientes Activos"
     },
     "charts": {
       "monthlyRevenue": "Ingresos Mensuales",
       "viewReport": "Ver Informe"
     },
+    "quickActions": {
+      "title": "Acciones Rápidas",
+      "newPurchaseOrder": "Nueva Orden de Compra",
+      "newSalesOrder": "Nueva Orden de Venta",
+      "viewProducts": "Ver Productos",
+      "viewVehicles": "Ver Vehículos"
+    },
+    "recentPurchaseOrders": {
+      "title": "Órdenes de Compra Recientes"
+    },
+    "recentSalesOrders": {
+      "title": "Órdenes de Venta Recientes"
+    },
+    "viewAll": "Ver Todos",
+    "noData": "No se encontraron registros",
+    "table": {
+      "orderNumber": "Número de Pedido",
+      "type": "Tipo",
+      "customer": "Cliente/Proveedor",
+      "value": "Valor",
+      "status": "Estado",
+      "date": "Fecha"
+    },
     "recentOrders": {
       "title": "Pedidos Recientes",
-      "viewAll": "Ver Todos los Pedidos"
+      "viewAll": "Ver Todos los Pedidos",
+      "status": {
+        "completed": "Completado",
+        "pending": "Pendiente",
+        "cancelled": "Cancelado"
+      }
     }
   },
   "products": {
@@ -525,9 +602,36 @@
     "subtitle": "Control de stock e inventario",
     "stats": {
       "totalStock": "Total en Stock",
+      "totalItems": "Total de Artículos",
       "lowStock": "Stock Bajo",
       "outOfStock": "Sin Stock",
       "totalValue": "Valor Total"
+    },
+    "search": {
+      "placeholder": "Buscar por producto, ubicación o almacén..."
+    },
+    "filter": {
+      "allWarehouses": "Todos los Almacenes",
+      "allStock": "Todo el Stock"
+    },
+    "status": {
+      "inStock": "En Stock",
+      "lowStock": "Stock Bajo",
+      "outOfStock": "Sin Stock"
+    },
+    "table": {
+      "product": "Producto",
+      "warehouse": "Almacén",
+      "location": "Ubicación",
+      "quantity": "Cantidad",
+      "minStock": "Stock Mín.",
+      "maxStock": "Stock Máx.",
+      "status": "Estado",
+      "lastUpdated": "Última Actualización"
+    },
+    "empty": "No se encontraron artículos en el inventario",
+    "errors": {
+      "loadFailed": "Error al cargar inventario"
     },
     "module": {
       "title": "Control de Inventario",
@@ -537,6 +641,7 @@
   "suppliers": {
     "title": "Proveedores",
     "subtitle": "Gestiona tus proveedores",
+    "searchPlaceholder": "Buscar por nombre, email o documento...",
     "newSupplier": "Nuevo Proveedor",
     "activeSupplier": "Proveedor Activo",
     "table": {
@@ -596,6 +701,9 @@
     "newVehicle": "Nuevo Vehículo",
     "editVehicle": "Editar Vehículo",
     "createVehicle": "Crear Vehículo",
+    "noVehicles": "No hay vehículos registrados",
+    "noDriver": "Sin conductor",
+    "viewOnMap": "Ver en Mapa",
     "fields": {
       "plateNumber": "Matrícula",
       "licensePlate": "Matrícula",
@@ -608,13 +716,19 @@
       "color": "Color",
       "fuelType": "Combustible",
       "notes": "Observaciones",
-      "driver": "Conductor"
+      "driver": "Conductor",
+      "driverName": "Nombre del Conductor",
+      "driverPhone": "Teléfono del Conductor"
     },
     "placeholders": {
       "plate": "1234-ABC",
       "type": "Camión, Furgoneta, etc",
       "model": "Modelo del vehículo",
-      "capacity": "1000"
+      "capacity": "1000",
+      "notes": "Observaciones sobre el vehículo..."
+    },
+    "validation": {
+      "licensePlateFormat": "Formato inválido. Use 1234-ABC"
     },
     "status": {
       "available": "Disponible",
@@ -658,6 +772,276 @@
     "module": {
       "title": "Gestión de Vehículos",
       "subtitle": "Módulo de vehículos en desarrollo"
+    },
+    "inspection": {
+      "inspectionCenter": "Centro de Inspección",
+      "mileageAtInspection": "Kilometraje en Inspección",
+      "types": {
+        "ITV": "ITV",
+        "MOT": "MOT",
+        "TUV": "TÜV",
+        "CT": "CT",
+        "DETRAN": "DETRAN",
+        "SafetyInspection": "Inspección de Seguridad",
+        "EmissionsTest": "Prueba de Emisiones",
+        "Other": "Otro"
+      }
+    }
+  },
+  "vehicleDetail": {
+    "backToList": "Volver a la Lista",
+    "overview": "Resumen",
+    "criticalAlerts": "Alertas Críticas",
+    "currentMileage": "Kilometraje Actual",
+    "totalMaintenanceCost": "Costo Total Mantenimiento",
+    "totalDamageCost": "Costo Total Daños",
+    "totalDeliveries": "Total de Entregas",
+    "tabs": {
+      "overview": "Resumen",
+      "documents": "Documentos",
+      "maintenance": "Mantenimientos",
+      "inspections": "Inspecciones",
+      "damages": "Daños",
+      "mileage": "Kilometraje"
+    },
+    "summary": {
+      "mileage": "Kilometraje",
+      "currentMileage": "Kilometraje Actual",
+      "maintenanceCost": "Costo de Mantenimiento",
+      "damageCost": "Costo de Daños",
+      "deliveries": "Entregas",
+      "pending": "pendientes"
+    },
+    "info": {
+      "basic": "Información Básica",
+      "driver": "Conductor",
+      "dates": "Fechas Importantes"
+    },
+    "dates": {
+      "nextMaintenance": "Próximo Mantenimiento",
+      "nextInspection": "Próxima Inspección",
+      "insuranceExpiry": "Vencimiento Seguro",
+      "licenseExpiry": "Vencimiento Licencia"
+    },
+    "alerts": {
+      "title": "Todas las Alertas"
+    },
+    "gps": {
+      "active": "GPS Activo",
+      "inactive": "GPS Inactivo"
+    },
+    "expiry": {
+      "expiredAgo": "Vencido hace {{days}} días",
+      "expiresIn": "En {{days}} días"
+    },
+    "documents": {
+      "title": "Documentos del Vehículo",
+      "add": "Agregar Documento",
+      "edit": "Editar Documento",
+      "empty": "No hay documentos registrados",
+      "type": "Tipo de Documento",
+      "number": "Número del Documento",
+      "issueDate": "Fecha de Emisión",
+      "issued": "Emitido",
+      "expires": "Vence",
+      "expired": "Vencido",
+      "valid": "Válido",
+      "confirmDelete": "¿Estás seguro de que deseas eliminar este documento?",
+      "expirationDate": "Fecha de Vencimiento",
+      "expiryDate": "Fecha de Vencimiento",
+      "issuingAuthority": "Autoridad Emisora",
+      "cost": "Costo",
+      "alertEnabled": "Alerta Activada",
+      "alertOnExpiry": "Alertar al Vencer",
+      "alertDays": "Días de Antelación",
+      "daysBefore": "días antes",
+      "file": "Archivo",
+      "expiringSoon": "Vence Pronto",
+      "types": {
+        "registrationCertificate": "Permiso de Circulación",
+        "ownershipTitle": "Título de Propiedad",
+        "insurance": "Póliza de Seguro",
+        "thirdPartyInsurance": "Seguro de Terceros",
+        "cargoInsurance": "Seguro de Carga",
+        "operatingLicense": "Licencia de Operación",
+        "transportLicense": "Licencia de Transporte",
+        "hazmatLicense": "Licencia Productos Peligrosos",
+        "roadTax": "Impuesto de Circulación",
+        "tollTag": "Tag de Peaje",
+        "tachographCertificate": "Certificado Tacógrafo",
+        "speedometerCertificate": "Certificado Velocímetro",
+        "purchaseInvoice": "Factura de Compra",
+        "warranty": "Garantía",
+        "manual": "Manual del Vehículo",
+        "other": "Otro"
+      }
+    },
+    "maintenance": {
+      "title": "Historial de Mantenimientos",
+      "add": "Agregar Mantenimiento",
+      "edit": "Editar Mantenimiento",
+      "empty": "No hay mantenimientos registrados",
+      "type": "Tipo de Mantenimiento",
+      "mileage": "Kilometraje",
+      "nextMileage": "Próximo Mantenimiento (KM)",
+      "nextDate": "Próximo Mantenimiento (Fecha)",
+      "laborCost": "Costo Mano de Obra",
+      "partsCost": "Costo de Piezas",
+      "provider": "Taller/Proveedor",
+      "invoiceNumber": "Número de Factura",
+      "confirmDelete": "¿Desea eliminar este mantenimiento?",
+      "types": {
+        "preventive": "Preventivo",
+        "corrective": "Correctivo",
+        "oilChange": "Cambio de Aceite",
+        "tireChange": "Cambio de Neumáticos",
+        "brakeService": "Servicio de Frenos",
+        "engineRepair": "Reparación de Motor",
+        "transmission": "Transmisión",
+        "electrical": "Eléctrica",
+        "bodyWork": "Carrocería/Pintura",
+        "airConditioning": "Aire Acondicionado",
+        "other": "Otro"
+      }
+    },
+    "inspections": {
+      "title": "Inspecciones Vehiculares",
+      "add": "Agregar Inspección",
+      "edit": "Editar Inspección",
+      "empty": "No hay inspecciones registradas",
+      "type": "Tipo de Inspección",
+      "date": "Fecha",
+      "inspectionDate": "Fecha de Inspección",
+      "expiryDate": "Fecha de Vencimiento",
+      "result": "Resultado",
+      "cost": "Costo",
+      "certificate": "Número de Certificado",
+      "inspectionCenter": "Centro de Inspección",
+      "inspector": "Inspector",
+      "certificateNumber": "Número de Certificado",
+      "mileageAtInspection": "Kilometraje en Inspección",
+      "observations": "Observaciones",
+      "defectsFound": "Defectos Encontrados",
+      "defects": "Defectos Encontrados",
+      "passed": "Aprobado",
+      "failed": "Reprobado",
+      "types": {
+        "ITV": "ITV (España)",
+        "MOT": "MOT (Reino Unido)",
+        "TUV": "TÜV (Alemania)",
+        "CT": "CT (Francia)",
+        "Revisione": "Revisione (Italia)",
+        "APK": "APK (Holanda)",
+        "DETRAN": "Inspección Vehicular (Brasil)",
+        "SafetyInspection": "Inspección de Seguridad",
+        "EmissionsTest": "Prueba de Emisiones",
+        "Other": "Otro"
+      },
+      "results": {
+        "Approved": "Aprobado",
+        "ApprovedWithDefects": "Aprobado con Defectos",
+        "Rejected": "Rechazado",
+        "Pending": "Pendiente"
+      }
+    },
+    "damages": {
+      "title": "Registro de Daños",
+      "add": "Agregar Daño",
+      "edit": "Editar Daño",
+      "empty": "No hay daños registrados",
+      "date": "Fecha del Incidente",
+      "location": "Ubicación",
+      "description": "Descripción",
+      "severity": "Gravedad",
+      "severityLabel": "Gravedad",
+      "repairCost": "Costo de Reparación",
+      "estimatedCost": "Costo Estimado",
+      "status": "Estado",
+      "repaired": "Reparado",
+      "pending": "Pendiente",
+      "type": "Tipo de Daño",
+      "photos": "Fotos",
+      "photoHint": "Formatos aceptados: WebP, JPEG, PNG. Máx 5MB por foto.",
+      "reportedBy": "Reportado Por",
+      "insuranceClaim": "Reclamación de Seguro",
+      "thirdPartyFault": "Causado por Tercero",
+      "thirdPartyInfo": "Información del Tercero",
+      "types": {
+        "collision": "Colisión",
+        "scratch": "Rasguño",
+        "dent": "Abolladura",
+        "glass": "Vidrio",
+        "mechanical": "Mecánico",
+        "electrical": "Eléctrico",
+        "other": "Otro"
+      },
+      "severities": {
+        "Minor": "Leve",
+        "Moderate": "Moderado",
+        "Major": "Grave",
+        "Critical": "Crítico",
+        "minor": "Leve",
+        "moderate": "Moderado",
+        "major": "Grave",
+        "critical": "Crítico"
+      },
+      "statuses": {
+        "reported": "Reportado",
+        "underRepair": "En Reparación",
+        "repaired": "Reparado",
+        "closed": "Cerrado"
+      }
+    },
+    "mileage": {
+      "title": "Registro de Kilometraje",
+      "add": "Agregar Registro",
+      "edit": "Editar Registro",
+      "empty": "No hay registros de kilometraje",
+      "current": "Kilometraje Actual",
+      "date": "Fecha",
+      "odometer": "Odómetro",
+      "distance": "Distancia",
+      "fuelCost": "Costo Combustible",
+      "tollCost": "Costo Peajes",
+      "notes": "Observaciones",
+      "totalDistance": "Distancia Total",
+      "totalFuelCost": "Costo Total de Combustible",
+      "avgEfficiency": "Eficiencia Promedio",
+      "startTrip": "Iniciar Viaje",
+      "endTrip": "Finalizar Viaje",
+      "enterEndMileage": "Ingrese la kilometría final:",
+      "start": "Inicio",
+      "end": "Fin",
+      "costs": "Costos",
+      "completeTrip": "Finalizar Viaje",
+      "inProgress": "En progreso...",
+      "tripType": "Tipo de Viaje",
+      "purpose": "Propósito",
+      "startInfo": "Información de Salida",
+      "endInfo": "Información de Llegada",
+      "tripCosts": "Costos del Viaje",
+      "startMileage": "KM Inicial",
+      "endMileage": "KM Final",
+      "startTime": "Hora de Salida",
+      "endTime": "Hora de Llegada",
+      "startAddress": "Dirección de Origen",
+      "endAddress": "Dirección de Destino",
+      "latitude": "Latitud",
+      "longitude": "Longitud",
+      "fuelConsumed": "Combustible Consumido",
+      "parkingCost": "Costo Estacionamiento",
+      "otherCosts": "Otros Costos",
+      "status": {
+        "active": "Activo",
+        "completed": "Completado",
+        "cancelled": "Cancelado"
+      },
+      "types": {
+        "delivery": "Entrega",
+        "pickup": "Recogida",
+        "maintenance": "Mantenimiento",
+        "other": "Otro"
+      }
     }
   },
   "storageLocations": {
@@ -997,6 +1381,61 @@
       "quantity": "Cantidad",
       "unitPrice": "Precio Unitario",
       "addItem": "Agregar Artículo"
+    },
+    "priority": {
+      "low": "Baja",
+      "normal": "Normal",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
+    "purchaseOrderNumber": "Número de Orden"
+  },
+  "fleetPages": {
+    "common": {
+      "allVehicles": "Todos los vehículos",
+      "viewVehicle": "Ver vehículo",
+      "number": "Número",
+      "issueDate": "Fecha de Emisión",
+      "expiryDate": "Fecha de Vencimiento",
+      "cost": "Costo",
+      "date": "Fecha",
+      "description": "Descripción",
+      "vehicle": "Vehículo",
+      "actions": "Acciones",
+      "km": "KM",
+      "origin": "Origen",
+      "destination": "Destino",
+      "type": "Tipo"
+    },
+    "documents": {
+      "subtitle": "Gestione documentos de todos los vehículos",
+      "noDocuments": "No se encontraron documentos"
+    },
+    "maintenance": {
+      "subtitle": "Historial de mantenimientos de la flota",
+      "noMaintenance": "No se encontraron registros de mantenimiento"
+    },
+    "inspections": {
+      "subtitle": "Inspecciones ITV de la flota",
+      "noInspections": "No se encontraron inspecciones",
+      "performedDate": "Realizada",
+      "expiryDate": "Vencimiento",
+      "result": "Resultado",
+      "cost": "Costo"
+    },
+    "damages": {
+      "subtitle": "Registro de daños de la flota",
+      "noDamages": "No se encontraron daños"
+    },
+    "mileage": {
+      "subtitle": "Control de kilometraje de la flota",
+      "noMileage": "No se encontraron registros de kilometraje",
+      "totalDistance": "Distancia Total",
+      "fuelCost": "Costo de Combustible",
+      "tollCost": "Costo de Peajes",
+      "fuel": "Combustible",
+      "toll": "Peaje",
+      "distance": "Distancia"
     }
   }
 }

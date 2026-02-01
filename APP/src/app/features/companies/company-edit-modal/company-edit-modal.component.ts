@@ -66,6 +66,7 @@ export class CompanyEditModalComponent {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       await this.companiesService.update(this.company().id, this.form.value);

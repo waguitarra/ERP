@@ -25,7 +25,7 @@ FROM nginx:alpine AS runtime
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 # Copy built files
-COPY --from=build /app/dist/nexus-admin/browser /usr/share/nginx/html
+COPY --from=build /app/dist/WMS-admin/browser /usr/share/nginx/html
 
 # Expose port
 EXPOSE 80

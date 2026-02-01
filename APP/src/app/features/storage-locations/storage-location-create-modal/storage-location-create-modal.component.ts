@@ -51,6 +51,7 @@ export class StorageLocationCreateModalComponent {
       return;
     }
 
+    if (!confirm(this.i18n.t('common.messages.confirmSave'))) return;
     this.loading.set(true);
     try {
       await this.storageLocationsService.create(this.form.value);

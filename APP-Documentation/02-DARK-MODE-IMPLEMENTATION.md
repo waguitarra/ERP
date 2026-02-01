@@ -2,7 +2,7 @@
 
 ## ✅ Status da Implementação
 
-O modo escuro foi **100% implementado** no projeto NEXUS ADMIN seguindo os padrões do Tailwind CSS.
+O modo escuro foi **100% implementado** no projeto WMS ADMIN seguindo os padrões do Tailwind CSS.
 
 ---
 
@@ -17,7 +17,7 @@ O modo escuro foi **100% implementado** no projeto NEXUS ADMIN seguindo os padr�
 ```typescript
 // Localização: src/app/core/services/theme.service.ts
 - ✅ Signal reativo para isDarkMode
-- ✅ Persistência no localStorage (chave: nexus_theme)
+- ✅ Persistência no localStorage (chave: WMS_theme)
 - ✅ Detecção automática de preferência do sistema
 - ✅ Effect para aplicar tema automaticamente
 - ✅ Método toggleTheme() para alternar

@@ -135,6 +135,10 @@
                 </td>
                 <td class="px-4 py-4 text-right">
                   <div class="flex items-center justify-end gap-2">
+                    <!-- View Details Button -->
+                    <button (click)="openVehicleDetail(vehicle)" class="p-2 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 rounded-lg transition-colors" [title]="i18n.t('common.buttons.viewDetails')">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </button>
                     @if (vehicle.trackingEnabled) {
                       <button (click)="openMapView(vehicle)" class="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-colors" [title]="i18n.t('vehicles.viewOnMap')">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
@@ -224,7 +228,7 @@
             <span class="text-xs text-slate-500 dark:text-slate-400 block mb-1">{{ i18n.t('vehicles.tracking.speed') }}</span>
             <div class="flex items-center gap-2">
               <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span class="text-xl font-bold text-slate-900 dark:text-slate-100">{{ selectedVehicleForMap()!.currentSpeed || 0 }}</span>
+              <span class="text-xl font-bold text-slate-900 dark:text-slate-100">{{ simulatedSpeed() }}</span>
               <span class="text-sm text-slate-500 dark:text-slate-400">km/h</span>
             </div>
           </div>
@@ -321,75 +325,65 @@
         </div>
       }
       
-      <!-- Map Container - Google Maps Embed -->
-      <div class="relative h-96 bg-slate-200 dark:bg-slate-700">
-        @if (selectedVehicleForMap()!.lastLatitude && selectedVehicleForMap()!.lastLongitude) {
-          <!-- Google Maps iframe with vehicle location -->
-          <div class="absolute inset-0">
-            <iframe 
-              [src]="getGoogleMapsUrl(selectedVehicleForMap()!)" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade"
-              class="w-full h-full">
-            </iframe>
-          </div>
-          
-          <!-- Vehicle indicator overlay -->
-          <div class="absolute top-4 right-4 z-10">
-            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-3 border border-slate-200 dark:border-slate-700">
-              <div class="flex items-center gap-3">
-                <div [class]="'w-10 h-10 rounded-full flex items-center justify-center ' + (selectedVehicleForMap()!.isMoving ? 'bg-green-500' : 'bg-blue-500')">
-                  @if (selectedVehicleForMap()!.isMoving) {
-                    <svg class="w-5 h-5 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                  } @else {
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    </svg>
-                  }
+      <!-- Map Container - Real-time Tracking -->
+      <div class="relative h-96 bg-slate-900 overflow-hidden">
+        @if (hasGoogleMaps) {
+          <!-- Google Maps JS API Container -->
+          <div id="google-map" class="absolute inset-0 z-0"></div>
+        } @else {
+          <!-- Leaflet Map Container -->
+          <div id="leaflet-map" class="absolute inset-0 z-0"></div>
+        }
+        
+        <!-- Real-time Info Overlay -->
+        <div class="absolute top-4 right-4 z-[1000]">
+          <div class="bg-white/95 dark:bg-slate-800/95 rounded-xl shadow-lg p-4 border border-slate-200 dark:border-slate-700 backdrop-blur-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center animate-pulse">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-slate-900 dark:text-slate-100">{{ selectedVehicleForMap()!.licensePlate }}</div>
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                  <span class="text-green-600 dark:text-green-400 font-semibold">{{ i18n.t('vehicles.tracking.inMotion') }}</span>
                 </div>
-                <div>
-                  <div class="text-sm font-bold text-slate-900 dark:text-slate-100">{{ selectedVehicleForMap()!.licensePlate }}</div>
-                  <div class="text-xs text-slate-500 dark:text-slate-400">
-                    @if (selectedVehicleForMap()!.isMoving) {
-                      <span class="text-green-600 dark:text-green-400">● {{ i18n.t('vehicles.tracking.inMotion') }} - {{ selectedVehicleForMap()!.currentSpeed || 0 }} km/h</span>
-                    } @else {
-                      <span class="text-slate-500">● {{ i18n.t('vehicles.tracking.stopped') }}</span>
-                    }
-                  </div>
+                <div class="text-lg font-bold text-blue-600 dark:text-blue-400 mt-1">
+                  {{ simulatedSpeed() }} <span class="text-xs font-normal">km/h</span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Coordinates display -->
-          <div class="absolute bottom-4 left-4 z-10 bg-white/95 dark:bg-slate-800/95 px-3 py-2 rounded-lg shadow-lg text-xs border border-slate-200 dark:border-slate-700">
+        <!-- Live Coordinates Display -->
+        <div class="absolute bottom-4 left-4 z-[1000] bg-black/80 px-4 py-3 rounded-lg shadow-lg border border-green-500/30 backdrop-blur-sm">
+          <div class="flex items-center gap-3">
             <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              </svg>
-              <span class="font-mono text-slate-700 dark:text-slate-300">
-                {{ selectedVehicleForMap()!.lastLatitude?.toFixed(6) }}, {{ selectedVehicleForMap()!.lastLongitude?.toFixed(6) }}
-              </span>
+              <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span class="text-green-400 text-xs font-semibold uppercase tracking-wider">LIVE GPS</span>
+            </div>
+            <div class="h-4 w-px bg-slate-600"></div>
+            <div class="font-mono text-green-400 text-sm">
+              {{ simulatedLat().toFixed(6) }}, {{ simulatedLng().toFixed(6) }}
             </div>
           </div>
-        } @else {
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center bg-white/80 dark:bg-slate-800/80 p-6 rounded-xl">
-              <svg class="w-12 h-12 mx-auto text-slate-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              <p class="text-slate-600 dark:text-slate-400 font-medium">{{ i18n.t('vehicles.tracking.noLocationData') }}</p>
-              <p class="text-sm text-slate-500 dark:text-slate-500 mt-1">{{ i18n.t('vehicles.tracking.waitingGpsSignal') }}</p>
+        </div>
+        
+        <!-- Signal Strength Indicator -->
+        <div class="absolute bottom-4 right-4 z-[1000] bg-black/80 px-3 py-2 rounded-lg border border-slate-700">
+          <div class="flex items-center gap-2">
+            <div class="flex items-end gap-0.5 h-4">
+              <div class="w-1 h-1 bg-green-500 rounded-sm"></div>
+              <div class="w-1 h-2 bg-green-500 rounded-sm"></div>
+              <div class="w-1 h-3 bg-green-500 rounded-sm"></div>
+              <div class="w-1 h-4 bg-green-500 rounded-sm animate-pulse"></div>
             </div>
+            <span class="text-xs text-green-400 font-medium">GPS</span>
           </div>
-        }
+        </div>
       </div>
 
       <!-- Action buttons -->
